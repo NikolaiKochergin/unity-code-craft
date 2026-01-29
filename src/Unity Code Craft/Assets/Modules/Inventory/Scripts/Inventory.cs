@@ -111,9 +111,6 @@ namespace Modules.Inventories
             if(!IsFitsInside(position, item.Size, _size))
                 return false;
             
-            if(Count == 0)
-                return true;
-
             foreach (KeyValuePair<Item, Vector2Int> pair in _items)
                 if(IsIntersects(position, item.Size, pair.Value, pair.Key.Size))
                     return false;
