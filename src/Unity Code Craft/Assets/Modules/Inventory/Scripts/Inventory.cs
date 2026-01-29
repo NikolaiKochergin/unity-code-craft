@@ -1,68 +1,97 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace Modules.Inventories
 {
     public class Inventory : IEnumerable<Item>
     {
+        private readonly Dictionary<Item, Vector2Int> _items = new();
+        private readonly Vector2Int _size;
+        
         public event Action<Item, Vector2Int> OnAdded;
         public event Action<Item, Vector2Int> OnRemoved;
         public event Action<Item, Vector2Int> OnMoved;
         public event Action OnCleared;
 
-        public int Width => throw new NotImplementedException();
-        public int Height => throw new NotImplementedException();
-        public int Count => throw new NotImplementedException();
+        public int Width => _size.x;
+        public int Height => _size.y;
+        public int Count => _items.Count;
 
         public Inventory(int width, int height)
         {
-            throw new NotImplementedException();
+            if(width < 1 || height < 1)
+                throw new ArgumentException();
+            
+            _size = new Vector2Int(width, height);
         }
 
         public Inventory(
             int width,
             int height,
             params KeyValuePair<Item, Vector2Int>[] items
-        )
+        ) : this(width, height)
         {
-            throw new NotImplementedException();
+            if(items == null)
+                throw new ArgumentNullException(nameof(items));
+            
+            foreach (KeyValuePair<Item, Vector2Int> item in items) 
+                _items.Add(item.Key, item.Value);
         }
 
         public Inventory(
             int width,
             int height,
             params Item[] items
-        )
+        ) : this(width, height)
         {
-            throw new NotImplementedException();
+            if(items == null)
+                throw new ArgumentNullException(nameof(items));
+            
+            foreach (Item item in items)
+                if(FindFreePosition(item, out Vector2Int position))
+                    _items.Add(item, position);
         }
 
         public Inventory(
             int width,
             int height,
             IEnumerable<KeyValuePair<Item, Vector2Int>> items
-        )
+        ) : this(width, height)
         {
-            throw new NotImplementedException();
+            if(items == null)
+                throw new ArgumentNullException(nameof(items));
+            
+            foreach (KeyValuePair<Item, Vector2Int> item in items)
+                _items.Add(item.Key, item.Value);
         }
 
         public Inventory(
             int width,
             int height,
             IEnumerable<Item> items
-        )
+        ) : this(width, height)
         {
-            throw new NotImplementedException();
+            if(items == null)
+                throw new ArgumentNullException(nameof(items));
+
+            foreach (Item item in items)
+                if(FindFreePosition(item, out Vector2Int position))
+                    _items.Add(item, position);
         }
 
         /// <summary>
         /// Creates new inventory 
         /// </summary>
-        public Inventory(Inventory inventory)
+        public Inventory(Inventory inventory) 
+            : this(
+                inventory?.Width ?? throw new ArgumentNullException(nameof(inventory)), 
+                inventory.Height)
         {
-            throw new NotImplementedException();
+            foreach (KeyValuePair<Item, Vector2Int> item in inventory._items) 
+                _items.Add(item.Key, item.Value);
         }
 
         /// <summary>
@@ -70,12 +99,31 @@ namespace Modules.Inventories
         /// </summary>
         public bool CanAddItem(Item item, Vector2Int position)
         {
-            throw new NotImplementedException();
+            if(item == null)
+                return false;
+            
+            if(_items.ContainsKey(item))
+                return false;
+            
+            if(item.Size.x < 1 || item.Size.y < 1)
+                throw new ArgumentException();
+            
+            if(!IsFitsInside(position, item.Size, _size))
+                return false;
+            
+            if(Count == 0)
+                return true;
+
+            foreach (KeyValuePair<Item, Vector2Int> pair in _items)
+                if(IsIntersects(position, item.Size, pair.Value, pair.Key.Size))
+                    return false;
+            
+            return true;
         }
 
         public bool CanAddItem(Item item, int startX, int startY)
         {
-            throw new NotImplementedException();
+            return CanAddItem(item, new Vector2Int(startX, startY));
         }
 
         /// <summary>
@@ -83,12 +131,22 @@ namespace Modules.Inventories
         /// </summary>
         public bool AddItem(Item item, Vector2Int position)
         {
-            throw new NotImplementedException();
+            if(item == null)
+                return false;
+
+            if (!CanAddItem(item, position))
+                return false;
+            
+            if (!_items.TryAdd(item, position)) 
+                return false;
+            
+            OnAdded?.Invoke(item, position);
+            return true;
         }
 
         public bool AddItem(Item item, int startX, int startY)
         {
-            throw new NotImplementedException();
+            return AddItem(item, new Vector2Int(startX, startY));
         }
 
         /// <summary>
@@ -96,7 +154,10 @@ namespace Modules.Inventories
         /// </summary>
         public bool CanAddItem(Item item)
         {
-            throw new NotImplementedException();
+            if(item == null)
+                return false;
+            
+            return !_items.ContainsKey(item) && FindFreePosition(item, out _);
         }
 
         /// <summary>
@@ -104,7 +165,7 @@ namespace Modules.Inventories
         /// </summary>
         public bool AddItem(Item item)
         {
-            throw new NotImplementedException();
+            return FindFreePosition(item, out Vector2Int position) && AddItem(item, position);
         }
 
         /// <summary>
@@ -112,22 +173,51 @@ namespace Modules.Inventories
         /// </summary>
         public bool FindFreePosition(Item item, out Vector2Int position)
         {
-            throw new NotImplementedException();
+            if (item == null)
+            {
+                position = default;
+                return false;
+            }
+            
+            return FindFreePosition(item.Size, out position);
         }
 
         public bool FindFreePosition(Vector2Int size, out Vector2Int position)
         {
-            throw new NotImplementedException();
+            position = default;
+
+            if (size.x < 1 || size.y < 1)
+                throw new ArgumentException();
+            
+            if (size.x > Width || size.y > Height)
+                return false;
+
+            for (int i = 0; i <= Height - size.y; i++)
+            for (int j = 0; j <= Width - size.x; j++)
+            {
+                position = new Vector2Int(j, i);
+                if (IsFreeSpace(position, size))
+                    return true;
+            }
+
+            position = new Vector2Int();
+            return false;
         }
 
         public bool FindFreePosition(int sizeX, int sizeY, out Vector2Int position)
         {
-            throw new NotImplementedException();
+            return FindFreePosition(new Vector2Int(sizeX, sizeY), out position);
         }
 
-        private bool IsFreeSpace(int startX, int startY, int endX, int endY)
+        private bool IsFreeSpace(Vector2Int origin, Vector2Int size)
         {
-            throw new NotImplementedException();
+            foreach (KeyValuePair<Item, Vector2Int> item in _items)
+                if (IsIntersects(
+                        origin, size,
+                        item.Value, item.Key.Size))
+                    return false;
+
+            return true;
         }
 
         /// <summary>
@@ -135,7 +225,7 @@ namespace Modules.Inventories
         /// </summary>
         public bool Contains(Item item)
         {
-            throw new NotImplementedException();
+            return item != null && _items.ContainsKey(item);
         }
 
         /// <summary>
@@ -143,12 +233,19 @@ namespace Modules.Inventories
         /// </summary>
         public bool IsOccupied(Vector2Int position)
         {
-            throw new NotImplementedException();
+            foreach (KeyValuePair<Item, Vector2Int> item in _items)
+                if (position.x >= item.Value.x &&
+                    position.x < item.Value.x + item.Key.Size.x &&
+                    position.y >= item.Value.y &&
+                    position.y < item.Value.y + item.Key.Size.y)
+                    return true;
+
+            return false;
         }
 
         public bool IsOccupied(int x, int y)
         {
-            throw new NotImplementedException();
+            return IsOccupied(new Vector2Int(x, y));
         }
 
         /// <summary>
@@ -156,12 +253,12 @@ namespace Modules.Inventories
         /// </summary>
         public bool IsFree(Vector2Int position)
         {
-            throw new NotImplementedException();
+            return !IsOccupied(position);
         }
 
         public bool IsFree(int x, int y)
         {
-            throw new NotImplementedException();
+            return IsFree(new Vector2Int(x, y));
         }
 
         /// <summary>
@@ -169,12 +266,20 @@ namespace Modules.Inventories
         /// </summary>
         public bool RemoveItem(Item item)
         {
-            throw new NotImplementedException();
+            return RemoveItem(item, out _);
         }
 
         public bool RemoveItem(Item item, out Vector2Int position)
         {
-            throw new NotImplementedException();
+            position = default;
+            if (item == null)
+                return false;
+            
+            if(!_items.Remove(item, out position))
+                return false;
+            
+            OnRemoved?.Invoke(item, position);
+            return true;
         }
 
         /// <summary>
@@ -182,22 +287,37 @@ namespace Modules.Inventories
         /// </summary>
         public Item GetItem(Vector2Int position)
         {
-            throw new NotImplementedException();
+            if (!IsPointInside(position, default, _size))
+                throw new IndexOutOfRangeException();
+            
+            foreach (KeyValuePair<Item, Vector2Int> item in _items)
+                if (position.x >= item.Value.x &&
+                    position.x < item.Value.x + item.Key.Size.x &&
+                    position.y >= item.Value.y &&
+                    position.y < item.Value.y + item.Key.Size.y)
+                    return item.Key;
+
+            return null;
         }
 
         public Item GetItem(int x, int y)
         {
-            throw new NotImplementedException();
+            return GetItem(new Vector2Int(x, y));
         }
 
         public bool TryGetItem(Vector2Int position, out Item item)
         {
-            throw new NotImplementedException();
+            item = null;
+            if (!IsPointInside(position, default, _size))
+                return false;
+            
+            item = GetItem(position);
+            return item != null;
         }
 
         public bool TryGetItem(int x, int y, out Item item)
         {
-            throw new NotImplementedException();
+            return TryGetItem(new Vector2Int(x, y), out item);
         }
 
         /// <summary>
@@ -205,12 +325,35 @@ namespace Modules.Inventories
         /// </summary>
         public Vector2Int[] GetPositions(Item item)
         {
-            throw new NotImplementedException();
+            if (item == null)
+                throw new NullReferenceException(nameof(item));
+            
+            if (!_items.TryGetValue(item, out Vector2Int position))
+                throw new KeyNotFoundException("Item not found");
+
+            int width = item.Size.x;
+            int height = item.Size.y;
+
+            Vector2Int[] positions = new Vector2Int[width * height];
+
+            for (int x = 0; x < width; x++)
+            for (int y = 0; y < height; y++)
+                positions[x * height + y] = new Vector2Int(position.x + x, position.y + y);
+
+            return positions;
         }
 
         public bool TryGetPositions(Item item, out Vector2Int[] positions)
         {
-            throw new NotImplementedException();
+            positions = null;
+            if (item == null)
+                return false;
+
+            if (!_items.ContainsKey(item))
+                return false;
+            
+            positions = GetPositions(item);
+            return positions.Length > 0;
         }
 
         /// <summary>
@@ -218,7 +361,11 @@ namespace Modules.Inventories
         /// </summary>
         public void Clear()
         {
-            throw new NotImplementedException();
+            if(Count == 0)
+                return;
+            
+            _items.Clear();
+            OnCleared?.Invoke();
         }
 
         /// <summary>
@@ -226,12 +373,36 @@ namespace Modules.Inventories
         /// </summary>
         public int GetItemCount(string name)
         {
-            throw new NotImplementedException();
+            int count = 0;
+            foreach (KeyValuePair<Item, Vector2Int> item in _items)
+                if (item.Key.Name == name)
+                    count++;
+            return count;
         }
 
         public bool MoveItem(Item item, Vector2Int position)
         {
-            throw new NotImplementedException();
+            if(item == null)
+                throw new ArgumentNullException(nameof(item));
+            
+            if(!_items.ContainsKey(item))
+                return false;
+            
+            if(!IsPointInside(position, default, _size - item.Size))
+                return false;
+
+            foreach (KeyValuePair<Item, Vector2Int> pair in _items)
+            {
+                if (Equals(item, pair.Key))
+                    continue;
+                
+                if(IsIntersects(position, item.Size, pair.Value, pair.Key.Size))
+                    return false;
+            }
+            
+            _items[item] = position;
+            OnMoved?.Invoke(item, position);
+            return true;
         }
 
         /// <summary>
@@ -239,7 +410,17 @@ namespace Modules.Inventories
         /// </summary>
         public void OptimizeSpace()
         {
-            throw new NotImplementedException();
+            if(Count == 0)
+                return;
+
+            List<Item> items = new(_items.Keys);
+            
+            items.Sort((a, b) => (b.Size.x * b.Size.y).CompareTo(a.Size.x * a.Size.y));
+            
+            _items.Clear();
+            foreach (Item item in items)
+                if(FindFreePosition(item, out Vector2Int position))
+                    _items.Add(item, position);
         }
 
         /// <summary>
@@ -247,12 +428,12 @@ namespace Modules.Inventories
         /// </summary>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return _items.Keys.GetEnumerator();
         }
 
         public IEnumerator<Item> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return _items.Keys.GetEnumerator();
         }
 
         /// <summary>
@@ -260,7 +441,9 @@ namespace Modules.Inventories
         /// </summary>
         public void CopyTo(Item[,] matrix)
         {
-            throw new NotImplementedException();
+            for (int y = 0; y < matrix.GetLength(1); y++)
+            for (int x = 0; x < matrix.GetLength(0); x++)
+                matrix[x, y] = GetItem(x, y);
         }
 
         /// <summary>
@@ -268,7 +451,47 @@ namespace Modules.Inventories
         /// </summary>
         public override string ToString()
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new();
+
+            for (int x = 0; x < Width; x++)
+            {
+                for (int y = 0; y < Height; y++)
+                {
+                    Item item = GetItem(x, y);
+                    sb.Append(item != null ? item.ToString() : "empty");
+                    sb.Append(' ');
+                }
+                sb.AppendLine();
+            }
+
+            return sb.ToString();
         }
+
+        private static bool IsPointInside(
+            Vector2Int position,
+            Vector2Int origin,
+            Vector2Int size
+            ) =>
+            position.x >= origin.x &&
+            position.y >= origin.y &&
+            position.x < origin.x + size.x &&
+            position.y < origin.y + size.y;
+        
+        private static bool IsFitsInside(
+            Vector2Int itemPos, 
+            Vector2Int itemSize,
+            Vector2Int inventorySize
+            ) =>
+            itemPos.x >= 0 &&
+            itemPos.y >= 0 &&
+            itemPos.x + itemSize.x <= inventorySize.x &&
+            itemPos.y + itemSize.y <= inventorySize.y;
+        
+        private static bool IsIntersects(
+            Vector2Int posA, Vector2Int sizeA,
+            Vector2Int posB, Vector2Int sizeB
+            ) =>
+            posA.x < posB.x + sizeB.x && posA.x + sizeA.x > posB.x &&
+            posA.y < posB.y + sizeB.y && posA.y + sizeA.y > posB.y;
     }
 }
