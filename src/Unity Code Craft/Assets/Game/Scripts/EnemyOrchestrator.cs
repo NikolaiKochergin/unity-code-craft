@@ -45,7 +45,7 @@ namespace Game
         
         [Header("Bullets")]
         [SerializeField]
-        private BulletWorldGO _bulletWorld;
+        private BulletSystem _bulletWorld;
         
         [Header("UI")]
         [SerializeField]

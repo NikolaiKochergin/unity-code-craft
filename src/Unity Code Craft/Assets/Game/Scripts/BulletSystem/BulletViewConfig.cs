@@ -15,7 +15,6 @@ namespace Game
         [field: SerializeField]
         public GameObject RedVFX { get; private set; }
         
-        [field: SerializeField]
-        public GameObject ExplosionVFX  { get; private set; }
+        [field: SerializeField] public ExplosionParticles ExplosionVFX  { get; private set; }
     }
 }

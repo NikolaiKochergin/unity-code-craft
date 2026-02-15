@@ -25,7 +25,7 @@ namespace Game
 
         [Header("Movement")]
         [SerializeField]
-        protected Motor _motor;
+        protected RigidbodyMover _motor;
         
         protected Vector3 moveDirection;
 
