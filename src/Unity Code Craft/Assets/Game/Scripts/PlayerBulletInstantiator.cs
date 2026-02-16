@@ -3,13 +3,13 @@ using UnityEngine;
 namespace Game
 {
     // +
-    public sealed class PlayerBulletInstantiator : MonoBehaviour
+    public sealed class FireController : MonoBehaviour
     {
         [SerializeField]
         private BulletSystem _bulletWorld;
 
         [SerializeField]
-        private PlayerShip _player;
+        private Ship _player;
 
         private void OnEnable()
         {
@@ -21,7 +21,7 @@ namespace Game
             _player.OnFire -= this.OnFire;
         }
 
-        private void OnFire(ShipController _)
+        private void OnFire(Ship _)
         {
             _bulletWorld.Spawn(
                 _player.firePoint.position,

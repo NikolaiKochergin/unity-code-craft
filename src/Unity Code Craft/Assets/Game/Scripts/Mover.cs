@@ -5,19 +5,17 @@ namespace Game
 {
     // +
     [Serializable]
-    public sealed class RigidbodyMover
+    public sealed class Mover
     {
-        public event Action<Vector3> OnMoved;
-        
-        [SerializeField]
-        private Rigidbody2D _rigidbody;
-
-        [SerializeField]
-        private float _speed;
+        [SerializeField] private Rigidbody2D _rigidbody;
+        [SerializeField] private float _speed;
 
         private Vector2? _direction;
 
-        public void SetSpeed(float speed) => _speed = speed;
+        public Mover(float speed) => 
+            _speed = speed;
+
+        public event Action<Vector3> OnMoved;
 
         public void MoveStep(Vector2 direction) => _direction = direction;
 
@@ -31,7 +29,9 @@ namespace Game
             _rigidbody.MovePosition(newPosition);
             _direction = null;
             
-            this.OnMoved?.Invoke(direction);
+            OnMoved?.Invoke(direction);
         }
+
+        public void SetSpeed(float speed) => _speed = speed;
     }
 }

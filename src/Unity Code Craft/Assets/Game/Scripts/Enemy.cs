@@ -3,10 +3,12 @@ using UnityEngine;
 namespace Game
 {
     // +
-    public sealed class Enemy : ShipController
+    public sealed class Enemy : MonoBehaviour
     {
+        [SerializeField] private Ship _ship;
+        
         [Header("Enemy")]
-        public ShipController target;
+        public Ship target;
         public Vector2 destination;
 
         [SerializeField]
@@ -18,37 +20,35 @@ namespace Game
         private float _fireTime;
 
         private IEnemyDespawner _despawner;
+        
+        public Ship Ship => _ship;
 
         public void SetDespawner(IEnemyDespawner despawner) => _despawner = despawner;
 
-        private void OnEnable() => this.OnDead += this.OnCharacterDead;
+        private void OnEnable() => _ship.Health.OnDied += OnCharacterDead;
 
-        private void OnDisable() => this.OnDead -= this.OnCharacterDead;
+        private void OnDisable() => _ship.Health.OnDied -= OnCharacterDead;
 
         private void OnCharacterDead() => _despawner.Despawn(this);
 
-        protected override void FixedUpdate()
+        private void FixedUpdate()
         {
-            base.FixedUpdate();
-
-            if (this.currentHealth <= 0 || this.target == null || this.target.currentHealth <= 0)
+            if (!_ship.Health.IsAlive || target == null || !target.Health.IsAlive)
                 return;
 
             Vector2 distance = destination - (Vector2) this.transform.position;
             bool isNotReached = distance.sqrMagnitude > _stoppingDistance * _stoppingDistance;
             
-            moveDirection = isNotReached ? distance.normalized : Vector3.zero;
-
             if (isNotReached)
             {
-                _motor.MoveStep(distance.normalized);
+                _ship.Mover.MoveStep(distance.normalized);
             }
             else
             {
                 float time = Time.time;
                 if (time - _fireTime >= _fireCooldown)
                 {
-                    this.Fire();
+                    _ship.Fire();
                     _fireTime = time;
                 }
             }

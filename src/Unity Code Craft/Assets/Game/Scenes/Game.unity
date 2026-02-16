@@ -518,12 +518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba1c9bb6cda40859c2a722f818fdc94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.UIController
-  _gameOverView: {fileID: 1375492023}
-  _scoreView: {fileID: 895558708}
-  _healthView: {fileID: 1243470931}
-  _enemyManager: {fileID: 562298205}
-  _player: {fileID: 0}
-  gameManager: {fileID: 0}
 --- !u!1 &196756140
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,6 +595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
   _container: {fileID: 363245576}
+  _initialCapacity: 10
   _configView: {fileID: 11400000, guid: f2107b212e6a245009f8ae9313cc81bb, type: 2}
   _levelBounds: {fileID: 2572952653776768186}
 --- !u!1 &404085825
@@ -1007,7 +1002,7 @@ MonoBehaviour:
   _maxSpawnCooldown: 3
   _prefab: {fileID: 102605417607457000, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
   _container: {fileID: 1052031097}
-  _player: {fileID: 4414282821800802410}
+  _player: {fileID: 4414282821800802411}
   _spawnPositions:
   - {fileID: 5098186055898699330}
   - {fileID: 3822857799868723767}
@@ -2559,7 +2554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.PlayerBulletInstantiator
   _bulletWorld: {fileID: 363245577}
-  _player: {fileID: 4414282821800802410}
+  _player: {fileID: 4414282821800802411}
 --- !u!1 &1954893900
 GameObject:
   m_ObjectHideFlags: 0
@@ -3142,6 +3137,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 739865810}
     m_Modifications:
     - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      propertyPath: _ship
+      value: 
+      objectReference: {fileID: 4414282821800802411}
+    - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       propertyPath: _healthView
       value: 
       objectReference: {fileID: 1243470931}
@@ -3204,8 +3203,26 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 4414282821800802411}
   m_SourcePrefab: {fileID: 100100000, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+--- !u!4 &3559832809919233304 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8503432944885784460, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+  m_PrefabInstance: {fileID: 3559832809919233303}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3559832809919233305 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+  m_PrefabInstance: {fileID: 3559832809919233303}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &3559832809919233306 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 4575139502811685103, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+  m_PrefabInstance: {fileID: 3559832809919233303}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3569791732579588318
 GameObject:
   m_ObjectHideFlags: 0
@@ -3258,17 +3275,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5706750963508843440, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
   m_PrefabInstance: {fileID: 3559832809919233303}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4414282821800802410 stripped
+--- !u!114 &4414282821800802411
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
-  m_PrefabInstance: {fileID: 3559832809919233303}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 3559832809919233305}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aab487c3ce89407b8153f9c2ff593bc3, type: 3}
+  m_Script: {fileID: 11500000, guid: 558b312fd53c491ab69f3e55255aae3c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Game::Game.PlayerShip
+  m_EditorClassIdentifier: Game::Game.Ship
+  config: {fileID: 11400000, guid: 0b9a4576e5f0a4babb44b3c82e6480d0, type: 2}
+  <Health>k__BackingField:
+    _current: 0
+  <Mover>k__BackingField:
+    _rigidbody: {fileID: 3559832809919233306}
+    _speed: 0
+  firePoint: {fileID: 3559832809919233304}
+  bulletSpeed: 0
+  bulletDamage: 0
 --- !u!1 &4788406047096451828
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,8 +5,10 @@ using UnityEngine;
 namespace Game
 {
     // +
-    public sealed class PlayerShip : ShipController
+    public sealed class PlayerShipController : MonoBehaviour
     {
+        [SerializeField] private Ship _ship;
+        
         [SerializeField]
         private TransformBounds _playerArea;
 
@@ -22,43 +24,39 @@ namespace Game
 
         private void OnEnable()
         {
-            this.OnHealthChanged += health =>
-            {
-                _healthView.SetHealth(health, this.config.Health);
-                _cameraShaker.Shake();
-            };
-            this.OnDead += _gameOverView.Show;
+            _ship.Health.OnChanged += OnHealthChanged;
+            _ship.Health.OnDied += _gameOverView.Show;
         }
 
         private void OnDisable()
         {
-            this.OnHealthChanged -= health =>
-            {
-                _healthView.SetHealth(health, this.config.Health);
-                _cameraShaker.Shake();
-            };
-            this.OnDead -= _gameOverView.Show;
+            _ship.Health.OnChanged += OnHealthChanged;
+            _ship.Health.OnDied += _gameOverView.Show;
+        }
+
+        private void OnHealthChanged(int currentHealth)
+        {
+            _healthView.SetHealth(currentHealth, _ship.Health.Max);
+            _cameraShaker.Shake();
         }
 
         public void Update()
         {
+            if(!_ship.Health.IsAlive)
+                return;
+            
             if (Input.GetKeyDown(KeyCode.Space))
-                this.Fire();
+                _ship.Fire();
 
             float dx = Input.GetAxisRaw("Horizontal");
             float dy = Input.GetAxisRaw("Vertical");
-            this.moveDirection = new Vector2(dx, dy);
-
-            if (this.currentHealth > 0)
-            {
-                _motor.MoveStep(this.moveDirection);
-            }
+            
+            _ship.Mover.MoveStep(new Vector2(dx, dy));
         }
 
-        protected override void LateUpdate()
+        private void LateUpdate()
         {
-            base.LateUpdate();
-            this.transform.position = _playerArea.ClampInBounds(this.transform.position);
+            _ship.transform.position = _playerArea.ClampInBounds(this.transform.position);
         }
     }
 }

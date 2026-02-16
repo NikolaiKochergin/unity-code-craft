@@ -44,25 +44,13 @@ namespace Game
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if(_damage <= 0 || !other.TryGetComponent(out ShipController ship))
+            if(_damage <= 0 || !other.TryGetComponent(out IDamageable ship))
                 return;
             
-            ApplyDamage(ship);
+            ship.Health.TakeDamage(_damage);
 
             _onDamageApplied?.Invoke(this);
             _onDamageApplied = null;
-        }
-
-        private void ApplyDamage(ShipController ship)
-        {
-            ship.currentHealth = Mathf.Clamp(ship.currentHealth - _damage, 0, ship.config.Health);
-            ship.NotifyAboutHealthChanged(ship.currentHealth);
- 
-            if (ship.currentHealth <= 0)
-            {
-                ship.NotifyAboutDead();
-                ship.gameObject.SetActive(false);
-            }
         }
 
         private void SetLayer(TeamType team) =>
