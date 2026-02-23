@@ -15,21 +15,21 @@ namespace Game
         public void Setup(float speed) => 
             _speed = speed;
 
-        public event Action<Vector3> OnMoved;
+        public event Action<Vector3, float> OnMoved;
 
         public void MoveStep(Vector2 direction) => _direction = direction;
 
-        public void FixedUpdate()
+        public void Update(float deltaTime)
         {
             if (!_direction.HasValue)
                 return;
 
             Vector2 direction = _direction.Value;
-            Vector2 newPosition = _rigidbody.position + direction * (_speed * Time.fixedDeltaTime);
+            Vector2 newPosition = _rigidbody.position + direction * (_speed * deltaTime);
             _rigidbody.MovePosition(newPosition);
             _direction = null;
             
-            OnMoved?.Invoke(direction);
+            OnMoved?.Invoke(direction, deltaTime);
         }
     }
 }

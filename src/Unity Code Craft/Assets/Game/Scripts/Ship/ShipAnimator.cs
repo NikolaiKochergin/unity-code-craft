@@ -35,7 +35,7 @@ namespace Game
       _viewTransform.localRotation = Quaternion.Lerp(_viewTransform.localRotation, shipRotation, t);
     }
 
-    public void AnimateFire()
+    public void AnimateFire(AttackEvent _)
     {
       if (_fireSFX)
         _audioSource.PlayOneShot(_fireSFX);
@@ -44,7 +44,7 @@ namespace Game
         _fireVFX.Play();
     }
     
-    public void AnimateDamage()
+    public void AnimateDamage(int _)
     {
       if (_damageAnimation.IsActive())
         _damageAnimation.Kill();

@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 102605417607457000}
   - component: {fileID: 4560017961611896118}
   - component: {fileID: 740828546143207622}
+  - component: {fileID: 6992474245113567429}
+  - component: {fileID: 3243668468931162889}
   m_Layer: 11
   m_Name: EnemyShip
   m_TagString: Untagged
@@ -235,6 +237,40 @@ MonoBehaviour:
     _speed: 0
   <Attack>k__BackingField:
     _firePoint: {fileID: 3195880656587174614}
+--- !u!114 &6992474245113567429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d3853ee84648f69e540fab7d02f2d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.ShipAnimator
+  _renderer: {fileID: 1333951631294404335}
+  _root: {fileID: 559606060570185700}
+  _viewTransform: {fileID: 2570692159425164225}
+  _viewConfig: {fileID: 11400000, guid: f6ecf0b3d1d004b3893cc42c64995303, type: 2}
+  _audioSource: {fileID: 4560017961611896118}
+  _fireVFX: {fileID: 1792961037914348205}
+  _fireSFX: {fileID: 8300000, guid: a6ed263e807940048af5295b8f7144d3, type: 3}
+  _damageSFX: {fileID: 8300000, guid: a6ed263e807940048af5295b8f7144d3, type: 3}
+--- !u!114 &3243668468931162889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5285761d509a401992ad9dbedd760056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.ShipAnimatorController
+  _ship: {fileID: 740828546143207622}
+  _animator: {fileID: 6992474245113567429}
 --- !u!1 &1074127585690423075
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +397,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 192558214123937395, guid: fa966f90370b8444eb8c3d68ddfaa574, type: 3}
   m_PrefabInstance: {fileID: 28168940994966515}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &1333951631294404335 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1362117268098458908, guid: fa966f90370b8444eb8c3d68ddfaa574, type: 3}
+  m_PrefabInstance: {fileID: 28168940994966515}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1900076867361227821
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -426,6 +467,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afb15b2c47760da419d51e3b253b9a97, type: 3}
+--- !u!198 &1792961037914348205 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198032251219402368, guid: afb15b2c47760da419d51e3b253b9a97, type: 3}
+  m_PrefabInstance: {fileID: 1900076867361227821}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1896272799918682171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4089945042170902, guid: afb15b2c47760da419d51e3b253b9a97, type: 3}

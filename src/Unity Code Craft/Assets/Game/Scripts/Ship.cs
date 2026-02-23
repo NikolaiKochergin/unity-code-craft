@@ -19,6 +19,6 @@ namespace Game
         }
 
         private void FixedUpdate() => 
-            Mover.FixedUpdate();
+            Mover.Update(Time.fixedDeltaTime);
     }
 }

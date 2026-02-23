@@ -3137,10 +3137,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 739865810}
     m_Modifications:
     - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
-      propertyPath: _ship
-      value: 
-      objectReference: {fileID: 4414282821800802411}
-    - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       propertyPath: _healthView
       value: 
       objectReference: {fileID: 1243470931}
@@ -3203,26 +3199,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 4414282821800802411}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
---- !u!4 &3559832809919233304 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8503432944885784460, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
-  m_PrefabInstance: {fileID: 3559832809919233303}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3559832809919233305 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
-  m_PrefabInstance: {fileID: 3559832809919233303}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &3559832809919233306 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 4575139502811685103, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
-  m_PrefabInstance: {fileID: 3559832809919233303}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3569791732579588318
 GameObject:
   m_ObjectHideFlags: 0
@@ -3275,26 +3253,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5706750963508843440, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
   m_PrefabInstance: {fileID: 3559832809919233303}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4414282821800802411
+--- !u!114 &4414282821800802411 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 8489289596571212206, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+  m_PrefabInstance: {fileID: 3559832809919233303}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3559832809919233305}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 558b312fd53c491ab69f3e55255aae3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.Ship
-  config: {fileID: 11400000, guid: 0b9a4576e5f0a4babb44b3c82e6480d0, type: 2}
-  <Health>k__BackingField:
-    _current: 0
-  <Mover>k__BackingField:
-    _rigidbody: {fileID: 3559832809919233306}
-    _speed: 0
-  <Attack>k__BackingField:
-    _firePoint: {fileID: 3559832809919233304}
 --- !u!1 &4788406047096451828
 GameObject:
   m_ObjectHideFlags: 0
