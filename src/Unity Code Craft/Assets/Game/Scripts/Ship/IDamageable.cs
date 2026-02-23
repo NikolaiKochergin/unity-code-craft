@@ -2,6 +2,6 @@
 {
   public interface IDamageable
   {
-    HealthComponent Health { get; }
+    IHealth Health { get; }
   }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class AttackComponent
+    public class AttackComponent : IAttack
     {
         [SerializeField] private Transform _firePoint;
         

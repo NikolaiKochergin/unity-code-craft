@@ -4,17 +4,19 @@ using UnityEngine;
 namespace Game
 {
   [Serializable]
-  public class HealthComponent
+  public class HealthComponent : IHealth
   {
     [SerializeField] private int _current;
     
-    public void Setup(int maxHealth)
+    private HealthConfig _config;
+
+    public void Setup(HealthConfig config)
     {
-      Max = maxHealth;
-      _current = maxHealth;
+      _config = config;
+      _current = config.Max;
     }
 
-    public int Max { get; private set; }
+    public int Max => _config.Max;
     public int Current =>  _current;
     public bool IsAlive => Current > 0;
 

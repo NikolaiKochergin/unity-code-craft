@@ -2,9 +2,8 @@ using UnityEngine;
 
 namespace Game
 {
-    // +
-    [CreateAssetMenu(menuName = "Game/ShipControllerViewConfig", order = 0)]
-    public sealed class ShipControllerViewConfig : ScriptableObject
+    [CreateAssetMenu(menuName = "Game/ShipViewConfig", order = 0)]
+    public sealed class ShipViewConfig : ScriptableObject
     {
         [field: SerializeField]
         public Material MaterialPrefab { get; private set; }

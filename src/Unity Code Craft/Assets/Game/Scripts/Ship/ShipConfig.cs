@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Game
 {
-    // +
     [CreateAssetMenu(menuName = "Game/Create " + nameof(ShipConfig))]
     public sealed class ShipConfig : ScriptableObject
     {

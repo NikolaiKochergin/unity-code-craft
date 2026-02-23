@@ -230,12 +230,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.Ship
   config: {fileID: 11400000, guid: 342eb63e507d644daae6ffc27bd8fc71, type: 2}
-  <Health>k__BackingField:
+  _health:
     _current: 0
-  <Mover>k__BackingField:
+  _move:
     _rigidbody: {fileID: 659620479434099170}
-    _speed: 0
-  <Attack>k__BackingField:
+  _attack:
     _firePoint: {fileID: 3195880656587174614}
 --- !u!114 &6992474245113567429
 MonoBehaviour:

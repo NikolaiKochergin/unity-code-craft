@@ -77,14 +77,11 @@ namespace Game
                 enemy = Instantiate(_prefab, _container);
 
             enemy.transform.position = this.NextSpawnPosition();
-            enemy.destination = this.NextDestination();
-            enemy.Ship.Health.Restore();
-
-            enemy.target = _player;
-            enemy.SetDespawner(this);
-            enemy.Ship.Attack.OnFire += this.OnFire;
+            enemy.Setup(this, _player.Health, NextDestination());
+            
+            enemy.OnFire += this.OnFire;
                 
-            this.ResetSpawnCooldown();
+            ResetSpawnCooldown();
         }
 
         private void ResetSpawnCooldown()

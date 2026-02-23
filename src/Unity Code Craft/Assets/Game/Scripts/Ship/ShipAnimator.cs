@@ -8,7 +8,7 @@ namespace Game
     [SerializeField] private Renderer _renderer;
     [SerializeField] private GameObject _root;
     [SerializeField] private Transform _viewTransform;
-    [SerializeField] private ShipControllerViewConfig _viewConfig;
+    [SerializeField] private ShipViewConfig _viewConfig;
     
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private ParticleSystem _fireVFX;

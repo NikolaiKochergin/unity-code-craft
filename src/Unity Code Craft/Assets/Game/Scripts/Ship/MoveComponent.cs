@@ -3,17 +3,16 @@ using UnityEngine;
 
 namespace Game
 {
-    // +
     [Serializable]
-    public sealed class MoveComponent
+    public sealed class MoveComponent : IMover
     {
         [SerializeField] private Rigidbody2D _rigidbody;
-        [SerializeField] private float _speed;
 
+        private MoveConfig _config;
         private Vector2? _direction;
 
-        public void Setup(float speed) => 
-            _speed = speed;
+        public void Setup(MoveConfig config) => 
+            _config = config;
 
         public event Action<Vector3, float> OnMoved;
 
@@ -25,7 +24,7 @@ namespace Game
                 return;
 
             Vector2 direction = _direction.Value;
-            Vector2 newPosition = _rigidbody.position + direction * (_speed * deltaTime);
+            Vector2 newPosition = _rigidbody.position + direction * (_config.Speed * deltaTime);
             _rigidbody.MovePosition(newPosition);
             _direction = null;
             

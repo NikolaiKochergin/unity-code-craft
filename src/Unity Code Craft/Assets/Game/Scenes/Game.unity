@@ -515,9 +515,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 177601766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ba1c9bb6cda40859c2a722f818fdc94, type: 3}
+  m_Script: {fileID: 11500000, guid: 24647f53d0c149a692bb3baa952d272f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.UIController
+  _gameOverView: {fileID: 1375492023}
+  _scoreView: {fileID: 895558708}
+  _healthView: {fileID: 1243470931}
+  _ship: {fileID: 4414282821800802411}
 --- !u!1 &196756140
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,6 +690,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
+  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: '[Camera]'
   m_TagString: MainCamera
@@ -828,6 +833,20 @@ MonoBehaviour:
   _strength: {x: 0.11, y: 0.11, z: 0.11}
   _vibrato: 4
   _randomnessMode: 0
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a4ce63a587d498f905e3570498da716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.CameraShakerController
+  _cameraShaker: {fileID: 519420034}
+  _ship: {fileID: 4414282821800802411}
 --- !u!1 &522898773
 GameObject:
   m_ObjectHideFlags: 0

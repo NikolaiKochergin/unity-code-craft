@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Game
@@ -6,24 +7,31 @@ namespace Game
     public sealed class Enemy : MonoBehaviour
     {
         [SerializeField] private Ship _ship;
+        [SerializeField] private float _fireCooldown = 1.25f;
+        [SerializeField] private float _stoppingDistance = 0.25f;
         
-        [Header("Enemy")]
-        public Ship target;
-        public Vector2 destination;
-
-        [SerializeField]
-        private float _fireCooldown = 1.25f;
-
-        [SerializeField]
-        private float _stoppingDistance = 0.25f;
-
-        private float _fireTime;
-
         private IEnemyDespawner _despawner;
+        private IHealth _target;
+        private Vector2 _destination;
         
-        public Ship Ship => _ship;
-
-        public void SetDespawner(IEnemyDespawner despawner) => _despawner = despawner;
+        private float _fireTime;
+        
+        public event Action<AttackEvent> OnFire
+        {
+            add => _ship.Attack.OnFire += value;
+            remove => _ship.Attack.OnFire -= value;
+        }
+        
+        public void Setup(
+            IEnemyDespawner despawner, 
+            IHealth target, 
+            Vector2 destination)
+        {
+            _despawner = despawner;
+            _target = target;
+            _destination = destination;
+            _ship.Health.Restore();
+        }
 
         private void OnEnable() => _ship.Health.OnDied += OnCharacterDead;
 
@@ -33,10 +41,10 @@ namespace Game
 
         private void FixedUpdate()
         {
-            if (!_ship.Health.IsAlive || target == null || !target.Health.IsAlive)
+            if (!_ship.Health.IsAlive || _target == null || !_target.IsAlive)
                 return;
 
-            Vector2 distance = destination - (Vector2) this.transform.position;
+            Vector2 distance = _destination - (Vector2) transform.position;
             bool isNotReached = distance.sqrMagnitude > _stoppingDistance * _stoppingDistance;
             
             if (isNotReached)
