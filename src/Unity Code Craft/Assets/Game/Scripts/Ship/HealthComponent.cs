@@ -4,11 +4,11 @@ using UnityEngine;
 namespace Game
 {
   [Serializable]
-  public class Health
+  public class HealthComponent
   {
     [SerializeField] private int _current;
     
-    public Health(int maxHealth)
+    public HealthComponent(int maxHealth)
     {
       Max = maxHealth;
       _current = maxHealth;

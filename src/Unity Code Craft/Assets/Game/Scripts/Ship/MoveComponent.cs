@@ -5,14 +5,14 @@ namespace Game
 {
     // +
     [Serializable]
-    public sealed class Mover
+    public sealed class MoveComponent
     {
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private float _speed;
 
         private Vector2? _direction;
 
-        public Mover(float speed) => 
+        public MoveComponent(float speed) => 
             _speed = speed;
 
         public event Action<Vector3> OnMoved;

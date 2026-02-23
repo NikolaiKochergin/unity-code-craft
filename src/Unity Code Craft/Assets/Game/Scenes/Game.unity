@@ -3294,8 +3294,8 @@ MonoBehaviour:
     _rigidbody: {fileID: 3559832809919233306}
     _speed: 0
   firePoint: {fileID: 3559832809919233304}
-  bulletSpeed: 0
-  bulletDamage: 0
+  bulletSpeed: 2
+  bulletDamage: 1
 --- !u!1 &4788406047096451828
 GameObject:
   m_ObjectHideFlags: 0

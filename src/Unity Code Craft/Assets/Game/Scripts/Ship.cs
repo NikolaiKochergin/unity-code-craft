@@ -10,8 +10,8 @@ namespace Game
 
         public ShipControllerSO config;
 
-        [field: SerializeField] public Health Health { get; private set; }
-        [field: SerializeField] public Mover Mover { get; private set; }
+        [field: SerializeField] public HealthComponent Health { get; private set; }
+        [field: SerializeField] public MoveComponent Mover { get; private set; }
 
         [Header("Combat")]
         public Transform firePoint;
@@ -21,7 +21,7 @@ namespace Game
         
         private void Awake()
         {
-            Health = new Health(config.Health);
+            Health = new HealthComponent(config.Health);
             Mover.SetSpeed(config.MoveSpeed);
         }
 
