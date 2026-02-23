@@ -233,9 +233,8 @@ MonoBehaviour:
   <Mover>k__BackingField:
     _rigidbody: {fileID: 659620479434099170}
     _speed: 0
-  firePoint: {fileID: 3195880656587174614}
-  bulletSpeed: 0
-  bulletDamage: 0
+  <Attack>k__BackingField:
+    _firePoint: {fileID: 3195880656587174614}
 --- !u!1 &1074127585690423075
 GameObject:
   m_ObjectHideFlags: 0

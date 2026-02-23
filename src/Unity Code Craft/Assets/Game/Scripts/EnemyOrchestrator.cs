@@ -82,7 +82,7 @@ namespace Game
 
             enemy.target = _player;
             enemy.SetDespawner(this);
-            enemy.Ship.OnFire += this.OnFire;
+            enemy.Ship.Attack.OnFire += this.OnFire;
                 
             this.ResetSpawnCooldown();
         }
@@ -107,16 +107,16 @@ namespace Game
             _pool.Enqueue(enemy);
         }
         
-        private void OnFire(Ship enemy)
+        private void OnFire(AttackEvent attackEvent)
         {
-            Vector2 position = enemy.firePoint.position;
+            Vector2 position = attackEvent.FirePoint.position;
             Vector2 target = _player.transform.position;
             Vector2 direction = (target - position).normalized;
             _bulletWorld.Spawn(
-                enemy.firePoint.position,
+                attackEvent.FirePoint.position,
                 direction,
-                enemy.bulletSpeed,
-                enemy.bulletDamage,
+                attackEvent.Speed,
+                attackEvent.Damage,
                 TeamType.Enemy
             );
         }

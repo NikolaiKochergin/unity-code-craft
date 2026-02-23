@@ -48,7 +48,7 @@ namespace Game
                 float time = Time.time;
                 if (time - _fireTime >= _fireCooldown)
                 {
-                    _ship.Fire();
+                    _ship.Attack.Fire();
                     _fireTime = time;
                 }
             }

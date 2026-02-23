@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Game
@@ -6,35 +5,20 @@ namespace Game
     // +
     public sealed class Ship : MonoBehaviour, IDamageable
     {
-        public event Action<Ship> OnFire;
-
-        public ShipControllerSO config;
+        [SerializeField] private ShipConfig config;
 
         [field: SerializeField] public HealthComponent Health { get; private set; }
         [field: SerializeField] public MoveComponent Mover { get; private set; }
-
-        [Header("Combat")]
-        public Transform firePoint;
-        public float bulletSpeed;
-        public int bulletDamage;
-        private float _fireTime;
+        [field: SerializeField] public AttackComponent Attack { get; private set; }
         
         private void Awake()
         {
-            Health = new HealthComponent(config.Health);
-            Mover.SetSpeed(config.MoveSpeed);
+            Health.Setup(config.Health.Max);
+            Mover.Setup(config.Move.Speed);
+            Attack.Setup(config.Attack, () => Health.IsAlive);
         }
 
-        private void FixedUpdate() => Mover.FixedUpdate();
-
-        public void Fire()
-        {
-            float time = Time.time;
-            if (time - _fireTime < config.FireCooldown || !Health.IsAlive)
-                return;
-
-            this.OnFire?.Invoke(this);
-            _fireTime = time;
-        }
+        private void FixedUpdate() => 
+            Mover.FixedUpdate();
     }
 }

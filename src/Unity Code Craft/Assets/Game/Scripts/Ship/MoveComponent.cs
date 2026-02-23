@@ -12,7 +12,7 @@ namespace Game
 
         private Vector2? _direction;
 
-        public MoveComponent(float speed) => 
+        public void Setup(float speed) => 
             _speed = speed;
 
         public event Action<Vector3> OnMoved;
@@ -31,7 +31,5 @@ namespace Game
             
             OnMoved?.Invoke(direction);
         }
-
-        public void SetSpeed(float speed) => _speed = speed;
     }
 }

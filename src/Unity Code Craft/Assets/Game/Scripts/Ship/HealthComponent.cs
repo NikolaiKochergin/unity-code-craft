@@ -8,13 +8,13 @@ namespace Game
   {
     [SerializeField] private int _current;
     
-    public HealthComponent(int maxHealth)
+    public void Setup(int maxHealth)
     {
       Max = maxHealth;
       _current = maxHealth;
     }
 
-    public int Max { get; }
+    public int Max { get; private set; }
     public int Current =>  _current;
     public bool IsAlive => Current > 0;
 

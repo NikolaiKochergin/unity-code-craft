@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Game
 {
     // +
-    public sealed class FireController : MonoBehaviour
+    public sealed class PlayerAttackController : MonoBehaviour
     {
         [SerializeField]
         private BulletSystem _bulletWorld;
@@ -13,21 +13,21 @@ namespace Game
 
         private void OnEnable()
         {
-            _player.OnFire += this.OnFire;
+            _player.Attack.OnFire += OnFire;
         }
 
         private void OnDisable()
         {
-            _player.OnFire -= this.OnFire;
+            _player.Attack.OnFire -= OnFire;
         }
 
-        private void OnFire(Ship _)
+        private void OnFire(AttackEvent attackEvent)
         {
             _bulletWorld.Spawn(
-                _player.firePoint.position,
-                _player.firePoint.up,
-                _player.bulletSpeed,
-                _player.bulletDamage,
+                attackEvent.FirePoint.position,
+                attackEvent.FirePoint.up,
+                attackEvent.Speed,
+                attackEvent.Damage,
                 TeamType.Player
             );
         }

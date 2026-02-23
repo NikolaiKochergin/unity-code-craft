@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072d2ba2b8554d2f9cee8304b9932c09, type: 3}
   m_Name: SpaceShip (Player)
   m_EditorClassIdentifier: 
-  <Health>k__BackingField: 10
-  <MoveSpeed>k__BackingField: 7
-  <FireCooldown>k__BackingField: 0.25
+  <Health>k__BackingField:
+    <Max>k__BackingField: 5
+  <Move>k__BackingField:
+    <Speed>k__BackingField: 5
+  <Attack>k__BackingField:
+    <FireCooldown>k__BackingField: 0.25
+    <BulletSpeed>k__BackingField: 3
+    <BulletDamage>k__BackingField: 3
