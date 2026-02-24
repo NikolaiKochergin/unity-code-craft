@@ -22,9 +22,7 @@ namespace Game
             _ship.Mover.SetDirection(new Vector2(dx, dy));
         }
 
-        private void LateUpdate()
-        {
+        private void LateUpdate() => 
             _ship.transform.position = _playerArea.ClampInBounds(transform.position);
-        }
     }
 }

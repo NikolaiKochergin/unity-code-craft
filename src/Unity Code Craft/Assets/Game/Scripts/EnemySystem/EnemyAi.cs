@@ -14,29 +14,29 @@ namespace Game
         private Vector2 _destination;
         
         private float _fireTime;
-        
-        public event Action<AttackEvent> OnFire
+        private Action<AttackEvent> _onFire;
+
+        public void Setup(IEnemyDespawner despawner,
+            IHealth target,
+            Vector2 destination, 
+            Action<AttackEvent> onFire)
         {
-            add => _ship.Attack.OnFire += value;
-            remove => _ship.Attack.OnFire -= value;
-        }
-        
-        public void Setup(
-            IEnemyDespawner despawner, 
-            IHealth target, 
-            Vector2 destination)
-        {
+            _onFire = onFire;
             _despawner = despawner;
             _target = target;
             _destination = destination;
             _ship.Health.Restore();
+            
+            _ship.Attack.OnFire += _onFire;
+            _ship.Health.OnDied += OnCharacterDead;
         }
 
-        private void OnEnable() => _ship.Health.OnDied += OnCharacterDead;
-
-        private void OnDisable() => _ship.Health.OnDied -= OnCharacterDead;
-
-        private void OnCharacterDead() => _despawner.Despawn(this);
+        private void OnCharacterDead()
+        {
+            _ship.Attack.OnFire -= _onFire;
+            _ship.Health.OnDied -= OnCharacterDead;
+            _despawner.Despawn(this);
+        }
 
         private void FixedUpdate()
         {

@@ -2,34 +2,24 @@ using UnityEngine;
 
 namespace Game
 {
-    // +
     public sealed class PlayerAttackController : MonoBehaviour
     {
-        [SerializeField]
-        private BulletSystem _bulletWorld;
+        [SerializeField] private BulletSystem _bulletSystem;
+        [SerializeField] private Ship _player;
 
-        [SerializeField]
-        private Ship _player;
-
-        private void OnEnable()
-        {
+        private void OnEnable() => 
             _player.Attack.OnFire += OnFire;
-        }
 
-        private void OnDisable()
-        {
+        private void OnDisable() => 
             _player.Attack.OnFire -= OnFire;
-        }
 
-        private void OnFire(AttackEvent attackEvent)
-        {
-            _bulletWorld.Spawn(
+        private void OnFire(AttackEvent attackEvent) =>
+            _bulletSystem.Spawn(
                 attackEvent.FirePoint.position,
                 attackEvent.FirePoint.up,
                 attackEvent.Speed,
                 attackEvent.Damage,
                 TeamType.Player
             );
-        }
     }
 }

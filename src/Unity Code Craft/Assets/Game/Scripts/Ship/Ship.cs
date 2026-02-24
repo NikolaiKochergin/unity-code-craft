@@ -21,14 +21,14 @@ namespace Game
             _attack.Setup(config.Attack, () => Health.IsAlive);
         }
         
-        private void Start()
+        private void OnEnable()
         {
             Attack.OnFire += _animator.AnimateFire;
             Health.OnChanged += _animator.AnimateDamage;
             Health.OnDied += _animator.AnimateDeath;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             Attack.OnFire -= _animator.AnimateFire;
             Health.OnChanged -= _animator.AnimateDamage;

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8141832910989862937}
   - component: {fileID: 5490084936504085548}
   - component: {fileID: 8489289596571212206}
-  - component: {fileID: 328849090417711829}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -239,20 +238,6 @@ MonoBehaviour:
     _rigidbody: {fileID: 4575139502811685103}
   _attack:
     _firePoint: {fileID: 8503432944885784460}
---- !u!114 &328849090417711829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4109394316656653739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aab487c3ce89407b8153f9c2ff593bc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Game.PlayerShip
-  _ship: {fileID: 8489289596571212206}
-  _playerArea: {fileID: 0}
 --- !u!1 &7932017922939402051
 GameObject:
   m_ObjectHideFlags: 0

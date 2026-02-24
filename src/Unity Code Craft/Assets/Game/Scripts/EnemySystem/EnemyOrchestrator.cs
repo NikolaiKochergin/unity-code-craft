@@ -1,69 +1,54 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using Modules.UI;
 using Modules.Utils;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Game
 {
-    // +
     public sealed class EnemyOrchestrator : MonoBehaviour, IEnemyDespawner
     {
         [Header("Spawn")]
-        [SerializeField]
-        private float _minSpawnCooldown = 2;
-
-        [SerializeField]
-        private float _maxSpawnCooldown = 3;
+        [SerializeField] private float _minSpawnCooldown = 2;
+        [SerializeField] private float _maxSpawnCooldown = 3;
         
         private float _spawnCooldown;
         private float _spawnTime;
         
         [Header("Pool")]
-        [SerializeField]
-        private EnemyAi _prefab;
-
-        [SerializeField]
-        private Transform _container;
+        [SerializeField] private EnemyAi _prefab;
+        [SerializeField] private Transform _container;
+        [SerializeField] private int _initialCapacity = 10;
         
-        private readonly Queue<EnemyAi> _pool = new();
+        private ComponentPool<EnemyAi> _pool;
 
         [Header("Target")]
-        [SerializeField]
-        private Ship _player;
+        [SerializeField] private Ship _player;
         
         [Header("Points")]
-        [SerializeField]
-        private Transform[] _spawnPositions;
-        
-        [SerializeField]
-        private Transform[] _attackPositions;
+        [SerializeField] private Transform[] _spawnPositions;
+        [SerializeField] private Transform[] _attackPositions;
         
         private int _spawnIndex;
         private int _attackIndex;
         
         [Header("Bullets")]
-        [SerializeField]
-        private BulletSystem _bulletWorld;
+        [SerializeField] private BulletSystem _bulletWorld;
         
-        [Header("UI")]
-        [SerializeField]
-        private ScoreView _scoreView;
-        
-        private int _destroyedEnemies;
+        public int DestroyedEnemies { get; private set; }
+
+        public event Action OnEnemyDied;
         
         private void Awake()
         {
+            _pool = new ComponentPool<EnemyAi>(_prefab, _initialCapacity, _container);
+            
             _spawnPositions.Shuffle();
             _attackPositions.Shuffle();
-            _scoreView.SetValue(_destroyedEnemies);
         }
         
-        private void Start()
-        {
-            this.ResetSpawnCooldown();
-        }
+        private void Start() => 
+            ResetSpawnCooldown();
 
         private void FixedUpdate()
         {
@@ -71,15 +56,11 @@ namespace Game
             if (time - _spawnTime < _spawnCooldown || !_player.Health.IsAlive)
                 return;
             
-            if (_pool.TryDequeue(out EnemyAi enemy))
-                enemy.gameObject.SetActive(true);
-            else
-                enemy = Instantiate(_prefab, _container);
+            EnemyAi enemy = _pool.Get();
 
-            enemy.transform.position = this.NextSpawnPosition();
-            enemy.Setup(this, _player.Health, NextDestination());
-            
-            enemy.OnFire += this.OnFire;
+            enemy.transform.position = NextSpawnPosition();
+            enemy.Setup(this, _player.Health, NextDestination(), OnFire);
+            enemy.gameObject.SetActive(true);
                 
             ResetSpawnCooldown();
         }
@@ -92,16 +73,16 @@ namespace Game
 
         public void Despawn(EnemyAi enemy)
         {
-            _destroyedEnemies++;
-            _scoreView.SetValue(_destroyedEnemies);
-            this.StartCoroutine(DespawnInNextFrame(enemy));
+            DestroyedEnemies++;
+            OnEnemyDied?.Invoke();
+            StartCoroutine(DespawnInNextFrame(enemy));
         }
 
         private IEnumerator DespawnInNextFrame(EnemyAi enemy)
         {
             yield return null;
             enemy.gameObject.SetActive(false);
-            _pool.Enqueue(enemy);
+            _pool.Return(enemy);
         }
         
         private void OnFire(AttackEvent attackEvent)
