@@ -19,7 +19,7 @@ namespace Game
             float dx = Input.GetAxisRaw("Horizontal");
             float dy = Input.GetAxisRaw("Vertical");
             
-            _ship.Mover.MoveStep(new Vector2(dx, dy));
+            _ship.Mover.SetDirection(new Vector2(dx, dy));
         }
 
         private void LateUpdate()

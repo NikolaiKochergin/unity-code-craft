@@ -10,13 +10,14 @@ namespace Game
 
         private MoveConfig _config;
         private Vector2? _direction;
+        
+        public Vector2 Direction => _direction ?? Vector2.zero;
 
         public void Setup(MoveConfig config) => 
             _config = config;
 
-        public event Action<Vector3, float> OnMoved;
-
-        public void MoveStep(Vector2 direction) => _direction = direction;
+        public void SetDirection(Vector2 direction) => 
+            _direction = direction;
 
         public void Update(float deltaTime)
         {
@@ -27,8 +28,6 @@ namespace Game
             Vector2 newPosition = _rigidbody.position + direction * (_config.Speed * deltaTime);
             _rigidbody.MovePosition(newPosition);
             _direction = null;
-            
-            OnMoved?.Invoke(direction, deltaTime);
         }
     }
 }

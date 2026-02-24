@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    // +
-    public sealed class Enemy : MonoBehaviour
+    public sealed class EnemyAi : MonoBehaviour
     {
         [SerializeField] private Ship _ship;
         [SerializeField] private float _fireCooldown = 1.25f;
@@ -49,7 +48,7 @@ namespace Game
             
             if (isNotReached)
             {
-                _ship.Mover.MoveStep(distance.normalized);
+                _ship.Mover.SetDirection(distance.normalized);
             }
             else
             {

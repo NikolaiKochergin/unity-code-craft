@@ -22,12 +22,12 @@ namespace Game
         
         [Header("Pool")]
         [SerializeField]
-        private Enemy _prefab;
+        private EnemyAi _prefab;
 
         [SerializeField]
         private Transform _container;
         
-        private readonly Queue<Enemy> _pool = new();
+        private readonly Queue<EnemyAi> _pool = new();
 
         [Header("Target")]
         [SerializeField]
@@ -71,7 +71,7 @@ namespace Game
             if (time - _spawnTime < _spawnCooldown || !_player.Health.IsAlive)
                 return;
             
-            if (_pool.TryDequeue(out Enemy enemy))
+            if (_pool.TryDequeue(out EnemyAi enemy))
                 enemy.gameObject.SetActive(true);
             else
                 enemy = Instantiate(_prefab, _container);
@@ -90,14 +90,14 @@ namespace Game
             _spawnTime = Time.fixedTime;
         }
 
-        public void Despawn(Enemy enemy)
+        public void Despawn(EnemyAi enemy)
         {
             _destroyedEnemies++;
             _scoreView.SetValue(_destroyedEnemies);
             this.StartCoroutine(DespawnInNextFrame(enemy));
         }
 
-        private IEnumerator DespawnInNextFrame(Enemy enemy)
+        private IEnumerator DespawnInNextFrame(EnemyAi enemy)
         {
             yield return null;
             enemy.gameObject.SetActive(false);

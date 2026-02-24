@@ -3,6 +3,6 @@ namespace Game
     // +
     public interface IEnemyDespawner
     {
-        void Despawn(Enemy enemy);
+        void Despawn(EnemyAi enemy);
     }
 }
