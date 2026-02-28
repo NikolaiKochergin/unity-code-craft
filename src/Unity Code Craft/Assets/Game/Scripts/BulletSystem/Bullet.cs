@@ -5,52 +5,39 @@ namespace Game
 {
     public sealed class Bullet : MonoBehaviour
     {
-        [SerializeField] private TeamType _team = TeamType.None;
         [SerializeField] private Vector2 _direction;
-        [SerializeField] public int _damage;
-        [SerializeField] public float _speed;
-        
-        [SerializeField] private GameObject blueVFX;
-        [SerializeField] private GameObject redVFX;
-        
-        private Action<Bullet> _onDamageApplied;
+        [SerializeField] private BulletConfig _config;
 
-        public void Setup(
-            TeamType team,
-            Vector2 position,
-            Vector2 direction, 
-            int damage, 
-            float speed, 
-            Action<Bullet> onDamageApplied)
+        public Vector3 Position => transform.position;
+        public TeamType Team => _config.Team;
+        
+        public event Action<Bullet> OnDamageApplied;
+
+        public void Setup(Vector2 position, Vector2 direction, BulletConfig config)
         {
-            _team = team;
+            _config = config;
             _direction = direction;
-            _damage = damage;
-            _speed = speed;
-            _onDamageApplied = onDamageApplied;
             
             transform.position = position;
             transform.rotation = Quaternion.LookRotation(direction, Vector3.forward);
             
-            SetLayer(_team);
-            SetVisual(_team);
+            SetLayer(config.Team);
         }
 
         public void Move()
         {
-            Vector3 moveStep = _direction * (_speed * Time.fixedDeltaTime);
+            Vector3 moveStep = _direction * (_config.Speed * Time.fixedDeltaTime);
             transform.position += moveStep;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if(_damage <= 0 || !other.TryGetComponent(out IDamageable ship))
+            if(_config.Damage <= 0 || !other.TryGetComponent(out Ship targer))
                 return;
             
-            ship.Health.TakeDamage(_damage);
+            targer.TakeDamage(_config.Damage);
 
-            _onDamageApplied?.Invoke(this);
-            _onDamageApplied = null;
+            OnDamageApplied?.Invoke(this);
         }
 
         private void SetLayer(TeamType team) =>
@@ -61,19 +48,5 @@ namespace Game
                 TeamType.Enemy => LayerMask.NameToLayer("EnemyBullet"),
                 _ => throw new ArgumentOutOfRangeException(nameof(team), team, null)
             };
-
-        private void SetVisual(TeamType team)
-        {
-            if (team == TeamType.Player)
-            {
-                blueVFX.SetActive(true);
-                redVFX.SetActive(false);
-            }
-            else
-            {
-                blueVFX.SetActive(false);
-                redVFX.SetActive(true);
-            }
-        }
     }
 }

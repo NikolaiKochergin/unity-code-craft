@@ -9,32 +9,32 @@ namespace Game
         [SerializeField] private ScoreView _scoreView;
         [SerializeField] private HealthView _healthView;
         [SerializeField] private Ship _playerShip;
-        [SerializeField] private EnemyOrchestrator _enemyOrchestrator;
+        [SerializeField] private EnemyManager enemyManager;
 
         private void Start()
         {
-            OnHealthChanged(_playerShip.Health.Current);
-            OnEnemyDied();
+            OnHealthChanged(_playerShip.HealthCurrent);
+            OnDestroyedEnemiesChanged();
         }
 
         private void OnEnable()
         {
-            _playerShip.Health.OnChanged += OnHealthChanged;
-            _playerShip.Health.OnDied += _gameOverView.Show;
-            _enemyOrchestrator.OnEnemyDied += OnEnemyDied;
+            _playerShip.OnHealthChanged += OnHealthChanged;
+            _playerShip.OnDied += _gameOverView.Show;
+            enemyManager.OnDestroyedEnemiesChanged += OnDestroyedEnemiesChanged;
         }
 
         private void OnDisable()
         {
-            _playerShip.Health.OnChanged -= OnHealthChanged;
-            _playerShip.Health.OnDied -= _gameOverView.Show;
-            _enemyOrchestrator.OnEnemyDied -= OnEnemyDied;
+            _playerShip.OnHealthChanged -= OnHealthChanged;
+            _playerShip.OnDied -= _gameOverView.Show;
+            enemyManager.OnDestroyedEnemiesChanged -= OnDestroyedEnemiesChanged;
         }
 
         private void OnHealthChanged(int currentHealth) => 
-            _healthView.SetHealth(currentHealth, _playerShip.Health.Max);
+            _healthView.SetHealth(currentHealth, _playerShip.HealthMax);
 
-        private void OnEnemyDied() => 
-            _scoreView.SetValue(_enemyOrchestrator.DestroyedEnemies);
+        private void OnDestroyedEnemiesChanged() => 
+            _scoreView.SetValue(enemyManager.DestroyedEnemies);
     }
 }

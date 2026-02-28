@@ -9,10 +9,10 @@ namespace Game
         [SerializeField] private Ship _ship;
 
         private void OnEnable() => 
-            _ship.Health.OnChanged += ShakeCamera;
+            _ship.OnHealthChanged += ShakeCamera;
         
         private void OnDisable() =>
-            _ship.Health.OnChanged -= ShakeCamera;
+            _ship.OnHealthChanged -= ShakeCamera;
 
         private void ShakeCamera(int _) => 
             _cameraShaker.Shake();

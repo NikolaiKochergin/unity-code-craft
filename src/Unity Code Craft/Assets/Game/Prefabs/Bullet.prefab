@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3555983760417175357}
   - component: {fileID: 3951101991959698325}
   - component: {fileID: 201757604187811891}
+  - component: {fileID: 6994999621167771393}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -110,12 +111,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f04ddcf68e44c1b95a5d6ea04d1a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _team: 0
   _direction: {x: 0, y: 0}
-  _damage: 1
-  _speed: 3
-  blueVFX: {fileID: 2619809868877078830}
-  redVFX: {fileID: 1820983718236820478}
+  _config:
+    <Team>k__BackingField: 0
+    <Speed>k__BackingField: 0
+    <Damage>k__BackingField: 0
+--- !u!114 &6994999621167771393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743036428890533592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d95bd4705534ef68489548bc5803ce7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.BulletView
+  _bullet: {fileID: 201757604187811891}
+  _config: {fileID: 11400000, guid: f2107b212e6a245009f8ae9313cc81bb, type: 2}
+  _blueVFX: {fileID: 2619809868877078830}
+  _redVFX: {fileID: 1820983718236820478}
 --- !u!1 &3276060438849189846
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: 6992474245113567429}
   - component: {fileID: 740828546143207622}
   - component: {fileID: 102605417607457000}
+  - component: {fileID: 1961438916857456933}
+  - component: {fileID: 689121593850263454}
+  - component: {fileID: 5544775433920536483}
   m_Layer: 11
   m_Name: EnemyShip
   m_TagString: Untagged
@@ -211,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d3853ee84648f69e540fab7d02f2d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.ShipAnimator
+  _ship: {fileID: 740828546143207622}
   _renderer: {fileID: 1333951631294404335}
   _root: {fileID: 559606060570185700}
   _viewTransform: {fileID: 2570692159425164225}
@@ -231,14 +235,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558b312fd53c491ab69f3e55255aae3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.Ship
-  config: {fileID: 11400000, guid: 342eb63e507d644daae6ffc27bd8fc71, type: 2}
-  _animator: {fileID: 6992474245113567429}
-  _health:
-    _current: 0
-  _move:
-    _rigidbody: {fileID: 659620479434099170}
-  _attack:
-    _firePoint: {fileID: 3195880656587174614}
+  _config: {fileID: 11400000, guid: 342eb63e507d644daae6ffc27bd8fc71, type: 2}
+  _health: {fileID: 1961438916857456933}
+  _move: {fileID: 689121593850263454}
+  _fire: {fileID: 5544775433920536483}
 --- !u!114 &102605417607457000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +254,46 @@ MonoBehaviour:
   _ship: {fileID: 740828546143207622}
   _fireCooldown: 1.25
   _stoppingDistance: 0.25
+--- !u!114 &1961438916857456933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b8db182c444dc48a3f92183d494a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.HealthComponent
+  _current: 0
+--- !u!114 &689121593850263454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f4c3c53e55744ff9792aebcf0a01a80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.MoveComponent
+  _rigidbody: {fileID: 659620479434099170}
+--- !u!114 &5544775433920536483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 162be615d08940fc99e118e11980b892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.FireComponent
+  _bulletSystem: {fileID: 0}
+  _firePoint: {fileID: 3195880656587174614}
 --- !u!1 &1074127585690423075
 GameObject:
   m_ObjectHideFlags: 0

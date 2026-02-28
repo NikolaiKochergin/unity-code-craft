@@ -27,7 +27,14 @@ namespace Game
     public class AttackConfig
     {
         [field: SerializeField] public float FireCooldown { get; private set; } = 0.25f;
-        [field: SerializeField] public float BulletSpeed { get; private set; }
-        [field: SerializeField] public int BulletDamage { get; private set; }
+        [field: SerializeField] public BulletConfig Bullet { get; private set; }
+    }
+    
+    [Serializable]
+    public class BulletConfig
+    {
+        [field: SerializeField] public TeamType Team { get; private set; } = TeamType.None;
+        [field: SerializeField] public float Speed { get; private set; }
+        [field: SerializeField] public int Damage { get; private set; }
     }
 }

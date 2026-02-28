@@ -3,8 +3,10 @@ using UnityEngine;
 
 namespace Game
 {
-  public class ShipAnimator : MonoBehaviour
+  public class ShipView : MonoBehaviour
   {
+    [SerializeField] private Ship _ship;
+    
     [SerializeField] private Renderer _renderer;
     [SerializeField] private GameObject _root;
     [SerializeField] private Transform _viewTransform;
@@ -24,7 +26,24 @@ namespace Game
       _renderer.material = _material;
     }
 
-    public void AnimateMovement(Vector3 moveDirection, float deltaTime)
+    private void OnEnable()
+    {
+      _ship.OnHealthChanged += AnimateDamage;
+      _ship.OnDied += AnimateDeath;
+      _ship.OnFire += AnimateFire;
+    }
+    
+    private void OnDisable()
+    {
+      _ship.OnHealthChanged -= AnimateDamage;
+      _ship.OnDied -= AnimateDeath;
+      _ship.OnFire -= AnimateFire;
+    }
+
+    private void LateUpdate() => 
+      AnimateMovement(_ship.Direction, Time.deltaTime);
+
+    private void AnimateMovement(Vector3 moveDirection, float deltaTime)
     {
       Vector3 shipAngles = _viewTransform.localEulerAngles;
       shipAngles.x = _viewConfig.MoveRotationAngle * moveDirection.y;
@@ -35,7 +54,7 @@ namespace Game
       _viewTransform.localRotation = Quaternion.Lerp(_viewTransform.localRotation, shipRotation, t);
     }
 
-    public void AnimateFire(AttackEvent _)
+    private void AnimateFire()
     {
       if (_fireSFX)
         _audioSource.PlayOneShot(_fireSFX);
@@ -44,7 +63,7 @@ namespace Game
         _fireVFX.Play();
     }
     
-    public void AnimateDamage(int _)
+    private void AnimateDamage(int _)
     {
       if (_damageAnimation.IsActive())
         _damageAnimation.Kill();
@@ -61,7 +80,7 @@ namespace Game
         _audioSource.PlayOneShot(_damageSFX);
     }
 
-    public void AnimateDeath()
+    private void AnimateDeath()
     {
       ParticleSystem prefab = _viewConfig.DestroyEffectPrefab;
       Instantiate(prefab, _viewTransform.position, prefab.transform.rotation);

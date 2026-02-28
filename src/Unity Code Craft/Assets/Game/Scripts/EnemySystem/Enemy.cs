@@ -3,44 +3,39 @@ using UnityEngine;
 
 namespace Game
 {
-    public sealed class EnemyAi : MonoBehaviour
+    public sealed class Enemy : MonoBehaviour
     {
         [SerializeField] private Ship _ship;
         [SerializeField] private float _fireCooldown = 1.25f;
         [SerializeField] private float _stoppingDistance = 0.25f;
         
-        private IEnemyDespawner _despawner;
-        private IHealth _target;
+        private Ship _target;
         private Vector2 _destination;
         
         private float _fireTime;
-        private Action<AttackEvent> _onFire;
 
-        public void Setup(IEnemyDespawner despawner,
-            IHealth target,
-            Vector2 destination, 
-            Action<AttackEvent> onFire)
+        public event Action<Enemy> OnDied;
+
+        public void Setup(BulletSystem bulletSystem, Ship target, Vector2 destination)
         {
-            _onFire = onFire;
-            _despawner = despawner;
             _target = target;
             _destination = destination;
-            _ship.Health.Restore();
             
-            _ship.Attack.OnFire += _onFire;
-            _ship.Health.OnDied += OnCharacterDead;
+            _ship.Setup(bulletSystem);
+            _ship.RestoreHealth();
+            
+            _ship.OnDied += OnCharacterDead;
         }
 
         private void OnCharacterDead()
         {
-            _ship.Attack.OnFire -= _onFire;
-            _ship.Health.OnDied -= OnCharacterDead;
-            _despawner.Despawn(this);
+            _ship.OnDied -= OnCharacterDead;
+            OnDied?.Invoke(this);
         }
 
         private void FixedUpdate()
         {
-            if (!_ship.Health.IsAlive || _target == null || !_target.IsAlive)
+            if (!_ship.IsAlive || _target == null || !_target.IsAlive)
                 return;
 
             Vector2 distance = _destination - (Vector2) transform.position;
@@ -48,14 +43,15 @@ namespace Game
             
             if (isNotReached)
             {
-                _ship.Mover.SetDirection(distance.normalized);
+                _ship.Direction = distance.normalized;
             }
             else
             {
                 float time = Time.time;
                 if (time - _fireTime >= _fireCooldown)
                 {
-                    _ship.Attack.Fire();
+                    Vector2 direction = (_target.Position - (Vector2)_ship.FirePoint.position).normalized;
+                    _ship.Fire(direction);
                     _fireTime = time;
                 }
             }

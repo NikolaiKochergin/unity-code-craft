@@ -18,5 +18,7 @@ MonoBehaviour:
     <Speed>k__BackingField: 7
   <Attack>k__BackingField:
     <FireCooldown>k__BackingField: 0.25
-    <BulletSpeed>k__BackingField: 7
-    <BulletDamage>k__BackingField: 1
+    <Bullet>k__BackingField:
+      <Team>k__BackingField: 1
+      <Speed>k__BackingField: 3
+      <Damage>k__BackingField: 1

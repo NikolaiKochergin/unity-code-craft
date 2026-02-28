@@ -1,10 +1,8 @@
-using System;
 using UnityEngine;
 
 namespace Game
 {
-    [Serializable]
-    public sealed class MoveComponent : IMover
+    public sealed class MoveComponent : MonoBehaviour
     {
         [SerializeField] private Rigidbody2D _rigidbody;
 
@@ -19,13 +17,13 @@ namespace Game
         public void SetDirection(Vector2 direction) => 
             _direction = direction;
 
-        public void Update(float deltaTime)
+        public void FixedUpdate()
         {
             if (!_direction.HasValue)
                 return;
 
             Vector2 direction = _direction.Value;
-            Vector2 newPosition = _rigidbody.position + direction * (_config.Speed * deltaTime);
+            Vector2 newPosition = _rigidbody.position + direction * (_config.Speed * Time.fixedDeltaTime);
             _rigidbody.MovePosition(newPosition);
             _direction = null;
         }

@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-  [Serializable]
-  public class HealthComponent : IHealth
+  public class HealthComponent : MonoBehaviour
   {
     [SerializeField] private int _current;
     
