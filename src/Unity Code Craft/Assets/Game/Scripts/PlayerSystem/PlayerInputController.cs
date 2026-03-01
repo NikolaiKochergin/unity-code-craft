@@ -12,7 +12,7 @@ namespace Game
                 return;
             
             if (Input.GetKeyDown(KeyCode.Space))
-                _ship.Fire(_ship.FirePoint.up);
+                _ship.FireUp();
 
             float dx = Input.GetAxisRaw("Horizontal");
             float dy = Input.GetAxisRaw("Vertical");

@@ -8,7 +8,7 @@ namespace Game
     {
         [field: SerializeField] public HealthConfig Health { get; private set; }
         [field: SerializeField] public MoveConfig Move { get; private set; }
-        [field: SerializeField] public AttackConfig Attack { get; private set; }
+        [field: SerializeField] public FireConfig Fire { get; private set; }
     }
 
     [Serializable]
@@ -24,7 +24,7 @@ namespace Game
     }
 
     [Serializable]
-    public class AttackConfig
+    public class FireConfig
     {
         [field: SerializeField] public float FireCooldown { get; private set; } = 0.25f;
         [field: SerializeField] public BulletConfig Bullet { get; private set; }

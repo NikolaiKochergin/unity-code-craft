@@ -16,7 +16,7 @@ MonoBehaviour:
     <Max>k__BackingField: 10
   <Move>k__BackingField:
     <Speed>k__BackingField: 7
-  <Attack>k__BackingField:
+  <Fire>k__BackingField:
     <FireCooldown>k__BackingField: 0.25
     <Bullet>k__BackingField:
       <Team>k__BackingField: 1

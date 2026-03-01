@@ -15,7 +15,6 @@ namespace Game
         public int HealthCurrent => _health.Current;
         public int HealthMax => _health.Max;
         public bool IsAlive => _health.IsAlive;
-        public Transform FirePoint => _fire.Point;
 
         public event Action<int> OnHealthChanged
         {
@@ -39,22 +38,31 @@ namespace Game
         {
             _health.Setup(_config.Health);
             _move.Setup(_config.Move);
-            _fire.Setup(_config.Attack);
+            _fire.Setup(_config.Fire);
         }
 
         public void Setup(BulletSystem bulletSystem) => 
             _fire.Setup(bulletSystem);
 
-        public void Fire(Vector2 direction)
+        public void FireAt(Vector2 targetPosition)
         {
             if(_health.IsAlive)
-                _fire.Fire(direction);
+                _fire.FireAt(targetPosition);
         }
+
+        public void FireUp() => 
+            _fire.FireUp();
 
         public void TakeDamage(int value) => 
             _health.TakeDamage(value);
 
         public void RestoreHealth() => 
             _health.Restore();
+
+        private void FixedUpdate()
+        {
+            if(_health.IsAlive)
+                _move.Move();
+        }
     }
 }

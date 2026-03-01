@@ -17,7 +17,7 @@ namespace Game
         public void SetDirection(Vector2 direction) => 
             _direction = direction;
 
-        public void FixedUpdate()
+        public void Move()
         {
             if (!_direction.HasValue)
                 return;

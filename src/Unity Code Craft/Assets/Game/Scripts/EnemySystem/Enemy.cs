@@ -50,8 +50,7 @@ namespace Game
                 float time = Time.time;
                 if (time - _fireTime >= _fireCooldown)
                 {
-                    Vector2 direction = (_target.Position - (Vector2)_ship.FirePoint.position).normalized;
-                    _ship.Fire(direction);
+                    _ship.FireAt(_target.Position);
                     _fireTime = time;
                 }
             }
