@@ -565,6 +565,7 @@ GameObject:
   - component: {fileID: 363245576}
   - component: {fileID: 363245577}
   - component: {fileID: 363245578}
+  - component: {fileID: 363245579}
   m_Layer: 0
   m_Name: <BulletSystem>
   m_TagString: Untagged
@@ -613,10 +614,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8e8cac0fabf4596bcc956b6bf8dfd38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.BulletPool
-  _prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
-  _container: {fileID: 363245576}
+  _factory: {fileID: 363245579}
   _initialCapacity: 10
   _isExtensible: 1
+--- !u!114 &363245579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363245575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26fde78738ca4297abca52be1914091e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.BulletFactory
+  _prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
+  _container: {fileID: 363245576}
 --- !u!1 &404085825
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,7 +1011,9 @@ GameObject:
   - component: {fileID: 562298204}
   - component: {fileID: 562298205}
   - component: {fileID: 562298206}
+  - component: {fileID: 562298209}
   - component: {fileID: 562298207}
+  - component: {fileID: 562298208}
   m_Layer: 0
   m_Name: <EnemySystem>
   m_TagString: Untagged
@@ -1034,10 +1050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32dae85f8264479bac19d85418d92392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 4414282821800802411}
   _pool: {fileID: 562298206}
-  _bulletSystem: {fileID: 363245577}
-  _spawnCooldown: {fileID: 562298207}
   _enemyPositions: {fileID: 7166351703523243261}
 --- !u!114 &562298206
 MonoBehaviour:
@@ -1051,8 +1064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f367e855ade3416b82fd17462fa7bf44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.EnemyPool
-  _prefab: {fileID: 102605417607457000, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
-  _container: {fileID: 1052031097}
+  _factory: {fileID: 562298209}
   _initialCapacity: 10
   _isExtensible: 1
 --- !u!114 &562298207
@@ -1067,8 +1079,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d82d1272db3945afa1ac14e2b4074d05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.EnemySpawnCooldown
+  _enemyManager: {fileID: 562298205}
   _minSpawnCooldown: 2
   _maxSpawnCooldown: 3
+--- !u!114 &562298208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562298203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd339d50a054972b8438a14081470c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.PlayerDiedObserver
+  _player: {fileID: 4414282821800802411}
+  _enemySpawnCooldown: {fileID: 562298207}
+--- !u!114 &562298209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562298203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17c52293bf2474b866578c1c94ac708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.EnemyFactory
+  _prefab: {fileID: 102605417607457000, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
+  _container: {fileID: 1052031097}
+  _bulletSystem: {fileID: 363245577}
+  _playerShip: {fileID: 4414282821800802411}
 --- !u!1 &574514311
 GameObject:
   m_ObjectHideFlags: 0

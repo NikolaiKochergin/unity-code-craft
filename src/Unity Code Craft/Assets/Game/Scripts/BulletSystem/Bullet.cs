@@ -24,6 +24,12 @@ namespace Game
             SetLayer(config.Team);
         }
 
+        public void Enable() => 
+            gameObject.SetActive(true);
+        
+        public void Disable() =>
+            gameObject.SetActive(false);
+
         public void Move()
         {
             Vector3 moveStep = _direction * (_config.Speed * Time.fixedDeltaTime);
@@ -32,10 +38,10 @@ namespace Game
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if(_config.Damage <= 0 || !other.TryGetComponent(out Ship targer))
+            if(_config.Damage <= 0 || !other.TryGetComponent(out Ship target))
                 return;
             
-            targer.TakeDamage(_config.Damage);
+            target.TakeDamage(_config.Damage);
 
             OnDamageApplied?.Invoke(this);
         }

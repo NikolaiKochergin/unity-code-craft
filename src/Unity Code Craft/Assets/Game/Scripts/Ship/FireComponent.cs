@@ -13,18 +13,18 @@ namespace Game
 
         public event Action OnFire;
 
+        public void Construct(BulletSystem bulletSystem) => 
+            _bulletSystem = bulletSystem;
+
         public void Setup(FireConfig config) => 
             _config = config;
-
-        public void Setup(BulletSystem bulletSystem) => 
-            _bulletSystem = bulletSystem;
 
         public void FireUp() => 
             Fire(_firePoint.up);
 
-        public void FireAt(Vector2 _targetPosition)
+        public void FireAt(Vector2 position)
         {
-            Vector2 direction = (_targetPosition - (Vector2)_firePoint.position).normalized;
+            Vector2 direction = (position - (Vector2)_firePoint.position).normalized;
             Fire(direction);
         }
 

@@ -41,13 +41,10 @@ namespace Game
             _fire.Setup(_config.Fire);
         }
 
-        public void Setup(BulletSystem bulletSystem) => 
-            _fire.Setup(bulletSystem);
-
-        public void FireAt(Vector2 targetPosition)
+        public void FireAt(Vector2 position)
         {
             if(_health.IsAlive)
-                _fire.FireAt(targetPosition);
+                _fire.FireAt(position);
         }
 
         public void FireUp() => 
@@ -55,9 +52,6 @@ namespace Game
 
         public void TakeDamage(int value) => 
             _health.TakeDamage(value);
-
-        public void RestoreHealth() => 
-            _health.Restore();
 
         private void FixedUpdate()
         {

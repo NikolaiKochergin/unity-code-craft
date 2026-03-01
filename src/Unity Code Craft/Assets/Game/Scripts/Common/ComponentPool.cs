@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace Game
 {
-    public class ComponentPool<TComponent> : MonoBehaviour where TComponent : Component
+    public abstract class ComponentPool<TComponent> : MonoBehaviour where TComponent : Component
     {
-        [SerializeField] private TComponent _prefab;
-        [SerializeField] private Transform _container;
+        [SerializeField] private ComponentFactory<TComponent> _factory;
         [SerializeField] private int _initialCapacity = 10;
         [SerializeField] private bool _isExtensible;
 
@@ -44,7 +43,7 @@ namespace Game
 
         private TComponent NewComponent()
         {
-            TComponent newComponent = Instantiate(_prefab, _container);
+            TComponent newComponent = _factory.Create();
             newComponent.gameObject.SetActive(false);
 
             return newComponent;

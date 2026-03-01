@@ -32,7 +32,7 @@ namespace Game
             bullet.OnDamageApplied += OnDamageApplied;
 
             _activeBullets.Add(bullet);
-            bullet.gameObject.SetActive(true);
+            bullet.Enable();
         }
 
         private void OnDamageApplied(Bullet bullet)
@@ -44,7 +44,7 @@ namespace Game
 
         private void DeactivateBullet(Bullet bullet)
         {
-            bullet.gameObject.SetActive(false);
+            bullet.Disable();
             _activeBullets.Remove(bullet);
             _bulletPool.Return(bullet);
         }

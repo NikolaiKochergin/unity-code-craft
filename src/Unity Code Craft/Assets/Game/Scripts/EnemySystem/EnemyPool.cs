@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    public class EnemyPool : ComponentPool<Enemy>
+    public sealed class EnemyPool : ComponentPool<Enemy>
     {
     }
 }

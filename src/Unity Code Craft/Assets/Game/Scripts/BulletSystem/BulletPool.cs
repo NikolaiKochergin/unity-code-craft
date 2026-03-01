@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    public class BulletPool : ComponentPool<Bullet>
+    public sealed class BulletPool : ComponentPool<Bullet>
     {
     }
 }
