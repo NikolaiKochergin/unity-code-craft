@@ -29,21 +29,16 @@ namespace Game
                 return;
             
             bullet.Setup(position, direction, config);
-            bullet.OnDamageApplied += OnDamageApplied;
+            bullet.OnDamageApplied += DeactivateBullet;
 
             _activeBullets.Add(bullet);
             bullet.Enable();
         }
 
-        private void OnDamageApplied(Bullet bullet)
-        {
-            bullet.OnDamageApplied -= OnDamageApplied;
-            
-            DeactivateBullet(bullet);
-        }
-
         private void DeactivateBullet(Bullet bullet)
         {
+            bullet.OnDamageApplied -= DeactivateBullet;
+            
             bullet.Disable();
             _activeBullets.Remove(bullet);
             _bulletPool.Return(bullet);
