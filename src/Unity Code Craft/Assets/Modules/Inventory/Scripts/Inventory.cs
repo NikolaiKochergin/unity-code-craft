@@ -1,6 +1,8 @@
 using System;
+using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 
@@ -9,6 +11,7 @@ namespace Modules.Inventories
     public class Inventory : IEnumerable<Item>
     {
         private readonly Dictionary<Item, Vector2Int> _items = new();
+        private readonly Item[,] _matrix;
         private readonly Vector2Int _size;
         
         public event Action<Item, Vector2Int> OnAdded;
@@ -25,6 +28,7 @@ namespace Modules.Inventories
             if(width < 1 || height < 1)
                 throw new ArgumentException();
             
+            _matrix = new Item[width, height];
             _size = new Vector2Int(width, height);
         }
 
@@ -36,9 +40,9 @@ namespace Modules.Inventories
         {
             if(items == null)
                 throw new ArgumentNullException(nameof(items));
-            
+
             foreach (KeyValuePair<Item, Vector2Int> item in items) 
-                _items.Add(item.Key, item.Value);
+                AddItem(item.Key, item.Value);
         }
 
         public Inventory(
@@ -52,7 +56,7 @@ namespace Modules.Inventories
             
             foreach (Item item in items)
                 if(FindFreePosition(item, out Vector2Int position))
-                    _items.Add(item, position);
+                    AddItem(item, position);
         }
 
         public Inventory(
@@ -65,7 +69,7 @@ namespace Modules.Inventories
                 throw new ArgumentNullException(nameof(items));
             
             foreach (KeyValuePair<Item, Vector2Int> item in items)
-                _items.Add(item.Key, item.Value);
+                AddItem(item.Key, item.Value);
         }
 
         public Inventory(
@@ -79,7 +83,7 @@ namespace Modules.Inventories
 
             foreach (Item item in items)
                 if(FindFreePosition(item, out Vector2Int position))
-                    _items.Add(item, position);
+                    AddItem(item, position);
         }
 
         /// <summary>
@@ -91,7 +95,7 @@ namespace Modules.Inventories
                 inventory.Height)
         {
             foreach (KeyValuePair<Item, Vector2Int> item in inventory._items) 
-                _items.Add(item.Key, item.Value);
+                AddItem(item.Key, item.Value);
         }
 
         /// <summary>
@@ -99,10 +103,7 @@ namespace Modules.Inventories
         /// </summary>
         public bool CanAddItem(Item item, Vector2Int position)
         {
-            if(item == null)
-                return false;
-            
-            if(_items.ContainsKey(item))
+            if(item == null || _items.ContainsKey(item))
                 return false;
             
             if(item.Size.x < 1 || item.Size.y < 1)
@@ -111,11 +112,7 @@ namespace Modules.Inventories
             if(!IsFitsInside(position, item.Size, _size))
                 return false;
             
-            foreach (KeyValuePair<Item, Vector2Int> pair in _items)
-                if(IsIntersects(position, item.Size, pair.Value, pair.Key.Size))
-                    return false;
-            
-            return true;
+            return IsFreeSpace(position, item.Size);
         }
 
         public bool CanAddItem(Item item, int startX, int startY)
@@ -128,14 +125,12 @@ namespace Modules.Inventories
         /// </summary>
         public bool AddItem(Item item, Vector2Int position)
         {
-            if(item == null)
+            if(item == null || !CanAddItem(item, position) || !_items.TryAdd(item, position))
                 return false;
 
-            if (!CanAddItem(item, position))
-                return false;
-            
-            if (!_items.TryAdd(item, position)) 
-                return false;
+            for (int i = position.x, k = position.x + item.Size.x; i < k; i++)
+            for (int j = position.y, l = position.y + item.Size.y; j < l; j++)
+                _matrix[i, j] = item;
             
             OnAdded?.Invoke(item, position);
             return true;
@@ -151,10 +146,7 @@ namespace Modules.Inventories
         /// </summary>
         public bool CanAddItem(Item item)
         {
-            if(item == null)
-                return false;
-            
-            return !_items.ContainsKey(item) && FindFreePosition(item, out _);
+            return item != null && !_items.ContainsKey(item) && FindFreePosition(item, out _);
         }
 
         /// <summary>
@@ -189,8 +181,8 @@ namespace Modules.Inventories
             if (size.x > Width || size.y > Height)
                 return false;
 
-            for (int i = 0; i <= Height - size.y; i++)
-            for (int j = 0; j <= Width - size.x; j++)
+            for (int i = 0, k = Height - size.y; i <= k; i++)
+            for (int j = 0, l = Width - size.x; j <= l; j++)
             {
                 position = new Vector2Int(j, i);
                 if (IsFreeSpace(position, size))
@@ -208,10 +200,9 @@ namespace Modules.Inventories
 
         private bool IsFreeSpace(Vector2Int origin, Vector2Int size)
         {
-            foreach (KeyValuePair<Item, Vector2Int> item in _items)
-                if (IsIntersects(
-                        origin, size,
-                        item.Value, item.Key.Size))
+            for (int x = origin.x, k = origin.x + size.x; x < k; x++)
+            for (int y = origin.y, l = origin.y + size.y; y < l; y++)
+                if (_matrix[x, y] != null)
                     return false;
 
             return true;
@@ -230,14 +221,7 @@ namespace Modules.Inventories
         /// </summary>
         public bool IsOccupied(Vector2Int position)
         {
-            foreach (KeyValuePair<Item, Vector2Int> item in _items)
-                if (position.x >= item.Value.x &&
-                    position.x < item.Value.x + item.Key.Size.x &&
-                    position.y >= item.Value.y &&
-                    position.y < item.Value.y + item.Key.Size.y)
-                    return true;
-
-            return false;
+            return IsPointInside(position, Vector2Int.zero, _size) && _matrix[position.x, position.y] != null;
         }
 
         public bool IsOccupied(int x, int y)
@@ -269,11 +253,12 @@ namespace Modules.Inventories
         public bool RemoveItem(Item item, out Vector2Int position)
         {
             position = default;
-            if (item == null)
+            if (item == null || !_items.Remove(item, out position))
                 return false;
             
-            if(!_items.Remove(item, out position))
-                return false;
+            for (int x = position.x; x < position.x + item.Size.x; x++)
+            for (int y = position.y; y < position.y + item.Size.y; y++)
+                _matrix[x, y] = null;
             
             OnRemoved?.Invoke(item, position);
             return true;
@@ -287,14 +272,7 @@ namespace Modules.Inventories
             if (!IsPointInside(position, default, _size))
                 throw new IndexOutOfRangeException();
             
-            foreach (KeyValuePair<Item, Vector2Int> item in _items)
-                if (position.x >= item.Value.x &&
-                    position.x < item.Value.x + item.Key.Size.x &&
-                    position.y >= item.Value.y &&
-                    position.y < item.Value.y + item.Key.Size.y)
-                    return item.Key;
-
-            return null;
+            return _matrix[position.x, position.y];
         }
 
         public Item GetItem(int x, int y)
@@ -343,10 +321,7 @@ namespace Modules.Inventories
         public bool TryGetPositions(Item item, out Vector2Int[] positions)
         {
             positions = null;
-            if (item == null)
-                return false;
-
-            if (!_items.ContainsKey(item))
+            if (item == null || !_items.ContainsKey(item))
                 return false;
             
             positions = GetPositions(item);
@@ -361,7 +336,9 @@ namespace Modules.Inventories
             if(Count == 0)
                 return;
             
+            Array.Clear(_matrix, 0, _matrix.Length);
             _items.Clear();
+            
             OnCleared?.Invoke();
         }
 
@@ -377,47 +354,93 @@ namespace Modules.Inventories
             return count;
         }
 
-        public bool MoveItem(Item item, Vector2Int position)
+        public bool MoveItem(Item item, Vector2Int newPosition)
         {
             if(item == null)
                 throw new ArgumentNullException(nameof(item));
             
-            if(!_items.ContainsKey(item))
-                return false;
-            
-            if(!IsPointInside(position, default, _size - item.Size))
+            if (!_items.TryGetValue(item, out Vector2Int oldPosition) || !IsFitsInside(newPosition, item.Size, _size))
                 return false;
 
-            foreach (KeyValuePair<Item, Vector2Int> pair in _items)
+            for (int x = oldPosition.x; x < oldPosition.x + item.Size.x; x++)
+            for (int y = oldPosition.y; y < oldPosition.y + item.Size.y; y++)
+                _matrix[x, y] = null;
+
+            if (!IsFreeSpace(newPosition, item.Size))
             {
-                if (Equals(item, pair.Key))
-                    continue;
-                
-                if(IsIntersects(position, item.Size, pair.Value, pair.Key.Size))
-                    return false;
+                for (int x = oldPosition.x; x < oldPosition.x + item.Size.x; x++)
+                for (int y = oldPosition.y; y < oldPosition.y + item.Size.y; y++)
+                    _matrix[x, y] = item;
+
+                return false;
             }
-            
-            _items[item] = position;
-            OnMoved?.Invoke(item, position);
+
+            for (int x = newPosition.x; x < newPosition.x + item.Size.x; x++)
+            for (int y = newPosition.y; y < newPosition.y + item.Size.y; y++)
+                _matrix[x, y] = item;
+
+            _items[item] = newPosition;
+            OnMoved?.Invoke(item, newPosition);
             return true;
         }
-
+        
         /// <summary>
         /// Rearranges an inventory space with max free slots 
         /// </summary>
         public void OptimizeSpace()
         {
-            if(Count == 0)
+            if (Count == 0)
                 return;
 
-            List<Item> items = new(_items.Keys);
-            
-            items.Sort((a, b) => (b.Size.x * b.Size.y).CompareTo(a.Size.x * a.Size.y));
-            
+            int count = _items.Count;
+            Item[] buffer = ArrayPool<Item>.Shared.Rent(count);
+
+            int i = 0;
+            foreach (Item item in _items.Keys)
+                buffer[i++] = item;
+
+            Array.Sort(buffer, 0, count, ItemComparer.Instance);
+
+            Array.Clear(_matrix, 0, _matrix.Length);
             _items.Clear();
-            foreach (Item item in items)
-                if(FindFreePosition(item, out Vector2Int position))
-                    _items.Add(item, position);
+
+            for (int n = 0; n < count; n++)
+            {
+                Item item = buffer[n];
+                bool placed = false;
+
+                for (int y = 0, k = Height - item.Size.y; y <= k && !placed; y++)
+                for (int x = 0, l = Width - item.Size.x; x <= l && !placed; x++)
+                {
+                    Vector2Int pos = new(x, y);
+
+                    if (IsFreeSpace(pos, item.Size))
+                    {
+                        _items[item] = pos;
+
+                        for (int dx = 0; dx < item.Size.x; dx++)
+                        for (int dy = 0; dy < item.Size.y; dy++)
+                            _matrix[x + dx, y + dy] = item;
+
+                        placed = true;
+                    }
+                }
+            }
+
+            ArrayPool<Item>.Shared.Return(buffer, clearArray: true);
+        }
+        
+        private sealed class ItemComparer : IComparer<Item>
+        {
+            public static readonly ItemComparer Instance = new();
+
+            public int Compare(Item a, Item b)
+            {
+                int areaA = a.Size.x * a.Size.y;
+                int areaB = b.Size.x * b.Size.y;
+
+                return areaB.CompareTo(areaA);
+            }
         }
 
         /// <summary>
@@ -483,12 +506,5 @@ namespace Modules.Inventories
             itemPos.y >= 0 &&
             itemPos.x + itemSize.x <= inventorySize.x &&
             itemPos.y + itemSize.y <= inventorySize.y;
-        
-        private static bool IsIntersects(
-            Vector2Int posA, Vector2Int sizeA,
-            Vector2Int posB, Vector2Int sizeB
-            ) =>
-            posA.x < posB.x + sizeB.x && posA.x + sizeA.x > posB.x &&
-            posA.y < posB.y + sizeB.y && posA.y + sizeA.y > posB.y;
     }
 }
