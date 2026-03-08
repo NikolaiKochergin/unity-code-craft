@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Modules;
 using UnityEngine;
 
-namespace Gameplay.GameContext
+namespace Game
 {
     public class CoinManager
     {

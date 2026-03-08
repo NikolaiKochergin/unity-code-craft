@@ -1,10 +1,9 @@
 ﻿using System;
-using Gameplay.GameContext;
 using Modules;
 using SnakeGame;
 using Zenject;
 
-namespace UI
+namespace Game
 {
     public class GameUIPresenter : IInitializable, IDisposable
     {
