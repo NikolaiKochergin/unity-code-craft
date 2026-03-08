@@ -1,0 +1,22 @@
+{
+    "name": "Game",
+    "rootNamespace": "",
+    "references": [
+        "Zenject",
+        "Coin",
+        "Difficulty",
+        "Score",
+        "Snake",
+        "UI",
+        "WorldBounds"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
