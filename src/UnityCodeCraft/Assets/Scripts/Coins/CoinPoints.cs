@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using SnakeGame;
 using UnityEngine;
 
 namespace Gameplay.GameContext
 {
-    public class CoinPoints
+    public class CoinPoints : IWorldBounds
     {
         private readonly IWorldBounds _worldBounds;
 
@@ -16,19 +17,30 @@ namespace Gameplay.GameContext
             if(count <= 0)
                 throw new ArgumentException("Count must be greater than zero");
             
-            Vector2Int[] points = new Vector2Int[count];
+            List<Vector2Int> points = new(count);
 
             for (int i = 0; i < count; i++)
             {
-                Vector2Int point = _worldBounds.GetRandomPosition();
-                
-                
+                bool isAdded = false;
+                while (!isAdded)
+                {
+                    Vector2Int point = _worldBounds.GetRandomPosition();
+                    
+                    if(points.Contains(point))
+                        continue;
+                    
+                    points.Add(point);
+                    isAdded = true;
+                }
             }
-            
 
-            return points;
+            return points.ToArray();
         }
-        
-        
+
+        public bool IsInBounds(Vector2Int position) => 
+            _worldBounds.IsInBounds(position);
+
+        public Vector2Int GetRandomPosition() => 
+            _worldBounds.GetRandomPosition();
     }
 }

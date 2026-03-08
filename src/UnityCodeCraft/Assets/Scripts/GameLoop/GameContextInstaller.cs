@@ -16,7 +16,7 @@ namespace Gameplay.GameContext
         
         public override void InstallBindings()
         {
-            Container.Bind<IWorldBounds>().FromInstance(_worldBounds).AsSingle();
+            Container.BindInterfacesAndSelfTo<CoinPoints>().FromInstance(new CoinPoints(_worldBounds)).AsSingle();
             Container.Bind<ISnake>().FromInstance(_snake).AsSingle();
             
             Container.Bind<IDifficulty>().To<Difficulty>().AsSingle().WithArguments(_maxLevel);
@@ -39,7 +39,15 @@ namespace Gameplay.GameContext
                 .AsSingle();
 
             Container
-                .BindMemoryPool<MonoMemoryPool<Coin>>();
+                .BindMemoryPool<Coin, CoinsPool>()
+                .FromComponentInNewPrefab(_coinPrefab)
+                .UnderTransform(_worldBounds.transform)
+                .AsSingle();
+            
+            Container
+                .BindInterfacesTo<CoinCollector>()
+                .AsSingle()
+                .NonLazy();
         }
     }
 }

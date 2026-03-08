@@ -42,7 +42,6 @@ namespace Gameplay.GameContext
 
         private void SetGameOver()
         {
-            _snake.SetSpeed(0);
             _gameCycle.FinishGame();
         }
     }

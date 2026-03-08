@@ -1,30 +1,53 @@
-﻿using Modules;
-using SnakeGame;
+﻿using System;
+using System.Collections.Generic;
+using Modules;
+using UnityEngine;
 
 namespace Gameplay.GameContext
 {
     public class CoinManager
     {
-        private readonly IDifficulty _difficulty;
-        private readonly CoinFactory _factory;
-        private readonly IWorldBounds _worldBounds;
+        private readonly CoinsPool _pool;
+        private readonly CoinPoints _coinPoints;
+        private readonly Dictionary<Vector2Int, Coin> _activeCoins = new();
 
-        public CoinManager(IDifficulty difficulty, CoinFactory factory, IWorldBounds worldBounds)
+        public CoinManager(CoinsPool pool, CoinPoints coinPoints)
         {
-            _difficulty = difficulty;
-            _factory = factory;
-            _worldBounds = worldBounds;
+            _pool = pool;
+            _coinPoints = coinPoints;
         }
 
-        public int ActiveCoins { get; set; }
+        public int ActiveCoinsCount => _activeCoins.Count;
 
-        public void SpawnCoins()
+        public event Action OnCoinsOver;
+
+        public void SpawnCoins(int count)
         {
-            if (!_difficulty.Next(out int difficulty))
-                return;
+            Vector2Int[] points = _coinPoints.GetRandomPoints(count);
 
-            for (int i = 0; i < difficulty; i++) 
-                _factory.CreateCoin(_worldBounds.GetRandomPosition());
+            foreach (Vector2Int point in points) 
+                _activeCoins.Add(point, _pool.Spawn(point));
+        }
+
+        public void DespawnCoin(ICoin coin)
+        {
+            if(_activeCoins.Remove(coin.Position, out Coin activeCoin))
+                _pool.Despawn(activeCoin);
+            
+            if(_activeCoins.Count == 0)
+                OnCoinsOver?.Invoke();
+        }
+
+        public bool TryGetCoinAt(Vector2Int position, out ICoin coin)
+        {
+            if (_activeCoins.TryGetValue(position, out Coin activeCoin))
+            {
+                coin = activeCoin;
+                return true;
+            }
+
+            coin = null;
+            return false;
         }
     }
 }
