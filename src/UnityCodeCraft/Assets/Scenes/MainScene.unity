@@ -463,9 +463,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Gameplay.GameContext.GameContextInstaller
   _worldBounds: {fileID: 1431199845}
-  _snake: {fileID: 603291647516529739}
   _gameUI: {fileID: 1764093826}
-  _coinPrefab: {fileID: 1221131666036007499, guid: f37c023e6b8b06149a4215320dd7e482, type: 3}
+  _snakeInstaller:
+    _snake: {fileID: 603291647516529739}
+  _coinsInstaller:
+    _coinsContainer: {fileID: 1431199844}
+    _coinPrefab: {fileID: 1221131666036007499, guid: f37c023e6b8b06149a4215320dd7e482, type: 3}
+  _gameplayInstaller:
+    _maxLevel: 9
 --- !u!114 &810044849
 MonoBehaviour:
   m_ObjectHideFlags: 0

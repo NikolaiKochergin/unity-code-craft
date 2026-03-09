@@ -8,22 +8,20 @@ namespace Game
     public class CoinManager
     {
         private readonly CoinsPool _pool;
-        private readonly CoinPoints _coinPoints;
+        private readonly WorldPoints _worldPoints;
         private readonly Dictionary<Vector2Int, Coin> _activeCoins = new();
 
-        public CoinManager(CoinsPool pool, CoinPoints coinPoints)
+        public CoinManager(CoinsPool pool, WorldPoints worldPoints)
         {
             _pool = pool;
-            _coinPoints = coinPoints;
+            _worldPoints = worldPoints;
         }
-
-        public int ActiveCoinsCount => _activeCoins.Count;
 
         public event Action OnCoinsOver;
 
         public void SpawnCoins(int count)
         {
-            Vector2Int[] points = _coinPoints.GetRandomPoints(count);
+            List<Vector2Int> points = _worldPoints.GetRandomPoints(count);
 
             foreach (Vector2Int point in points) 
                 _activeCoins.Add(point, _pool.Spawn(point));

@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace Game
 {
-    public class CoinPoints : IWorldBounds
+    public class WorldPoints
     {
         private readonly IWorldBounds _worldBounds;
 
-        public CoinPoints(IWorldBounds worldBounds) => 
+        public WorldPoints(IWorldBounds worldBounds) => 
             _worldBounds = worldBounds;
 
-        public Vector2Int[] GetRandomPoints(int count)
+        public List<Vector2Int> GetRandomPoints(int count)
         {
             if(count <= 0)
                 throw new ArgumentException("Count must be greater than zero");
@@ -34,13 +34,7 @@ namespace Game
                 }
             }
 
-            return points.ToArray();
+            return points;
         }
-
-        public bool IsInBounds(Vector2Int position) => 
-            _worldBounds.IsInBounds(position);
-
-        public Vector2Int GetRandomPosition() => 
-            _worldBounds.GetRandomPosition();
     }
 }
