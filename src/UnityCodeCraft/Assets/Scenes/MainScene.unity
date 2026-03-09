@@ -465,6 +465,7 @@ MonoBehaviour:
   _worldBounds: {fileID: 1431199845}
   _gameUI: {fileID: 1764093826}
   _snakeInstaller:
+    _inputConfig: {fileID: 11400000, guid: 3f15e006ddc977340b8c6abdc79d6b92, type: 2}
     _snake: {fileID: 603291647516529739}
   _coinsInstaller:
     _coinsContainer: {fileID: 1431199844}

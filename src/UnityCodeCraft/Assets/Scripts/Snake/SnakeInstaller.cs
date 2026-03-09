@@ -8,6 +8,7 @@ namespace Game
     [Serializable]
     public sealed class SnakeInstaller : Installer
     {
+        [SerializeField] private SnakeInputConfig _inputConfig;
         [SerializeField] private Snake _snake;
         
         public override void InstallBindings()
@@ -19,7 +20,8 @@ namespace Game
             
             Container
                 .BindInterfacesTo<SnakeInputController>()
-                .AsSingle();
+                .AsSingle()
+                .WithArguments(_inputConfig);
             
             Container
                 .BindInterfacesTo<SnakeSelfCollideObserver>()

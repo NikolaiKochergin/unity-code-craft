@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faed5a9118cf4eed9d5fcef2f299e3f6, type: 3}
+  m_Name: Snake Input Config (Arrows)
+  m_EditorClassIdentifier: Game::Game.SnakeInputConfig
+  <Up>k__BackingField: 273
+  <Down>k__BackingField: 274
+  <Left>k__BackingField: 276
+  <Right>k__BackingField: 275
