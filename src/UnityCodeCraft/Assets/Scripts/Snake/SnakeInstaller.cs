@@ -18,11 +18,19 @@ namespace Game
                 .AsSingle();
             
             Container
-                .BindInterfacesTo<InputController>()
+                .BindInterfacesTo<SnakeInputController>()
                 .AsSingle();
             
             Container
-                .BindInterfacesTo<SnakeObserver>()
+                .BindInterfacesTo<SnakeSelfCollideObserver>()
+                .AsSingle();
+            
+            Container
+                .BindInterfacesTo<SnakeWorldBoundsCollideObserver>()
+                .AsSingle();
+            
+            Container
+                .BindInterfacesTo<SnakeCoinPickObserver>()
                 .AsSingle();
         }
     }

@@ -4,11 +4,11 @@ using Zenject;
 
 namespace Game
 {
-    public class InputController : ITickable
+    public class SnakeInputController : ITickable
     {
         private readonly ISnake _snake;
 
-        public InputController(ISnake snake) => 
+        public SnakeInputController(ISnake snake) => 
             _snake = snake;
 
         public void Tick()
