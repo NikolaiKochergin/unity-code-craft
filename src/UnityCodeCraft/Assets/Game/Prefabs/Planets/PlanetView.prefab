@@ -402,20 +402,23 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -443,6 +446,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1226517422905731925}
   - component: {fileID: 7486801599208217449}
+  - component: {fileID: 7373958440172053670}
+  - component: {fileID: 8146461606194212818}
   m_Layer: 5
   m_Name: PlanetView
   m_TagString: Untagged
@@ -482,6 +487,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080244410604157239}
   m_CullTransparentMesh: 1
+--- !u!114 &7373958440172053670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080244410604157239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4bc6f46d75b4bd5b33b9ff1e2c4ad5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Views::Game.Views.PlanetPresenter
+  _view: {fileID: 8146461606194212818}
+  _income: {fileID: 2525868834811137541}
+  _price: {fileID: 8089639882956057898}
+--- !u!114 &8146461606194212818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080244410604157239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e1140eb35b149e3a5018eebc91c9c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Views::Game.Views.Planet.PlanetView
+  _icon: {fileID: 606508972301849034}
+  _lock: {fileID: 7085741634984397813}
+  _button: {fileID: 5583372068559771244}
 --- !u!1 &5564512366540979095
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,6 +528,8 @@ GameObject:
   - component: {fileID: 1921716995094703198}
   - component: {fileID: 7366688001666472230}
   - component: {fileID: 5072925286837728165}
+  - component: {fileID: 2525868834811137541}
+  - component: {fileID: 3280184734145156565}
   m_Layer: 5
   m_Name: Income
   m_TagString: Untagged
@@ -559,6 +596,34 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.2
+--- !u!114 &2525868834811137541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5564512366540979095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cce5f7622334c5da879cc0233cbc40e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Views::Game.Views.PlanetIncomePresenter
+  _incomeView: {fileID: 3280184734145156565}
+--- !u!114 &3280184734145156565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5564512366540979095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f26beca5009342cdadc366a5dc798c33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Views::Game.Views.PlanetIncomeView
+  _coin: {fileID: 320550912344372757}
+  _slider: {fileID: 6948507870913343312}
+  _timerText: {fileID: 8019802931863089282}
 --- !u!1 &6740194235726008877
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,6 +731,8 @@ GameObject:
   - component: {fileID: 3033779123653569042}
   - component: {fileID: 6404032390609247133}
   - component: {fileID: 544170752107032563}
+  - component: {fileID: 8089639882956057898}
+  - component: {fileID: 7874731155486734788}
   m_Layer: 5
   m_Name: Price
   m_TagString: Untagged
@@ -734,6 +801,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 0
+--- !u!114 &8089639882956057898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6850814019076832775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fbd9941e80b4df4a5f6cceca32395c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Views::Game.Views.PlanetPricePresenter
+  _priceView: {fileID: 7874731155486734788}
+--- !u!114 &7874731155486734788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6850814019076832775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdb68b481ced43c6a58fa8b2403c1a9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Views::Game.Views.PriceView
+  _price: {fileID: 5444377921757551026}
 --- !u!1 &7085741634984397813
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,20 +1005,23 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
