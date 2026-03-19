@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f98e7f172dba47a28aee7b40393c698d, type: 3}
-  m_Name: "Planet\u0421atalog"
+  m_Name: PlanetCatalog
   m_EditorClassIdentifier: 
   _planets:
   - {fileID: 11400000, guid: 15e65e6f39d251d4ba9636b335fd7ff7, type: 2}

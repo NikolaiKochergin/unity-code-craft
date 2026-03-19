@@ -1,12 +1,11 @@
 {
-    "name": "Game.Views",
+    "name": "Game.Presenters",
     "rootNamespace": "",
     "references": [
-        "Unity.TextMeshPro",
-        "UIComponents",
-        "Zenject",
-        "dotweenModules",
-        "Game.Presenters"
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
+        "GUID:d430bedc2075480fbe691ed151691c6c",
+        "GUID:62a9adcec8f3470dab014061262d08cd",
+        "GUID:87df7d11a064465e9f5772fc6c82502f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,3 +1,4 @@
+using Modules.Planets;
 using UnityEngine;
 using Zenject;
 
@@ -11,7 +12,17 @@ namespace Game.Presenters
     {
         public override void InstallBindings()
         {
-            //TODO:
+            Container
+                .BindInterfacesAndSelfTo<MoneyPresenter>()
+                .AsSingle();
+
+            Container
+                .BindInterfacesAndSelfTo<PlanetsPresenter>()
+                .AsSingle();
+            
+            Container
+                .BindFactory<Planet, PlanetPresenter, PlanetPresenterFactory>()
+                .AsSingle();
         }
     }
 }
