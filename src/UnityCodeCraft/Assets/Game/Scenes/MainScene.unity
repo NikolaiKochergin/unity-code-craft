@@ -1396,6 +1396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf1abd95338489aa5e953f001a270a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _coinParticle: {fileID: 1465214281}
 --- !u!1 &974007725
 GameObject:
   m_ObjectHideFlags: 0
@@ -1827,6 +1828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1465214279}
   - component: {fileID: 1465214280}
+  - component: {fileID: 1465214281}
   m_Layer: 5
   m_Name: Screen
   m_TagString: Untagged
@@ -1869,6 +1871,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _particlePrefab: {fileID: 8463490587080572799, guid: 38d7f5045319aa547904a82ff3c91ebb, type: 3}
   _parent: {fileID: 1465214279}
+--- !u!114 &1465214281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465214278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67875cbaf067471bb3760078bdb21e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Views::Game.Views.CoinParticleView
+  _particleAnimator: {fileID: 1465214280}
+  _particlesTarget: {fileID: 1831136176}
 --- !u!1 &1556955875
 GameObject:
   m_ObjectHideFlags: 0
@@ -1905,6 +1921,11 @@ Transform:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5364966909751367753, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
   m_PrefabInstance: {fileID: 1052078977217180737}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1831136176 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6204055655084186918, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
+  m_PrefabInstance: {fileID: 6121086404576301247}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1886819928
 GameObject:

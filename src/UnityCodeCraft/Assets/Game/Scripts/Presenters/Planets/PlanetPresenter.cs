@@ -16,13 +16,17 @@ namespace Game.Presenters
         {
             _planet = planet;
             
+            Name = planet.Name;
+            Income = new IncomePresenter(planet);
+            
             _isUnlocked = new ReactiveProperty<bool>(_planet.IsUnlocked);
             _icon = new ReactiveProperty<Sprite>(_planet.GetIcon(_planet.IsUnlocked));
             _price = new ReactiveProperty<int>(_planet.Price);
         }
 
         public string PriceFormat => "{0:0}";
-        public string Name => _planet.Name;
+        public string Name { get; }
+        public IncomePresenter Income { get; }
 
         public ReadOnlyReactiveProperty<Sprite> Icon => _icon;
         public ReadOnlyReactiveProperty<bool> IsUnlocked => _isUnlocked;
@@ -32,15 +36,19 @@ namespace Game.Presenters
         {
             _planet.OnUnlocked += OnUnlocked;
             _planet.OnUpgraded += OnUpgraded;
+            Income.Initialize();
         }
 
         public void Dispose()
         {
             _planet.OnUnlocked -= OnUnlocked;
             _planet.OnUpgraded -= OnUpgraded;
+            Income.Dispose();
         }
 
-        private void OnUpgraded(int level) => _price.Value = _planet.Price;
+        private void OnUpgraded(int level) => 
+            _price.Value = _planet.Price;
+        
         private void OnUnlocked()
         {
             _isUnlocked.Value = true;
@@ -48,7 +56,15 @@ namespace Game.Presenters
             _price.Value = _planet.Price;
         }
 
-        public void OnClick() => 
-            _planet.Unlock();
+        public void OnClick()
+        {
+            if (!_planet.IsUnlocked)
+                _planet.Unlock();
+        }
+
+        public void OnHold()
+        {
+            Debug.Log("<color=orange>OnHold");
+        }
     }
 }

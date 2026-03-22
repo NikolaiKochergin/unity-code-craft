@@ -12,9 +12,11 @@ namespace Game.Views
         [SerializeField] private Image _icon;
         [SerializeField] private GameObject _lock;
         [SerializeField] private SmartButton _button;
+        [SerializeField] private IncomeView _incomeView;
+        [SerializeField] private Widget _priceWidget;
         
-        private IDisposable _disposables;
         private PlanetPresenter _presenter;
+        private IDisposable _disposables;
 
         public void Show(PlanetPresenter presenter)
         {
@@ -27,19 +29,47 @@ namespace Game.Views
                 .AddTo(ref disposables);
             
             _presenter.IsUnlocked
-                .Subscribe(isUnlocked => _lock.SetActive(!isUnlocked))
+                .Subscribe(OnUnlockChanged)
                 .AddTo(ref disposables);
 
             _disposables = disposables.Build();
 
-            _button.OnClick += _presenter.OnClick;
+            _button.OnClick += OnButtonClick;
+            _button.OnHold += _presenter.OnHold;
         }
 
         public void Hide()
         {
-            _disposables.Dispose();
+            _disposables?.Dispose();
             
-            _button.OnClick -= _presenter.OnClick;
+            _button.OnClick -= OnButtonClick;
+            _button.OnHold -= _presenter.OnHold;
+
+            _incomeView.Hide();
+        }
+
+        private void OnButtonClick()
+        {
+            if (_presenter.IsUnlocked.CurrentValue)
+                _incomeView.TryGatherIncome();
+            else
+                _presenter.OnClick();
+        }
+
+        private void OnUnlockChanged(bool isUnlocked)
+        {
+            _lock.SetActive(!isUnlocked);
+            if (isUnlocked)
+            {
+                _incomeView.Show(_presenter.Income);
+                _priceWidget.Hide();
+            }
+            else
+            {
+                _incomeView.Hide();
+                _priceWidget.SetText(_presenter.Price.CurrentValue, _presenter.PriceFormat);
+                _priceWidget.Show();
+            }
         }
     }
 }
