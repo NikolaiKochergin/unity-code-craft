@@ -19,6 +19,10 @@ namespace Game.Presenters
             Container
                 .BindInterfacesAndSelfTo<PlanetsPresenter>()
                 .AsSingle();
+
+            Container
+                .Bind<PlanetPopupPresenter>()
+                .AsSingle();
             
             Container
                 .BindFactory<Planet, PlanetPresenter, PlanetPresenterFactory>()

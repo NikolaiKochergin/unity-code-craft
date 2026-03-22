@@ -10,7 +10,7 @@ namespace Game.Views
         public void SetText(float value, string format = "{0}") => 
             _valueText.SetText(format, value);
         
-        public void SetText(float arg1, float arg2, string format = "{0}") => 
+        public void SetText(float arg1, float arg2, string format = "{0}/{1}") => 
             _valueText.SetText(format, arg1, arg2);
 
         public void Show() => 

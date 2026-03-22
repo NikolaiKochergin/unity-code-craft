@@ -53,7 +53,7 @@ namespace Game.Views
             if (_presenter.IsUnlocked.CurrentValue)
                 _incomeView.TryGatherIncome();
             else
-                _presenter.OnClick();
+                _presenter.Unlock();
         }
 
         private void OnUnlockChanged(bool isUnlocked)
