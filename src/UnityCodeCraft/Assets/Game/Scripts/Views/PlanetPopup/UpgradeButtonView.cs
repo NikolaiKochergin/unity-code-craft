@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -9,7 +8,8 @@ namespace Game.Views
     {
         [SerializeField] private Button _button;
         [SerializeField] private Widget _priceWidget;
-        [SerializeField] private TMP_Text _buttonText;
+        [SerializeField] private GameObject _commonView;
+        [SerializeField] private GameObject _maxLevelView;
         
         public event UnityAction OnClick
         {
@@ -22,8 +22,9 @@ namespace Game.Views
 
         public void SetMaxLevelView(bool value)
         {
-            _buttonText.SetText(value ? "MAX LEVEL" : "Upgrade");
             _button.interactable = !value;
+            _commonView.SetActive(!value);
+            _maxLevelView.SetActive(value);
             
             if(value)
                 _priceWidget.Hide();

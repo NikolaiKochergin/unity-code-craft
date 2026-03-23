@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 4035766591218761423}
   - component: {fileID: 4556502046767129200}
   - component: {fileID: 6758420860918249786}
-  - component: {fileID: 4465495751404862920}
+  - component: {fileID: 7798258382305061471}
   m_Layer: 5
   m_Name: MoneyView
   m_TagString: Untagged
@@ -303,8 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff273a8f859540f08b58765334d94277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Views::Game.Views.MoneyPresenter
-  _moneyView: {fileID: 4465495751404862920}
---- !u!114 &4465495751404862920
+  _moneyView: {fileID: 7798258382305061471}
+--- !u!114 &7798258382305061471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7207275897469232668}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 489f41cae1e44d4d8f0fd505bf78c7a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 7945c30c91ca45c4fbde5ed276ee39c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Views::Game.Views.MoneyView
   _moneyText: {fileID: 3299675748291971791}

@@ -27,8 +27,7 @@ namespace Game.Views
                 return;
             }
             
-            if (_planet != planet)
-                _planet = planet;
+            _planet = planet;
             
             UpdatePlanetView();
             

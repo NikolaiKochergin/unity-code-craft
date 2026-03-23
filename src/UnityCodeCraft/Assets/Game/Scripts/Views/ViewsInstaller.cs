@@ -5,14 +5,14 @@ namespace Game.Views
 {
     public sealed class ViewsInstaller : MonoInstaller
     {
-        [SerializeField] private MoneyParticleAnimatorPresenter _moneyParticleAnimatorPresenter;
+        [SerializeField] private CoinParticleView _coinParticle;
         [SerializeField] private PlanetPopupPresenter _planetPopupPresenter;
 
         public override void InstallBindings()
         {
             Container
-                .Bind<MoneyParticleAnimatorPresenter>()
-                .FromInstance(_moneyParticleAnimatorPresenter)
+                .Bind<CoinParticleView>()
+                .FromInstance(_coinParticle)
                 .AsCached();
 
             Container

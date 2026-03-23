@@ -6,10 +6,8 @@ namespace Game.Views
     public class PlanetPopupPresenter : MonoBehaviour
     {
         [SerializeField] private PlanetPopupView _planetPopupView;
-        
-        [SerializeField] private PopulationPresenter _populationPresenter;
-        [SerializeField] private LevelPresenter _levelPresenter;
-        [SerializeField] private IncomePresenter _incomePresenter;
+
+        [SerializeField] private PlanetStatsPresenter _planetStatsPresenter;
         [SerializeField] private UpgradeButtonPresenter _upgradeButtonPresenter;
         
         private Planet _planet;
@@ -22,16 +20,13 @@ namespace Game.Views
                 return;
             }
             
-            if (_planet != planet) 
-                _planet = planet;
+            _planet = planet;
             
             UpdateName();
             UpdateIcon();
 
             _planetPopupView.Show();
-            _populationPresenter.Show(planet);
-            _levelPresenter.Show(planet);
-            _incomePresenter.Show(planet);
+            _planetStatsPresenter.Show(planet);
             _upgradeButtonPresenter.Show(planet);
 
             _planet.OnUnlocked += UpdateIcon;
@@ -40,14 +35,14 @@ namespace Game.Views
 
         public void Hide()
         {
-            _planet.OnUnlocked += UpdateIcon;
+            _planet.OnUnlocked -= UpdateIcon;
             _planetPopupView.OnClose -= Hide;
             
             _planetPopupView.Hide();
-            _populationPresenter.Hide();
-            _levelPresenter.Hide();
-            _incomePresenter.Hide();
+            _planetStatsPresenter.Hide();
             _upgradeButtonPresenter.Hide();
+
+            _planet = null;
         }
 
         private void UpdateName() => 

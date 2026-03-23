@@ -1,4 +1,5 @@
-﻿using Modules.Planets;
+﻿using System;
+using Modules.Planets;
 using UnityEngine;
 using Zenject;
 
@@ -11,11 +12,11 @@ namespace Game.Views
         [SerializeField] private PlanetIncomeView _incomeView;
         
         private Planet _planet;
-        private MoneyParticleAnimatorPresenter _particlePresenter;
+        private CoinParticleView _particlePresenter;
 
         [Inject]
-        public void Construct(MoneyParticleAnimatorPresenter particlePresenter) => 
-            _particlePresenter = particlePresenter;
+        public void Construct(CoinParticleView coinParticle) => 
+            _particlePresenter = coinParticle;
 
         public void Show(Planet planet)
         {
@@ -59,9 +60,9 @@ namespace Game.Views
 
         private void OnIncomeTimeChanged(float value)
         {
-            int time = (int)value;
+            TimeSpan timeRemain = TimeSpan.FromSeconds(value);
             _incomeView.SetSlider(_planet.IncomeProgress);
-            _incomeView.SetText(time / 60, time % 60, Format);
+            _incomeView.SetText(timeRemain.Minutes, timeRemain.Seconds, Format);
         }
     }
 }
