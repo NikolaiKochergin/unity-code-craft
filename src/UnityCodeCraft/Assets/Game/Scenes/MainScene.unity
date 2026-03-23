@@ -1484,7 +1484,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coinParticle: {fileID: 1465214281}
-  _planetPopup: {fileID: 0}
 --- !u!1 &905660609
 GameObject:
   m_ObjectHideFlags: 0
