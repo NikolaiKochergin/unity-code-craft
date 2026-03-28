@@ -13,7 +13,11 @@ namespace Game.Views
         [SerializeField] private TMP_Text _planetName;
         [SerializeField] private Button _closeButton;
         [SerializeField] private Image _icon;
-        [SerializeField] private PlanetStatsView _stats;
+        
+        [SerializeField] private Widget _population;
+        [SerializeField] private Widget _level;
+        [SerializeField] private Widget _income;
+        
         [SerializeField] private UpgradeButtonView _upgradeButton;
         
         private PlanetPopupPresenter _presenter;
@@ -21,15 +25,14 @@ namespace Game.Views
         private IDisposable _planetDisposables;
 
         [Inject]
-        public void Construct(PlanetPopupPresenter presenter) => 
-            _presenter = presenter;
-
-        private void Start()
+        public void Construct(PlanetPopupPresenter presenter)
         {
+            _presenter = presenter;
+            
             DisposableBuilder disposables = Disposable.CreateBuilder();
             
             _presenter.IsShown
-                .Subscribe(isShown => gameObject.SetActive(isShown))
+                .Subscribe(gameObject.SetActive)
                 .AddTo(ref disposables);
             
             _disposables = disposables.Build();
@@ -40,21 +43,36 @@ namespace Game.Views
 
         private void OnEnable()
         {
-            _closeButton.onClick.AddListener(_presenter.Hide);
-
             PlanetPresenter planet = _presenter.Planet;
             
             if(planet == null)
                 return;
             
             _planetName.SetText(planet.Name);
-            _stats.Initialize(planet.Stats);
             _upgradeButton.Initialize(planet);
             
             DisposableBuilder disposables = Disposable.CreateBuilder();
+
+            _closeButton
+                .OnClickAsObservable()
+                .Subscribe(_ => _presenter.Hide())
+                .AddTo(ref disposables);
             
             planet.Icon
                 .Subscribe(sprite => _icon.sprite = sprite)
+                .AddTo(ref disposables);
+
+
+            planet.Population
+                .Subscribe(population => _population.SetText(population, planet.PopulationFormat))
+                .AddTo(ref disposables);
+            
+            planet.CurrentLevel
+                .Subscribe(currentLevel => _level.SetText(currentLevel, planet.MaxLevel, planet.LevelFormat))
+                .AddTo(ref disposables);
+            
+            planet.MinuteIncome
+                .Subscribe(income => _income.SetText(income, planet.IncomeFormat))
                 .AddTo(ref disposables);
             
             _planetDisposables = disposables.Build();
@@ -62,8 +80,6 @@ namespace Game.Views
 
         private void OnDisable()
         {
-            _closeButton.onClick.RemoveListener(_presenter.Hide);
-            _stats.Dispose();
             _upgradeButton.Dispose();
             
             if(_presenter.Planet != null)

@@ -2270,7 +2270,9 @@ MonoBehaviour:
   _planetName: {fileID: 406148886}
   _closeButton: {fileID: 1559525175}
   _icon: {fileID: 1294113807}
-  _stats: {fileID: 1908159818}
+  _population: {fileID: 1303459459}
+  _level: {fileID: 1062725773}
+  _income: {fileID: 552928112}
   _upgradeButton: {fileID: 809404769}
 --- !u!224 &1831136176 stripped
 RectTransform:
@@ -2380,26 +2382,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1908159814 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6181976275336085481, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
-  m_PrefabInstance: {fileID: 1052078977217180737}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1908159818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908159814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e3216727ac64ce68bc72f66ca296161, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game.Views::Game.Views.PlanetStatsView
-  _population: {fileID: 1303459459}
-  _level: {fileID: 1062725773}
-  _income: {fileID: 552928112}
 --- !u!1001 &1918786892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2727,9 +2709,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 860805340701978150, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1802329538}
-    - targetCorrespondingSourceObject: {fileID: 6181976275336085481, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1908159818}
     - targetCorrespondingSourceObject: {fileID: 985398518431913536, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1303459459}
