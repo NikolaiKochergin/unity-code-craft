@@ -2845,6 +2845,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7207275897469232668, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 6121086404576301251}
+    - targetCorrespondingSourceObject: {fileID: 7207275897469232668, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 6121086404576301250}
   m_SourcePrefab: {fileID: 100100000, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
 --- !u!114 &6121086404576301248 stripped
@@ -2875,6 +2878,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad23837ee00409d94afbb0d1d91db7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Views::Game.Views.MoneyView
+  _moneyPanel: {fileID: 6121086404576301251}
+--- !u!114 &6121086404576301251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6121086404576301249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef265488242e40b79496a7a44787f499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Views::Game.Views.MoneyPanel
   _moneyText: {fileID: 6121086404576301248}
   _animationDuration: 0.75
 --- !u!224 &7237256081421283246 stripped
