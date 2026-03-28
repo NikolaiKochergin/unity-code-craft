@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Views
 {
-    public class CoinParticleView : MonoBehaviour
+    public class MoneyParticleView : MonoBehaviour
     {
         [SerializeField] private ParticleAnimator _particleAnimator;
         [SerializeField] private Transform _particlesTarget;

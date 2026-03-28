@@ -1462,7 +1462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf1abd95338489aa5e953f001a270a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinParticle: {fileID: 1465214281}
+  moneyParticle: {fileID: 1465214281}
 --- !u!1 &905660609
 GameObject:
   m_ObjectHideFlags: 0

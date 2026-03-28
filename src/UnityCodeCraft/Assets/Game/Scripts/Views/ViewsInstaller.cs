@@ -5,13 +5,13 @@ namespace Game.Views
 {
     public sealed class ViewsInstaller : MonoInstaller
     {
-        [SerializeField] private CoinParticleView _coinParticle;
+        [SerializeField] private MoneyParticleView moneyParticle;
         
         public override void InstallBindings()
         {
             Container
-                .Bind<CoinParticleView>()
-                .FromInstance(_coinParticle)
+                .Bind<MoneyParticleView>()
+                .FromInstance(moneyParticle)
                 .AsSingle();
         }
     }

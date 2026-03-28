@@ -146,7 +146,6 @@ GameObject:
   - component: {fileID: 8193891107021228721}
   - component: {fileID: 648301223005266422}
   - component: {fileID: 3509156194491149301}
-  - component: {fileID: 1285978222258840827}
   m_Layer: 5
   m_Name: Coin
   m_TagString: Untagged
@@ -225,18 +224,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatDistance: 40
   duration: 2
---- !u!114 &1285978222258840827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 320550912344372757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07f9bae0640044698a9028b35fef1868, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game.Views::Game.Views.CoinView
 --- !u!1 &383599552409175847
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,8 +501,10 @@ MonoBehaviour:
   _icon: {fileID: 606508972301849034}
   _lock: {fileID: 7085741634984397813}
   _button: {fileID: 5583372068559771244}
-  _incomeView: {fileID: 2055727422050135660}
   _priceWidget: {fileID: 4521207596467826248}
+  _coin: {fileID: 320550912344372757}
+  _timerSlider: {fileID: 6948507870913343312}
+  _timer: {fileID: 5345301833860118654}
 --- !u!1 &5564512366540979095
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,7 +516,7 @@ GameObject:
   - component: {fileID: 1921716995094703198}
   - component: {fileID: 7366688001666472230}
   - component: {fileID: 5072925286837728165}
-  - component: {fileID: 2055727422050135660}
+  - component: {fileID: 5345301833860118654}
   m_Layer: 5
   m_Name: Income
   m_TagString: Untagged
@@ -594,7 +583,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.2
---- !u!114 &2055727422050135660
+--- !u!114 &5345301833860118654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -603,12 +592,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5564512366540979095}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e615dcbe81db40a5a63d4bbaca9fb674, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d0d6b85e0e046afb917e4a4727dd920, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Game.Views::Game.Views.IncomeView
-  _coin: {fileID: 1285978222258840827}
-  _slider: {fileID: 6948507870913343312}
-  _timerText: {fileID: 8019802931863089282}
+  m_EditorClassIdentifier: Game.Views::Game.Views.Widget
+  _valueText: {fileID: 8019802931863089282}
 --- !u!1 &6740194235726008877
 GameObject:
   m_ObjectHideFlags: 0
