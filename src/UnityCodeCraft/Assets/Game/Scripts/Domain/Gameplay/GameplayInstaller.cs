@@ -1,4 +1,5 @@
 using Modules.Entities;
+using Modules.Extensions;
 using UnityEngine;
 using Zenject;
 
@@ -14,10 +15,14 @@ namespace Game.Gameplay
         [SerializeField]
         private EntityCatalog _catalog;
         
+        [SerializeField]
+        private SaveLoadInstaller _saveLoad;
+        
         public override void InstallBindings()
         {
             this.Container.Bind<EntityWorld>().FromComponentInHierarchy().AsSingle();
             this.Container.Bind<EntityCatalog>().FromInstance(_catalog).AsSingle();
+            this.Container.Install(_saveLoad);
         }
     }
 }
