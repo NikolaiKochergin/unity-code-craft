@@ -18,11 +18,14 @@ namespace Game.Views
         [SerializeField] private Widget _level;
         [SerializeField] private Widget _income;
         
-        [SerializeField] private UpgradeButtonView _upgradeButton;
+        [SerializeField] private Button _upgradeButton;
+        [SerializeField] private Widget _priceWidget;
+        [SerializeField] private GameObject _commonView;
+        [SerializeField] private GameObject _maxLevelView;
         
         private PlanetPopupPresenter _presenter;
-        private IDisposable _disposables;
-        private IDisposable _planetDisposables;
+        private IDisposable _showDisposables;
+        private IDisposable _presentationDisposables;
 
         [Inject]
         public void Construct(PlanetPopupPresenter presenter)
@@ -35,11 +38,11 @@ namespace Game.Views
                 .Subscribe(gameObject.SetActive)
                 .AddTo(ref disposables);
             
-            _disposables = disposables.Build();
+            _showDisposables = disposables.Build();
         }
 
         private void OnDestroy() => 
-            _disposables.Dispose();
+            _showDisposables.Dispose();
 
         private void OnEnable()
         {
@@ -49,7 +52,6 @@ namespace Game.Views
                 return;
             
             _planetName.SetText(planet.Name);
-            _upgradeButton.Initialize(planet);
             
             DisposableBuilder disposables = Disposable.CreateBuilder();
 
@@ -58,10 +60,14 @@ namespace Game.Views
                 .Subscribe(_ => _presenter.Hide())
                 .AddTo(ref disposables);
             
+            _upgradeButton
+                .OnClickAsObservable()
+                .Subscribe(_ => planet.UnlockOrUpgrade())
+                .AddTo(ref disposables);
+            
             planet.Icon
                 .Subscribe(sprite => _icon.sprite = sprite)
                 .AddTo(ref disposables);
-
 
             planet.Population
                 .Subscribe(population => _population.SetText(population, planet.PopulationFormat))
@@ -75,15 +81,33 @@ namespace Game.Views
                 .Subscribe(income => _income.SetText(income, planet.IncomeFormat))
                 .AddTo(ref disposables);
             
-            _planetDisposables = disposables.Build();
+            planet.Price
+                .Subscribe(price => _priceWidget.SetText(price, planet.PriceFormat))
+                .AddTo(ref disposables);
+            
+            planet.IsMaxLevel
+                .Subscribe(OnGetMaxLevel)
+                .AddTo(ref disposables);
+            
+            _presentationDisposables = disposables.Build();
         }
 
         private void OnDisable()
         {
-            _upgradeButton.Dispose();
-            
             if(_presenter.Planet != null)
-                _planetDisposables.Dispose();
+                _presentationDisposables.Dispose();
+        }
+        
+        private void OnGetMaxLevel(bool isMaxLevel)
+        {
+            _upgradeButton.interactable = !isMaxLevel;
+            _commonView.SetActive(!isMaxLevel);
+            _maxLevelView.SetActive(isMaxLevel);
+
+            if (isMaxLevel)
+                _priceWidget.Hide();
+            else
+                _priceWidget.Show();
         }
     }
 }

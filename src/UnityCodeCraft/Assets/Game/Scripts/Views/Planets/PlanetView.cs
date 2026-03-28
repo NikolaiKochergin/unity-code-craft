@@ -61,7 +61,7 @@ namespace Game.Views
             _lock.SetActive(!isUnlocked);
             if (isUnlocked)
             {
-                _incomeView.Show(_presenter.Income);
+                _incomeView.Show(_presenter);
                 _priceWidget.Hide();
             }
             else

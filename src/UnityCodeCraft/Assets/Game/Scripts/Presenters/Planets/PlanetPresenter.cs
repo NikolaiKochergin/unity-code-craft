@@ -18,6 +18,10 @@ namespace Game.Presenters
         private readonly ReactiveProperty<int> _population;
         private readonly ReactiveProperty<int> _level;
         private readonly ReactiveProperty<int> _minuteIncome;
+        
+        private readonly ReactiveProperty<bool> _isIncomeReady;
+        private readonly ReactiveProperty<float> _incomeProgress;
+        private readonly ReactiveProperty<TimeSpan> _remainTime;
 
         public PlanetPresenter(Planet planet, PlanetPopupPresenter planetPopup)
         {
@@ -27,8 +31,6 @@ namespace Game.Presenters
             Name = planet.Name;
             MaxLevel = planet.MaxLevel;
             
-            Income = new IncomePresenter(planet);
-            
             _isUnlocked = new ReactiveProperty<bool>(_planet.IsUnlocked);
             _isMaxLevel = new ReactiveProperty<bool>(_planet.IsMaxLevel);
             _icon = new ReactiveProperty<Sprite>(_planet.GetIcon(_planet.IsUnlocked));
@@ -37,16 +39,19 @@ namespace Game.Presenters
             _population = new ReactiveProperty<int>(planet.Population);
             _level = new ReactiveProperty<int>(planet.Level);
             _minuteIncome = new ReactiveProperty<int>(planet.MinuteIncome);
+            
+            _isIncomeReady = new ReactiveProperty<bool>(planet.IsIncomeReady);
+            _incomeProgress = new ReactiveProperty<float>(planet.IncomeProgress);
+            _remainTime = new ReactiveProperty<TimeSpan>();
         }
-
-        public IncomePresenter Income { get; }
-
+        
+        public string Name { get; }
+        public int MaxLevel { get; }
         public string PriceFormat => "{0:0}";
         public string PopulationFormat => "Population: {0:0}";
         public string LevelFormat => "Level: {0:0}/{1:0}";
         public string IncomeFormat => "Income: {0:0} / sec";
-        public string Name { get; }
-        public int MaxLevel { get; }
+        public string RemainTimeFormat => "{0:00}m:{1:00}s";
         
         public ReadOnlyReactiveProperty<Sprite> Icon => _icon;
         public ReadOnlyReactiveProperty<bool> IsUnlocked => _isUnlocked;
@@ -56,28 +61,37 @@ namespace Game.Presenters
         public ReadOnlyReactiveProperty<int> Population => _population;
         public ReadOnlyReactiveProperty<int> CurrentLevel => _level;
         public ReadOnlyReactiveProperty<int> MinuteIncome => _minuteIncome;
+        
+        public ReadOnlyReactiveProperty<bool> IsIncomeReady => _isIncomeReady;
+        public ReadOnlyReactiveProperty<float> IncomeProgress => _incomeProgress;
+        public ReadOnlyReactiveProperty<TimeSpan> RemainTime => _remainTime;
 
         public void Initialize()
         {
-            Income.Initialize();
-            
             _planet.OnUnlocked += OnUnlocked;
             _planet.OnUpgraded += OnUpgraded;
             
             _planet.OnPopulationChanged += OnPopulationChanged;
             _planet.OnIncomeChanged += OnIncomeChanged;
+            
+            _planet.OnIncomeReady += OnIncomeReady;
+            _planet.OnIncomeTimeChanged += OnIncomeTimeChanged;
         }
 
         public void Dispose()
         {
-            Income.Dispose();
-            
             _planet.OnUnlocked -= OnUnlocked;
             _planet.OnUpgraded -= OnUpgraded;
             
             _planet.OnPopulationChanged -= OnPopulationChanged;
             _planet.OnIncomeChanged -= OnIncomeChanged;
+            
+            _planet.OnIncomeReady -= OnIncomeReady;
+            _planet.OnIncomeTimeChanged -= OnIncomeTimeChanged;
         }
+        
+        public void GatherIncome() => 
+            _planet.GatherIncome();
 
         private void OnUnlocked()
         {
@@ -114,5 +128,18 @@ namespace Game.Presenters
         
         private void OnIncomeChanged(int minuteIncome) => 
             _minuteIncome.Value = minuteIncome / 60;
+        
+        private void OnIncomeReady(bool isReady)
+        {
+            _isIncomeReady.Value = isReady;
+            _remainTime.Value = TimeSpan.Zero;
+            _incomeProgress.Value = _planet.IncomeProgress;
+        }
+
+        private void OnIncomeTimeChanged(float value)
+        {
+            _remainTime.Value = TimeSpan.FromSeconds(value);
+            _incomeProgress.Value = _planet.IncomeProgress;
+        }
     }
 }

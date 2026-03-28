@@ -1332,11 +1332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be884619b8d40fbb6e48157efc3f63a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Views::Game.Views.PlanetView
---- !u!1 &809404764 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1849719361140464407, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
-  m_PrefabInstance: {fileID: 1052078977217180737}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &809404765 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6077616932496996747, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
@@ -1347,28 +1342,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3885529525276896717, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
   m_PrefabInstance: {fileID: 1052078977217180737}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 809404764}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &809404769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 809404764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b2be0b9dedc4a92b138a02ef4618ca7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game.Views::Game.Views.UpgradeButtonView
-  _button: {fileID: 809404766}
-  _priceWidget: {fileID: 917527872}
-  _commonView: {fileID: 648433329}
-  _maxLevelView: {fileID: 905660609}
 --- !u!1 &859427043
 GameObject:
   m_ObjectHideFlags: 0
@@ -2273,7 +2252,10 @@ MonoBehaviour:
   _population: {fileID: 1303459459}
   _level: {fileID: 1062725773}
   _income: {fileID: 552928112}
-  _upgradeButton: {fileID: 809404769}
+  _upgradeButton: {fileID: 809404766}
+  _priceWidget: {fileID: 917527872}
+  _commonView: {fileID: 648433329}
+  _maxLevelView: {fileID: 905660609}
 --- !u!224 &1831136176 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6204055655084186918, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
@@ -2718,9 +2700,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2728555838112404472, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 552928112}
-    - targetCorrespondingSourceObject: {fileID: 1849719361140464407, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 809404769}
     - targetCorrespondingSourceObject: {fileID: 7510333081995661202, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 917527872}

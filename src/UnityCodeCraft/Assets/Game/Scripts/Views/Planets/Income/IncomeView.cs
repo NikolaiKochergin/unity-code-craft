@@ -13,10 +13,10 @@ namespace Game.Views
         [SerializeField] private Image _slider;
         [SerializeField] private TMP_Text _timerText;
         
-        private IncomePresenter _presenter;
+        private PlanetPresenter _presenter;
         private IDisposable _disposables;
 
-        public void Show(IncomePresenter presenter)
+        public void Show(PlanetPresenter presenter)
         {
             _presenter = presenter;
             
@@ -51,7 +51,7 @@ namespace Game.Views
         }
 
         private void OnIncomeTimeChanged(TimeSpan time) => 
-            _timerText.SetText(_presenter.Format, time.Minutes, time.Seconds);
+            _timerText.SetText(_presenter.RemainTimeFormat, time.Minutes, time.Seconds);
 
         private void OnIncomeProgressChanged(float value) => 
             _slider.fillAmount = Mathf.Clamp01(value);
