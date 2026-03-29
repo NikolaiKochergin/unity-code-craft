@@ -22,6 +22,8 @@ namespace Game.Gameplay
         {
             this.Container.Bind<EntityWorld>().FromComponentInHierarchy().AsSingle();
             this.Container.Bind<EntityCatalog>().FromInstance(_catalog).AsSingle();
+            
+            this.Container.Bind<ISaveSerializer>().To<EntityWorldSerializer>().AsSingle();
             this.Container.Install(_saveLoad);
         }
     }

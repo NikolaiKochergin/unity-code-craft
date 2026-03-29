@@ -10,7 +10,6 @@ namespace Game.Gameplay
         {
             Container
                 .Bind<SaveLoad>()
-                .FromNew()
                 .AsSingle();
         }
     }
