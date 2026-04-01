@@ -4,7 +4,7 @@ using UnityEngine;
 namespace SampleGame.Gameplay
 {
     //Can be extended
-    public sealed class Health : Component
+    public sealed class Health : MonoBehaviour, IComponentSerializer<int>
     {
         ///Variable
         [field: SerializeField]
@@ -14,17 +14,10 @@ namespace SampleGame.Gameplay
         [field: SerializeField]
         public int Max { get; private set; } = 100;
 
-        public override ComponentData AsData() =>
-            new()
-            {
-                Name = nameof(Health),
-                Value = Current.ToString()
-            };
+        public string Key => nameof(Health);
+        
+        public int Serialize() => Current;
 
-        public override void Restore(ComponentData data)
-        {
-            if(int.TryParse(data.Value, out int value))
-                Current = value;
-        }
+        public void Deserialize(int data) => Current = data;
     }
 }

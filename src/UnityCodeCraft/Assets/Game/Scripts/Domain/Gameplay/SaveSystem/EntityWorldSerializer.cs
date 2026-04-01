@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Modules.Entities;
+using Newtonsoft.Json.Linq;
 using SampleGame.Common;
-using SampleGame.Gameplay;
-using Component = SampleGame.Gameplay.Component;
 
 namespace Game.Gameplay
 {
@@ -36,17 +34,6 @@ namespace Game.Gameplay
             return result;
         }
 
-        private static ComponentData[] ComponentsData(Entity entity)
-        {
-            Component[] components = entity.GetComponents<Component>();
-            ComponentData[] componentsData = new ComponentData[components.Length];
-            int index = 0;
-            foreach (Component component in components) 
-                componentsData[index++] = component.AsData();
-            
-            return componentsData;
-        }
-
         public void Deserialize(EntityData[] data)
         {
             foreach (EntityData entityData in data)
@@ -65,17 +52,24 @@ namespace Game.Gameplay
                         entityData.Id);
                 }
 
-                foreach (ComponentData componentData in entityData.Components)
+                IComponentSerializer[] components = entity.GetComponents<IComponentSerializer>();
+                foreach (IComponentSerializer component in components)
                 {
-                    Component[] components = entity.GetComponents<Component>();
-                    foreach (Component component in components)
-                        if(component.GetType().Name == componentData.Name)
-                            component.Restore(componentData);
+                    if(entityData.Components.TryGetValue(component.Key, out JToken componentData))
+                        component.Deserialize(componentData);
                 }
             }
         }
-        
-        
+
+        private static JObject ComponentsData(Entity entity)
+        {
+            IComponentSerializer[] components = entity.GetComponents<IComponentSerializer>();
+            JObject componentsData = new();
+            foreach (IComponentSerializer component in components) 
+                componentsData.Add(component.Key, component.Serialize());
+            
+            return componentsData;
+        }
     }
 
     public struct EntityData
@@ -84,12 +78,6 @@ namespace Game.Gameplay
         public string Name;
         public SerializedVector3 Position;
         public SerializedVector3 Rotation;
-        public ComponentData[] Components;
-    }
-    
-    public struct ComponentData
-    {
-        public string Name;
-        public string Value;
+        public JObject Components;
     }
 }
