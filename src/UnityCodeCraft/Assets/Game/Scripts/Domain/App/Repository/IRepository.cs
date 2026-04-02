@@ -1,11 +1,12 @@
-﻿using System;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
 namespace Game.Scripts.Domain.App
 {
     public interface IRepository
     {
-        void Save(JObject data, Action<bool, int> callback);
-        void Load(string version, Action<bool, int, JObject> callback);
+        UniTask<(bool success, int version)> Save(JObject data, CancellationToken ct = default);
+        UniTask<(bool success, int version, JObject data)> Load(int version, CancellationToken ct = default);
     }
 }

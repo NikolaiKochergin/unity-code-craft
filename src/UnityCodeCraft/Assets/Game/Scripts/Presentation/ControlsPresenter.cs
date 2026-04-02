@@ -12,7 +12,10 @@ namespace Game.Gameplay
         public void Save(Action<bool, int> callback) => 
             _saveLoad.Save(callback);
 
-        public void Load(string version, Action<bool, int> callback) => 
-            _saveLoad.Load(version, callback);
+        public void Load(string version, Action<bool, int> callback)
+        {
+            if(int.TryParse(version, out int versionNumber))
+                _saveLoad.Load(versionNumber, callback);
+        }
     }
 }

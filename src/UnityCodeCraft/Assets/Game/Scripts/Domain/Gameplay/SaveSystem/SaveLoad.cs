@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using Game.Scripts.Domain.App;
 using Newtonsoft.Json.Linq;
 
@@ -8,6 +9,8 @@ namespace Game.Gameplay
     {
         private readonly IRepository _gameRepository;
         private readonly ISaveSerializer[] _serializers;
+        
+        private int _currentVersion;
 
         public SaveLoad(IRepository gameRepository, ISaveSerializer[] serializers)
         {
@@ -15,35 +18,43 @@ namespace Game.Gameplay
             _gameRepository = gameRepository;
         }
         
-        public void Save(Action<bool, int> callback)
+        public void Save(Action<bool, int> callback) =>
+            SaveAsync()
+                .ContinueWith(result => callback?.Invoke(result.success, result.version))
+                .Forget(e =>
+                {
+                    UnityEngine.Debug.LogException(e);
+                    callback?.Invoke(false, -1);
+                });
+
+        public void Load(int version, Action<bool, int> callback) =>
+            LoadAsync(version)
+                .ContinueWith(result => callback?.Invoke(result.success, result.version))
+                .Forget(e =>
+                {
+                    UnityEngine.Debug.LogException(e);
+                    callback?.Invoke(false, version);
+                });
+
+        private async UniTask<(bool success, int version)> SaveAsync()
         {
             JObject gameData = new();
             foreach (ISaveSerializer serializer in _serializers)
                 gameData.Add(serializer.Key, serializer.Serialize());
             
-            _gameRepository.Save(gameData, callback);
+            return await _gameRepository.Save(gameData);
         }
 
-        public void Load(string version, Action<bool, int> callback)
+        private async UniTask<(bool success, int version)> LoadAsync(int version)
         {
-            _gameRepository.Load(version, OnLoaded);
-            return;
+            (bool success, int version, JObject data) result = await _gameRepository.Load(version);
 
-            void OnLoaded(bool success, int dataVersion, JObject gameData)
-            {
-                if (success)
-                {
-                    foreach (ISaveSerializer serializer in _serializers)
-                        if (gameData.TryGetValue(serializer.Key, out JToken data))
-                            serializer.Deserialize(data);
-
-                    callback?.Invoke(true, dataVersion);
-                }
-                else
-                {
-                    callback?.Invoke(false, dataVersion);
-                }
-            }
+            if (result.success)
+                foreach (ISaveSerializer serializer in _serializers)
+                    if (result.data.TryGetValue(serializer.Key, out JToken data))
+                        serializer.Deserialize(data);
+            
+            return result.success ? (true, result.version) : (false, version);
         }
     }
 }

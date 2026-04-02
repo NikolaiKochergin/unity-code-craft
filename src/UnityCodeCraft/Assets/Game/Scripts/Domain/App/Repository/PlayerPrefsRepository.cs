@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -6,47 +8,45 @@ namespace Game.Scripts.Domain.App
 {
     public sealed class PlayerPrefsRepository : IRepository
     {
+        private const string Version = "version";
+        
         private readonly string _prefsKey;
-        private int _currentVersion;
 
-        public PlayerPrefsRepository(string prefsKey) => 
+        public PlayerPrefsRepository(string prefsKey) =>
             _prefsKey = prefsKey;
 
-        public void Save(JObject data, Action<bool, int> callback)
+        public UniTask<(bool success, int version)> Save(JObject data, CancellationToken ct = default)
         {
-            if (data == null)
-            {
-                callback?.Invoke(false, _currentVersion);
-                return;
-            }
-
-            data["version"] = (++_currentVersion).ToString();
+            int version = -1;
+            if(data == null)
+                return UniTask.FromResult<(bool success, int version)>((false, version));
+            
+            if(data.TryGetValue(Version, out JToken token))
+                version = token.Value<int>();
             
             string raw = data.ToString();
             PlayerPrefs.SetString(_prefsKey, raw);
-            callback?.Invoke(true, _currentVersion);
-            
-            
-            Debug.Log($"<color=red> SERIALIZE </color> {raw}");
-            
+            return UniTask.FromResult((true, version));
         }
 
-        public void Load(string version, Action<bool, int, JObject> callback)
+        public UniTask<(bool success, int version, JObject data)> Load(int version, CancellationToken ct = default)
         {
             if (!PlayerPrefs.HasKey(_prefsKey))
-            {
-                callback?.Invoke(false, _currentVersion, null);
-                return;
-            }
+                return UniTask.FromResult((false, version, (JObject) null));
             
             string raw = PlayerPrefs.GetString(_prefsKey);
             try
             {
-                callback?.Invoke(true, _currentVersion, JObject.Parse(raw));
+                JObject data = JObject.Parse(raw);
+                
+                if(data.TryGetValue(Version, out JToken token))
+                    version = token.Value<int>();
+                
+                return UniTask.FromResult((true, version, data));
             }
             catch (Exception)
             {
-                callback?.Invoke(false, _currentVersion, null);
+                return UniTask.FromResult((false, version, (JObject) null));
             }
         }
     }
