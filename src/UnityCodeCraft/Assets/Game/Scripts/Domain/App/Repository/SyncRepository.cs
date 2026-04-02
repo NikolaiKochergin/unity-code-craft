@@ -17,30 +17,14 @@ namespace Game.Scripts.Domain.App
             _repositories = repositories;
         }
 
-        public async UniTask<(bool success, int version)> Save(JObject data, CancellationToken ct = default)
+        public UniTask<bool> Save(JObject data, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
 
-        public async UniTask<(bool success, int version, JObject data)> Load(int version, CancellationToken ct = default)
+        public UniTask<(bool success, JObject data)> Load(CancellationToken ct = default)
         {
-            int count = _repositories.Length;
-            if(count == 0)
-                return (false, -1, null);
-
-            UniTask<(bool, int, JObject)>[] tasks = new UniTask<(bool, int, JObject)> [count];
-            for (int i = 0; i < count; i++) 
-                tasks[i] = _repositories[i].Load(version, ct);
-            
-            (bool, int, JObject)[] results = await UniTask.WhenAll(tasks);
-
-            foreach ((bool, int, JObject) result in results)
-            {
-                
-            }
-            
-            
-            
+            throw new NotImplementedException();
         }
     }
 }

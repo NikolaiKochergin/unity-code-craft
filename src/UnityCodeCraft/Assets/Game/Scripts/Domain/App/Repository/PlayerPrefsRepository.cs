@@ -8,45 +8,36 @@ namespace Game.Scripts.Domain.App
 {
     public sealed class PlayerPrefsRepository : IRepository
     {
-        private const string Version = "version";
-        
         private readonly string _prefsKey;
 
         public PlayerPrefsRepository(string prefsKey) =>
             _prefsKey = prefsKey;
 
-        public UniTask<(bool success, int version)> Save(JObject data, CancellationToken ct = default)
+        public UniTask<bool> Save(JObject data, CancellationToken ct = default)
         {
-            int version = -1;
-            if(data == null)
-                return UniTask.FromResult<(bool success, int version)>((false, version));
-            
-            if(data.TryGetValue(Version, out JToken token))
-                version = token.Value<int>();
-            
+            if (data == null)
+                return UniTask.FromResult(false);
+
             string raw = data.ToString();
             PlayerPrefs.SetString(_prefsKey, raw);
-            return UniTask.FromResult((true, version));
+            return UniTask.FromResult(true);
         }
 
-        public UniTask<(bool success, int version, JObject data)> Load(int version, CancellationToken ct = default)
+        public UniTask<(bool, JObject)> Load(CancellationToken ct = default)
         {
             if (!PlayerPrefs.HasKey(_prefsKey))
-                return UniTask.FromResult((false, version, (JObject) null));
+                return UniTask.FromResult((false, (JObject) null));
             
             string raw = PlayerPrefs.GetString(_prefsKey);
+            JObject data = null;
             try
             {
-                JObject data = JObject.Parse(raw);
-                
-                if(data.TryGetValue(Version, out JToken token))
-                    version = token.Value<int>();
-                
-                return UniTask.FromResult((true, version, data));
+                data = JObject.Parse(raw);
+                return UniTask.FromResult((true, data));
             }
             catch (Exception)
             {
-                return UniTask.FromResult((false, version, (JObject) null));
+                return UniTask.FromResult((false, data));
             }
         }
     }
