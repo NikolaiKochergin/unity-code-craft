@@ -8,9 +8,13 @@ namespace Game.Gameplay
     public class EntityWorldSerializer : ISaveSerializer<EntityData[]>
     {
         private readonly EntityWorld _world;
+        private readonly List<IComponentSerializer> _componentSerializers;
 
-        public EntityWorldSerializer(EntityWorld world) => 
+        public EntityWorldSerializer(EntityWorld world, List<IComponentSerializer> componentSerializers)
+        {
             _world = world;
+            _componentSerializers = componentSerializers;
+        }
 
         public string Key => "World";
         
@@ -52,21 +56,16 @@ namespace Game.Gameplay
                         entityData.Id);
                 }
 
-                IComponentSerializer[] components = entity.GetComponents<IComponentSerializer>();
-                foreach (IComponentSerializer component in components)
-                {
-                    if(entityData.Components.TryGetValue(component.Key, out JToken componentData))
-                        component.Deserialize(componentData);
-                }
+                foreach (IComponentSerializer serializer in _componentSerializers) 
+                    serializer.Deserialize(entity, entityData.Components);
             }
         }
 
-        private static JObject ComponentsData(Entity entity)
+        private JObject ComponentsData(Entity entity)
         {
-            IComponentSerializer[] components = entity.GetComponents<IComponentSerializer>();
             JObject componentsData = new();
-            foreach (IComponentSerializer component in components) 
-                componentsData.Add(component.Key, component.Serialize());
+            foreach (IComponentSerializer serializer in _componentSerializers) 
+                serializer.Serialize(entity, componentsData);
             
             return componentsData;
         }

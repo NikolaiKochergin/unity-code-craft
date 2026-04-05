@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Modules.Entities;
 using Modules.Extensions;
 using UnityEngine;
@@ -24,6 +25,15 @@ namespace Game.Gameplay
             this.Container.Bind<EntityCatalog>().FromInstance(_catalog).AsSingle();
             
             this.Container.Bind<ISaveSerializer>().To<EntityWorldSerializer>().AsSingle();
+
+            this.Container.Bind<IComponentSerializer>().To<CountdownComponentSerializer>().AsSingle();
+            this.Container.Bind<IComponentSerializer>().To<DestinationPointComponentSerializer>().AsSingle();
+            this.Container.Bind<IComponentSerializer>().To<HealthComponentSerializer>().AsSingle();
+            this.Container.Bind<IComponentSerializer>().To<ProductionOrderComponentSerializer>().AsSingle();
+            this.Container.Bind<IComponentSerializer>().To<ResourceBagComponentSerializer>().AsSingle();
+            this.Container.Bind<IComponentSerializer>().To<TargetObjectComponentSerializer>().AsSingle();
+            this.Container.Bind<IComponentSerializer>().To<TeamComponentSerializer>().AsSingle();
+            
             this.Container.Install(_saveLoad);
         }
     }
