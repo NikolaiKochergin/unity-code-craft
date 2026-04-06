@@ -13,22 +13,22 @@ namespace Game.Scripts.Domain.App
         public PlayerPrefsRepository(string prefsKey) =>
             _prefsKey = prefsKey;
 
-        public UniTask<bool> Save(JObject data, CancellationToken ct = default)
+        public UniTask<(bool, int)> Save(JObject data, CancellationToken ct = default)
         {
             if (data == null)
-                return UniTask.FromResult(false);
+                return UniTask.FromResult((false, -1));
 
             string raw = data.ToString();
-            PlayerPrefs.SetString(_prefsKey, raw);
-            return UniTask.FromResult(true);
+            PlayerPrefs.SetString(_prefsKey + data["version"], raw);
+            return UniTask.FromResult((true, data["version"].Value<int>()));
         }
 
-        public UniTask<(bool, JObject)> Load(CancellationToken ct = default)
+        public UniTask<(bool, JObject)> Load(int version, CancellationToken ct = default)
         {
-            if (!PlayerPrefs.HasKey(_prefsKey))
+            if (!PlayerPrefs.HasKey(_prefsKey + version))
                 return UniTask.FromResult((false, (JObject) null));
             
-            string raw = PlayerPrefs.GetString(_prefsKey);
+            string raw = PlayerPrefs.GetString(_prefsKey + version);
             JObject data = null;
             try
             {

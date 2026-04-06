@@ -14,118 +14,25 @@ namespace Game.Scripts.Domain.App
         [ShowInInspector, ReadOnly]
         private readonly string _uri;
 
-        [ShowInInspector, ReadOnly]
-        private string _token;
-
-        public RemoteRepository(string uri)
-        {
+        public RemoteRepository(string uri) => 
             _uri = uri;
-        }
 
-        [Button]
-        public async UniTask<bool> Register(string login, string password, CancellationToken ct = default)
+        public async UniTask<(bool, int)> Save(JObject gameData, CancellationToken ct = default)
         {
-            var body = new JObject
-            {
-                ["login"] = login,
-                ["password"] = password
-            };
-
-            byte[] bytes = Encoding.UTF8.GetBytes(body.ToString());
-
-            var request = new UnityWebRequest($"{_uri}/register", "POST")
-            {
-                uploadHandler = new UploadHandlerRaw(bytes),
-                downloadHandler = new DownloadHandlerBuffer()
-            };
-
-            request.SetRequestHeader("Content-Type", "application/json");
-
-            try
-            {
-                await request.SendWebRequest().WithCancellation(ct);
-            }
-            catch (OperationCanceledException)
-            {
-                Debug.Log("Register cancelled");
-                return false;
-            }
-
-            if (request.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError($"Register error: {request.error}");
-                return false;
-            }
-
-            Debug.Log("Registered successfully");
-            return true;
-        }
-
-        [Button]
-        public async UniTask<bool> Login(string login, string password, CancellationToken ct = default)
-        {
-            var body = new JObject
-            {
-                ["login"] = login,
-                ["password"] = password
-            };
-
-            byte[] bytes = Encoding.UTF8.GetBytes(body.ToString());
-
-            var request = new UnityWebRequest($"{_uri}/login", "POST")
-            {
-                uploadHandler = new UploadHandlerRaw(bytes),
-                downloadHandler = new DownloadHandlerBuffer()
-            };
-
-            request.SetRequestHeader("Content-Type", "application/json");
-
-            try
-            {
-                await request.SendWebRequest().WithCancellation(ct);
-            }
-            catch (OperationCanceledException)
-            {
-                Debug.Log("Login cancelled");
-                return false;
-            }
-
-            if (request.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError($"Login error: {request.error}");
-                return false;
-            }
-
-            JObject response = JObject.Parse(request.downloadHandler.text);
-            _token = response["token"]?.ToString();
-
-            if (string.IsNullOrEmpty(_token))
-                return false;
-
-            Debug.Log($"Logged in: {_token}");
-            return true;
-        }
-
-        public async UniTask<bool> Save(JObject gameData, CancellationToken ct = default)
-        {
-            if (string.IsNullOrEmpty(_token))
-                return false;
-
-            var body = new JObject
+            JObject body = new()
             {
                 ["data"] = gameData.ToString()
             };
-
+            
             byte[] bytes = Encoding.UTF8.GetBytes(body.ToString());
 
-            var request = new UnityWebRequest($"{_uri}/game/save", "POST")
+            var request = new UnityWebRequest($"{_uri}/save?version={gameData["version"]}", UnityWebRequest.kHttpVerbPUT)
             {
                 uploadHandler = new UploadHandlerRaw(bytes),
                 downloadHandler = new DownloadHandlerBuffer()
             };
-
+            
             request.SetRequestHeader("Content-Type", "application/json");
-            request.SetRequestHeader("Authorization", $"Bearer {_token}");
             
             try
             {
@@ -134,27 +41,23 @@ namespace Game.Scripts.Domain.App
             catch (OperationCanceledException)
             {
                 Debug.Log("Save cancelled");
-                return false;
+                return (false, -1);
             }
 
             if (request.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError($"Save error: {request.error}");
-                return false;
+                return (false, -1);
             }
             
             Debug.Log($"Save Completed {gameData}");
-            return true;
+            return (true, gameData["version"].Value<int>());
         }
 
-        public async UniTask<(bool, JObject)> Load(CancellationToken ct = default)
+        public async UniTask<(bool, JObject)> Load(int version, CancellationToken ct = default)
         {
-            if (string.IsNullOrEmpty(_token))
-                return (false, null);
-
-            var request = UnityWebRequest.Get($"{_uri}/game/load");
+            var request = UnityWebRequest.Get($"{_uri}/load?version={version}");
             request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Authorization", $"Bearer {_token}");
 
             try
             {
