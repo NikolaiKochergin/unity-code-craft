@@ -2,7 +2,7 @@
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
-namespace Game.Scripts.Domain.App
+namespace Game.Repository
 {
     public interface IRepository
     {

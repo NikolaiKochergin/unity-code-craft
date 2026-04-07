@@ -1,27 +1,33 @@
 ﻿using System;
 using System.Text;
 using System.Threading;
+using App.Encryption;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Networking;
+using Zenject;
 
-namespace Game.Scripts.Domain.App
+namespace Game.Repository
 {
     public class RemoteRepository : IRepository
     {
         [ShowInInspector, ReadOnly]
         private readonly string _uri;
+        private readonly IEncryptor _encryptor;
 
-        public RemoteRepository(string uri) => 
+        public RemoteRepository(string uri, [InjectOptional] IEncryptor encryptor = null)
+        {
+            _encryptor = encryptor;
             _uri = uri;
+        }
 
         public async UniTask<(bool, int)> Save(JObject gameData, CancellationToken ct = default)
         {
             JObject body = new()
             {
-                ["data"] = gameData.ToString()
+                ["data"] = _encryptor != null ? _encryptor.Encrypt(gameData.ToString()) : gameData.ToString()
             };
             
             byte[] bytes = Encoding.UTF8.GetBytes(body.ToString());
@@ -77,6 +83,8 @@ namespace Game.Scripts.Domain.App
 
             var response = JObject.Parse(request.downloadHandler.text);
             string jsonText = response["data"]?.ToString();
+            
+            jsonText = _encryptor?.Decrypt(jsonText);
 
             if (string.IsNullOrEmpty(jsonText))
                 return (false, null);

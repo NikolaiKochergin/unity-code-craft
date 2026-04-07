@@ -1,8 +1,9 @@
 ﻿using System;
+using App.Encryption;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Domain.App
+namespace Game.Repository
 {
     [Serializable]
     public class RepositoryInstaller : Installer
@@ -30,6 +31,12 @@ namespace Game.Scripts.Domain.App
             Container
                 .Decorate<IRepository>()
                 .With<DebugLogRepository>();
+            
+            Container
+                .Bind<IEncryptor>()
+                .To<AesEncryptor>()
+                .WithArguments("asldoo234aSl")
+                .WhenInjectedInto<RemoteRepository>();
         }
 
         private SyncRepository CreateSyncRepository() => new(

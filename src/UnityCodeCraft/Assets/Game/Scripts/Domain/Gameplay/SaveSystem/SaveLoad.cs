@@ -1,6 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
-using Game.Scripts.Domain.App;
+using Game.Repository;
 using Newtonsoft.Json.Linq;
 
 namespace Game.Gameplay

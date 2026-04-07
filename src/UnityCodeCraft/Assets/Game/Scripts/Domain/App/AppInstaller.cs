@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.Domain.App
+namespace Game.Repository
 {
     [CreateAssetMenu(
         fileName = "AppInstaller",

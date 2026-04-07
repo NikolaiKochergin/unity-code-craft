@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace Game.Scripts.Domain.App
+namespace Game.Repository
 {
     public sealed class DebugLogRepository : IRepository
     {
