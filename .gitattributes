@@ -1,0 +1,2 @@
+src/UnityCodeCraft/Assets/Plugins** filter=lfs diff=lfs merge=lfs -text
+src/UnityCodeCraft/Assets/TextMesh** filter=lfs diff=lfs merge=lfs -text
