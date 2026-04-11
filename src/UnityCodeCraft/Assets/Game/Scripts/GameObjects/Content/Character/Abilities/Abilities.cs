@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public class Weapon : MonoBehaviour
+    public class Abilities : MonoBehaviour
     {
         
     }

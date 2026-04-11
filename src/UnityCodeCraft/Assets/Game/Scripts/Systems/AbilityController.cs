@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class AttackController : MonoBehaviour
+    public class AbilityController : MonoBehaviour
     {
         [SerializeField] private GameObject _character;
         
@@ -18,10 +18,10 @@ namespace Game
         private void Update()
         {
             if (Input.GetMouseButton(0))
-                _tossComponent.Toss();
-
-            if (Input.GetMouseButton(1))
                 _pushComponent.Push();
+            
+            if (Input.GetMouseButton(1))
+                _tossComponent.Toss();
         }
     }
 }

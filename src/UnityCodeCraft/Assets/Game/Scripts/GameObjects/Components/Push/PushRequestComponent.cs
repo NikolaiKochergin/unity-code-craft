@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -19,12 +18,19 @@ namespace Game
 
         private IAction _pushAction;
         private ICondition _pushCondition;
-
-        public event Action OnPushed;
+        
+        public void SetAction(IAction action) => _pushAction = action;
+        public void SetCondition(ICondition condition) => _pushCondition = condition;
         
         public void Push()
         {
+            if (_pushRequired && IsExpired && (_pushAction == null || _pushCondition.Evaluate()))
+            {
+                _pushAction?.Invoke();
+                Reset();
+            }
             
+            _pushRequired = false;
         }
     }
 }

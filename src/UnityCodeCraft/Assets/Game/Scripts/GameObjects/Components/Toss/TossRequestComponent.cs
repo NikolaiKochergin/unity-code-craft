@@ -2,9 +2,9 @@
 
 namespace Game
 {
-    public class TossRequestComponent : MonoBehaviour
+    public class TossRequestComponent : CooldownComponent
     {
-        interface IAction
+        public interface IAction
         {
             public void Invoke();
         }
@@ -13,12 +13,24 @@ namespace Game
         {
             bool Evaluate();
         }
+
+        [SerializeField] private bool _tossRequired;
         
-        
+        private IAction _tossAction;
+        private ICondition _tossCondition;
+
+        public void SetAction(IAction action) => _tossAction = action;
+        public void SetCondition(ICondition condition) => _tossCondition = condition;
         
         public void Toss()
         {
+            if (_tossRequired && IsExpired && (_tossAction == null || _tossCondition.Evaluate()))
+            {
+                _tossAction?.Invoke();
+                Reset();
+            }
             
+            _tossRequired = false;
         }
     }
 }
