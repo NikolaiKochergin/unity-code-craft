@@ -20,6 +20,8 @@ namespace Game.Scripts.GameObjects.Content.Trap
             if(!collision.otherCollider.TryGetComponent(out HealthComponent healthComponent))
                 return;
             
+            Debug.Log($"{name} collided with {collision.otherCollider.name}");
+            
             healthComponent.TakeDamage(_damage);
             Destroy(gameObject);
         }
