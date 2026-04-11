@@ -21,14 +21,14 @@ namespace Game
         private MoveRequestComponent _moveComponent;
         private GroundedComponent _groundedComponent;
         private FallingHandleComponent _fallingComponent;
-        private JumpRequestComponent _jumpComponent;
+        private JumpComponent _jumpComponent;
 
         private void Awake()
         {
             _damageComponent = GetComponent<TakeDamageColorComponent>();
             _healthComponent = GetComponentInParent<HealthComponent>();
             _moveComponent = GetComponentInParent<MoveRequestComponent>();
-            _jumpComponent = GetComponentInParent<JumpRequestComponent>();
+            _jumpComponent = GetComponentInParent<JumpComponent>();
             _groundedComponent = GetComponentInParent<GroundedComponent>();
             _fallingComponent = GetComponentInParent<FallingHandleComponent>();
             

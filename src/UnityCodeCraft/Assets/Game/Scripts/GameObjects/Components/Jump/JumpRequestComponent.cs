@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
-    public class JumpRequestComponent : MonoBehaviour
+    public class JumpRequestComponent : CooldownComponent
     {
         public interface IAction
         {
@@ -20,23 +19,18 @@ namespace Game
         private IAction _jumpAction;
         private ICondition _jumpCondition;
 
-        public event Action OnJumped;
-        
         public void SetAction(IAction action) => _jumpAction = action;
         public void SetCondition(ICondition condition) => _jumpCondition = condition;
         
-        public void Jump()
-        {
-            _jumpRequired = true;
-        }
+        public void Jump() => _jumpRequired = true;
 
         private void FixedUpdate()
         {
-            if (_jumpRequired && (_jumpCondition == null || _jumpCondition.Evaluate()))
+            if (_jumpRequired && IsExpired && (_jumpCondition == null || _jumpCondition.Evaluate()))
             {
                 _jumpAction?.Invoke();
-                OnJumped?.Invoke();
-            }
+                Reset();
+            } 
 
             _jumpRequired = false;
         }

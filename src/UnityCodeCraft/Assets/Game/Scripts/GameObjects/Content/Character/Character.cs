@@ -5,13 +5,17 @@ namespace Game
 {
     [RequireComponent(typeof(MoveRequestComponent), typeof(HealthComponent))]
     public class Character : MonoBehaviour,
-        MoveRequestComponent.IAction,
         MoveRequestComponent.ICondition,
-        JumpRequestComponent.IAction,
+        MoveRequestComponent.IAction,
         JumpRequestComponent.ICondition,
+        JumpRequestComponent.IAction,
         DeathHandleComponent.IAction,
-        FallingHandleComponent.IAction
+        FallingHandleComponent.IAction,
+        ITossComponent,
+        IPushComponent
     {
+        [SerializeField] private GameObject _weapon;
+        
         private Rigidbody2D _rigidbody2D;
         
         private HealthComponent _healthComponent;
@@ -50,8 +54,22 @@ namespace Game
             
             _deathHandleComponent = GetComponent<DeathHandleComponent>();
             _deathHandleComponent.SetAction(this);
-            
         }
+        
+        public void Toss()
+        {
+            if (_healthComponent.IsAlive)
+                _weapon.GetComponent<TossRequestComponent>()?.Toss();
+        }
+
+        public void Push()
+        {
+            if (_healthComponent.IsAlive)
+                _weapon.GetComponent<PushRequestComponent>()?.Push();
+        }
+
+        bool MoveRequestComponent.ICondition.Evaluate() =>
+            _healthComponent.IsAlive;
 
         void MoveRequestComponent.IAction.Invoke(Vector2 direction)
         {
@@ -59,15 +77,12 @@ namespace Game
             _moveComponent.Move(new Vector2(Mathf.Abs(direction.x), direction.y));
         }
 
-        bool MoveRequestComponent.ICondition.Evaluate() =>
-            _healthComponent.IsAlive;
-
-        void JumpRequestComponent.IAction.Invoke() => 
-            _jumpComponent.Jump();
-
         bool JumpRequestComponent.ICondition.Evaluate() => 
             _healthComponent.IsAlive &&
             _groundedComponent.IsGrounded;
+
+        void JumpRequestComponent.IAction.Invoke() => 
+            _jumpComponent.Jump();
 
         void DeathHandleComponent.IAction.Invoke() => 
             _rigidbody2D.simulated = false;
