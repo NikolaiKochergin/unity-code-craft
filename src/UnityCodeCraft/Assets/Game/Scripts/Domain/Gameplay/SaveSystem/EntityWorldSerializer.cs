@@ -32,7 +32,7 @@ namespace Game.Gameplay
                     Name = entity.Name,
                     Position = entity.transform.position,
                     Rotation = entity.transform.rotation,
-                    Components = ComponentsData(entity),
+                    Components = SerializeComponents(entity),
                 };
             }
             return result;
@@ -40,34 +40,39 @@ namespace Game.Gameplay
 
         public void Deserialize(EntityData[] data)
         {
+            _world.DestroyAll();
+
+            foreach (EntityData entityData in data)
+                _world.Spawn(
+                    entityData.Name,
+                    entityData.Position,
+                    entityData.Rotation,
+                    entityData.Id);
+            
             foreach (EntityData entityData in data)
             {
-                if (_world.TryGet(entityData.Id, out Entity entity))
-                {
-                    entity.transform.position = entityData.Position;
-                    entity.transform.rotation = entityData.Rotation;
-                }
-                else
-                {
-                    _world.Spawn(
-                        entityData.Name, 
-                        entityData.Position, 
-                        entityData.Rotation,
-                        entityData.Id);
-                }
-
-                foreach (IComponentSerializer serializer in _componentSerializers) 
-                    serializer.Deserialize(entity, entityData.Components);
+                if (!_world.TryGet(entityData.Id, out Entity entity)) 
+                    continue;
+                
+                entity.transform.position = entityData.Position;
+                entity.transform.rotation = entityData.Rotation;
+                DeserializeComponents(entity, entityData);
             }
         }
 
-        private JObject ComponentsData(Entity entity)
+        private JObject SerializeComponents(Entity entity)
         {
             JObject componentsData = new();
             foreach (IComponentSerializer serializer in _componentSerializers) 
                 serializer.Serialize(entity, componentsData);
             
             return componentsData;
+        }
+
+        private void DeserializeComponents(Entity entity, EntityData entityData)
+        {
+            foreach (IComponentSerializer serializer in _componentSerializers) 
+                serializer.Deserialize(entity, entityData.Components);
         }
     }
 
