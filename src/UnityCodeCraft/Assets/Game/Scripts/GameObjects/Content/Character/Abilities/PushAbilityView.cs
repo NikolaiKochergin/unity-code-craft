@@ -16,14 +16,11 @@ namespace Game
         private void Awake()
         {
             _pushComponent = GetComponent<PushComponent>();
-
             _pushComponent.OnPush += OnPush;
         }
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() => 
             _pushComponent.OnPush -= OnPush;
-        }
 
         private void OnPush()
         {

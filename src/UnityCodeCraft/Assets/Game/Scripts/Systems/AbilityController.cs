@@ -17,10 +17,10 @@ namespace Game
 
         private void Update()
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
                 _pushComponent.Push();
             
-            if (Input.GetMouseButton(1))
+            if (Input.GetMouseButtonDown(1))
                 _tossComponent.Toss();
         }
     }

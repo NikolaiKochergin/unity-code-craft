@@ -2,8 +2,7 @@
 
 namespace Game
 {
-    public class PushAbility : MonoBehaviour,
-        PushRequestComponent.IAction
+    public class PushAbility : MonoBehaviour, PushRequestComponent.IAction
     {
         private PushRequestComponent _pushRequest;
         private PushComponent _pushAction;

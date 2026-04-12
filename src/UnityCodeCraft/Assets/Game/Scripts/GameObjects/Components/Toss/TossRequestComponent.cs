@@ -22,9 +22,11 @@ namespace Game
         public void SetAction(IAction action) => _tossAction = action;
         public void SetCondition(ICondition condition) => _tossCondition = condition;
         
-        public void Toss()
+        public void Toss() => _tossRequired = true;
+        
+        public void FixedUpdate()
         {
-            if (_tossRequired && IsExpired && (_tossAction == null || _tossCondition.Evaluate()))
+            if (_tossRequired && IsExpired && (_tossCondition == null || _tossCondition.Evaluate()))
             {
                 _tossAction?.Invoke();
                 Reset();

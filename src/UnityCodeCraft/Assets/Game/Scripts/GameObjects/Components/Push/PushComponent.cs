@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace Game
 {
-    public class PushComponent : DelayedAction
+    public class PushComponent : MonoBehaviour
     {
         [SerializeField] private Transform _pushPoint;
-        [SerializeField] private Vector2 _pushForce;
+        [SerializeField] private Vector2 _pushForce = new(10, 2);
         [SerializeField] private ContactFilter2D _contactFilter;
         [SerializeField] private float _angle = 50f;
         [SerializeField] private float _distance = 4.5f;

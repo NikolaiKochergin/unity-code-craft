@@ -11,12 +11,10 @@ namespace Game
         JumpRequestComponent.IAction,
         DeathHandleComponent.IAction,
         FallingHandleComponent.IAction,
-        ITossComponent,
-        IPushComponent
+        IPushComponent,
+        ITossComponent
     {
         [SerializeField] private GameObject _abilities;
-        
-        private Rigidbody2D _rigidbody2D;
         
         private HealthComponent _healthComponent;
         private DeathHandleComponent _deathHandleComponent;
@@ -32,9 +30,10 @@ namespace Game
 
         private void Awake()
         {
-            _rigidbody2D = GetComponent<Rigidbody2D>();
-            
             _healthComponent = GetComponent<HealthComponent>();
+            _deathHandleComponent = GetComponent<DeathHandleComponent>();
+            _deathHandleComponent.SetAction(this);
+            
             _moveRequestComponent = GetComponent<MoveRequestComponent>();
             _moveComponent = GetComponent<MoveTransformComponent>();
             _lookComponent = GetComponent<LookComponent>();
@@ -51,21 +50,18 @@ namespace Game
             _fallingHandleComponent.SetAction(this);
             _jumpRequestComponent.SetAction(this);
             _jumpRequestComponent.SetCondition(this);
-            
-            _deathHandleComponent = GetComponent<DeathHandleComponent>();
-            _deathHandleComponent.SetAction(this);
-        }
-        
-        public void Toss()
-        {
-            if (_healthComponent.IsAlive)
-                _abilities.GetComponent<TossRequestComponent>()?.Toss();
         }
 
         public void Push()
         {
             if (_healthComponent.IsAlive)
-                _abilities.GetComponent<PushRequestComponent>().Push();
+                _abilities.GetComponentInChildren<PushRequestComponent>()?.Push();
+        }
+
+        public void Toss()
+        {
+            if (_healthComponent.IsAlive)
+                _abilities.GetComponentInChildren<TossRequestComponent>()?.Toss();
         }
 
         bool MoveRequestComponent.ICondition.Evaluate() =>
@@ -85,7 +81,7 @@ namespace Game
             _jumpComponent.Jump();
 
         void DeathHandleComponent.IAction.Invoke() => 
-            _rigidbody2D.simulated = false;
+            GetComponent<Rigidbody2D>()!.simulated = false;
         
         void FallingHandleComponent.IAction.Invoke(bool isFalling) =>
             _extraGravityComponent.enabled = isFalling;

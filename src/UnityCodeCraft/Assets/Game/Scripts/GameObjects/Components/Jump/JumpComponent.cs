@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class JumpComponent : DelayedAction
+    public class JumpComponent : MonoBehaviour
     {
         [SerializeField, Min(0)] private float _jumpForce;
         
@@ -15,11 +15,10 @@ namespace Game
         private void Awake() => 
             _rigidbody2D = GetComponent<Rigidbody2D>();
 
-        public void Jump() =>
-            InvokeDelayed(() =>
-            {
-                _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
-                OnJumped?.Invoke();
-            });
+        public void Jump()
+        {
+            _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            OnJumped?.Invoke();
+        }
     }
 }
