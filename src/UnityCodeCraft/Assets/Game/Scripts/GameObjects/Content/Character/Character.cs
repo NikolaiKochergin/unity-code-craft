@@ -14,7 +14,7 @@ namespace Game
         ITossComponent,
         IPushComponent
     {
-        [SerializeField] private GameObject _weapon;
+        [SerializeField] private GameObject _abilities;
         
         private Rigidbody2D _rigidbody2D;
         
@@ -59,13 +59,13 @@ namespace Game
         public void Toss()
         {
             if (_healthComponent.IsAlive)
-                _weapon.GetComponent<TossRequestComponent>()?.Toss();
+                _abilities.GetComponent<TossRequestComponent>()?.Toss();
         }
 
         public void Push()
         {
             if (_healthComponent.IsAlive)
-                _weapon.GetComponent<PushRequestComponent>()?.Push();
+                _abilities.GetComponent<PushRequestComponent>().Push();
         }
 
         bool MoveRequestComponent.ICondition.Evaluate() =>
