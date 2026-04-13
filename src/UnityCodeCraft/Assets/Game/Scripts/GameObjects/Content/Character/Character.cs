@@ -1,4 +1,3 @@
-using Game.Scripts.GameObjects.Components.Death;
 using UnityEngine;
 
 namespace Game
@@ -7,8 +6,6 @@ namespace Game
     public class Character : MonoBehaviour,
         MoveRequestComponent.ICondition,
         MoveRequestComponent.IAction,
-        DeathHandleComponent.IAction,
-        FallingHandleComponent.IAction,
         IPushComponent,
         ITossComponent,
         IJumpComponent
@@ -16,20 +13,13 @@ namespace Game
         [SerializeField] private GameObject _abilities;
         
         private HealthComponent _healthComponent;
-        private DeathHandleComponent _deathHandleComponent;
         private MoveRequestComponent _moveRequestComponent;
         private MoveTransformComponent _moveComponent;
         private LookComponent _lookComponent;
-        
-        private ExtraGravityComponent _extraGravityComponent;
-        private FallingHandleComponent _fallingHandleComponent;
 
         private void Awake()
         {
             _healthComponent = GetComponent<HealthComponent>();
-            _deathHandleComponent = GetComponent<DeathHandleComponent>();
-            
-            _deathHandleComponent.SetAction(this);
             
             _moveRequestComponent = GetComponent<MoveRequestComponent>();
             _moveComponent = GetComponent<MoveTransformComponent>();
@@ -37,11 +27,13 @@ namespace Game
             
             _moveRequestComponent.SetAction(this);
             _moveRequestComponent.SetCondition(this);
-            
-            _extraGravityComponent = GetComponent<ExtraGravityComponent>();
-            _fallingHandleComponent = GetComponent<FallingHandleComponent>();
-            
-            _fallingHandleComponent.SetAction(this);
+
+            _healthComponent.OnDied += OnDied;
+        }
+
+        private void OnDestroy()
+        {
+            _healthComponent.OnDied -= OnDied;
         }
 
         public void Push()
@@ -71,10 +63,7 @@ namespace Game
             _moveComponent.Move(new Vector2(Mathf.Abs(direction.x), direction.y));
         }
 
-        void DeathHandleComponent.IAction.Invoke() => 
+        private void OnDied() => 
             GetComponent<Rigidbody2D>().simulated = false;
-
-        void FallingHandleComponent.IAction.Invoke(bool isFalling) =>
-            _extraGravityComponent.enabled = isFalling;
     }
 }

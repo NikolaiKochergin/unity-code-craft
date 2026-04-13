@@ -1,30 +1,26 @@
-using Game.Scripts.GameObjects.Components.Death;
 using UnityEngine;
 
 namespace Game.Scripts.GameObjects.Content.Trap
 {
-    public class Trap : MonoBehaviour,
-        DeathHandleComponent.IAction
+    public class Trap : MonoBehaviour
     {
         [SerializeField] private int _damage = 1;
         
         private CollisionComponent _collisionComponent;
         private HealthComponent _healthComponent;
-        private DeathHandleComponent _deathHandleComponent;
 
         private void Awake()
         {
             _healthComponent = GetComponent<HealthComponent>();
-            _deathHandleComponent = GetComponent<DeathHandleComponent>();
-            _deathHandleComponent.SetAction(this);
-
             _collisionComponent = GetComponent<CollisionComponent>();
 
             _collisionComponent.OnEntered += OnEntered;
+            _healthComponent.OnDied += OnDied;
         }
 
         private void OnDestroy()
         {
+            _healthComponent.OnDied -= OnDied;
             _collisionComponent.OnEntered -= OnEntered;
         }
 
@@ -37,7 +33,7 @@ namespace Game.Scripts.GameObjects.Content.Trap
             Destroy(gameObject);
         }
 
-        void DeathHandleComponent.IAction.Invoke()
+        private void OnDied()
         {
             if(!_healthComponent.IsAlive)
                 Destroy(gameObject);

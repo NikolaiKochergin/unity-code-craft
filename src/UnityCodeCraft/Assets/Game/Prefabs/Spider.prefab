@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 5858735678826086515}
   - component: {fileID: 1098382824034308551}
   - component: {fileID: 6270974679682140044}
-  - component: {fileID: 5138776946006318950}
   m_Layer: 8
   m_Name: GameObject
   m_TagString: Untagged
@@ -220,18 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd8ed7bbf274eea99360b8b879f3cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.LookComponent
---- !u!114 &5138776946006318950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473927760801157524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5af2ed9a6da27cb4d8364108e544aa43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Components.Death.DeathHandleComponent
 --- !u!1 &802556461432274881
 GameObject:
   m_ObjectHideFlags: 0

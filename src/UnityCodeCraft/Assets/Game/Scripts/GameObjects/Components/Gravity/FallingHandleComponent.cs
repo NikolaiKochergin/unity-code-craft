@@ -3,18 +3,14 @@ using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(ExtraGravityComponent), typeof(Rigidbody2D))]
+    [RequireComponent(typeof(ExtraGravityComponent))]
     public class FallingHandleComponent : MonoBehaviour
     {
-        public interface IAction
-        {
-            void Invoke(bool isFalling);
-        }
-        
         [SerializeField, Min(0)] private float _velocityCheckDelta = 0.01f;
         
         private Rigidbody2D _rigidbody;
-        private IAction _fallingAction;
+        private ExtraGravityComponent _extraGravityComponent;
+        
         private bool _isFalling;
 
         public bool IsFalling
@@ -26,19 +22,22 @@ namespace Game
                     return;
                 
                 _isFalling = value;
-                _fallingAction?.Invoke(value);
                 OnFalling?.Invoke(value);
             }
         }
         
         public event Action<bool> OnFalling;
 
-        private void Awake() => 
+        private void Awake()
+        {
             _rigidbody = GetComponent<Rigidbody2D>();
+            _extraGravityComponent = GetComponent<ExtraGravityComponent>();
+        }
 
-        private void FixedUpdate() => 
+        private void FixedUpdate()
+        {
             IsFalling = _rigidbody && _rigidbody.linearVelocityY < -_velocityCheckDelta;
-        
-        public void SetAction(IAction action) => _fallingAction = action;
+            _extraGravityComponent.enabled = IsFalling;
+        }
     }
 }

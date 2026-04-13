@@ -42637,7 +42637,7 @@ Tilemap:
       - {fileID: 21300000, guid: 67222f212dca84fa9958ecaa42ab7518, type: 3}
       - {fileID: 21300000, guid: 03e0cf4cb8ed84b25974b0816cc9ad3d, type: 3}
       - {fileID: 21300000, guid: dbe263ca7515249ec9a566aa5e2234f5, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 39, y: -3, z: 0}
@@ -43396,7 +43396,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spider
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5138776946006318950, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -43508,18 +43509,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd8ed7bbf274eea99360b8b879f3cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.LookComponent
---- !u!114 &4915403210777931135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118249106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5af2ed9a6da27cb4d8364108e544aa43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Components.Death.DeathComponent
 --- !u!114 &4915403210777931139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43628,9 +43617,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3322474405303096178, guid: 1e3c3aa10ab4848f38169cd5bcaec303, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4915403210777931134}
-    - targetCorrespondingSourceObject: {fileID: 3322474405303096178, guid: 1e3c3aa10ab4848f38169cd5bcaec303, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4915403210777931135}
     - targetCorrespondingSourceObject: {fileID: 3661016561165312903, guid: 1e3c3aa10ab4848f38169cd5bcaec303, type: 3}
       insertIndex: -1
       addedObject: {fileID: 96821230}
