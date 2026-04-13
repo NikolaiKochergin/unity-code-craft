@@ -7,12 +7,11 @@ namespace Game
     public class Character : MonoBehaviour,
         MoveRequestComponent.ICondition,
         MoveRequestComponent.IAction,
-        JumpRequestComponent.ICondition,
-        JumpRequestComponent.IAction,
         DeathHandleComponent.IAction,
         FallingHandleComponent.IAction,
         IPushComponent,
-        ITossComponent
+        ITossComponent,
+        IJumpComponent
     {
         [SerializeField] private GameObject _abilities;
         
@@ -22,9 +21,6 @@ namespace Game
         private MoveTransformComponent _moveComponent;
         private LookComponent _lookComponent;
         
-        private JumpRequestComponent _jumpRequestComponent;
-        private JumpComponent _jumpComponent;
-        private GroundedComponent _groundedComponent;
         private ExtraGravityComponent _extraGravityComponent;
         private FallingHandleComponent _fallingHandleComponent;
 
@@ -32,6 +28,7 @@ namespace Game
         {
             _healthComponent = GetComponent<HealthComponent>();
             _deathHandleComponent = GetComponent<DeathHandleComponent>();
+            
             _deathHandleComponent.SetAction(this);
             
             _moveRequestComponent = GetComponent<MoveRequestComponent>();
@@ -41,27 +38,28 @@ namespace Game
             _moveRequestComponent.SetAction(this);
             _moveRequestComponent.SetCondition(this);
             
-            _jumpRequestComponent = GetComponent<JumpRequestComponent>();
-            _jumpComponent = GetComponent<JumpComponent>();
-            _groundedComponent = GetComponent<GroundedComponent>();
             _extraGravityComponent = GetComponent<ExtraGravityComponent>();
             _fallingHandleComponent = GetComponent<FallingHandleComponent>();
             
             _fallingHandleComponent.SetAction(this);
-            _jumpRequestComponent.SetAction(this);
-            _jumpRequestComponent.SetCondition(this);
         }
 
         public void Push()
         {
             if (_healthComponent.IsAlive)
-                _abilities.GetComponentInChildren<PushRequestComponent>()?.Push();
+                _abilities.GetComponentInChildren<PushAbility>()?.Use();
         }
 
         public void Toss()
         {
             if (_healthComponent.IsAlive)
-                _abilities.GetComponentInChildren<TossRequestComponent>()?.Toss();
+                _abilities.GetComponentInChildren<TossAbility>()?.Use();
+        }
+
+        public void Jump()
+        {
+            if (_healthComponent.IsAlive)
+                _abilities.GetComponentInChildren<JumpAbility>()?.Use();
         }
 
         bool MoveRequestComponent.ICondition.Evaluate() =>
@@ -72,13 +70,6 @@ namespace Game
             _lookComponent.Look(direction.x);
             _moveComponent.Move(new Vector2(Mathf.Abs(direction.x), direction.y));
         }
-
-        bool JumpRequestComponent.ICondition.Evaluate() => 
-            _healthComponent.IsAlive &&
-            _groundedComponent.IsGrounded;
-
-        void JumpRequestComponent.IAction.Invoke() => 
-            _jumpComponent.Jump();
 
         void DeathHandleComponent.IAction.Invoke() => 
             GetComponent<Rigidbody2D>().simulated = false;

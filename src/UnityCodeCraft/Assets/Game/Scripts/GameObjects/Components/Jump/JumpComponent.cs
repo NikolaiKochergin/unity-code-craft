@@ -1,24 +1,17 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(Rigidbody2D))]
     public class JumpComponent : MonoBehaviour
     {
         [SerializeField, Min(0)] private float _jumpForce;
         
         private Rigidbody2D _rigidbody2D;
-        
-        public event Action OnJumped;
 
         private void Awake() => 
-            _rigidbody2D = GetComponent<Rigidbody2D>();
+            _rigidbody2D = GetComponentInParent<Rigidbody2D>();
 
-        public void Jump()
-        {
+        public void Jump() => 
             _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
-            OnJumped?.Invoke();
-        }
     }
 }

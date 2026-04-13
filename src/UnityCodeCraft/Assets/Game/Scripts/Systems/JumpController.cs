@@ -6,10 +6,10 @@ namespace Game.Scripts.Systems
     {
         [SerializeField] private GameObject _character;
         
-        private JumpRequestComponent _jump;
+        private IJumpComponent _jump;
 
         private void Awake() => 
-            _jump = _character.GetComponent<JumpRequestComponent>();
+            _jump = _character.GetComponent<IJumpComponent>();
 
         private void Update() => 
             HandleKeyboard();

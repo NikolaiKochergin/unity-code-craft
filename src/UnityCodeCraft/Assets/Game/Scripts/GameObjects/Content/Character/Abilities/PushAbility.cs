@@ -5,10 +5,10 @@ using UnityEngine;
 namespace Game
 {
     public class PushAbility : MonoBehaviour,
-        PushRequestComponent.ICondition,
-        PushRequestComponent.IAction
+        AbilityRequestComponent.ICondition,
+        AbilityRequestComponent.IAction
     {
-        private PushRequestComponent _pushRequest;
+        private AbilityRequestComponent _pushRequest;
         private ForceComponent _force;
         private ITargetDetector _targetDetector;
         private DelayComponent _delay;
@@ -18,7 +18,7 @@ namespace Game
 
         private void Awake()
         {
-            _pushRequest = GetComponent<PushRequestComponent>();
+            _pushRequest = GetComponent<AbilityRequestComponent>();
             _force = GetComponent<ForceComponent>();
             _targetDetector = GetComponent<ArcTargetDetectorComponent>();
             _delay = GetComponent<DelayComponent>();
@@ -27,11 +27,14 @@ namespace Game
             _pushRequest.SetCondition(this);
             _pushRequest.SetAction(this);
         }
-        
-        bool PushRequestComponent.ICondition.Evaluate() => 
+
+        public void Use() => 
+            _pushRequest?.Require();
+
+        bool AbilityRequestComponent.ICondition.Evaluate() => 
             _cooldown.IsExpired;
 
-        void PushRequestComponent.IAction.Invoke()
+        void AbilityRequestComponent.IAction.Invoke()
         {
             _delay.DelayedInvoke(PushPossibleTargets);
             _cooldown.Reset();

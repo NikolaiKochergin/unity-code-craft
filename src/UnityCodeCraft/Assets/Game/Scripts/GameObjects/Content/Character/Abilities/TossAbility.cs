@@ -5,10 +5,10 @@ using UnityEngine;
 namespace Game
 {
     public class TossAbility : MonoBehaviour,
-        TossRequestComponent.ICondition,
-        TossRequestComponent.IAction
+        AbilityRequestComponent.ICondition,
+        AbilityRequestComponent.IAction
     {
-        private TossRequestComponent _tossRequest;
+        private AbilityRequestComponent _tossRequest;
         private ForceComponent _force;
         private ITargetDetector _targetDetector;
         private DelayComponent _delay;
@@ -18,7 +18,7 @@ namespace Game
 
         private void Awake()
         {
-            _tossRequest = GetComponent<TossRequestComponent>();
+            _tossRequest = GetComponent<AbilityRequestComponent>();
             _force = GetComponent<ForceComponent>();
             _targetDetector = GetComponent<BoxTargetDetector>();
             _delay = GetComponent<DelayComponent>();
@@ -28,17 +28,20 @@ namespace Game
             _tossRequest.SetAction(this);
         }
 
-        bool TossRequestComponent.ICondition.Evaluate() => 
+        public void Use() => 
+            _tossRequest.Require();
+
+        bool AbilityRequestComponent.ICondition.Evaluate() => 
             _cooldown.IsExpired;
 
-        void TossRequestComponent.IAction.Invoke()
+        void AbilityRequestComponent.IAction.Invoke()
         {
-            _delay.DelayedInvoke(PushPossibleTargets);
+            _delay.DelayedInvoke(TossPossibleTargets);
             _cooldown.Reset();
             OnToss?.Invoke();
         }
-        
-        private void PushPossibleTargets()
+
+        private void TossPossibleTargets()
         {
             IReadOnlyList<Transform> targets = _targetDetector.GetTargets();
             Vector2 direction = _targetDetector.Origin.right + _targetDetector.Origin.up;
