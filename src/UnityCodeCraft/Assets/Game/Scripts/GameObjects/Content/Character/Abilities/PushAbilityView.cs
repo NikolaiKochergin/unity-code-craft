@@ -11,11 +11,11 @@ namespace Game
         [SerializeField] private AudioClip _pushAudioClip;
         [SerializeField] private ParticleSystem _pushVFX;
         
-        private PushComponent _pushComponent;
+        private PushAbility _pushComponent;
 
         private void Awake()
         {
-            _pushComponent = GetComponent<PushComponent>();
+            _pushComponent = GetComponent<PushAbility>();
             _pushComponent.OnPush += OnPush;
         }
 

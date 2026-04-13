@@ -37,7 +37,7 @@ namespace Game.Scripts.GameObjects.Content.Spider
             _moveComponent.Move(new Vector2(Mathf.Abs(direction.x), direction.y));
         }
         
-        void DeathHandleComponent.IAction.Invoke() => 
+        void DeathHandleComponent.IAction.Invoke() =>
             GetComponentInChildren<Rigidbody2D>().simulated = false;
     }
 }

@@ -48,13 +48,8 @@ namespace Game.Scripts.GameObjects.Content.Spider
         private void Update() => 
             _animator.SetBool(IsMoving, _moveComponent.IsMoving);
 
-        private void OnHealthChanged(float health)
-        {
-            if(health <= 0)
-                return;
-            
+        private void OnHealthChanged(float health) => 
             _damageComponent.TakeDamage();
-        }
 
         private void OnDied() => 
             _animator.SetTrigger(Death);

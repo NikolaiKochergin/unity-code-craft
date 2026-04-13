@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public class PushRequestComponent : CooldownComponent
+    public class PushRequestComponent : MonoBehaviour
     {
         public interface IAction
         {
@@ -26,11 +26,8 @@ namespace Game
         
         public void FixedUpdate()
         {
-            if (_pushRequired && IsExpired && (_pushCondition == null || _pushCondition.Evaluate()))
-            {
+            if (_pushRequired && (_pushCondition == null || _pushCondition.Evaluate())) 
                 _pushAction?.Invoke();
-                Reset();
-            }
             
             _pushRequired = false;
         }

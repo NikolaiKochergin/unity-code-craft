@@ -83,7 +83,6 @@ namespace Game
         void DeathHandleComponent.IAction.Invoke() => 
             GetComponent<Rigidbody2D>().simulated = false;
 
-
         void FallingHandleComponent.IAction.Invoke(bool isFalling) =>
             _extraGravityComponent.enabled = isFalling;
     }
