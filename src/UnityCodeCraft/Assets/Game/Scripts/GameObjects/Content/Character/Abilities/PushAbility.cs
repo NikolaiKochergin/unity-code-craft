@@ -9,8 +9,8 @@ namespace Game
         PushRequestComponent.IAction
     {
         private PushRequestComponent _pushRequest;
-        private PushComponent _pushAction;
-        private ArcTargetDetectorComponent _targetDetector;
+        private ForceComponent _force;
+        private ITargetDetector _targetDetector;
         private DelayComponent _delay;
         private CooldownComponent _cooldown;
 
@@ -19,11 +19,12 @@ namespace Game
         private void Awake()
         {
             _pushRequest = GetComponent<PushRequestComponent>();
-            _pushAction = GetComponent<PushComponent>();
+            _force = GetComponent<ForceComponent>();
             _targetDetector = GetComponent<ArcTargetDetectorComponent>();
             _delay = GetComponent<DelayComponent>();
             _cooldown = GetComponent<CooldownComponent>();
 
+            _pushRequest.SetCondition(this);
             _pushRequest.SetAction(this);
         }
         
@@ -40,10 +41,10 @@ namespace Game
         private void PushPossibleTargets()
         {
             IReadOnlyList<Transform> targets = _targetDetector.GetTargets();
-            Vector2 direction = new(_targetDetector.PushPoint.right.x, _targetDetector.PushPoint.up.y);
+            Vector2 direction = _targetDetector.Origin.right + _targetDetector.Origin.up;
 
             foreach (Transform target in targets)
-                _pushAction.Push(target, direction);
+                _force.ApplyTo(target, direction);
         }
     }
 }

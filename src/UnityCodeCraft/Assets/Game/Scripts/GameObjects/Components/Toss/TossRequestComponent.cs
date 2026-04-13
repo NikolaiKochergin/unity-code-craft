@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public class TossRequestComponent : CooldownComponent
+    public class TossRequestComponent : MonoBehaviour
     {
         public interface IAction
         {
@@ -26,11 +26,8 @@ namespace Game
         
         public void FixedUpdate()
         {
-            if (_tossRequired && IsExpired && (_tossCondition == null || _tossCondition.Evaluate()))
-            {
+            if (_tossRequired && (_tossCondition == null || _tossCondition.Evaluate())) 
                 _tossAction?.Invoke();
-                Reset();
-            }
             
             _tossRequired = false;
         }

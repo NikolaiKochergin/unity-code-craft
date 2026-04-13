@@ -4,7 +4,7 @@ namespace Game
 {
     public class CooldownComponent : MonoBehaviour
     {
-        [SerializeField] private float _cooldown;
+        [SerializeField] private float _cooldown = 0.35f;
 
         private float _currentTime;
         

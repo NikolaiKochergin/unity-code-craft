@@ -6,7 +6,7 @@ namespace Game
 {
     public class DelayComponent : MonoBehaviour
     {
-        [SerializeField, Min(0)] private float _delay;
+        [SerializeField, Min(0)] private float _delay = 0.15f;
         
         private WaitForSeconds _seconds;
         private Coroutine _routine;

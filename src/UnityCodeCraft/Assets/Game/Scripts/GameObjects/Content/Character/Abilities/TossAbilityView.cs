@@ -11,16 +11,16 @@ namespace Game
         [SerializeField] private AudioClip _tossAudioClip;
         [SerializeField] private ParticleSystem _tossVFX;
         
-        private TossComponent _tossComponent;
+        private TossAbility _tossAbility;
 
         private void Awake()
         {
-            _tossComponent = GetComponent<TossComponent>();
-            _tossComponent.OnToss += OnToss;
+            _tossAbility = GetComponent<TossAbility>();
+            _tossAbility.OnToss += OnToss;
         }
 
         private void OnDestroy() => 
-            _tossComponent.OnToss -= OnToss;
+            _tossAbility.OnToss -= OnToss;
 
         private void OnToss()
         {

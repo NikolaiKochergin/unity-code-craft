@@ -3,22 +3,26 @@ using UnityEngine;
 
 namespace Game
 {
-    public class ArcTargetDetectorComponent : MonoBehaviour
+    public class ArcTargetDetectorComponent : MonoBehaviour, ITargetDetector
     {
-        [SerializeField] private Transform _pushPoint;
+        [SerializeField] private Transform _origin;
         [SerializeField] private ContactFilter2D _contactFilter;
         [SerializeField] private float _angle = 50f;
         [SerializeField] private float _distance = 4.5f;
+        [SerializeField, Min(1)] private int _targetLimit = 5;
         
-        private readonly Collider2D[] _results = new Collider2D[5];
         private readonly List<Transform> _targets = new();
+        private Collider2D[] _results;
         
-        public Transform PushPoint => _pushPoint;
+        public Transform Origin => _origin;
+
+        private void Awake() => 
+            _results = new Collider2D[_targetLimit];
 
         public IReadOnlyList<Transform> GetTargets()
         {
             int count = Physics2D.OverlapCircle(
-                _pushPoint.position, 
+                _origin.position, 
                 _distance, 
                 _contactFilter, 
                 _results);
@@ -29,8 +33,8 @@ namespace Game
             {
                 Transform target = _results[i].transform;
                 
-                Vector2 dirToTarget = (target.position - _pushPoint.position).normalized;
-                float angleToTarget = Vector2.Angle(_pushPoint.right, dirToTarget);
+                Vector2 dirToTarget = (target.position - _origin.position).normalized;
+                float angleToTarget = Vector2.Angle(_origin.right, dirToTarget);
                 
                 if(angleToTarget <= _angle / 2f)
                     _targets.Add(target);
@@ -44,11 +48,14 @@ namespace Game
         
         private void OnDrawGizmos()
         {
+            if(_origin == null)
+                return;
+            
             UnityEditor.Handles.color = _gizmosColor;
 
             Vector3 normal = Vector3.forward;
-            Vector3 origin = _pushPoint.position;
-            Vector3 direction = _pushPoint.right;
+            Vector3 origin = _origin.position;
+            Vector3 direction = _origin.right;
 
             Vector3 startDir = Quaternion.Euler(0, 0, -_angle / 2f) * direction;
             Vector3 dirA = Quaternion.Euler(0, 0, -_angle / 2f) * direction;
