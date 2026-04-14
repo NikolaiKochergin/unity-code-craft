@@ -11,8 +11,8 @@ namespace Game
         {
             Vector2 force = Vector2.Scale(direction, _force);
             
-            if (target.TryGetComponent(out Rigidbody2D rigidBody)) 
-                rigidBody.AddForce(force, _forceMode);
+            if (target.TryGetComponent(out Rigidbody2D rigidbody)) 
+                rigidbody.AddForce(force, _forceMode);
         }
     }
 }
