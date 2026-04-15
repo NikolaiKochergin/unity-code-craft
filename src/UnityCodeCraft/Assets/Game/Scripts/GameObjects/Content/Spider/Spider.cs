@@ -63,6 +63,9 @@ namespace Game.Scripts.GameObjects.Content.Spider
 
         private void OnCollisionEntered(Collision2D target)
         {
+            if(target.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                return;
+            
             _damageRequest.Damage(target.gameObject);
             _pushRequest.Require(target.gameObject);
         }
