@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game
@@ -8,6 +9,7 @@ namespace Game
         [SerializeField]
         private float _maxHealth;
 
+        [ShowInInspector, ReadOnly]
         public float CurrentHealth { get; private set; }
         public bool IsAlive => CurrentHealth > 0;
         public bool IsDied => CurrentHealth <= 0;

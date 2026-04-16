@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Game
 {
-    public class DelayComponent : MonoBehaviour
+    public class DelayComponent : ActionComponent
     {
+        [SerializeField] private ActionComponent _action;
         [SerializeField, Min(0)] private float _delay = 0.15f;
         
         private WaitForSeconds _seconds;
@@ -19,13 +19,13 @@ namespace Game
             if (_routine != null) StopCoroutine(_routine);
         }
 
-        public void DelayedInvoke(Action action) => 
-            _routine = StartCoroutine(DelayRoutine(action));
+        public override void Apply() => 
+            _routine = StartCoroutine(DelayRoutine());
 
-        private IEnumerator DelayRoutine(Action action)
+        private IEnumerator DelayRoutine()
         {
             yield return _seconds;
-            action?.Invoke();
+            _action?.Apply();
         }
     }
 }

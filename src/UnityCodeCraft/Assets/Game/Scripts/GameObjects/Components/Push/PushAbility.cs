@@ -20,7 +20,7 @@ namespace Game
         {
             _pushRequest = GetComponent<AbilityRequestComponent>();
             _force = GetComponent<ForceComponent>();
-            _targetDetector = GetComponent<ArcTargetDetectorComponent>();
+            _targetDetector = GetComponent<BoxTargetDetector>();
             _delay = GetComponent<DelayComponent>();
             _cooldown = GetComponent<CooldownComponent>();
 
@@ -36,7 +36,8 @@ namespace Game
 
         void AbilityRequestComponent.IAction.Invoke()
         {
-            _delay.DelayedInvoke(PushPossibleTargets);
+            // _delay.DelayedInvoke(PushPossibleTargets);
+            PushPossibleTargets();
             _cooldown.Reset();
             OnPush?.Invoke();
         }

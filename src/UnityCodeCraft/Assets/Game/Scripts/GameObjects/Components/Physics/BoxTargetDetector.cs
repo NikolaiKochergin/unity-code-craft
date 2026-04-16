@@ -7,8 +7,8 @@ namespace Game
     {
         [SerializeField] private Transform _origin;
         [SerializeField] private ContactFilter2D _contactFilter;
-        [SerializeField] private float _high = 1.3f;
-        [SerializeField] private float _width = 1.3f;
+        [SerializeField] private Vector2 _size = new(1.3f, 1.3f);
+        [SerializeField] private Vector2 _offset = new(0.65f, 0f);
         [SerializeField, Min(1)] private int _targetLimit = 5;
         
         private readonly List<Transform> _targets = new();
@@ -21,12 +21,11 @@ namespace Game
         
         public IReadOnlyList<Transform> GetTargets()
         {
-            Vector3 center = _origin.position + _origin.right * _width / 2;
-            Vector2 size = new(_width, _high);
+            Vector3 center = (Vector2)_origin.position + _offset;
             
             int count = Physics2D.OverlapBox(
                 center,
-                size,
+                _size,
                 0f,
                 _contactFilter,
                 _results);
@@ -49,10 +48,9 @@ namespace Game
             
             UnityEditor.Handles.color = _gizmosColor;
 
-            Vector3 center = _origin.position + _origin.right * _width / 2;
-            Vector3 size = new(_width, _high);
+            Vector3 center = (Vector2)_origin.position + _offset;
 
-            UnityEditor.Handles.DrawWireCube(center, size);
+            UnityEditor.Handles.DrawWireCube(center, _size);
         }
 #endif
     }

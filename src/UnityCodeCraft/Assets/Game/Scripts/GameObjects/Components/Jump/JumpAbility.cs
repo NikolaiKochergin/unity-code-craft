@@ -7,10 +7,10 @@ namespace Game
         AbilityRequestComponent.ICondition,
         AbilityRequestComponent.IAction
     {
+        [SerializeField] private ActionComponent _jumpComponent;
+        
         private AbilityRequestComponent _jumpRequest;
-        private JumpComponent _jumpComponent;
         private GroundedComponent _groundedComponent;
-        private DelayComponent _delay;
         private CooldownComponent _cooldown;
 
         public event Action OnJumped;
@@ -19,8 +19,6 @@ namespace Game
         {
             _groundedComponent = GetComponentInParent<GroundedComponent>();
             _jumpRequest = GetComponent<AbilityRequestComponent>();
-            _jumpComponent = GetComponent<JumpComponent>();
-            _delay = GetComponent<DelayComponent>();
             _cooldown = GetComponent<CooldownComponent>();
 
             _jumpRequest.SetCondition(this);
@@ -36,7 +34,7 @@ namespace Game
 
         void AbilityRequestComponent.IAction.Invoke()
         {
-            _delay.DelayedInvoke(_jumpComponent.Jump);
+            _jumpComponent.Apply();
             _cooldown.Reset();
             OnJumped?.Invoke();
         }

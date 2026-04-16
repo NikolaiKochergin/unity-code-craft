@@ -36,7 +36,7 @@ namespace Game
 
         void AbilityRequestComponent.IAction.Invoke()
         {
-            _delay.DelayedInvoke(TossPossibleTargets);
+            // _delay.DelayedInvoke(TossPossibleTargets);
             _cooldown.Reset();
             OnToss?.Invoke();
         }
