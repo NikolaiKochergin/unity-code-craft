@@ -11,15 +11,12 @@ GameObject:
   - component: {fileID: 5742867724401082830}
   - component: {fileID: 1948404990201771869}
   - component: {fileID: 813020282347325881}
-  - component: {fileID: 2109331639069877872}
   - component: {fileID: 8548943097207546145}
-  - component: {fileID: 5849251026429733282}
-  - component: {fileID: 700239058720447432}
   - component: {fileID: 8380186513546716137}
   - component: {fileID: 5858735678826086515}
-  - component: {fileID: 1098382824034308551}
-  - component: {fileID: 6270974679682140044}
+  - component: {fileID: 1334917580795041149}
   - component: {fileID: 7281932095858011411}
+  - component: {fileID: 8820421164175644040}
   m_Layer: 8
   m_Name: GameObject
   m_TagString: Untagged
@@ -42,7 +39,7 @@ Transform:
   m_Children:
   - {fileID: 5755018170686827275}
   - {fileID: 283898486638424115}
-  - {fileID: 7126203884703237093}
+  - {fileID: 7118370630537834061}
   m_Father: {fileID: 8956073846474739401}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1948404990201771869
@@ -109,19 +106,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0040880893, y: 0.3745281}
   m_Size: {x: 1.6880507, y: 0.79905957}
   m_Direction: 1
---- !u!114 &2109331639069877872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473927760801157524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44b4c715012943db9fdf26735a9e7876, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveTransformComponent
-  _speed: 1
 --- !u!114 &8548943097207546145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,38 +119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.HealthComponent
   _maxHealth: 1
---- !u!114 &5849251026429733282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473927760801157524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb3cb812805c4510bc0c6c9f3052316e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.WayPointRequestComponent
-  _waypoints:
-  - {fileID: 330482538772977516}
-  - {fileID: 5737562046146701280}
-  _reachDistance: 0.1
---- !u!114 &700239058720447432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473927760801157524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b00b45eba45649d6a3959c4ed9d0e293, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveRequestComponent
-  _moveDirection: {x: 0, y: 0}
-  _moveRequired: 0
-  _moveDuration: 0.1
-  _moveTime: 0
 --- !u!114 &8380186513546716137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.ExtraGravityComponent
   _gravity: -7
---- !u!114 &1098382824034308551
+--- !u!114 &1334917580795041149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,22 +158,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 473927760801157524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00763a3aaaa058b439b08f6765a3adfc, type: 3}
+  m_Script: {fileID: 11500000, guid: c3aa0c08f5134302afd86e198c1f90af, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.FallingHandleComponent
-  _velocityCheckDelta: 0.01
---- !u!114 &6270974679682140044
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473927760801157524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bd8ed7bbf274eea99360b8b879f3cb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.LookComponent
+  m_EditorClassIdentifier: Assembly-CSharp::Game.FallingComponent
+  _extraGravity: {fileID: 5858735678826086515}
 --- !u!114 &7281932095858011411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +174,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16615f4fd9aa496686de7e8755045b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.CollisionComponent
+--- !u!114 &8820421164175644040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473927760801157524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 861e6ed9a50943d0af99629b8399445e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Content.Spider.Spider
+  _moveAbility: {fileID: 4462495050656462287}
+  _pushAbility: {fileID: 1621567962320557774}
 --- !u!1 &802556461432274881
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +213,7 @@ Transform:
   m_GameObject: {fileID: 802556461432274881}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalPosition: {x: 1.62, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -276,6 +230,7 @@ GameObject:
   - component: {fileID: 5755018170686827275}
   - component: {fileID: 2061278704937212490}
   - component: {fileID: 1589362980239119350}
+  - component: {fileID: 7836252747903668573}
   m_Layer: 0
   m_Name: <View>
   m_TagString: Untagged
@@ -347,7 +302,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Content.Spider.SpiderView
   _animator: {fileID: 8580863070391731972}
   _damageComponent: {fileID: 2061278704937212490}
---- !u!1 &5437300173107476161
+  _moveComponent: {fileID: 4462495050656462287}
+  _fallingComponent: {fileID: 1334917580795041149}
+--- !u!114 &7836252747903668573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918590281638522552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bd8ed7bbf274eea99360b8b879f3cb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.LookComponent
+--- !u!1 &1621567962320557774
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -355,72 +324,76 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7126203884703237093}
-  - component: {fileID: 8108921321078015416}
-  - component: {fileID: 347143142162437709}
-  - component: {fileID: 3620237862515888970}
-  m_Layer: 8
-  m_Name: <Push>
+  - component: {fileID: 7118370630537834061}
+  - component: {fileID: 4462495050656462287}
+  - component: {fileID: 6698207975709014271}
+  - component: {fileID: 2112618928429934224}
+  m_Layer: 9
+  m_Name: <Move>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7126203884703237093
+--- !u!4 &7118370630537834061
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5437300173107476161}
+  m_GameObject: {fileID: 1621567962320557774}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 24.04, y: -0.13000011, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5742867724401082830}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8108921321078015416
+--- !u!114 &4462495050656462287
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5437300173107476161}
+  m_GameObject: {fileID: 1621567962320557774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d907997b15c94475aaeb8c434ee836ff, type: 3}
+  m_Script: {fileID: 11500000, guid: b6d29aa6663741d8be47c2a63600dfd9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.PushRequestComponent
-  _required: 0
---- !u!114 &347143142162437709
+  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveAbility
+  _moveRequest: {fileID: 6698207975709014271}
+  _moveComponent: {fileID: 2112618928429934224}
+--- !u!114 &6698207975709014271
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5437300173107476161}
+  m_GameObject: {fileID: 1621567962320557774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36ebb5feb5fa4901a177a6263381ad46, type: 3}
+  m_Script: {fileID: 11500000, guid: b00b45eba45649d6a3959c4ed9d0e293, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.ForceComponent
-  _force: {x: 10, y: 1}
-  _forceMode: 1
---- !u!114 &3620237862515888970
+  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveRequestComponent
+  _moveDirection: {x: 0, y: 0}
+  _moveRequired: 0
+  _moveDuration: 0.1
+  _moveTime: 0
+--- !u!114 &2112618928429934224
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5437300173107476161}
+  m_GameObject: {fileID: 1621567962320557774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f023d19e23664ac39c434978c5e5594c, type: 3}
+  m_Script: {fileID: 11500000, guid: 44b4c715012943db9fdf26735a9e7876, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.CooldownComponent
-  _cooldown: 0.35
+  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveTransformComponent
+  _transform: {fileID: 5742867724401082830}
+  _speed: 1
 --- !u!1 &7844865205063039758
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +492,7 @@ Transform:
   m_GameObject: {fileID: 8708105963922309212}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalPosition: {x: -1.63, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -534,7 +507,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8956073846474739401}
-  - component: {fileID: 4016845799414523817}
   m_Layer: 0
   m_Name: Spider
   m_TagString: Untagged
@@ -560,19 +532,6 @@ Transform:
   - {fileID: 5737562046146701280}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4016845799414523817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9211836127877050331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 861e6ed9a50943d0af99629b8399445e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Content.Spider.Spider
-  _pushAbility: {fileID: 5437300173107476161}
 --- !u!1001 &2657911147315956785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -644,10 +603,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7458919548120637365, guid: f7bc0bf025fb34cb4ac2bd9999e51ce6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5798614052750699878}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7bc0bf025fb34cb4ac2bd9999e51ce6, type: 3}
 --- !u!212 &190856296146001231 stripped
 SpriteRenderer:
@@ -724,23 +680,6 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 7268750522124257336, guid: f7bc0bf025fb34cb4ac2bd9999e51ce6, type: 3}
   m_PrefabInstance: {fileID: 2657911147315956785}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4855350802142925700 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7458919548120637365, guid: f7bc0bf025fb34cb4ac2bd9999e51ce6, type: 3}
-  m_PrefabInstance: {fileID: 2657911147315956785}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5798614052750699878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4855350802142925700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bd8ed7bbf274eea99360b8b879f3cb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.LookComponent
 --- !u!212 &6163774645578355677 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8172041528920793068, guid: f7bc0bf025fb34cb4ac2bd9999e51ce6, type: 3}

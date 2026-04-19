@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Character : MonoBehaviour
+    public class Character : MonoBehaviour, IMoveComponent
     {
         [SerializeField] private HealthComponent _healthComponent;
         [SerializeField] private LookComponent _lookComponent;
@@ -19,6 +19,9 @@ namespace Game
 
         public void Move(Vector2 direction)
         {
+            if(_healthComponent.IsDied)
+                return;
+            
             _moveAbility.Move(direction);
             _lookComponent.Look(direction.x);
         }

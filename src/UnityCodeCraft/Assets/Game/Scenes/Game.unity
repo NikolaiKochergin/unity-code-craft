@@ -1073,7 +1073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8655644000359545328, guid: 72f49d2e77eaa4d26818f3f35aef8a5f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1142,6 +1142,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12ef6009759504b94ab4607cc304f4bc, type: 3}
+--- !u!114 &674908793 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7836252747903668573, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
+  m_PrefabInstance: {fileID: 3870081959806933150}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bd8ed7bbf274eea99360b8b879f3cb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.LookComponent
 --- !u!1 &685511834
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,6 +1402,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &727805976 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5737562046146701280, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
+  m_PrefabInstance: {fileID: 3870081959806933150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &790479397
 GameObject:
   m_ObjectHideFlags: 0
@@ -1546,6 +1562,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3794226191236126334, guid: 12ef6009759504b94ab4607cc304f4bc, type: 3}
   m_PrefabInstance: {fileID: 847944759}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &860768870 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 330482538772977516, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
+  m_PrefabInstance: {fileID: 3870081959806933150}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &957403784 stripped
 Transform:
@@ -2123,6 +2144,133 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 3241670944889348004, guid: 80a831c9d00f24f04b83b56403d7f261, type: 3}
   m_PrefabInstance: {fileID: 3716293364684763535}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1291201409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1291201410}
+  - component: {fileID: 1291201416}
+  - component: {fileID: 1291201415}
+  - component: {fileID: 1291201414}
+  - component: {fileID: 1291201413}
+  - component: {fileID: 1291201412}
+  - component: {fileID: 1291201411}
+  m_Layer: 9
+  m_Name: <Push>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1291201410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291201409}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -67.64, y: -9.45, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1520294963}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1291201411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291201409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87446d656d4b41feb2c2d7e3007e19e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.PushAbilityView
+  _pushAbility: {fileID: 1291201416}
+  _animator: {fileID: 556741857}
+  _audioSource: {fileID: 1176189860}
+  _pushAudioClip: {fileID: 8300000, guid: 3dbd84c2bfae847229cd1013f68c0da7, type: 3}
+  _pushVFX: {fileID: 106079484}
+--- !u!114 &1291201412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291201409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbb145114e82411d9794598b9180c162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.DelayComponent
+  _delay: 0.15
+--- !u!114 &1291201413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291201409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f023d19e23664ac39c434978c5e5594c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.CooldownComponent
+  _cooldown: 0.35
+--- !u!114 &1291201414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291201409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a391dfd670164acf9d5e55d7ca909a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.AbilityRequestComponent
+  _required: 0
+--- !u!114 &1291201415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291201409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ebb5feb5fa4901a177a6263381ad46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.ForceComponent
+  _force: {x: 10, y: 2}
+  _forceMode: 1
+--- !u!114 &1291201416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291201409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675d233bcbda49e1a1ed9419c13567d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.ForceAbility
+  _applyPoint: {fileID: 4915403210777931120}
+  _forceComponent: {fileID: 1291201415}
+  _forceRequest: {fileID: 1291201414}
+  _cooldown: {fileID: 1291201413}
+  _delay:
+    active: 1
+    value: {fileID: 1291201412}
+  _targetDetector: {fileID: 0}
 --- !u!1001 &1321886905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2365,11 +2513,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f8bb7b860a43eda6b722fac68199a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Abilities
-  _targetDetector: {fileID: 0}
-  _pushRequest: {fileID: 0}
-  _force: {fileID: 0}
-  _delay: {fileID: 0}
-  _cooldown: {fileID: 0}
 --- !u!114 &1350587383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2882,6 +3025,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1520294963 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5742867724401082830, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
+  m_PrefabInstance: {fileID: 3870081959806933150}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1520294966 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8820421164175644040, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
+  m_PrefabInstance: {fileID: 3870081959806933150}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 861e6ed9a50943d0af99629b8399445e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Content.Spider.Spider
 --- !u!1 &1521526411
 GameObject:
   m_ObjectHideFlags: 0
@@ -3391,13 +3550,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c907318314f6475a8f51d98c0ff81743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.TossAbility
-  _delay:
-    active: 0
-    value: {fileID: 0}
-  _tossRequest: {fileID: 0}
-  _force: {fileID: 0}
-  _targetDetector: {fileID: 0}
-  _cooldown: {fileID: 0}
 --- !u!1 &1690877720
 GameObject:
   m_ObjectHideFlags: 0
@@ -43571,7 +43723,7 @@ Tilemap:
       - {fileID: 21300000, guid: 67222f212dca84fa9958ecaa42ab7518, type: 3}
       - {fileID: 21300000, guid: 03e0cf4cb8ed84b25974b0816cc9ad3d, type: 3}
       - {fileID: 21300000, guid: dbe263ca7515249ec9a566aa5e2234f5, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 36, y: -3, z: 0}
@@ -43826,7 +43978,7 @@ Tilemap:
       - {fileID: 21300000, guid: 67222f212dca84fa9958ecaa42ab7518, type: 3}
       - {fileID: 21300000, guid: 03e0cf4cb8ed84b25974b0816cc9ad3d, type: 3}
       - {fileID: 21300000, guid: dbe263ca7515249ec9a566aa5e2234f5, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 63, y: 5, z: 0}
@@ -44176,10 +44328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00763a3aaaa058b439b08f6765a3adfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.FallingHandleComponent
-  _rigidbody: {fileID: 0}
-  _extraGravityComponent: {fileID: 0}
-  _velocityCheckDelta: 0.01
-  _isFalling: 0
 --- !u!114 &422449931950469000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44686,10 +44834,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1840973719}
     m_Modifications:
-    - target: {fileID: 5737562046146701280, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.62
-      objectReference: {fileID: 0}
+    - target: {fileID: 8820421164175644040, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
+      propertyPath: _pushAbility
+      value: 
+      objectReference: {fileID: 1291201409}
+    - target: {fileID: 8820421164175644040, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
+      propertyPath: _lookComponent
+      value: 
+      objectReference: {fileID: 674908793}
     - target: {fileID: 8956073846474739401, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 69.84
@@ -44734,16 +44886,39 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spider
       objectReference: {fileID: 0}
-    - target: {fileID: 9211836127877050331, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5138776946006318950, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5742867724401082830, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1291201410}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9211836127877050331, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3870081959806933152}
   m_SourcePrefab: {fileID: 100100000, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
+--- !u!1 &3870081959806933151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9211836127877050331, guid: 0ec997e873f9642f3b6e0d36345da0c0, type: 3}
+  m_PrefabInstance: {fileID: 3870081959806933150}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3870081959806933152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3870081959806933151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb5c655ac1134222b6135fee00acbccf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Content.Spider.SpiderController
+  _spider: {fileID: 1520294966}
+  _waypoints:
+  - {fileID: 860768870}
+  - {fileID: 727805976}
+  _reachDistance: 0.1
 --- !u!4 &4085932541923840477 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4979841302588641904, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
@@ -44993,10 +45168,6 @@ PrefabInstance:
     - target: {fileID: 8655644000359545328, guid: 72f49d2e77eaa4d26818f3f35aef8a5f, type: 3}
       propertyPath: m_Name
       value: Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 8655644000359545328, guid: 72f49d2e77eaa4d26818f3f35aef8a5f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

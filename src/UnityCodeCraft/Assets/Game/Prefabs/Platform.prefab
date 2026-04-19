@@ -11,9 +11,6 @@ GameObject:
   - component: {fileID: 7845036276167105276}
   - component: {fileID: 4998109996826579298}
   - component: {fileID: 9111860641350533513}
-  - component: {fileID: 3813073669904040843}
-  - component: {fileID: 6730394318803715357}
-  - component: {fileID: 3794137368786841633}
   m_Layer: 3
   m_Name: GameObject
   m_TagString: Platform
@@ -35,6 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4197703630263784642}
+  - {fileID: 7745259024208973637}
   m_Father: {fileID: 1736318179580503177}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &4998109996826579298
@@ -110,26 +108,62 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &3813073669904040843
+--- !u!1 &725974124396915951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7745259024208973637}
+  - component: {fileID: 5526469717841051968}
+  - component: {fileID: 516933848601121887}
+  - component: {fileID: 1524343480089796327}
+  - component: {fileID: 3259778305469808281}
+  m_Layer: 9
+  m_Name: <Move>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7745259024208973637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725974124396915951}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7845036276167105276}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5526469717841051968
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240930164425400058}
+  m_GameObject: {fileID: 725974124396915951}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44b4c715012943db9fdf26735a9e7876, type: 3}
+  m_Script: {fileID: 11500000, guid: b6d29aa6663741d8be47c2a63600dfd9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveTransformComponent
-  _speed: 3
---- !u!114 &6730394318803715357
+  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveAbility
+  _moveRequest: {fileID: 516933848601121887}
+  _moveComponent: {fileID: 1524343480089796327}
+--- !u!114 &516933848601121887
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240930164425400058}
+  m_GameObject: {fileID: 725974124396915951}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b00b45eba45649d6a3959c4ed9d0e293, type: 3}
@@ -139,18 +173,33 @@ MonoBehaviour:
   _moveRequired: 0
   _moveDuration: 0.1
   _moveTime: 0
---- !u!114 &3794137368786841633
+--- !u!114 &1524343480089796327
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240930164425400058}
+  m_GameObject: {fileID: 725974124396915951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44b4c715012943db9fdf26735a9e7876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveTransformComponent
+  _transform: {fileID: 7845036276167105276}
+  _speed: 3.5
+--- !u!114 &3259778305469808281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725974124396915951}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb3cb812805c4510bc0c6c9f3052316e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.WayPointRequestComponent
+  m_EditorClassIdentifier: Assembly-CSharp::Game.WayPointComponent
+  _movableAbility: {fileID: 5526469717841051968}
   _waypoints:
   - {fileID: 5434138037557620653}
   - {fileID: 7441270365842623162}
@@ -316,7 +365,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1736318179580503177}
-  - component: {fileID: 1100330939580519048}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -342,15 +390,3 @@ Transform:
   - {fileID: 7441270365842623162}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1100330939580519048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8655644000359545328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e00e95c27e475a546ada5bfcbe065291, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Platform

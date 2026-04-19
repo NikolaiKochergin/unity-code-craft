@@ -12,18 +12,19 @@ namespace Game.Scripts.GameObjects.Content.Spider
         [SerializeField] private Animator _animator;
         [SerializeField] private TakeDamageColorComponent _damageComponent;
         
+        [Space]
+        [SerializeField] private MoveAbility _moveComponent;
+        [SerializeField] private FallingComponent _fallingComponent;
+        
         private HealthComponent _healthComponent;
-        private MoveRequestComponent _moveComponent;
+
         private GroundedComponent _groundedComponent;
-        private FallingComponent _fallingComponent;
         
         private void Awake()
         {
             _damageComponent = GetComponent<TakeDamageColorComponent>();
             _healthComponent = GetComponentInParent<HealthComponent>();
-            _moveComponent = GetComponentInParent<MoveRequestComponent>();
             _groundedComponent = GetComponentInParent<GroundedComponent>();
-            _fallingComponent = GetComponentInParent<FallingComponent>();
             
             _groundedComponent.OnGrounded += OnGrounded;
             _fallingComponent.OnFalling += OnFalling;

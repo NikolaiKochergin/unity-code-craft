@@ -3,12 +3,15 @@
 namespace Game.Scripts.GameObjects.Content.Spider
 {
     public class Spider : MonoBehaviour,
+        IMoveComponent,
         DamageRequestComponent.ICondition,
         DamageRequestComponent.IAction
     {
+        [SerializeField] private MoveAbility _moveAbility;
+        [SerializeField] private LookComponent _lookComponent;
+        
         [SerializeField] private GameObject _pushAbility;
         
-        private LookComponent _lookComponent;
         private HealthComponent _healthComponent;
         private WayPointComponent _wayPointRequestComponent;
         private MoveTransformComponent _moveComponent;
@@ -95,5 +98,14 @@ namespace Game.Scripts.GameObjects.Content.Spider
         // void AttackRequestComponent<Rigidbody2D>.IAction.Invoke(Rigidbody2D rb) => 
         //     _pushComponent.ApplyTo(rb.transform, 
         //         new Vector2((rb.transform.position - transform.position).normalized.x, 0));
+        
+        public void Move(Vector2 direction)
+        {
+            if(_healthComponent.IsDied)
+                return;
+            
+            _moveAbility.Move(direction);
+            _lookComponent.Look(direction.x);
+        }
     }
 }
