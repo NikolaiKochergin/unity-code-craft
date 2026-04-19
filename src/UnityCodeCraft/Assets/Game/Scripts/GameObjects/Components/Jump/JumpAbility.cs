@@ -3,38 +3,32 @@ using UnityEngine;
 
 namespace Game
 {
-    public class JumpAbility : MonoBehaviour,
-        AbilityRequestComponent.ICondition,
-        AbilityRequestComponent.IAction
+    public class JumpAbility : MonoBehaviour
     {
-        [SerializeField] private ActionComponent _jumpComponent;
-        
-        private AbilityRequestComponent _jumpRequest;
-        private GroundedComponent _groundedComponent;
-        private CooldownComponent _cooldown;
+        [SerializeField] private JumpComponent _jumpComponent;
+        [SerializeField] private AbilityRequestComponent _jumpRequest;
+        [SerializeField] private GroundedComponent _groundedComponent;
+        [SerializeField] private CooldownComponent _cooldown;
+        [SerializeField] private Optional<DelayComponent> _delay;
 
         public event Action OnJumped;
         
         private void Awake()
         {
-            _groundedComponent = GetComponentInParent<GroundedComponent>();
-            _jumpRequest = GetComponent<AbilityRequestComponent>();
-            _cooldown = GetComponent<CooldownComponent>();
-
-            _jumpRequest.SetCondition(this);
-            _jumpRequest.SetAction(this);
+            _jumpRequest.SetCondition(() => _cooldown.IsExpired && _groundedComponent.IsGrounded);
+            _jumpRequest.SetAction(JumpInvoke);
         }
 
-        public void Use() => 
-            _jumpRequest?.Require();
-        
-        bool AbilityRequestComponent.ICondition.Evaluate() => 
-            _cooldown.IsExpired &&
-            _groundedComponent.IsGrounded;
+        public void Jump() => 
+            _jumpRequest.Require();
 
-        void AbilityRequestComponent.IAction.Invoke()
+        private void JumpInvoke()
         {
-            _jumpComponent.Apply();
+            if(_delay)
+                _delay.Value.DelayedInvoke( _jumpComponent.Jump);
+            else
+                _jumpComponent.Jump();
+            
             _cooldown.Reset();
             OnJumped?.Invoke();
         }

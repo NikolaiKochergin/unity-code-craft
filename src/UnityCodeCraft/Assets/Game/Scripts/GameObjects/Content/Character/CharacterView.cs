@@ -9,29 +9,22 @@ namespace Game
         private static readonly int Jump = Animator.StringToHash("Jump");
         private static readonly int Death = Animator.StringToHash("Death");
         private static readonly int IsFalling = Animator.StringToHash("IsFalling");
-
-        [SerializeField] private JumpAbility _jumpComponent;
         
+        [SerializeField] private TakeDamageColorComponent _damageComponent;
         [SerializeField] private Animator _animator;
         [SerializeField] private AudioSource _audioSource;
-        
         [SerializeField] private AudioClip _takeDamageSound;
         [SerializeField] private AudioClip _jumpSound;
         
-        private TakeDamageColorComponent _damageComponent;
-        private HealthComponent _healthComponent;
-        private MoveRequestComponent _moveComponent;
-        private GroundedComponent _groundedComponent;
-        private FallingHandleComponent _fallingComponent;
+        [Space]
+        [SerializeField] private HealthComponent _healthComponent;
+        [SerializeField] private JumpAbility _jumpComponent;
+        [SerializeField] private MoveAbility _moveComponent;
+        [SerializeField] private GroundedComponent _groundedComponent;
+        [SerializeField] private FallingComponent _fallingComponent;
 
         private void Awake()
         {
-            _damageComponent = GetComponent<TakeDamageColorComponent>();
-            _healthComponent = GetComponentInParent<HealthComponent>();
-            _moveComponent = GetComponentInParent<MoveRequestComponent>();
-            _groundedComponent = GetComponentInParent<GroundedComponent>();
-            _fallingComponent = GetComponentInParent<FallingHandleComponent>();
-            
             _jumpComponent.OnJumped += OnJumped;
             _groundedComponent.OnGrounded += OnGrounded;
             _fallingComponent.OnFalling += OnFalling;

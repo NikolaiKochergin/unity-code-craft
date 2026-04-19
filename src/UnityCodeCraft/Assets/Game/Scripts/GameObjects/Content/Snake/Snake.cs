@@ -3,13 +3,11 @@
 namespace Game.Scripts.GameObjects.Content.Snake
 {
     public class Snake : MonoBehaviour,
-        MoveRequestComponent.ICondition,
-        MoveRequestComponent.IAction,
         DamageRequestComponent.ICondition,
         DamageRequestComponent.IAction
     {
         [SerializeField] private GameObject _target;
-        [SerializeField] private TossAbility _tossAbility;
+        // [SerializeField] private TossAbility _tossAbility;
         [SerializeField] private GameObject _damage;
         
         private HealthComponent _healthComponent;
@@ -30,8 +28,8 @@ namespace Game.Scripts.GameObjects.Content.Snake
             _moveComponent = GetComponent<MoveTransformComponent>();
             _lookComponent = GetComponent<LookComponent>();
             
-            _moveRequestComponent.SetAction(this);
-            _moveRequestComponent.SetCondition(this);
+            // _moveRequestComponent.SetAction(this);
+            // _moveRequestComponent.SetCondition(this);
 
             _healthComponent.OnDied += OnDied;
 
@@ -64,7 +62,7 @@ namespace Game.Scripts.GameObjects.Content.Snake
         {
             if(col.gameObject.layer != LayerMask.NameToLayer("Character"))
                 return;
-            _tossAbility.Use();
+            // _tossAbility.Use();
             _damageRequest.Damage(col.gameObject);
         }
 
@@ -89,14 +87,14 @@ namespace Game.Scripts.GameObjects.Content.Snake
             _moveRequestComponent.Move(direction);
         }
 
-        bool MoveRequestComponent.ICondition.Evaluate() =>
-            _healthComponent.IsAlive;
-
-        void MoveRequestComponent.IAction.Invoke(Vector2 direction)
-        {
-            _lookComponent.Look(direction.x);
-            _moveComponent.Move(new Vector2(Mathf.Abs(direction.x), direction.y));
-        }
+        // bool MoveRequestComponent.ICondition.Evaluate() =>
+        //     _healthComponent.IsAlive;
+        //
+        // void MoveRequestComponent.IAction.Invoke(Vector2 direction)
+        // {
+        //     _lookComponent.Look(direction.x);
+        //     _moveComponent.Move(new Vector2(Mathf.Abs(direction.x), direction.y));
+        // }
         
         bool DamageRequestComponent.ICondition.Evaluate() => 
             _healthComponent.IsAlive &&

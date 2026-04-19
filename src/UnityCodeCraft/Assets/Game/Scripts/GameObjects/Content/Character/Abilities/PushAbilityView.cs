@@ -6,21 +6,18 @@ namespace Game
     {
         private static readonly int BlowForward = Animator.StringToHash("BlowForward");
         
+        [SerializeField] private ForceAbility _pushAbility;
         [SerializeField] private Animator _animator;
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioClip _pushAudioClip;
         [SerializeField] private ParticleSystem _pushVFX;
         
-        private PushAbility _pushAbility;
 
-        private void Awake()
-        {
-            _pushAbility = GetComponent<PushAbility>();
-            _pushAbility.OnPush += OnPush;
-        }
+        private void Awake() => 
+            _pushAbility.OnApplied += OnPush;
 
         private void OnDestroy() => 
-            _pushAbility.OnPush -= OnPush;
+            _pushAbility.OnApplied -= OnPush;
 
         private void OnPush()
         {

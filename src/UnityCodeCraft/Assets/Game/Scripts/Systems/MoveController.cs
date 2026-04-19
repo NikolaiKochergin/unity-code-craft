@@ -6,10 +6,10 @@ namespace Game.Scripts.Systems
     {
         [SerializeField] private GameObject _character;
         
-        private MoveRequestComponent _move;
+        private Character _moveComponent;
 
         private void Awake() => 
-            _move = _character.GetComponent<MoveRequestComponent>();
+            _moveComponent = _character.GetComponent<Character>();
 
         private void Update() => 
             HandleKeyboard();
@@ -24,7 +24,7 @@ namespace Game.Scripts.Systems
                 direction.x = -1;
 
             if (direction != Vector2.zero)
-                _move?.Move(direction);
+                _moveComponent.Move(direction);
         }
     }
 }

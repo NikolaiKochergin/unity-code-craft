@@ -2,23 +2,13 @@
 
 namespace Game
 {
-    public class WayPointRequestComponent : MonoBehaviour
+    public class WayPointComponent : MonoBehaviour
     {
+        [SerializeField] private MoveRequestComponent _moveRequestComponent;
         [SerializeField] private Transform[] _waypoints;
         [SerializeField, Min(0)] private float _reachDistance = 0.1f;
         
-        private MoveRequestComponent _moveRequestComponent;
-        
         private int _waypointIndex;
-
-        private void Awake() => 
-            _moveRequestComponent = GetComponent<MoveRequestComponent>();
-
-        public void SetCondition(MoveRequestComponent.ICondition condition) => 
-            _moveRequestComponent.SetCondition(condition);
-        
-        public void SetAction(MoveRequestComponent.IAction action) =>
-            _moveRequestComponent.SetAction(action);
 
         private void FixedUpdate()
         {

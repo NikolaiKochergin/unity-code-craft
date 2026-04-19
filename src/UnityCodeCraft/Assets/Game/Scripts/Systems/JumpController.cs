@@ -6,10 +6,10 @@ namespace Game.Scripts.Systems
     {
         [SerializeField] private GameObject _character;
         
-        private IJumpComponent _jump;
+        private Character _jumpComponent;
 
         private void Awake() => 
-            _jump = _character.GetComponent<IJumpComponent>();
+            _jumpComponent = _character.GetComponent<Character>();
 
         private void Update() => 
             HandleKeyboard();
@@ -17,7 +17,7 @@ namespace Game.Scripts.Systems
         private void HandleKeyboard()
         {
             if (Input.GetKeyDown(KeyCode.Space))
-                _jump?.Jump();
+                _jumpComponent.Jump();
         }
     }
 }

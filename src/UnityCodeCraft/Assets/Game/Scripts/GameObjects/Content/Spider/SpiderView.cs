@@ -15,7 +15,7 @@ namespace Game.Scripts.GameObjects.Content.Spider
         private HealthComponent _healthComponent;
         private MoveRequestComponent _moveComponent;
         private GroundedComponent _groundedComponent;
-        private FallingHandleComponent _fallingComponent;
+        private FallingComponent _fallingComponent;
         
         private void Awake()
         {
@@ -23,7 +23,7 @@ namespace Game.Scripts.GameObjects.Content.Spider
             _healthComponent = GetComponentInParent<HealthComponent>();
             _moveComponent = GetComponentInParent<MoveRequestComponent>();
             _groundedComponent = GetComponentInParent<GroundedComponent>();
-            _fallingComponent = GetComponentInParent<FallingHandleComponent>();
+            _fallingComponent = GetComponentInParent<FallingComponent>();
             
             _groundedComponent.OnGrounded += OnGrounded;
             _fallingComponent.OnFalling += OnFalling;

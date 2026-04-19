@@ -2,16 +2,12 @@
 
 namespace Game
 {
-    public class JumpComponent : ActionComponent
+    public class JumpComponent : MonoBehaviour
     {
         [SerializeField, Min(0)] private float _jumpForce;
-        
-        private Rigidbody2D _rigidbody2D;
+        [SerializeField] private Rigidbody2D _rigidbody2D;
 
-        private void Awake() => 
-            _rigidbody2D = GetComponentInParent<Rigidbody2D>();
-
-        public override void Apply() => 
+        public void Jump() => 
             _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
 }

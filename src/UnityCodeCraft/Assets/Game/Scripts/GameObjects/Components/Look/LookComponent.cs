@@ -13,7 +13,7 @@ namespace Game
         public void Look(float direction)
         {
             float angle = direction > 0 ? 0 : 180;
-            this.transform.eulerAngles = new Vector3(0, angle, 0);
+            transform.eulerAngles = new Vector3(0, angle, 0);
         }
     }
 }

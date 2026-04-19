@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class BoxTargetDetector : MonoBehaviour, ITargetDetector
+    public class BoxTargetDetector : TargetDetector
     {
         [SerializeField] private Transform _origin;
         [SerializeField] private ContactFilter2D _contactFilter;
@@ -14,17 +14,13 @@ namespace Game
         private readonly List<Transform> _targets = new();
         private Collider2D[] _results;
         
-        public Transform Origin => _origin;
-        
         private void Awake() => 
             _results = new Collider2D[_targetLimit];
         
-        public IReadOnlyList<Transform> GetTargets()
+        public override IReadOnlyList<Transform> GetTargets()
         {
-            Vector3 center = (Vector2)_origin.position + _offset;
-            
             int count = Physics2D.OverlapBox(
-                center,
+                Center(),
                 _size,
                 0f,
                 _contactFilter,
@@ -37,7 +33,10 @@ namespace Game
             
             return _targets;
         }
-        
+
+        private Vector2 Center() => 
+            (Vector2)_origin.position + (Vector2)(_origin.right * _offset.x) + (Vector2)(_origin.up * _offset.y);
+
 #if UNITY_EDITOR
         [SerializeField] private Color _gizmosColor;
 
@@ -47,10 +46,7 @@ namespace Game
                 return;
             
             UnityEditor.Handles.color = _gizmosColor;
-
-            Vector3 center = (Vector2)_origin.position + _offset;
-
-            UnityEditor.Handles.DrawWireCube(center, _size);
+            UnityEditor.Handles.DrawWireCube(Center(), _size);
         }
 #endif
     }

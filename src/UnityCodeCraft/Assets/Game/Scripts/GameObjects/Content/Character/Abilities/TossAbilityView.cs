@@ -6,21 +6,17 @@ namespace Game
     {
         private static readonly int BlowUp = Animator.StringToHash("BlowUp");
         
+        [SerializeField] private ForceAbility _tossAbility;
         [SerializeField] private Animator _animator;
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioClip _tossAudioClip;
         [SerializeField] private ParticleSystem _tossVFX;
         
-        private TossAbility _tossAbility;
-
-        private void Awake()
-        {
-            _tossAbility = GetComponent<TossAbility>();
-            _tossAbility.OnToss += OnToss;
-        }
+        private void Awake() => 
+            _tossAbility.OnApplied += OnToss;
 
         private void OnDestroy() => 
-            _tossAbility.OnToss -= OnToss;
+            _tossAbility.OnApplied -= OnToss;
 
         private void OnToss()
         {

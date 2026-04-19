@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class ArcTargetDetectorComponent : MonoBehaviour, ITargetDetector
+    public class ArcTargetDetectorComponent : TargetDetector
     {
         [SerializeField] private Transform _origin;
         [SerializeField] private ContactFilter2D _contactFilter;
@@ -14,12 +14,10 @@ namespace Game
         private readonly List<Transform> _targets = new();
         private Collider2D[] _results;
         
-        public Transform Origin => _origin;
-
         private void Awake() => 
             _results = new Collider2D[_targetLimit];
 
-        public IReadOnlyList<Transform> GetTargets()
+        public override IReadOnlyList<Transform> GetTargets()
         {
             int count = Physics2D.OverlapCircle(
                 _origin.position, 

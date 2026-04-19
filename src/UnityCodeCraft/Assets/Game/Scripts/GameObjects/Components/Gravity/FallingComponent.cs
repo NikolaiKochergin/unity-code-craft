@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(Rigidbody2D))]
     public sealed class FallingComponent : MonoBehaviour
     {
         [SerializeField] private ExtraGravityComponent _extraGravity;

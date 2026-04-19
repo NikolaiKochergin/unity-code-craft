@@ -11,7 +11,7 @@ namespace Game.Scripts.GameObjects.Content.Monkey
         [SerializeField] private GroundedComponent _grounded;
         [SerializeField] private CollisionComponent _collision;
         [SerializeField] private DamageComponent _damage;
-        [SerializeField] private PushAbility _pushAbility;
+        // [SerializeField] private PushAbility _pushAbility;
         
         private GameObject _target;
 
@@ -53,7 +53,7 @@ namespace Game.Scripts.GameObjects.Content.Monkey
             if(_target)
                 _look.Look(_target.transform);
             
-            _jumpAbility.Use();
+            _jumpAbility.Jump();
         }
 
         private void OnCollisionEntered(Collision2D col)
@@ -67,8 +67,8 @@ namespace Game.Scripts.GameObjects.Content.Monkey
 
         private void OnGrounded(bool isGrounded)
         {
-            if(isGrounded)
-                _pushAbility.Use();
+            // if(isGrounded)
+            //     _pushAbility.Use();
         }
     }
 }
