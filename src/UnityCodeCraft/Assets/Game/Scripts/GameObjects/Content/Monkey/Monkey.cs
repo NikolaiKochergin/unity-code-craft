@@ -2,44 +2,55 @@
 
 namespace Game.Scripts.GameObjects.Content.Monkey
 {
-    public class Monkey : MonoBehaviour
+    public class Monkey : MonoBehaviour,
+        DamageRequestComponent.ICondition,
+        DamageRequestComponent.IAction
     {
-        [SerializeField] private HealthComponent _health;
+        [SerializeField] private LookComponent _lookComponent;
+        [SerializeField] private ForceAbility _pushAbility;
         [SerializeField] private JumpAbility _jumpAbility;
-        [SerializeField] private LookComponent _look;
-        [SerializeField] private TriggerComponent _characterTrigger;
-        [SerializeField] private GroundedComponent _grounded;
-        [SerializeField] private CollisionComponent _collision;
-        [SerializeField] private DamageComponent _damage;
-        // [SerializeField] private PushAbility _pushAbility;
+        [SerializeField] private GroundedComponent _groundedComponent;
+        [SerializeField] private TriggerComponent _triggerComponent;
+        [SerializeField] private CollisionComponent _collisionComponent;
+        [SerializeField] private DamageRequestComponent _damageRequest;
+        [SerializeField] private DamageComponent _damageComponent;
         
+        private HealthComponent _healthComponent;
         private GameObject _target;
-
+        
         private void Awake()
         {
-            _characterTrigger.OnEntered += OnCharacterEntered;
-            _characterTrigger.OnExited += OnCharacterExited;
-            _collision.OnEntered += OnCollisionEntered;
-            _health.OnDied += OnDead;
-            _grounded.OnGrounded += OnGrounded;
+            _healthComponent = GetComponent<HealthComponent>();
+            
+            _damageRequest.SetCondition(this);
+            _damageRequest.SetAction(this);
+            
+            _healthComponent.OnDied += OnDied;
+            _groundedComponent.OnGrounded += OnGrounded;
+            _triggerComponent.OnEntered += OnCharacterEnter;
+            _triggerComponent.OnExited += OnCharacterExit;
+            _collisionComponent.OnEntered += OnCollisionEntered;
         }
-
+        
         private void OnDestroy()
         {
-            _characterTrigger.OnEntered -= OnCharacterEntered;
-            _characterTrigger.OnExited -= OnCharacterExited;
-            _collision.OnEntered -= OnCollisionEntered;
-            _health.OnDied -= OnDead;
-            _grounded.OnGrounded -= OnGrounded;
+            _healthComponent.OnDied -= OnDied;
+            _groundedComponent.OnGrounded -= OnGrounded;
+            _triggerComponent.OnEntered -= OnCharacterEnter;
+            _triggerComponent.OnExited -= OnCharacterExit;
+            _collisionComponent.OnEntered -= OnCollisionEntered;
         }
 
-        private void OnCharacterEntered(Collider2D col)
+        private void OnCollisionEntered(Collision2D collision) => 
+            _damageRequest.Damage(collision.gameObject);
+
+        private void OnCharacterExit(Collider2D col)
         {
             if(col.gameObject.layer == LayerMask.NameToLayer("Character"))
                 _target = col.gameObject;
         }
 
-        private void OnCharacterExited(Collider2D col)
+        private void OnCharacterEnter(Collider2D col)
         {
             if(col.gameObject.layer == LayerMask.NameToLayer("Character"))
                 _target = null;
@@ -47,28 +58,27 @@ namespace Game.Scripts.GameObjects.Content.Monkey
 
         private void Update()
         {
-            if(_health.IsDied)
+            if(_healthComponent.IsDied)
                 return;
             
-            if(_target)
-                _look.Look(_target.transform);
-            
             _jumpAbility.Jump();
+            if(_target)
+                _lookComponent.Look(_target.transform);
         }
 
-        private void OnCollisionEntered(Collision2D col)
-        {
-            if(col.gameObject.TryGetComponent(out HealthComponent health))
-                _damage.Apply(health);
-        }
-
-        private void OnDead() => 
+        private void OnDied() => 
             GetComponent<Rigidbody2D>().simulated = false;
 
         private void OnGrounded(bool isGrounded)
         {
-            // if(isGrounded)
-            //     _pushAbility.Use();
+            if(_healthComponent.IsAlive)
+                _pushAbility.Apply();
         }
+        
+        bool DamageRequestComponent.ICondition.Evaluate() => 
+            _healthComponent.IsAlive;
+
+        void DamageRequestComponent.IAction.Invoke(HealthComponent health) => 
+            _damageComponent.Apply(health);
     }
 }
