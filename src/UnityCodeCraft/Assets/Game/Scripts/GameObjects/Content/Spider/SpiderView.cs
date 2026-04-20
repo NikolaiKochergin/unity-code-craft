@@ -17,7 +17,6 @@ namespace Game.Scripts.GameObjects.Content.Spider
         [SerializeField] private FallingComponent _fallingComponent;
         
         private HealthComponent _healthComponent;
-
         private GroundedComponent _groundedComponent;
         
         private void Awake()

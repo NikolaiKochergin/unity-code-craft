@@ -6,22 +6,20 @@ namespace Game
     {
         [SerializeField] private GameObject _character;
         
-        private Character _tossComponent;
-        private Character _pushComponent;
+        private Character _attacker;
 
         private void Awake()
         {
-            _tossComponent = _character.GetComponent<Character>();
-            _pushComponent = _character.GetComponent<Character>();
+            _attacker = _character.GetComponent<Character>();
         }
 
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
-                _pushComponent.Push();
+                _attacker.Push();
             
             if (Input.GetMouseButtonDown(1))
-                _tossComponent.Toss();
+                _attacker.Toss();
         }
     }
 }

@@ -31,7 +31,10 @@ namespace Game.Scripts.GameObjects.Content.Spider
                 _waypointIndex = 0;
         }
 
-        private void Attack(Collision2D col) => 
-            _spider.Attack();
+        private void Attack(Collision2D col)
+        {
+            if(col.gameObject.layer == LayerMask.NameToLayer("Character"))
+                _spider.Attack();
+        }
     }
 }
