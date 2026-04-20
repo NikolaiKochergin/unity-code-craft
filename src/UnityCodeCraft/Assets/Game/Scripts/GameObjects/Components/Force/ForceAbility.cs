@@ -11,6 +11,7 @@ namespace Game
         [SerializeField] private AbilityRequestComponent _forceRequest;
         [SerializeField] private CooldownComponent _cooldown;
         [SerializeField] private Optional<DelayComponent> _delay;
+        [SerializeField] private Optional<DamageComponent> _damage;
         [SerializeField] private TargetDetector _targetDetector;
 
         public event Action OnApplied;
@@ -38,6 +39,8 @@ namespace Game
             {
                 Vector2 direction = new((target.position - _applyPoint.position).normalized.x, 1);
                 _forceComponent.ApplyTo(target, direction);
+                if (_damage.Active && target.TryGetComponent(out HealthComponent health))
+                    _damage.Value.Apply(health);
             }
             
             _cooldown.Reset();
