@@ -1820,13 +1820,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1840973719}
     m_Modifications:
+    - target: {fileID: 1933890785491388024, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
+      propertyPath: _force.y
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 4979841302588641904, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 49.91
       objectReference: {fileID: 0}
     - target: {fileID: 4979841302588641904, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.5
+      value: 7.65
       objectReference: {fileID: 0}
     - target: {fileID: 4979841302588641904, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -39700,6 +39704,9 @@ GameObject:
   - component: {fileID: 2096727760}
   - component: {fileID: 2096727759}
   - component: {fileID: 2096727762}
+  - component: {fileID: 2096727764}
+  - component: {fileID: 2096727763}
+  - component: {fileID: 2096727765}
   m_Layer: 6
   m_Name: Lava
   m_TagString: Untagged
@@ -42532,6 +42539,44 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2096727763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096727757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5422a7ec96a64114b5a73ed421fea44a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.LavaView
+  _audioSource: {fileID: 2096727762}
+--- !u!114 &2096727764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096727757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7eec5ec8913416a95f1f139ce335240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Lava
+  _trigger: {fileID: 2096727765}
+--- !u!114 &2096727765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096727757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53bd3481cde748c6a96e2417a23b6532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.TriggerComponent
 --- !u!4 &346548071188616950 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1736318179580503177, guid: 72f49d2e77eaa4d26818f3f35aef8a5f, type: 3}
@@ -42623,7 +42668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4979841302588641904, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.25
+      value: -0.364
       objectReference: {fileID: 0}
     - target: {fileID: 4979841302588641904, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -42656,10 +42701,6 @@ PrefabInstance:
     - target: {fileID: 4979841302588641904, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7321891268234170333, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
-      propertyPath: _force.y
-      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8595837930061912479, guid: b12d48f7b934943239d57d70cddd96e7, type: 3}
       propertyPath: m_Name
