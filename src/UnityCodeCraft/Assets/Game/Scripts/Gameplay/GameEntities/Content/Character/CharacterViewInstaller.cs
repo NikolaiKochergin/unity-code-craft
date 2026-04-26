@@ -8,6 +8,7 @@ namespace Game.Gameplay
     {
         private static readonly int TakeDamage = Animator.StringToHash("TakeDamage");
         private static readonly int Death = Animator.StringToHash("Death");
+        private static readonly int IsMoving = Animator.StringToHash("IsMoving");
         
         [SerializeField] private Animator _animator;
 
@@ -28,6 +29,10 @@ namespace Game.Gameplay
                 .GetValue(GameEntityAPI.TakeDamageCommand)
                 .Subscribe(_ => _animator.SetTrigger(TakeDamage))
                 .AddTo(_disposables);
+
+            // entity
+            //     .WhenTick(_ => _animator.SetBool(IsMoving, entity))
+            //     .AddTo(_disposables);
         }
     }
 }
