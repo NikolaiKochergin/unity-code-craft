@@ -12,6 +12,7 @@ namespace Game
         [SerializeField] private Vector2 _force;
         [SerializeField, Min(0)] private float _delay;
         [SerializeField, Min(0)] private float _cooldown;
+        [SerializeField, Min(0)] private float _damage;
         
         private Func<bool> _condition;
         private float _currentTime;
@@ -42,16 +43,28 @@ namespace Game
 
             foreach (GameObject target in targets)
             {
-                if (!target.TryGetComponent(out Rigidbody2D rigidbody)) 
-                    continue;
-                
-                Vector2 force = new(
-                    target.transform.position.x - transform.position.x < 0 ? -_force.x : _force.x,
-                    _force.y);
-
-                rigidbody.AddForce(force, ForceMode2D.Impulse);
+                Push(target);
+                Damage(target);
             }
             OnFire?.Invoke();
+        }
+
+        private void Push(GameObject target)
+        {
+            if (!target.TryGetComponent(out Rigidbody2D rigidbody)) 
+                return;
+                
+            Vector2 force = new(
+                target.transform.position.x < transform.position.x  ? -_force.x : _force.x,
+                _force.y);
+
+            rigidbody.AddForce(force, ForceMode2D.Impulse);
+        }
+
+        private void Damage(GameObject target)
+        {
+            if(_damage > 0 && target.TryGetComponent(out HealthComponent health))
+                health.TakeDamage(_damage);
         }
     }
 }

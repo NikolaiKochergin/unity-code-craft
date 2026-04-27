@@ -8,7 +8,6 @@ namespace Game
         private static readonly int IsGrounded = Animator.StringToHash("IsGrounded");
         private static readonly int Jump = Animator.StringToHash("Jump");
         private static readonly int Death = Animator.StringToHash("Death");
-        private static readonly int IsFalling = Animator.StringToHash("IsFalling");
         
         private static readonly int BlowForward = Animator.StringToHash("BlowForward");
         private static readonly int BlowUp = Animator.StringToHash("BlowUp");
@@ -65,9 +64,6 @@ namespace Game
 
         private void OnGrounded(bool isGrounded) => 
             _animator.SetBool(IsGrounded, isGrounded);
-
-        private void OnFalling(bool isFalling) => 
-            _animator.SetBool(IsFalling, isFalling);
 
         private void OnMove(bool isMoving) => 
             _animator.SetBool(IsMoving, isMoving);
