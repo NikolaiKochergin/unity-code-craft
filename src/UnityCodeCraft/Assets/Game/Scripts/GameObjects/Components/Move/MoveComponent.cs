@@ -9,10 +9,10 @@ namespace Game
         [SerializeField] private Vector2 _moveDirection;
         [SerializeField] private bool _require;
         [SerializeField] private float _moveDuration = 0.1f;
-        [SerializeField] private float _moveTime;
         
         private MoveTransformComponent _moveTransformComponent;
         
+        private float _moveTime;
         private Func<bool> _condition;
 
         public bool IsMoving => Time.time <= _moveTime;
