@@ -1,9 +1,61 @@
-﻿using UnityEngine;
+﻿using System;
+using Unity.VisualScripting;
+using UnityEngine;
 
 namespace Game.Scripts.GameObjects.Content.Spider
 {
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(HealthComponent))]
+    [RequireComponent(typeof(GroundedComponent))]
+    [RequireComponent(typeof(ExtraGravityComponent))]
+    [RequireComponent(typeof(WaypointMoveComponent))]
+    [RequireComponent(typeof(CollisionComponent))]
     public class Spider : MonoBehaviour
     {
+        [SerializeField] private GameObject _pushAttack;
         
+        private Rigidbody2D _rigidbody;
+        private HealthComponent _healthComponent;
+        private GroundedComponent _groundedComponent;
+        private ExtraGravityComponent _extraGravityComponent;
+        private WaypointMoveComponent _waypointMoveComponent;
+        private FireComponent _pushComponent;
+        private CollisionComponent _collisionComponent;
+
+        private void Awake()
+        {
+            _rigidbody = GetComponent<Rigidbody2D>();
+            _healthComponent = GetComponent<HealthComponent>();
+            _groundedComponent = GetComponent<GroundedComponent>();
+            _extraGravityComponent = GetComponent<ExtraGravityComponent>();
+            _waypointMoveComponent = GetComponent<WaypointMoveComponent>();
+            _collisionComponent = GetComponent<CollisionComponent>();
+            _pushComponent = _pushAttack.GetComponent<FireComponent>();
+            
+            _waypointMoveComponent.SetCondition(() => _healthComponent.IsAlive);
+            _pushComponent.SetCondition(() => _healthComponent.IsAlive &&
+                                              _groundedComponent.IsGrounded);
+
+            _healthComponent.OnDied += OnDied;
+            _collisionComponent.OnEntered += OnCollisionEntered;
+        }
+
+        private void OnDestroy()
+        {
+            _healthComponent.OnDied -= OnDied;
+            _collisionComponent.OnEntered -= OnCollisionEntered;
+        }
+        
+        private void Update() => 
+            _extraGravityComponent.enabled = _rigidbody.linearVelocityY < 0;
+
+        private void OnCollisionEntered(Collision2D col)
+        {
+            if (col.gameObject.CompareTag(GameObjectTags.Character))
+                _pushComponent.Fire();
+        }
+
+        private void OnDied() => 
+            _rigidbody.simulated = false;
     }
 }
