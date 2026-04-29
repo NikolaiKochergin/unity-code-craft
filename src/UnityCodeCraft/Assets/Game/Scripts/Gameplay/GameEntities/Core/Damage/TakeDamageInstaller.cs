@@ -2,7 +2,7 @@
 using Atomic.Elements;
 using Atomic.Entities;
 
-namespace Game.Gameplay.Core.Damage
+namespace Game.Gameplay
 {
     [Serializable]
     public sealed class TakeDamageInstaller : IGameEntityInstaller

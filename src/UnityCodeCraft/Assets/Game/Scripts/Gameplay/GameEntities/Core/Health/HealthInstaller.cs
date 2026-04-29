@@ -15,7 +15,7 @@ namespace Game.Gameplay
         
         public void Install(IGameEntity entity)
         {
-            ReactiveVariable<int> currentHealth = new ReactiveVariable<int>(_maxHealth);
+            ReactiveVariable<int> currentHealth = new(_maxHealth);
             entity.AddValue(GameEntityAPI.CurrentHealth, currentHealth);
             entity.AddValue(GameEntityAPI.MaxHealth, _maxHealth);
 

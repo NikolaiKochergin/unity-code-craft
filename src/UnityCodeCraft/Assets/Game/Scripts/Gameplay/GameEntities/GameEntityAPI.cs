@@ -15,6 +15,9 @@ namespace Game.Gameplay
         public static ValueKey<IGameEntity, Event> DeathEvent = new(nameof(DeathEvent));
         public static ValueKey<IGameEntity, Animator> Animator = new(nameof(Animator));
         public static ValueKey<IGameEntity, Command<int>> TakeDamageCommand = new(nameof(TakeDamageCommand));
-        public static ValueKey<IGameEntity, IVariable<Vector3>> Position = new(nameof(Position));
+        public static ValueKey<IGameEntity, ICommand<MoveArgs>> MoveCommand = new(nameof(MoveCommand));
+        public static ValueKey<IGameEntity, IRequest<Vector3>> MoveRequest { get; set; }
+        
+        public static ValueKey<ICooldown> MoveTime = new(nameof(MoveTime));
     }
 }

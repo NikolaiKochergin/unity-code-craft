@@ -30,9 +30,9 @@ namespace Game.Gameplay
                 .Subscribe(_ => _animator.SetTrigger(TakeDamage))
                 .AddTo(_disposables);
 
-            // entity
-            //     .WhenTick(_ => _animator.SetBool(IsMoving, entity))
-            //     .AddTo(_disposables);
+            entity
+                .WhenTick(_ => _animator.SetBool(IsMoving, entity.IsMoving()))
+                .AddTo(_disposables);
         }
     }
 }

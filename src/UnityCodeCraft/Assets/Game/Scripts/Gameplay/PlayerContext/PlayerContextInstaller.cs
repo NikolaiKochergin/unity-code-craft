@@ -1,12 +1,17 @@
 ﻿using Atomic.Entities;
+using UnityEngine;
 
 namespace Game.Gameplay
 {
     public sealed class PlayerContextInstaller : SceneEntityInstaller<IPlayerContext>
     {
-        public override void Install(IPlayerContext entity)
+        [SerializeField] private GameEntity _playerCharacter;
+        
+        public override void Install(IPlayerContext context)
         {
-            
+            context.AddValue(PlayerContextAPI.Character, _playerCharacter);
+                
+            context.AddBehaviour(new CharacterInputController());
         }
     }
 }
