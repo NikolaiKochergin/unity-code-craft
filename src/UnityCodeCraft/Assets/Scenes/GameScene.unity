@@ -18371,6 +18371,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.509991, y: 3.0119958, z: 1}
   m_Center: {x: -1.2500002, y: 1.5, z: 0}
+--- !u!114 &1404803378 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4794328611557280731, guid: 69a29ff4468e6456e888262b30735f8c, type: 3}
+  m_PrefabInstance: {fileID: 2928555308454414446}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1406005988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27529,6 +27540,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5764159610076527034}
+  - component: {fileID: 5764159610076527035}
+  - component: {fileID: 5764159610076527036}
   m_Layer: 0
   m_Name: '[UI]'
   m_TagString: Untagged
@@ -27554,6 +27567,51 @@ Transform:
   - {fileID: 8539559718434948107}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5764159610076527035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571916461013147395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a95235e61351268429e14937907b6c43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.GameUI
+  useUnityLifecycle: 1
+  disposeValues: 1
+  installOnAwake: 1
+  uninstallOnDestroy: 1
+  scriptableInstallers: []
+  sceneInstallers:
+  - {fileID: 5764159610076527036}
+  onlySelectedGizmos: 0
+  onlyEditModeGizmos: 0
+  autoCompile: 0
+  initialTagCapacity: 1
+  initialValueCapacity: 1
+  initialBehaviourCapacity: 0
+  _isGlobal: 1
+  _dontDestroyOnLoad: 0
+--- !u!114 &5764159610076527036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571916461013147395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15e6cae68f952e04c8ecc628e12dddd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.GameUIInstaller
+  _healthScreenView: {fileID: 548561269895222117}
+  _moveJoystick: {fileID: 757640612756630603}
+  _attackJoystick: {fileID: 7919524849257179009}
+  _healthView: {fileID: 7160444056652517396}
+  _ammoView: {fileID: 7160444056652517395}
+  _killsView: {fileID: 1404803378}
 --- !u!1001 &7160444056652517393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28137,9 +28195,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 4616498620599230045}
+  - {fileID: 317358820}
   - {fileID: 9048405937420967252}
   - {fileID: 261950140}
   - {fileID: 1676091983}
   - {fileID: 548618061}
   - {fileID: 5764159610076527034}
-  - {fileID: 317358820}
