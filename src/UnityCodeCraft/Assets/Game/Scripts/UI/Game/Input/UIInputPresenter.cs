@@ -14,12 +14,10 @@ namespace Game.UI
             _playerContext = playerContext;
         }
 
-        public void Tick(IEntity entity, float deltaTime)
-        {
-             _playerContext
+        public void Tick(IEntity entity, float deltaTime) =>
+            _playerContext
                 .GetValue(PlayerContextAPI.Character)
                 .GetValue(GameEntityAPI.MoveRequest)
                 .Invoke(_ui.GetValue(GameUIAPI.MoveJoystick).Direction);
-        }
     }
 }

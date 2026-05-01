@@ -22,7 +22,7 @@ namespace Game.Gameplay
             entity.AddValue(GameEntityAPI.MoveTime, _moveTime);
             entity.WhenFixedTick(_moveTime.Tick);
             
-            entity.AddBehaviour(new MoveBehaviour());
+            entity.AddBehaviour<MoveBehaviour>();
         }
     }
 }

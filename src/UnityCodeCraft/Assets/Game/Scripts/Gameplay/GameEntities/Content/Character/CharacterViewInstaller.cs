@@ -9,6 +9,9 @@ namespace Game.Gameplay
         private static readonly int TakeDamage = Animator.StringToHash("TakeDamage");
         private static readonly int Death = Animator.StringToHash("Death");
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
+        private static readonly int IsAiming = Animator.StringToHash("IsAiming");
+        private static readonly int AimX = Animator.StringToHash("AimX");
+        private static readonly int AimY = Animator.StringToHash("AimY");
         
         [SerializeField] private Animator _animator;
 
@@ -33,6 +36,9 @@ namespace Game.Gameplay
             entity
                 .WhenTick(_ => _animator.SetBool(IsMoving, entity.IsMoving()))
                 .AddTo(_disposables);
+            
+            // entity
+            //     .WhenTick(_ => animation)
         }
     }
 }

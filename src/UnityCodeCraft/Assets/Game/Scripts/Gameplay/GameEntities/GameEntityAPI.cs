@@ -16,7 +16,12 @@ namespace Game.Gameplay
         public static ValueKey<IGameEntity, Animator> Animator = new(nameof(Animator));
         public static ValueKey<IGameEntity, Command<int>> TakeDamageCommand = new(nameof(TakeDamageCommand));
         public static ValueKey<IGameEntity, ICommand<MoveArgs>> MoveCommand = new(nameof(MoveCommand));
-        public static ValueKey<IGameEntity, IRequest<Vector3>> MoveRequest { get; set; }
+        public static ValueKey<IGameEntity, IRequest<Vector3>> MoveRequest = new(nameof(MoveRequest));
+        public static ValueKey<IGameEntity, Command<RotateArgs>> RotateCommand = new(nameof(RotateCommand));
+        public static ValueKey<IGameEntity, IRequest<Vector3>> RotateRequest = new(nameof(RotateRequest));
+        public static ValueKey<IGameEntity, IVariable<Quaternion>> Rotation = new(nameof(Rotation));
+        public static ValueKey<IGameEntity, IValue<float>> RotateSpeed = new(nameof(RotateSpeed));
+        public static ValueKey<IGameEntity, IValue<Vector3>> Position = new(nameof(Position));
         
         public static ValueKey<ICooldown> MoveTime = new(nameof(MoveTime));
     }

@@ -28158,6 +28158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d8e5d83db8466544b3f0068f0aadbdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.CharacterInstaller
+  _transformInstaller:
+    _transform: {fileID: 8264958231034587487}
   _moveInstaller:
     _moveInstaller:
       _moveTime:
@@ -28166,6 +28168,8 @@ MonoBehaviour:
   _healthInstaller:
     _maxHealth:
       value: 10
+  _rotateSpeed:
+    value: 720
 --- !u!114 &9048405937420967255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28190,8 +28194,8 @@ MonoBehaviour:
   onlyEditModeGizmos: 0
   autoCompile: 0
   initialTagCapacity: 1
-  initialValueCapacity: 8
-  initialBehaviourCapacity: 1
+  initialValueCapacity: 13
+  initialBehaviourCapacity: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
