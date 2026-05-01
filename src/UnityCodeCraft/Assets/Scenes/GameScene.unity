@@ -4281,6 +4281,8 @@ MonoBehaviour:
   initialTagCapacity: 0
   initialValueCapacity: 1
   initialBehaviourCapacity: 1
+  _isGlobal: 1
+  _dontDestroyOnLoad: 0
 --- !u!4 &317358820
 Transform:
   m_ObjectHideFlags: 0
@@ -27589,9 +27591,9 @@ MonoBehaviour:
   onlySelectedGizmos: 0
   onlyEditModeGizmos: 0
   autoCompile: 0
-  initialTagCapacity: 1
-  initialValueCapacity: 1
-  initialBehaviourCapacity: 0
+  initialTagCapacity: 0
+  initialValueCapacity: 2
+  initialBehaviourCapacity: 1
   _isGlobal: 1
   _dontDestroyOnLoad: 0
 --- !u!114 &5764159610076527036

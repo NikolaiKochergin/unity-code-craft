@@ -1,4 +1,5 @@
 ﻿using Atomic.Entities;
+using Game.UI;
 using UnityEngine;
 
 namespace Game.Gameplay
@@ -21,7 +22,9 @@ namespace Game.Gameplay
         {
             Vector3 direction = GetMoveDirection();
 
-            _character.GetValue(GameEntityAPI.MoveRequest).Invoke(direction);
+            _character
+                .GetValue(GameEntityAPI.MoveRequest)
+                .Invoke(direction);
         }
         
         

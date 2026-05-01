@@ -4,7 +4,7 @@
  * Created by Entity Domain Generator.
  */
 
-namespace Game.Gameplay
+namespace Game.UI
 {
     /// <summary>
     /// Provides initialization logic for the strongly-typed <see cref="IPlayerContext"/> entity.
