@@ -29,8 +29,8 @@ namespace Game
         private JumpComponent _jumpComponent;
         private HealthComponent _healthComponent;
         private MoveComponent _moveComponent;
-        private FireComponent _pushComponent;
-        private FireComponent _tossComponent;
+        private ForceComponent _pushComponent;
+        private ForceComponent _tossComponent;
 
         private void Awake()
         {
@@ -38,8 +38,8 @@ namespace Game
             _jumpComponent = _character.GetComponent<JumpComponent>();
             _healthComponent = _character.GetComponent<HealthComponent>();
             _moveComponent = _character.GetComponent<MoveComponent>();
-            _pushComponent = _pushAttack.GetComponent<FireComponent>();
-            _tossComponent = _tossAttack.GetComponent<FireComponent>();
+            _pushComponent = _pushAttack.GetComponent<ForceComponent>();
+            _tossComponent = _tossAttack.GetComponent<ForceComponent>();
 
             _groundedComponent.OnGrounded += OnGrounded;
             _jumpComponent.OnJump += OnJump;

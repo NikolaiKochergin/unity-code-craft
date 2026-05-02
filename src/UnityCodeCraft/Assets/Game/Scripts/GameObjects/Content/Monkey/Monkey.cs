@@ -19,7 +19,7 @@ namespace Game
         private JumpComponent _jumpComponent;
         private LookComponent _lookComponent;
         private CollisionComponent _collisionComponent;
-        private FireComponent _pushComponent;
+        private ForceComponent _pushComponent;
         private TriggerComponent _characterTriggerComponent;
         private GroundedComponent _groundedComponent;
 
@@ -31,7 +31,7 @@ namespace Game
             _jumpComponent = GetComponent<JumpComponent>();
             _lookComponent = GetComponent<LookComponent>();
             _collisionComponent = GetComponent<CollisionComponent>();
-            _pushComponent = _pushAttack.GetComponent<FireComponent>();
+            _pushComponent = _pushAttack.GetComponent<ForceComponent>();
             _characterTriggerComponent = GetComponentInChildren<TriggerComponent>();
 
             _pushComponent.SetCondition(() => _healthComponent.IsAlive);
@@ -71,13 +71,13 @@ namespace Game
 
         private void OnCharacterEntered(Collider2D col)
         {
-            if(col.gameObject.layer == LayerMask.NameToLayer(GameObjectTags.Character))
+            if(col.CompareTag(GameObjectTags.Character))
                 _target = col.gameObject;
         }
 
         private void OnCharacterExited(Collider2D col)
         {
-            if(col.gameObject.layer == LayerMask.NameToLayer(GameObjectTags.Character))
+            if(col.CompareTag(GameObjectTags.Character))
                 _target = null;
         }
 

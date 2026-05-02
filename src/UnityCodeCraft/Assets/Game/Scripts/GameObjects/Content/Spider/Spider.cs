@@ -15,7 +15,7 @@ namespace Game.Scripts.GameObjects.Content.Spider
         private HealthComponent _healthComponent;
         private GroundedComponent _groundedComponent;
         private WaypointMoveComponent _waypointMoveComponent;
-        private FireComponent _pushComponent;
+        private ForceComponent _pushComponent;
         private CollisionComponent _collisionComponent;
 
         private void Awake()
@@ -25,7 +25,7 @@ namespace Game.Scripts.GameObjects.Content.Spider
             _groundedComponent = GetComponent<GroundedComponent>();
             _waypointMoveComponent = GetComponent<WaypointMoveComponent>();
             _collisionComponent = GetComponent<CollisionComponent>();
-            _pushComponent = _pushAttack.GetComponent<FireComponent>();
+            _pushComponent = _pushAttack.GetComponent<ForceComponent>();
             
             _waypointMoveComponent.SetCondition(() => _healthComponent.IsAlive);
             _pushComponent.SetCondition(() => _healthComponent.IsAlive &&

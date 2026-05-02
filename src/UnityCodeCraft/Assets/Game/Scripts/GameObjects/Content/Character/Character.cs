@@ -8,18 +8,16 @@ namespace Game
     [RequireComponent(typeof(JumpComponent))]
     [RequireComponent(typeof(MoveComponent))]
     [RequireComponent(typeof(LookComponent))]
-    public class Character : MonoBehaviour, IMoveComponent, IJumpComponent, IFireComponent
+    public class Character : MonoBehaviour, IMoveComponent, IJumpComponent, IPushComponent, ITossComponent
     {
-        [SerializeField] private GameObject _pushAttack;
-        [SerializeField] private GameObject _tossAttack;
+        [SerializeField] private ForceComponent _pushComponent;
+        [SerializeField] private ForceComponent _tossComponent;
         
         private JumpComponent _jumpComponent;
         private HealthComponent _healthComponent;
         private GroundedComponent _groundedComponent;
         private MoveComponent _moveComponent;
         private LookComponent _lookComponent;
-        private FireComponent _pushComponent;
-        private FireComponent _tossComponent;
         private Rigidbody2D _rigidbody;
 
         private void Awake()
@@ -30,8 +28,6 @@ namespace Game
             _jumpComponent = GetComponent<JumpComponent>();
             _moveComponent = GetComponent<MoveComponent>();
             _lookComponent = GetComponent<LookComponent>();
-            _pushComponent = _pushAttack.GetComponent<FireComponent>();
-            _tossComponent = _tossAttack.GetComponent<FireComponent>();
 
             _jumpComponent.SetCondition(() => _healthComponent.IsAlive && 
                                               _groundedComponent.IsGrounded);

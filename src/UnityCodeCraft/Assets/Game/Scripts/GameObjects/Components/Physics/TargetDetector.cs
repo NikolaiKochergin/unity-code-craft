@@ -14,7 +14,6 @@ namespace Game
         private Collider2D[] _results;
         
         protected Vector2 Origin => (Vector2)_origin.position + (Vector2)(_origin.right * _offset.x) + (Vector2)(_origin.up * _offset.y);
-        protected Vector2 Direction => _origin.right;
         
         private void Awake() => 
             _results = new Collider2D[_targetLimit];

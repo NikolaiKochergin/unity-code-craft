@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game
 {
     [RequireComponent(typeof(TargetDetector))]
-    public class FireComponent : MonoBehaviour
+    public class ForceComponent : MonoBehaviour
     {
         [SerializeField] private TargetDetector _targetDetector;
         [SerializeField] private bool _require;

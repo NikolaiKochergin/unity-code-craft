@@ -176,8 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbe1e47ca964217acf14716b12cff00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Character
-  _pushAttack: {fileID: 9016562287610578585}
-  _tossAttack: {fileID: 3679485912714460099}
+  _pushComponent: {fileID: 138621915435952079}
+  _tossComponent: {fileID: 6685706794290837137}
 --- !u!114 &7526237783472922578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +252,6 @@ MonoBehaviour:
   _moveDirection: {x: 0, y: 0}
   _require: 0
   _moveDuration: 0.1
-  _moveTime: 0
 --- !u!114 &631194896354299372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,6 +427,7 @@ MonoBehaviour:
   _force: {x: 1, y: 10}
   _delay: 0.15
   _cooldown: 0.35
+  _damage: 0
 --- !u!114 &2357878793449007298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,6 +764,7 @@ MonoBehaviour:
   _force: {x: 10, y: 2}
   _delay: 0.15
   _cooldown: 0.35
+  _damage: 0
 --- !u!114 &2269439039583109759
 MonoBehaviour:
   m_ObjectHideFlags: 0

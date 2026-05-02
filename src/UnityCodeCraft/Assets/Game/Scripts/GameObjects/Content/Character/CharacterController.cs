@@ -8,13 +8,15 @@ namespace Game
         
         private IMoveComponent _moveComponent;
         private IJumpComponent _jumpComponent;
-        private IFireComponent _fireComponent;
+        private IPushComponent _pushComponent;
+        private ITossComponent _tossComponent;
 
         private void Awake()
         {
             _moveComponent = _character.GetComponent<IMoveComponent>();
             _jumpComponent = _character.GetComponent<IJumpComponent>();
-            _fireComponent = _character.GetComponent<IFireComponent>();
+            _pushComponent = _character.GetComponent<IPushComponent>();
+            _tossComponent = _character.GetComponent<ITossComponent>();
         }
 
         private void Update()
@@ -42,10 +44,10 @@ namespace Game
         private void HandleMouse()
         {
             if (Input.GetMouseButtonDown(0))
-                _fireComponent.Push();
+                _pushComponent.Push();
             
             if (Input.GetMouseButtonDown(1))
-                _fireComponent.Toss();
+                _tossComponent.Toss();
         }
     }
 }
