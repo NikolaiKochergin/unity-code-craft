@@ -12,14 +12,16 @@ namespace Game
         [SerializeField] private Vector2 _force;
         [SerializeField, Min(0)] private float _delay;
         [SerializeField, Min(0)] private float _cooldown;
-        [SerializeField, Min(0)] private float _damage;
         
         private Func<bool> _condition;
+        private Action<IReadOnlyList<GameObject>> 
+            _action;
         private float _currentTime;
 
         public event Action OnFire;
 
         public void SetCondition(Func<bool> condition) => _condition = condition;
+        public void SetAction(Action<IReadOnlyList<GameObject>> action) => _action = action;
 
         public void Fire() => _require = true;
         
@@ -41,11 +43,10 @@ namespace Game
         {
             IReadOnlyList<GameObject> targets = _targetDetector.GetTargets();
 
-            foreach (GameObject target in targets)
-            {
+            foreach (GameObject target in targets) 
                 Push(target);
-                Damage(target);
-            }
+            
+            _action?.Invoke(targets);
             OnFire?.Invoke();
         }
 
@@ -59,12 +60,6 @@ namespace Game
                 _force.y);
 
             rigidbody.AddForce(force, ForceMode2D.Impulse);
-        }
-
-        private void Damage(GameObject target)
-        {
-            if(_damage > 0 && target.TryGetComponent(out HealthComponent health))
-                health.TakeDamage(_damage);
         }
     }
 }

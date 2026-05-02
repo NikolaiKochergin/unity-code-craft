@@ -9,7 +9,7 @@ namespace Game
     [RequireComponent(typeof(CollisionComponent))]
     public class Snake : MonoBehaviour
     {
-        [SerializeField] private GameObject _tossAttack;
+        [SerializeField] private ForceComponent _tossComponent;
         [SerializeField] private GameObject _target;
         
         private Rigidbody2D _rigidbody;
@@ -17,8 +17,8 @@ namespace Game
         private MoveComponent _moveComponent;
         private LookComponent _lookComponent;
         private CollisionComponent _collisionComponent;
-        private ForceComponent _tossComponent;
         private TriggerComponent _characterTriggerComponent;
+        private DamageComponent _damageComponent;
 
         private void Awake()
         {
@@ -27,11 +27,16 @@ namespace Game
             _moveComponent = GetComponent<MoveComponent>();
             _lookComponent = GetComponent<LookComponent>();
             _collisionComponent = GetComponent<CollisionComponent>();
-            _tossComponent = _tossAttack.GetComponent<ForceComponent>();
             _characterTriggerComponent = GetComponentInChildren<TriggerComponent>();
+            _damageComponent = _tossComponent.GetComponent<DamageComponent>();
 
             _moveComponent.SetCondition(() => _healthComponent.IsAlive);
             _tossComponent.SetCondition(() => _healthComponent.IsAlive);
+            _tossComponent.SetAction(targets =>
+            {
+                foreach (GameObject target in targets) 
+                    _damageComponent.DealDamage(target);
+            });
             
             _healthComponent.OnDied += OnDied;
             _collisionComponent.OnEntered += OnCollisionEntered;

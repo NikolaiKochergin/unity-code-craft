@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 4005455949874838412}
   - component: {fileID: 5127057893691800522}
   - component: {fileID: 8551008285560836665}
+  - component: {fileID: 4127523822529623099}
   m_Layer: 8
   m_Name: Trap
   m_TagString: Untagged
@@ -237,4 +238,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3709a6edfb4696a8fd7254958c2301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Content.Trap.Trap
+--- !u!114 &4127523822529623099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8940468643134046639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4df4092070c4540ab4129e5ff447532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.DamageComponent
   _damage: 1

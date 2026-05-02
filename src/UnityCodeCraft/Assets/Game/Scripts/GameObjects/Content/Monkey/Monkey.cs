@@ -8,6 +8,7 @@ namespace Game
     [RequireComponent(typeof(JumpComponent))]
     [RequireComponent(typeof(LookComponent))]
     [RequireComponent(typeof(CollisionComponent))]
+    [RequireComponent(typeof(DamageComponent))]
     public class Monkey : MonoBehaviour
     {
         [SerializeField] private GameObject _pushAttack;
@@ -22,6 +23,7 @@ namespace Game
         private ForceComponent _pushComponent;
         private TriggerComponent _characterTriggerComponent;
         private GroundedComponent _groundedComponent;
+        private DamageComponent _damageComponent;
 
         private void Awake()
         {
@@ -31,6 +33,7 @@ namespace Game
             _jumpComponent = GetComponent<JumpComponent>();
             _lookComponent = GetComponent<LookComponent>();
             _collisionComponent = GetComponent<CollisionComponent>();
+            _damageComponent = GetComponent<DamageComponent>();
             _pushComponent = _pushAttack.GetComponent<ForceComponent>();
             _characterTriggerComponent = GetComponentInChildren<TriggerComponent>();
 
@@ -81,11 +84,8 @@ namespace Game
                 _target = null;
         }
 
-        private void OnCollisionEntered(Collision2D col)
-        {
-            if(_damage > 0 && col.gameObject.TryGetComponent(out HealthComponent health))
-                health.TakeDamage(_damage);
-        }
+        private void OnCollisionEntered(Collision2D col) => 
+            _damageComponent.DealDamage(col.gameObject);
 
         private void OnDied() => 
             _rigidbody.simulated = false;

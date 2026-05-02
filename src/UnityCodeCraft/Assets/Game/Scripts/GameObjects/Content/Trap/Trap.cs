@@ -4,17 +4,18 @@ namespace Game.Scripts.GameObjects.Content.Trap
 {
     [RequireComponent(typeof(HealthComponent))]
     [RequireComponent(typeof(CollisionComponent))]
+    [RequireComponent(typeof(DamageComponent))]
     public class Trap : MonoBehaviour
     {
-        [SerializeField, Min(0)] private float _damage;
-        
         private HealthComponent _healthComponent;
         private CollisionComponent _collisionComponent;
+        private DamageComponent _damageComponent;
 
         private void Awake()
         {
             _healthComponent = GetComponent<HealthComponent>();
             _collisionComponent = GetComponent<CollisionComponent>();
+            _damageComponent = GetComponent<DamageComponent>();
 
             _healthComponent.OnDied += OnDie;
             _collisionComponent.OnEntered += OnEntered;
@@ -28,11 +29,8 @@ namespace Game.Scripts.GameObjects.Content.Trap
 
         private void OnEntered(Collision2D col)
         {
-            if (!(_damage > 0) || !col.gameObject.TryGetComponent(out HealthComponent health)) 
-                return;
-            
-            health.TakeDamage(_damage);
-            OnDie();
+            if(_damageComponent.DealDamage(col.gameObject))
+                OnDie();
         }
 
         private void OnDie() => 

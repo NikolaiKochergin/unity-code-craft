@@ -9,14 +9,14 @@ namespace Game.Scripts.GameObjects.Content.Spider
     [RequireComponent(typeof(CollisionComponent))]
     public class Spider : MonoBehaviour
     {
-        [SerializeField] private GameObject _pushAttack;
+        [SerializeField] private ForceComponent _pushComponent;
         
         private Rigidbody2D _rigidbody;
         private HealthComponent _healthComponent;
         private GroundedComponent _groundedComponent;
         private WaypointMoveComponent _waypointMoveComponent;
-        private ForceComponent _pushComponent;
         private CollisionComponent _collisionComponent;
+        private DamageComponent _damageComponent;
 
         private void Awake()
         {
@@ -25,11 +25,17 @@ namespace Game.Scripts.GameObjects.Content.Spider
             _groundedComponent = GetComponent<GroundedComponent>();
             _waypointMoveComponent = GetComponent<WaypointMoveComponent>();
             _collisionComponent = GetComponent<CollisionComponent>();
-            _pushComponent = _pushAttack.GetComponent<ForceComponent>();
+            _damageComponent = _pushComponent.GetComponent<DamageComponent>();
             
             _waypointMoveComponent.SetCondition(() => _healthComponent.IsAlive);
             _pushComponent.SetCondition(() => _healthComponent.IsAlive &&
                                               _groundedComponent.IsGrounded);
+            
+            _pushComponent.SetAction(targets =>
+            {
+                foreach (GameObject target in targets) 
+                    _damageComponent.DealDamage(target);
+            });
 
             _healthComponent.OnDied += OnDied;
             _collisionComponent.OnEntered += OnCollisionEntered;
