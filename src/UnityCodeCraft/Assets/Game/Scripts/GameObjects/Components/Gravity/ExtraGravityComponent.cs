@@ -13,13 +13,13 @@ namespace Game
 
         private void Awake()
         {
-            _groundedComponent = this.GetComponent<GroundedComponent>();
-            _rigidbody = this.GetComponent<Rigidbody2D>();
+            _groundedComponent = GetComponent<GroundedComponent>();
+            _rigidbody = GetComponent<Rigidbody2D>();
         }
 
         private void FixedUpdate()
         {
-            if (!_groundedComponent.IsGrounded)
+            if (!_groundedComponent.IsGrounded && _rigidbody.linearVelocityY < 0)
                 _rigidbody.linearVelocity += new Vector2(0, _gravity * Time.fixedDeltaTime);
         }
     }

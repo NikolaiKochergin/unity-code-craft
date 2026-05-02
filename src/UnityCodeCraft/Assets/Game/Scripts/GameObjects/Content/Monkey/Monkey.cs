@@ -4,7 +4,6 @@ namespace Game
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(HealthComponent))]
-    [RequireComponent(typeof(ExtraGravityComponent))]
     [RequireComponent(typeof(GroundedComponent))]
     [RequireComponent(typeof(JumpComponent))]
     [RequireComponent(typeof(LookComponent))]
@@ -17,7 +16,6 @@ namespace Game
         
         private Rigidbody2D _rigidbody;
         private HealthComponent _healthComponent;
-        private ExtraGravityComponent _extraGravityComponent;
         private JumpComponent _jumpComponent;
         private LookComponent _lookComponent;
         private CollisionComponent _collisionComponent;
@@ -29,7 +27,6 @@ namespace Game
         {
             _rigidbody = GetComponent<Rigidbody2D>();
             _healthComponent = GetComponent<HealthComponent>();
-            _extraGravityComponent = GetComponent<ExtraGravityComponent>();
             _groundedComponent = GetComponent<GroundedComponent>();
             _jumpComponent = GetComponent<JumpComponent>();
             _lookComponent = GetComponent<LookComponent>();
@@ -63,8 +60,6 @@ namespace Game
 
         private void Update()
         {
-            _extraGravityComponent.enabled = _rigidbody.linearVelocityY < 0;
-            
             _jumpComponent.Jump();
             
             if(_target)

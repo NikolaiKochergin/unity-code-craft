@@ -8,7 +8,6 @@ namespace Game
     [RequireComponent(typeof(JumpComponent))]
     [RequireComponent(typeof(MoveComponent))]
     [RequireComponent(typeof(LookComponent))]
-    [RequireComponent(typeof(ExtraGravityComponent))]
     public class Character : MonoBehaviour, IMoveComponent, IJumpComponent, IFireComponent
     {
         [SerializeField] private GameObject _pushAttack;
@@ -17,7 +16,6 @@ namespace Game
         private JumpComponent _jumpComponent;
         private HealthComponent _healthComponent;
         private GroundedComponent _groundedComponent;
-        private ExtraGravityComponent _extraGravityComponent;
         private MoveComponent _moveComponent;
         private LookComponent _lookComponent;
         private FireComponent _pushComponent;
@@ -29,7 +27,6 @@ namespace Game
             _rigidbody = GetComponent<Rigidbody2D>();
             _healthComponent = GetComponent<HealthComponent>();
             _groundedComponent = GetComponent<GroundedComponent>();
-            _extraGravityComponent = GetComponent<ExtraGravityComponent>();
             _jumpComponent = GetComponent<JumpComponent>();
             _moveComponent = GetComponent<MoveComponent>();
             _lookComponent = GetComponent<LookComponent>();
@@ -48,9 +45,6 @@ namespace Game
 
         private void OnDestroy() => 
             _healthComponent.OnDied += OnDied;
-
-        private void Update() => 
-            _extraGravityComponent.enabled = _rigidbody.linearVelocityY < 0;
 
         public void Move(Vector2 direction)
         {

@@ -5,7 +5,6 @@ namespace Game.Scripts.GameObjects.Content.Spider
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(HealthComponent))]
     [RequireComponent(typeof(GroundedComponent))]
-    [RequireComponent(typeof(ExtraGravityComponent))]
     [RequireComponent(typeof(WaypointMoveComponent))]
     [RequireComponent(typeof(CollisionComponent))]
     public class Spider : MonoBehaviour
@@ -15,7 +14,6 @@ namespace Game.Scripts.GameObjects.Content.Spider
         private Rigidbody2D _rigidbody;
         private HealthComponent _healthComponent;
         private GroundedComponent _groundedComponent;
-        private ExtraGravityComponent _extraGravityComponent;
         private WaypointMoveComponent _waypointMoveComponent;
         private FireComponent _pushComponent;
         private CollisionComponent _collisionComponent;
@@ -25,7 +23,6 @@ namespace Game.Scripts.GameObjects.Content.Spider
             _rigidbody = GetComponent<Rigidbody2D>();
             _healthComponent = GetComponent<HealthComponent>();
             _groundedComponent = GetComponent<GroundedComponent>();
-            _extraGravityComponent = GetComponent<ExtraGravityComponent>();
             _waypointMoveComponent = GetComponent<WaypointMoveComponent>();
             _collisionComponent = GetComponent<CollisionComponent>();
             _pushComponent = _pushAttack.GetComponent<FireComponent>();
@@ -44,9 +41,6 @@ namespace Game.Scripts.GameObjects.Content.Spider
             _collisionComponent.OnEntered -= OnCollisionEntered;
         }
         
-        private void Update() => 
-            _extraGravityComponent.enabled = _rigidbody.linearVelocityY < 0;
-
         private void OnCollisionEntered(Collision2D col)
         {
             if (col.gameObject.CompareTag(GameObjectTags.Character))
