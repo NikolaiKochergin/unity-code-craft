@@ -7,20 +7,19 @@ namespace Game
     [RequireComponent(typeof(GroundedComponent))]
     [RequireComponent(typeof(JumpComponent))]
     [RequireComponent(typeof(LookComponent))]
+    [RequireComponent(typeof(TargetComponent))]
     [RequireComponent(typeof(CollisionComponent))]
     [RequireComponent(typeof(DamageComponent))]
     public sealed class Monkey : MonoBehaviour
     {
-        [SerializeField] private GameObject _pushAttack;
-        [SerializeField] private GameObject _target;
-        [SerializeField, Min(0)] private float _damage;
+        [SerializeField] private ForceComponent _pushComponent;
         
         private Rigidbody2D _rigidbody;
         private HealthComponent _healthComponent;
         private JumpComponent _jumpComponent;
         private LookComponent _lookComponent;
+        private TargetComponent _targetComponent;
         private CollisionComponent _collisionComponent;
-        private ForceComponent _pushComponent;
         private TriggerComponent _characterTriggerComponent;
         private GroundedComponent _groundedComponent;
         private DamageComponent _damageComponent;
@@ -32,9 +31,9 @@ namespace Game
             _groundedComponent = GetComponent<GroundedComponent>();
             _jumpComponent = GetComponent<JumpComponent>();
             _lookComponent = GetComponent<LookComponent>();
+            _targetComponent = GetComponent<TargetComponent>();
             _collisionComponent = GetComponent<CollisionComponent>();
             _damageComponent = GetComponent<DamageComponent>();
-            _pushComponent = _pushAttack.GetComponent<ForceComponent>();
             _characterTriggerComponent = GetComponentInChildren<TriggerComponent>();
 
             _pushComponent.SetCondition(() => _healthComponent.IsAlive);
@@ -65,8 +64,8 @@ namespace Game
         {
             _jumpComponent.Jump();
             
-            if(_target)
-                _lookComponent.Look(_target.transform);
+            if(_targetComponent.HasTarget)
+                _lookComponent.Look(_targetComponent.Target);
         }
 
         private void OnGrounded(bool _) => 
@@ -75,13 +74,13 @@ namespace Game
         private void OnCharacterEntered(Collider2D col)
         {
             if(col.CompareTag(GameObjectTags.Character))
-                _target = col.gameObject;
+                _targetComponent.Target = col.gameObject; 
         }
 
         private void OnCharacterExited(Collider2D col)
         {
             if(col.CompareTag(GameObjectTags.Character))
-                _target = null;
+                _targetComponent.Target = null;
         }
 
         private void OnCollisionEntered(Collision2D col) => 

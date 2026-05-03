@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 6149042369082285197}
   - component: {fileID: 805882395689229330}
   - component: {fileID: 8880383178409253636}
+  - component: {fileID: 6372553417305139076}
   m_Layer: 8
   m_Name: Monkey
   m_TagString: Untagged
@@ -210,9 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd32cd9461d84f7088387e5ce7a89ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Monkey
-  _pushAttack: {fileID: 6748920024625959833}
-  _target: {fileID: 0}
-  _damage: 10
+  _pushComponent: {fileID: 7106350093855887635}
 --- !u!114 &5230854518316190647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +308,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.DamageComponent
   _damage: 10
+--- !u!114 &6372553417305139076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084178272520813888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b1f13e8f1a44b38b13f81c7ba5f8a1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.TargetComponent
+  _target: {fileID: 0}
 --- !u!1 &3667686093434619927
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,7 +447,7 @@ MonoBehaviour:
   _targetDetector: {fileID: 4042473611356693830}
   _require: 0
   _force: {x: 20, y: 2}
-  _delay: 0.15
+  _delay: 0
   _cooldown: 0.35
 --- !u!114 &4042473611356693830
 MonoBehaviour:

@@ -63,7 +63,8 @@ namespace Game
         private void OnCharacterEntered(Collider2D col)
         {
             if(col.CompareTag(GameObjectTags.Character))
-                _targetComponent.Target = col.gameObject; }
+                _targetComponent.Target = col.gameObject; 
+        }
 
         private void OnCharacterExited(Collider2D col)
         {
