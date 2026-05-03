@@ -6,7 +6,7 @@ namespace Game
     [RequireComponent(typeof(HealthComponent))]
     [RequireComponent(typeof(GroundedComponent))]
     [RequireComponent(typeof(JumpComponent))]
-    [RequireComponent(typeof(LookComponent))]
+    [RequireComponent(typeof(LookAtTargetComponent))]
     [RequireComponent(typeof(TargetComponent))]
     [RequireComponent(typeof(CollisionComponent))]
     [RequireComponent(typeof(DamageComponent))]
@@ -17,7 +17,7 @@ namespace Game
         private Rigidbody2D _rigidbody;
         private HealthComponent _healthComponent;
         private JumpComponent _jumpComponent;
-        private LookComponent _lookComponent;
+        private LookAtTargetComponent _lookAtTargetComponent;
         private TargetComponent _targetComponent;
         private CollisionComponent _collisionComponent;
         private TriggerComponent _characterTriggerComponent;
@@ -30,11 +30,13 @@ namespace Game
             _healthComponent = GetComponent<HealthComponent>();
             _groundedComponent = GetComponent<GroundedComponent>();
             _jumpComponent = GetComponent<JumpComponent>();
-            _lookComponent = GetComponent<LookComponent>();
+            _lookAtTargetComponent = GetComponent<LookAtTargetComponent>();
             _targetComponent = GetComponent<TargetComponent>();
             _collisionComponent = GetComponent<CollisionComponent>();
             _damageComponent = GetComponent<DamageComponent>();
             _characterTriggerComponent = GetComponentInChildren<TriggerComponent>();
+            
+            _lookAtTargetComponent.SetCondition(() => _healthComponent.IsAlive);
 
             _pushComponent.SetCondition(() => _healthComponent.IsAlive);
             _jumpComponent.SetCondition(() => _healthComponent.IsAlive &&
@@ -60,13 +62,8 @@ namespace Game
             _groundedComponent.OnGrounded -= OnGrounded;
         }
 
-        private void Update()
-        {
+        private void Update() => 
             _jumpComponent.Jump();
-            
-            if(_targetComponent.HasTarget)
-                _lookComponent.Look(_targetComponent.Target);
-        }
 
         private void OnGrounded(bool _) => 
             _pushComponent.Apply();
