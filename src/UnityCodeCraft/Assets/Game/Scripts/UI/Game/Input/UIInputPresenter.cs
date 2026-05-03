@@ -3,22 +3,17 @@ using Game.Gameplay;
 
 namespace Game.UI
 {
-    public class UIInputPresenter : IEntityTick
+    public class UIInputPresenter : IGameUITick
     {
-        private readonly IGameUI _ui;
-        private readonly GameContext _gameContext;
+        private readonly PlayerContext _playerContext;
 
-        public UIInputPresenter(IGameUI ui, GameContext gameContext)
-        {
-            _ui = ui;
-            _gameContext = gameContext;
-        }
+        public UIInputPresenter(PlayerContext playerContext) => 
+            _playerContext = playerContext;
 
-        public void Tick(IEntity entity, float deltaTime) =>
-            _gameContext
-                .GetValue(GameContextAPI.PlayerContext)
+        public void Tick(IGameUI ui, float deltaTime) =>
+            _playerContext
                 .GetValue(PlayerContextAPI.Character)
                 .GetValue(GameEntityAPI.MoveRequest)
-                .Invoke(_ui.GetValue(GameUIAPI.MoveJoystick).Direction);
+                .Invoke(ui.GetValue(GameUIAPI.MoveJoystick).Direction);
     }
 }

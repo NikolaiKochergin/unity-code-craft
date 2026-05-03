@@ -1352,6 +1352,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6992041410405490774}
   - component: {fileID: 956588022611877713}
+  - component: {fileID: 5635805221442455491}
+  - component: {fileID: 4366909304254022560}
   m_Layer: 9
   m_Name: Character
   m_TagString: Player
@@ -1407,6 +1409,56 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &5635805221442455491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3578180279390331970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013b186af27c578459e9bf602889f6a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.GameEntity
+  useUnityLifecycle: 1
+  disposeValues: 1
+  installOnAwake: 1
+  uninstallOnDestroy: 1
+  scriptableInstallers: []
+  sceneInstallers:
+  - {fileID: 4366909304254022560}
+  - {fileID: 7751906750042188848}
+  onlySelectedGizmos: 0
+  onlyEditModeGizmos: 0
+  autoCompile: 0
+  initialTagCapacity: 1
+  initialValueCapacity: 13
+  initialBehaviourCapacity: 2
+--- !u!114 &4366909304254022560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3578180279390331970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d8e5d83db8466544b3f0068f0aadbdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.CharacterInstaller
+  _transformInstaller:
+    _transform: {fileID: 6992041410405490774}
+  _moveInstaller:
+    _moveInstaller:
+      _moveTime:
+        _duration: 0.04
+        _time: 0
+  _healthInstaller:
+    _maxHealth:
+      value: 10
+  _rotateSpeed:
+    value: 720
 --- !u!1 &3818262767236408140
 GameObject:
   m_ObjectHideFlags: 0
@@ -2219,6 +2271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 765187070542819803}
   - component: {fileID: 676053041413999030}
+  - component: {fileID: 7751906750042188848}
   m_Layer: 0
   m_Name: <Skeleton>
   m_TagString: Untagged
@@ -2264,6 +2317,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7751906750042188848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7884378371530702000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfd3c589e7b347b3af6df1cd38744de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.CharacterViewInstaller
+  _animator: {fileID: 676053041413999030}
 --- !u!1 &8089193100203344506
 GameObject:
   m_ObjectHideFlags: 0

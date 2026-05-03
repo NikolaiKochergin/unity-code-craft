@@ -1,5 +1,4 @@
-﻿using Atomic.Elements;
-using Atomic.Entities;
+﻿using Atomic.Entities;
 using Game.Gameplay;
 using Game.Modules;
 using TMPro;
@@ -18,20 +17,17 @@ namespace Game.UI
         
         public override void Install(IGameUI ui)
         {
+            PlayerContext playerContext = GameContext.Instance.GetValue(GameContextAPI.PlayerContext);
+            
             ui.AddValue(GameUIAPI.MoveJoystick, _moveJoystick);
             ui.AddValue(GameUIAPI.AttackJoystick, _attackJoystick);
+            ui.AddValue(GameUIAPI.HealthScreenView, _healthScreenView);
+            ui.AddValue(GameUIAPI.HealthView, _healthView);
+            ui.AddValue(GameUIAPI.AmmoView, _ammoView);
+            ui.AddValue(GameUIAPI.KillsView, _killsView);
             
-            ui.AddBehaviour(new UIInputPresenter(ui, GameContext.Instance));
-            
-            // IReactiveVariable<int> currentHealth = playerContext
-            //     .GetValue(PlayerContextAPI.Character)
-            //     .GetValue(GameEntityAPI.CurrentHealth);
-            //
-            // Const<int> maxHealth = playerContext
-            //     .GetValue(PlayerContextAPI.Character)
-            //     .GetValue(GameEntityAPI.MaxHealth);
-            //
-            // ui.AddBehaviour(new StatPresenter(_healthView, currentHealth, maxHealth));
+            ui.AddBehaviour(new UIInputPresenter(playerContext));
+            ui.AddBehaviour(new StatPresenter(playerContext));
         }
     }
 }

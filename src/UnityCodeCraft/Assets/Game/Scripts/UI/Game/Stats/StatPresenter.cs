@@ -1,31 +1,35 @@
 ﻿using Atomic.Elements;
+using Atomic.Entities;
+using Game.Gameplay;
 
 namespace Game.UI
 {
     public class StatPresenter : IGameUIInit, IGameUIDispose
     {
-        private readonly StatView _statView;
-        private readonly IReactiveVariable<int> _current;
-        private readonly IValue<int> _max;
+        private readonly PlayerContext _playerContext;
         private Subscription<int> _subscription;
 
-        public StatPresenter(StatView statView, IReactiveVariable<int> current, IValue<int> max)
+        public StatPresenter(PlayerContext playerContext) => 
+            _playerContext = playerContext;
+
+        public void Init(IGameUI ui)
         {
-            _max = max;
-            _current = current;
-            _statView = statView;
+            _subscription = _playerContext
+                .GetValue(PlayerContextAPI.Character)
+                .GetValue(GameEntityAPI.CurrentHealth)
+                .Observe(current =>
+                {
+                    int max = _playerContext
+                        .GetValue(PlayerContextAPI.Character)
+                        .GetValue(GameEntityAPI.MaxHealth).Value;
+
+                    StatView healthView = ui.GetValue(GameUIAPI.HealthView);
+                    healthView.SetText(current.ToString());
+                    healthView.SetProgress((float)current / max);
+                });
         }
-        
-        public void Init(IGameUI entity) => 
-            _subscription = _current.Observe(OnChanged);
 
         public void Dispose(IGameUI entity) => 
             _subscription.Dispose();
-
-        private void OnChanged(int current)
-        {
-            _statView.SetText(current.ToString());
-            _statView.SetProgress(current / _max.Value);
-        }
     }
 }
