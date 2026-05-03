@@ -6,16 +6,17 @@ namespace Game.UI
     public class UIInputPresenter : IEntityTick
     {
         private readonly IGameUI _ui;
-        private readonly PlayerContext _playerContext;
+        private readonly GameContext _gameContext;
 
-        public UIInputPresenter(IGameUI ui, PlayerContext playerContext)
+        public UIInputPresenter(IGameUI ui, GameContext gameContext)
         {
             _ui = ui;
-            _playerContext = playerContext;
+            _gameContext = gameContext;
         }
 
         public void Tick(IEntity entity, float deltaTime) =>
-            _playerContext
+            _gameContext
+                .GetValue(GameContextAPI.PlayerContext)
                 .GetValue(PlayerContextAPI.Character)
                 .GetValue(GameEntityAPI.MoveRequest)
                 .Invoke(_ui.GetValue(GameUIAPI.MoveJoystick).Direction);

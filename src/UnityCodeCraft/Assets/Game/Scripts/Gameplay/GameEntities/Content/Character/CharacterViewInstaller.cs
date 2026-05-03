@@ -17,8 +17,12 @@ namespace Game.Gameplay
 
         private readonly DisposableComposite _disposables = new();
         
+        private IGameEntity _entity;
+
         public override void Install(IGameEntity entity)
         {
+            _entity = entity;
+            
             entity.AddValue(GameEntityAPI.Animator, _animator);
             
             entity
@@ -39,6 +43,12 @@ namespace Game.Gameplay
             
             // entity
             //     .WhenTick(_ => animation)
+        }
+
+        private void OnAnimatorMove()
+        {
+            transform.parent.position += _animator.deltaPosition;
+            transform.parent.rotation *= _animator.deltaRotation;
         }
     }
 }

@@ -4,7 +4,7 @@
  * Created by Entity Domain Generator.
  */
 
-namespace Game.Gameplay
+namespace Game.App
 {
     /// <summary>
     /// Represents a specialized entity interface that extends the core <see cref="IEntity"/> contract.
@@ -14,7 +14,7 @@ namespace Game.Gameplay
     /// <remarks>
     /// Created by <b>Entity Domain Generator</b>.
     /// </remarks>
-    public interface IPlayerContext : IEntity
+    public interface IAppContext : IEntity
     {
     }
 }

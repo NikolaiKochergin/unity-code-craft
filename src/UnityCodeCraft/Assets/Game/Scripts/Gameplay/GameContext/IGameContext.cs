@@ -14,7 +14,7 @@ namespace Game.Gameplay
     /// <remarks>
     /// Created by <b>Entity Domain Generator</b>.
     /// </remarks>
-    public interface IPlayerContext : IEntity
+    public interface IGameContext : IEntity
     {
     }
 }
