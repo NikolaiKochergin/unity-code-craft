@@ -8,8 +8,8 @@ namespace Game
         public event Action<Collision2D> OnEntered;
         public event Action<Collision2D> OnExited;
 
-        private void OnCollisionEnter2D(Collision2D other) => this.OnEntered?.Invoke(other);
+        private void OnCollisionEnter2D(Collision2D other) => OnEntered?.Invoke(other);
 
-        private void OnCollisionExit2D(Collision2D other) => this.OnExited?.Invoke(other);
+        private void OnCollisionExit2D(Collision2D other) => OnExited?.Invoke(other);
     }
 }

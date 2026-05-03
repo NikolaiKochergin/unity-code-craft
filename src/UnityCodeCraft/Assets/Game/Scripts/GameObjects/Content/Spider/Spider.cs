@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-namespace Game.Scripts.GameObjects.Content.Spider
+namespace Game
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(HealthComponent))]
     [RequireComponent(typeof(GroundedComponent))]
     [RequireComponent(typeof(WaypointMoveComponent))]
     [RequireComponent(typeof(CollisionComponent))]
-    public class Spider : MonoBehaviour
+    public sealed class Spider : MonoBehaviour
     {
         [SerializeField] private ForceComponent _pushComponent;
         
@@ -31,11 +31,7 @@ namespace Game.Scripts.GameObjects.Content.Spider
             _pushComponent.SetCondition(() => _healthComponent.IsAlive &&
                                               _groundedComponent.IsGrounded);
             
-            _pushComponent.SetAction(targets =>
-            {
-                foreach (GameObject target in targets) 
-                    _damageComponent.DealDamage(target);
-            });
+            _pushComponent.SetAction(target => _damageComponent.DealDamage(target));
 
             _healthComponent.OnDied += OnDied;
             _collisionComponent.OnEntered += OnCollisionEntered;
@@ -50,7 +46,7 @@ namespace Game.Scripts.GameObjects.Content.Spider
         private void OnCollisionEntered(Collision2D col)
         {
             if (col.gameObject.CompareTag(GameObjectTags.Character))
-                _pushComponent.Fire();
+                _pushComponent.Apply();
         }
 
         private void OnDied() => 

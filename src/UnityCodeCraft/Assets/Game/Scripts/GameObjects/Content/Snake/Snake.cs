@@ -7,7 +7,7 @@ namespace Game
     [RequireComponent(typeof(MoveComponent))]
     [RequireComponent(typeof(LookComponent))]
     [RequireComponent(typeof(CollisionComponent))]
-    public class Snake : MonoBehaviour
+    public sealed class Snake : MonoBehaviour
     {
         [SerializeField] private ForceComponent _tossComponent;
         [SerializeField] private GameObject _target;
@@ -32,11 +32,7 @@ namespace Game
 
             _moveComponent.SetCondition(() => _healthComponent.IsAlive);
             _tossComponent.SetCondition(() => _healthComponent.IsAlive);
-            _tossComponent.SetAction(targets =>
-            {
-                foreach (GameObject target in targets) 
-                    _damageComponent.DealDamage(target);
-            });
+            _tossComponent.SetAction(target => _damageComponent.DealDamage(target));
             
             _healthComponent.OnDied += OnDied;
             _collisionComponent.OnEntered += OnCollisionEntered;
@@ -78,7 +74,7 @@ namespace Game
         private void OnCollisionEntered(Collision2D col)
         {
             if (col.gameObject.CompareTag(GameObjectTags.Character))
-                _tossComponent.Fire();
+                _tossComponent.Apply();
         }
 
         private void OnDied() => 

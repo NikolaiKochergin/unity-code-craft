@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-namespace Game.Scripts.GameObjects.Content.Trap
+namespace Game
 {
     [RequireComponent(typeof(HealthComponent))]
     [RequireComponent(typeof(CollisionComponent))]
     [RequireComponent(typeof(DamageComponent))]
-    public class Trap : MonoBehaviour
+    public sealed class Trap : MonoBehaviour
     {
         private HealthComponent _healthComponent;
         private CollisionComponent _collisionComponent;

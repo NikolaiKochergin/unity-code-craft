@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class JumpComponent : MonoBehaviour
+    public sealed class JumpComponent : MonoBehaviour
     {
         [SerializeField, Min(0)] private float _jumpForce = 12f;
         [SerializeField, Min(0)] private float _delay;

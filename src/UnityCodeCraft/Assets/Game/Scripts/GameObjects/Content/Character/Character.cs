@@ -8,7 +8,7 @@ namespace Game
     [RequireComponent(typeof(JumpComponent))]
     [RequireComponent(typeof(MoveComponent))]
     [RequireComponent(typeof(LookComponent))]
-    public class Character : MonoBehaviour, IMoveComponent, IJumpComponent, IPushComponent, ITossComponent
+    public sealed class Character : MonoBehaviour, IMoveComponent, IJumpComponent, IPushComponent, ITossComponent
     {
         [SerializeField] private ForceComponent _pushComponent;
         [SerializeField] private ForceComponent _tossComponent;
@@ -52,10 +52,10 @@ namespace Game
             _jumpComponent.Jump();
 
         public void Push() => 
-            _pushComponent.Fire();
+            _pushComponent.Apply();
 
         public void Toss() => 
-            _tossComponent.Fire();
+            _tossComponent.Apply();
 
         private void OnDied() => 
             _rigidbody.simulated = false;

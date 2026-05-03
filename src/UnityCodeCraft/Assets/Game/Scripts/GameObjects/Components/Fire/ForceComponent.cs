@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game
 {
     [RequireComponent(typeof(TargetDetector))]
-    public class ForceComponent : MonoBehaviour
+    public sealed class ForceComponent : MonoBehaviour
     {
         [SerializeField] private TargetDetector _targetDetector;
         [SerializeField] private bool _require;
@@ -14,22 +14,21 @@ namespace Game
         [SerializeField, Min(0)] private float _cooldown;
         
         private Func<bool> _condition;
-        private Action<IReadOnlyList<GameObject>> 
-            _action;
+        private Action<GameObject> _action;
         private float _currentTime;
 
         public event Action OnFire;
 
         public void SetCondition(Func<bool> condition) => _condition = condition;
-        public void SetAction(Action<IReadOnlyList<GameObject>> action) => _action = action;
+        public void SetAction(Action<GameObject> action) => _action = action;
 
-        public void Fire() => _require = true;
+        public void Apply() => _require = true;
         
         private void FixedUpdate()
         {
             if (_require && IsExpired() && (_condition == null || _condition.Invoke()))
             {
-                Invoke(nameof(FireInternal), _delay);
+                Invoke(nameof(ApplyInternal), _delay);
                 _currentTime = Time.time;
             }
             
@@ -39,14 +38,15 @@ namespace Game
         private bool IsExpired() => 
             Time.time - _currentTime > _cooldown;
 
-        private void FireInternal()
+        private void ApplyInternal()
         {
             IReadOnlyList<GameObject> targets = _targetDetector.GetTargets();
 
-            foreach (GameObject target in targets) 
+            foreach (GameObject target in targets)
+            {
                 Push(target);
-            
-            _action?.Invoke(targets);
+                _action?.Invoke(target);
+            }
             OnFire?.Invoke();
         }
 

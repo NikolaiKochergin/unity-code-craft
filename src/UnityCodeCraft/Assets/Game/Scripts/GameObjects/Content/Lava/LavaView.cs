@@ -9,11 +9,11 @@ namespace Game
 
         private TriggerComponent _triggerComponent;
 
-        private void Awake() => _triggerComponent = this.GetComponentInParent<TriggerComponent>();
+        private void Awake() => _triggerComponent = GetComponentInParent<TriggerComponent>();
 
-        private void OnEnable() => _triggerComponent.OnEntered += this.OnTrigger;
+        private void OnEnable() => _triggerComponent.OnEntered += OnTrigger;
 
-        private void OnDisable() => _triggerComponent.OnEntered -= this.OnTrigger;
+        private void OnDisable() => _triggerComponent.OnEntered -= OnTrigger;
 
         private void OnTrigger(Collider2D obj) => _audioSource.Play();
     }

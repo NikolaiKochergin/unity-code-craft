@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public class DamageComponent : MonoBehaviour
+    public sealed class DamageComponent : MonoBehaviour
     {
         [SerializeField, Min(0)] private float _damage;
         

@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public class MonkeyView : MonoBehaviour
+    public sealed class MonkeyView : MonoBehaviour
     {
         private static readonly int Jump = Animator.StringToHash("Jump");
         private static readonly int IsGrounded = Animator.StringToHash("IsGrounded");

@@ -21,12 +21,12 @@ namespace Game
 
         private void OnEnable()
         {
-            _triggerComponent.OnEntered += this.OnEntered;
+            _triggerComponent.OnEntered += OnEntered;
         }
 
         private void OnDisable()
         {
-            _triggerComponent.OnEntered -= this.OnEntered;
+            _triggerComponent.OnEntered -= OnEntered;
             _tween?.Kill();
         }
 

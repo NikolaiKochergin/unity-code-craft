@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Game.Scripts.GameObjects.Content.Spider
+namespace Game
 {
-    public class SpiderView : MonoBehaviour
+    public sealed class SpiderView : MonoBehaviour
     {
         private static readonly int Death = Animator.StringToHash("Death");
         private static readonly int IsGrounded = Animator.StringToHash("IsGrounded");

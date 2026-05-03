@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public class CharacterController : MonoBehaviour
+    public sealed class CharacterController : MonoBehaviour
     {
         [SerializeField] private GameObject _character;
         

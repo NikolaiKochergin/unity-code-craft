@@ -9,7 +9,7 @@ namespace Game
     [RequireComponent(typeof(LookComponent))]
     [RequireComponent(typeof(CollisionComponent))]
     [RequireComponent(typeof(DamageComponent))]
-    public class Monkey : MonoBehaviour
+    public sealed class Monkey : MonoBehaviour
     {
         [SerializeField] private GameObject _pushAttack;
         [SerializeField] private GameObject _target;
@@ -70,7 +70,7 @@ namespace Game
         }
 
         private void OnGrounded(bool _) => 
-            _pushComponent.Fire();
+            _pushComponent.Apply();
 
         private void OnCharacterEntered(Collider2D col)
         {

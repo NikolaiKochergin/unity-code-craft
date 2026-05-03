@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public class CharacterView : MonoBehaviour
+    public sealed class CharacterView : MonoBehaviour
     {
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
         private static readonly int IsGrounded = Animator.StringToHash("IsGrounded");

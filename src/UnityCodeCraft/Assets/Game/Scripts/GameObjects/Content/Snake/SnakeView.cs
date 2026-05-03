@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
-    public class SnakeView : MonoBehaviour
+    public sealed class SnakeView : MonoBehaviour
     {
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
         private static readonly int IsGrounded = Animator.StringToHash("IsGrounded");

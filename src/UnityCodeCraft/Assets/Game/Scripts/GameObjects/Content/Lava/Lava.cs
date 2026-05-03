@@ -7,11 +7,11 @@ namespace Game
         [SerializeField]
         private TriggerComponent _trigger;
 
-        private void OnEnable() => _trigger.OnEntered += this.OnTriggerEntered;
+        private void OnEnable() => _trigger.OnEntered += OnTriggerEntered;
 
-        private void OnDisable() => _trigger.OnEntered -= this.OnTriggerEntered;
+        private void OnDisable() => _trigger.OnEntered -= OnTriggerEntered;
 
-        private void OnTriggerEntered(Collider2D col)
+        private static void OnTriggerEntered(Collider2D col)
         {
             HealthComponent health = col.GetComponentInParent<HealthComponent>();
             if (health != null)

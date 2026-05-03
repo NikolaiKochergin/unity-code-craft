@@ -12,21 +12,21 @@ namespace Game
         
         private void OnEnable()
         {
-            _triggerComponent.OnEntered += this.OnEntered;
+            _triggerComponent.OnEntered += OnEntered;
         }
 
         private void OnDisable()
         {
-            _triggerComponent.OnEntered -= this.OnEntered;
+            _triggerComponent.OnEntered -= OnEntered;
         }
 
         private void OnEntered(Collider2D other)
         {
-            if (other.TryGetComponent(out Rigidbody2D rigidbody))
-            {
-                rigidbody.linearVelocityY = 0;
-                rigidbody.AddForce(_force, ForceMode2D.Impulse);
-            }
+            if (!other.TryGetComponent(out Rigidbody2D rigidbody)) 
+                return;
+            
+            rigidbody.linearVelocityY = 0;
+            rigidbody.AddForce(_force, ForceMode2D.Impulse);
         }
     }
 }
