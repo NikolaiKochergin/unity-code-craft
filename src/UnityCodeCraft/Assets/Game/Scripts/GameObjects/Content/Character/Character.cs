@@ -7,6 +7,7 @@ namespace Game
     [RequireComponent(typeof(GroundedComponent))]
     [RequireComponent(typeof(JumpComponent))]
     [RequireComponent(typeof(MoveComponent))]
+    [RequireComponent(typeof(MoveTransformComponent))]
     [RequireComponent(typeof(LookComponent))]
     public sealed class Character : MonoBehaviour, IMoveComponent, IJumpComponent, IPushComponent, ITossComponent
     {
@@ -17,6 +18,7 @@ namespace Game
         private HealthComponent _healthComponent;
         private GroundedComponent _groundedComponent;
         private MoveComponent _moveComponent;
+        private MoveTransformComponent _moveTransformComponent;
         private LookComponent _lookComponent;
         private Rigidbody2D _rigidbody;
 
@@ -27,12 +29,19 @@ namespace Game
             _groundedComponent = GetComponent<GroundedComponent>();
             _jumpComponent = GetComponent<JumpComponent>();
             _moveComponent = GetComponent<MoveComponent>();
+            _moveTransformComponent = GetComponent<MoveTransformComponent>();
             _lookComponent = GetComponent<LookComponent>();
 
             _jumpComponent.SetCondition(() => _healthComponent.IsAlive && 
                                               _groundedComponent.IsGrounded);
             
             _moveComponent.SetCondition(() => _healthComponent.IsAlive);
+            _moveComponent.SetAction(direction =>
+            {
+                _lookComponent.Look(direction.x);
+                _moveTransformComponent.Move(new Vector2(Mathf.Abs(direction.x), direction.y));
+            });
+            
             _pushComponent.SetCondition(() => _healthComponent.IsAlive);
             _tossComponent.SetCondition(() => _healthComponent.IsAlive);
 
@@ -42,11 +51,8 @@ namespace Game
         private void OnDestroy() => 
             _healthComponent.OnDied += OnDied;
 
-        public void Move(Vector2 direction)
-        {
-            _lookComponent.Look(direction.x);
-            _moveComponent.Move(new Vector2(Mathf.Abs(direction.x), direction.y));
-        }
+        public void Move(Vector2 direction) => 
+            _moveComponent.Move(direction);
 
         public void Jump() => 
             _jumpComponent.Jump();

@@ -6,6 +6,7 @@ namespace Game
     [RequireComponent(typeof(HealthComponent))]
     [RequireComponent(typeof(GroundedComponent))]
     [RequireComponent(typeof(WaypointMoveComponent))]
+    [RequireComponent(typeof(MoveTransformComponent))]
     [RequireComponent(typeof(CollisionComponent))]
     public sealed class Spider : MonoBehaviour
     {
@@ -15,6 +16,7 @@ namespace Game
         private HealthComponent _healthComponent;
         private GroundedComponent _groundedComponent;
         private WaypointMoveComponent _waypointMoveComponent;
+        private MoveTransformComponent _moveTransformComponent;
         private CollisionComponent _collisionComponent;
         private DamageComponent _damageComponent;
 
@@ -24,10 +26,13 @@ namespace Game
             _healthComponent = GetComponent<HealthComponent>();
             _groundedComponent = GetComponent<GroundedComponent>();
             _waypointMoveComponent = GetComponent<WaypointMoveComponent>();
+            _moveTransformComponent = GetComponent<MoveTransformComponent>();
             _collisionComponent = GetComponent<CollisionComponent>();
             _damageComponent = _pushComponent.GetComponent<DamageComponent>();
             
             _waypointMoveComponent.SetCondition(() => _healthComponent.IsAlive);
+            _waypointMoveComponent.SetAction(_moveTransformComponent.Move);
+            
             _pushComponent.SetCondition(() => _healthComponent.IsAlive &&
                                               _groundedComponent.IsGrounded);
             

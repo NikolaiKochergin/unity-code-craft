@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 9111860641350533513}
   - component: {fileID: 804757028210799050}
   - component: {fileID: 5434603241451472858}
+  - component: {fileID: 1935362300034786844}
+  - component: {fileID: 844104595450461165}
   m_Layer: 3
   m_Name: GameObject
   m_TagString: Platform
@@ -134,11 +136,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a376be5396bb424b98328df71154f825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.WaypointMoveComponent
+  _moveComponent: {fileID: 1935362300034786844}
   _waypoints:
   - {fileID: 5891192826379414999}
   - {fileID: 2402534428499199933}
   _reachDistance: 0.1
   _moveDuration: 0.1
+--- !u!114 &1935362300034786844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240930164425400058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b33f839b983f4b059ce9107f89f89e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveComponent
+  _moveDirection: {x: 0, y: 0}
+  _require: 0
+  _moveDuration: 0.1
+--- !u!114 &844104595450461165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240930164425400058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a28f1235c2e407a9d66ec7da3b4639a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Content.Platform.Platform
 --- !u!1 &2402534428499199933
 GameObject:
   m_ObjectHideFlags: 0
