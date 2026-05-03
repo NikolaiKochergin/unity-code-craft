@@ -4,8 +4,8 @@ namespace Game.Gameplay
 {
     public struct RotateArgs
     {
-        public Vector3 Direction;
-        public float DeltaTime;
+        public readonly Vector3 Direction;
+        public readonly float DeltaTime;
 
         public RotateArgs(Vector3 direction, float deltaTime)
         {

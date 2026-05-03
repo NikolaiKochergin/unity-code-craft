@@ -22,6 +22,9 @@ namespace Game.Gameplay
         public static ValueKey<IGameEntity, IVariable<Quaternion>> Rotation = new(nameof(Rotation));
         public static ValueKey<IGameEntity, IValue<float>> RotateSpeed = new(nameof(RotateSpeed));
         public static ValueKey<IGameEntity, IValue<Vector3>> Position = new(nameof(Position));
+        public static ValueKey<IGameEntity, IRequest<Vector3>> AimRequest = new(nameof(AimRequest));
+        public static ValueKey<IGameEntity, Command<AimArgs>> AimCommand = new(nameof(AimCommand));
+        public static ValueKey<IGameEntity, IVariable<Vector3>> AimDirection = new(nameof(AimDirection));
         
         public static ValueKey<ICooldown> MoveTime = new(nameof(MoveTime));
     }

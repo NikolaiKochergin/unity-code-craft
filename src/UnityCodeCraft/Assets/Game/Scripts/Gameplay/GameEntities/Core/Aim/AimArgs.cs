@@ -2,12 +2,12 @@
 
 namespace Game.Gameplay
 {
-    public struct MoveArgs
+    public struct AimArgs
     {
         public readonly Vector3 Direction;
         public readonly float DeltaTime;
 
-        public MoveArgs(Vector3 direction, float deltaTime)
+        public AimArgs(Vector3 direction, float deltaTime)
         {
             Direction = direction;
             DeltaTime = deltaTime;

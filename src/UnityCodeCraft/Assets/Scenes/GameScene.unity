@@ -4256,6 +4256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.PlayerContextInstaller
   _playerCharacter: {fileID: 9048405937420967255}
+  _inputMap: {fileID: 11400000, guid: f453f92117d312c45a25f3c892ec26ae, type: 2}
 --- !u!114 &317358819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27750,7 +27751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.UI.GameUIInstaller
   _moveJoystick: {fileID: 757640612756630603}
-  _attackJoystick: {fileID: 7919524849257179009}
+  _aimJoystick: {fileID: 7919524849257179009}
   _healthScreenView: {fileID: 548561269895222117}
   _healthView: {fileID: 7160444056652517396}
   _ammoView: {fileID: 7160444056652517395}
@@ -28209,6 +28210,10 @@ PrefabInstance:
     - target: {fileID: 3578180279390331970, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_Name
       value: '[Character]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578180279390331970, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6992041410405490774, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_LocalPosition.x

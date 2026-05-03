@@ -17,9 +17,10 @@ namespace Game.Gameplay
 
             Command<MoveArgs> moveCommand = new();
             moveCommand.AddAction(_ => _moveTime.ResetTime());
-            entity.AddValue(GameEntityAPI.MoveCommand, moveCommand);
             
+            entity.AddValue(GameEntityAPI.MoveCommand, moveCommand);
             entity.AddValue(GameEntityAPI.MoveTime, _moveTime);
+            
             entity.WhenFixedTick(_moveTime.Tick);
             
             entity.AddBehaviour<MoveBehaviour>();

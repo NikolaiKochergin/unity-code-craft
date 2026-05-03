@@ -9,7 +9,7 @@ namespace Game.UI
     public sealed class GameUIInstaller : SceneEntityInstaller<IGameUI>
     {
         [SerializeField] private Joystick _moveJoystick;
-        [SerializeField] private Joystick _attackJoystick;
+        [SerializeField] private Joystick _aimJoystick;
         [SerializeField] private HealthScreenView _healthScreenView;
         [SerializeField] private StatView _healthView;
         [SerializeField] private StatView _ammoView;
@@ -20,13 +20,12 @@ namespace Game.UI
             PlayerContext playerContext = GameContext.Instance.GetValue(GameContextAPI.PlayerContext);
             
             ui.AddValue(GameUIAPI.MoveJoystick, _moveJoystick);
-            ui.AddValue(GameUIAPI.AttackJoystick, _attackJoystick);
+            ui.AddValue(GameUIAPI.AimJoystick, _aimJoystick);
             ui.AddValue(GameUIAPI.HealthScreenView, _healthScreenView);
             ui.AddValue(GameUIAPI.HealthView, _healthView);
             ui.AddValue(GameUIAPI.AmmoView, _ammoView);
             ui.AddValue(GameUIAPI.KillsView, _killsView);
             
-            ui.AddBehaviour(new UIInputPresenter(playerContext));
             ui.AddBehaviour(new StatPresenter(playerContext));
         }
     }

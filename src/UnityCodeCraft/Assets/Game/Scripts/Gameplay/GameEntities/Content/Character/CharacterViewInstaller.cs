@@ -11,7 +11,7 @@ namespace Game.Gameplay
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
         private static readonly int IsAiming = Animator.StringToHash("IsAiming");
         private static readonly int AimX = Animator.StringToHash("AimX");
-        private static readonly int AimY = Animator.StringToHash("AimY");
+        private static readonly int AimZ = Animator.StringToHash("AimZ");
         
         [SerializeField] private Animator _animator;
 
@@ -40,9 +40,16 @@ namespace Game.Gameplay
             entity
                 .WhenTick(_ => _animator.SetBool(IsMoving, entity.IsMoving()))
                 .AddTo(_disposables);
-            
-            // entity
-            //     .WhenTick(_ => animation)
+
+            entity
+                .WhenTick(_ =>
+                {
+                    Vector3 aimDirection = entity.GetValue(GameEntityAPI.AimDirection).Value;
+                    
+                    _animator.SetBool(IsAiming, entity.IsAiming());
+                    _animator.SetFloat(AimX, aimDirection.x);
+                    _animator.SetFloat(AimZ, aimDirection.z);
+                });
         }
 
         private void OnAnimatorMove()

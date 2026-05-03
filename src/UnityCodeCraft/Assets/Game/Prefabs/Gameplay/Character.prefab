@@ -1433,8 +1433,8 @@ MonoBehaviour:
   onlyEditModeGizmos: 0
   autoCompile: 0
   initialTagCapacity: 1
-  initialValueCapacity: 13
-  initialBehaviourCapacity: 2
+  initialValueCapacity: 16
+  initialBehaviourCapacity: 3
 --- !u!114 &4366909304254022560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1454,11 +1454,16 @@ MonoBehaviour:
       _moveTime:
         _duration: 0.04
         _time: 0
+  _aimInstaller:
+    _moveTime:
+      _duration: 0.04
+      _time: 0
+  _rotateInstaller:
+    _rotateSpeed:
+      value: 720
   _healthInstaller:
     _maxHealth:
       value: 10
-  _rotateSpeed:
-    value: 720
 --- !u!1 &3818262767236408140
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,14 +14,11 @@ namespace Game.Gameplay
             _moveInstaller.Install(entity);
 
             entity.GetValue(GameEntityAPI.MoveCommand)
-                // .AddCondition(_ => entity.)
+                .AddCondition(_ => entity.IsHealthExists())
                 .AddAction(args =>
                 {
-                    // args.
-                })
-                .AddAction(args =>
-                {
-                    entity.RotateStep(args.Direction, args.DeltaTime);
+                    if(!entity.IsAiming())
+                        entity.RotateStep(args.Direction, args.DeltaTime);
                 });
         }
     }

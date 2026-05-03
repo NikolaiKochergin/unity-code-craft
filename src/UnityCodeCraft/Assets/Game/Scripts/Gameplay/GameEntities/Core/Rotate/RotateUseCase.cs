@@ -17,9 +17,7 @@ namespace Game.Gameplay
             IVariable<Quaternion> rotation = entity.GetValue(GameEntityAPI.Rotation);
             float rotationSpeed = entity.GetValue(GameEntityAPI.RotateSpeed).Value;
             
-            direction = new Vector3(direction.x, 0, direction.y).normalized;
-            
-            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+            Quaternion targetRotation = Quaternion.LookRotation(direction.normalized, Vector3.up);
             rotation.Value = Quaternion.RotateTowards(rotation.Value, targetRotation, rotationSpeed * deltaTime);
         }
     }
