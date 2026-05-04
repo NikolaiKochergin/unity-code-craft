@@ -25,6 +25,7 @@ namespace Game.Gameplay
         public static ValueKey<IGameEntity, IRequest<Vector3>> AimRequest = new(nameof(AimRequest));
         public static ValueKey<IGameEntity, Command<AimArgs>> AimCommand = new(nameof(AimCommand));
         public static ValueKey<IGameEntity, IVariable<Vector3>> AimDirection = new(nameof(AimDirection));
+        public static ValueKey<IGameEntity, Cooldown> AimTime = new(nameof(AimTime));
         
         public static ValueKey<ICooldown> MoveTime = new(nameof(MoveTime));
     }

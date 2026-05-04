@@ -26,7 +26,7 @@ namespace Game.UI
             ui.AddValue(GameUIAPI.AmmoView, _ammoView);
             ui.AddValue(GameUIAPI.KillsView, _killsView);
             
-            ui.AddBehaviour(new StatPresenter(playerContext));
+            ui.AddBehaviour(new HealthViewPresenter(playerContext));
         }
     }
 }

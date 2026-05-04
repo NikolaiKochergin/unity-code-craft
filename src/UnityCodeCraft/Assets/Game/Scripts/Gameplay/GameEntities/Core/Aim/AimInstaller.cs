@@ -8,6 +8,8 @@ namespace Game.Gameplay
     [Serializable]
     public class AimInstaller : IGameEntityInstaller
     {
+        [SerializeField] private Cooldown _aimTime = new (0.04f, 0);
+        
         public void Install(IGameEntity entity)
         {
             entity.AddValue(GameEntityAPI.AimRequest, new Request<Vector3>());
@@ -16,16 +18,13 @@ namespace Game.Gameplay
             Command<AimArgs> aimCommand = new();
             aimCommand
                 .AddCondition(_ => entity.IsHealthExists())
-                .AddAction(args =>
-                {
-                    entity.RotateStep(args.Direction, args.DeltaTime);
-                });
-            
-            // TODO: РАЗОБРАТЬСЯ КАК ПРАВИЛЬНО ЗАПИСАТЬ ЭТО НАПРАВЛЕНИЕ
-                // .AddAction(args => entity.GetValue(GameEntityAPI.AimDirection).Value = 
-                //     Vector3.Cross(args.Direction, entity.GetValue(GameEntityAPI.ro)));
+                .AddAction(_ => _aimTime.ResetTime())
+                .AddAction(args => entity.RotateStep(args.Direction, args.DeltaTime));
             
             entity.AddValue(GameEntityAPI.AimCommand, aimCommand);
+            entity.AddValue(GameEntityAPI.AimTime, _aimTime);
+
+            entity.WhenFixedTick(_aimTime.Tick);
 
             entity.AddBehaviour<AimBehaviour>();
         }

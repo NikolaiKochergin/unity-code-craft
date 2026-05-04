@@ -19,8 +19,6 @@ namespace Game.Gameplay
         {
             if(_aimRequest.Consume(out Vector3 direction) && direction != Vector3.zero)
                 _aimCommand.Invoke(new AimArgs(direction, deltaTime));
-            else
-                _aimCommand.Invoke(new AimArgs(Vector3.zero, deltaTime));
         }
     }
 }

@@ -4,12 +4,12 @@ using Game.Gameplay;
 
 namespace Game.UI
 {
-    public class StatPresenter : IGameUIInit, IGameUIDispose
+    public class HealthViewPresenter : IGameUIInit, IGameUIDispose
     {
         private readonly PlayerContext _playerContext;
         private Subscription<int> _subscription;
 
-        public StatPresenter(PlayerContext playerContext) => 
+        public HealthViewPresenter(PlayerContext playerContext) => 
             _playerContext = playerContext;
 
         public void Init(IGameUI ui)

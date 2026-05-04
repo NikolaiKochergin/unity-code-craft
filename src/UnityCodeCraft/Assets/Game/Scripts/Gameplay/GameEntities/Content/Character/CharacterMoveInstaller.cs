@@ -17,7 +17,11 @@ namespace Game.Gameplay
                 .AddCondition(_ => entity.IsHealthExists())
                 .AddAction(args =>
                 {
-                    if(!entity.IsAiming())
+                    if (entity.IsAiming())
+                        entity.GetValue(GameEntityAPI.AimDirection).Value =
+                            Quaternion.Inverse(entity.GetValue(GameEntityAPI.Rotation).Value) *
+                            args.Direction.normalized;
+                    else
                         entity.RotateStep(args.Direction, args.DeltaTime);
                 });
         }
