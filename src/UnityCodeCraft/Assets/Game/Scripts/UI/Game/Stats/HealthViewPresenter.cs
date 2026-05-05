@@ -6,10 +6,10 @@ namespace Game.UI
 {
     public class HealthViewPresenter : IGameUIInit, IGameUIDispose
     {
-        private readonly PlayerContext _playerContext;
+        private readonly IPlayerContext _playerContext;
         private Subscription<int> _subscription;
 
-        public HealthViewPresenter(PlayerContext playerContext) => 
+        public HealthViewPresenter(IPlayerContext playerContext) => 
             _playerContext = playerContext;
 
         public void Init(IGameUI ui)

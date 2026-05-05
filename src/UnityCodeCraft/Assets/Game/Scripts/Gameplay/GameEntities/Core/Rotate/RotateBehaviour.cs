@@ -7,7 +7,7 @@ namespace Game.Gameplay
     public class RotateBehaviour : IGameEntityInit, IGameEntityFixedTick
     {
         private IRequest<Vector3> _request;
-        private Command<RotateArgs> _command;
+        private ICommand<RotateArgs> _command;
 
         public void Init(IGameEntity entity)
         {

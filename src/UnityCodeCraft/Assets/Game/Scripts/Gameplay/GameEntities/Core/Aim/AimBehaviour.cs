@@ -7,7 +7,7 @@ namespace Game.Gameplay
     public class AimBehaviour : IGameEntityInit, IGameEntityFixedTick
     {
         private IRequest<Vector3> _aimRequest;
-        private Command<AimArgs> _aimCommand;
+        private ICommand<AimArgs> _aimCommand;
 
         public void Init(IGameEntity entity)
         {

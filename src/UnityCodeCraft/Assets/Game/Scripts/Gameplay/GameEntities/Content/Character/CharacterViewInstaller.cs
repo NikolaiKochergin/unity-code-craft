@@ -50,6 +50,11 @@ namespace Game.Gameplay
                     _animator.SetFloat(AimX, aimDirection.x);
                     _animator.SetFloat(AimZ, aimDirection.z);
                 });
+            
+            entity
+                .GetValue(GameEntityAPI.MoveSpeedMultiplier)
+                .Subscribe(speed => _animator.speed = speed)
+                .AddTo(_disposables);
         }
 
         private void OnAnimatorMove()

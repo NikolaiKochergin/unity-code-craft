@@ -1,4 +1,5 @@
 ﻿using System;
+using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ namespace Game.Gameplay
             entity.GetValue(GameEntityAPI.MoveCommand)
                 .AddCondition(_ => entity.IsHealthExists())
                 .AddAction(entity.MoveWithAimingOrRotate);
+            
+            entity.AddValue(GameEntityAPI.MoveSpeedMultiplier, new ReactiveVariable<float>(1f));
         }
     }
 }

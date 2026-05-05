@@ -4,6 +4,6 @@ namespace Game.Gameplay
 {
     public sealed class GameContextAPI
     {
-        public static ValueKey<IGameContext, PlayerContext> PlayerContext = new(nameof(PlayerContext));
+        public static ValueKey<IGameContext, IPlayerContext> PlayerContext = new(nameof(PlayerContext));
     }
 }

@@ -17,7 +17,7 @@ namespace Game.UI
         
         public override void Install(IGameUI ui)
         {
-            PlayerContext playerContext = GameContext.Instance.GetValue(GameContextAPI.PlayerContext);
+            IPlayerContext playerContext = GameContext.Instance.GetValue(GameContextAPI.PlayerContext);
             
             ui.AddValue(GameUIAPI.MoveJoystick, _moveJoystick);
             ui.AddValue(GameUIAPI.AimJoystick, _aimJoystick);
