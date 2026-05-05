@@ -15,15 +15,7 @@ namespace Game.Gameplay
 
             entity.GetValue(GameEntityAPI.MoveCommand)
                 .AddCondition(_ => entity.IsHealthExists())
-                .AddAction(args =>
-                {
-                    if (entity.IsAiming())
-                        entity.GetValue(GameEntityAPI.AimDirection).Value =
-                            Quaternion.Inverse(entity.GetValue(GameEntityAPI.Rotation).Value) *
-                            args.Direction.normalized;
-                    else
-                        entity.RotateStep(args.Direction, args.DeltaTime);
-                });
+                .AddAction(entity.MoveWithAimingOrRotate);
         }
     }
 }

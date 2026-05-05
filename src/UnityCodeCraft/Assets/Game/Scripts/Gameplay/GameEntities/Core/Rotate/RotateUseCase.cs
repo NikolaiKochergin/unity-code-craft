@@ -6,6 +6,9 @@ namespace Game.Gameplay
 {
     public static class RotateUseCase
     {
+        public static void RotateToAimStep(this IGameEntity entity, AimArgs args) => 
+            entity.RotateStep(args.Direction, args.DeltaTime);
+        
         public static void RotateStep(this IGameEntity entity, RotateArgs args) => 
             entity.RotateStep(args.Direction, args.DeltaTime);
 

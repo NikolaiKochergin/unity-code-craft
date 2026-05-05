@@ -19,7 +19,7 @@ namespace Game.Gameplay
             aimCommand
                 .AddCondition(_ => entity.IsHealthExists())
                 .AddAction(_ => _aimTime.ResetTime())
-                .AddAction(args => entity.RotateStep(args.Direction, args.DeltaTime));
+                .AddAction(entity.RotateToAimStep);
             
             entity.AddValue(GameEntityAPI.AimCommand, aimCommand);
             entity.AddValue(GameEntityAPI.AimTime, _aimTime);

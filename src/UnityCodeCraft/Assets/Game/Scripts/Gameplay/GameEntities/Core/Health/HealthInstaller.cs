@@ -19,7 +19,6 @@ namespace Game.Gameplay
             entity.AddValue(GameEntityAPI.CurrentHealth, currentHealth);
             entity.AddValue(GameEntityAPI.MaxHealth, _maxHealth);
 
-
             Event deathEvent = new();
             entity.AddValue(GameEntityAPI.DeathEvent, deathEvent);
 
