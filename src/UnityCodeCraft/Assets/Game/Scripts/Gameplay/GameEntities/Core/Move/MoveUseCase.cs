@@ -23,5 +23,14 @@ namespace Game.Gameplay
             entity.GetValue(GameEntityAPI.AimDirection).Value =
                 Quaternion.Inverse(entity.GetValue(GameEntityAPI.Rotation).Value) *
                 direction.normalized;
+
+        public static void MoveStepForward(this IGameEntity entity, float speed, float deltaTime)
+        {
+            Vector3 direction = entity.GetValue(GameEntityAPI.Rotation).Value * Vector3.forward;
+            entity.MoveStep(direction, speed, deltaTime);
+        }
+
+        public static void MoveStep(this IGameEntity entity, Vector3 direction, float speed, float deltaTime) => 
+            entity.GetValue(GameEntityAPI.Position).Value += direction * speed * deltaTime;
     }
 }

@@ -1,3 +1,4 @@
+using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ namespace Game.Gameplay
         [SerializeField] private RotateInstaller _rotateInstaller;
         [SerializeField] private HealthInstaller _healthInstaller;
         [SerializeField] private TakeDamageInstaller _takeDamageInstaller;
+        [SerializeField] private CharacterFireInstaller _fireInstaller;
+        [SerializeField] private GameEntity _weapon;
         
         public override void Install(IGameEntity entity)
         {
@@ -20,11 +23,14 @@ namespace Game.Gameplay
             _aimInstaller.Install(entity);
             _healthInstaller.Install(entity);
             _takeDamageInstaller.Install(entity);
+            _fireInstaller.Install(entity);
             
             entity
                 .GetValue(GameEntityAPI.TakeDamageCommand)
                 .AddCondition(_ => entity.IsHealthExists())
                 .AddAction(damage => entity.ReduceHealth(damage));
+            
+            entity.AddValue(GameEntityAPI.Weapon, new ReactiveVariable<IGameEntity>(_weapon));
         }
     }
 }

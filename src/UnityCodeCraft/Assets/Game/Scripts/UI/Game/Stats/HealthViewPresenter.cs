@@ -12,8 +12,7 @@ namespace Game.UI
         public HealthViewPresenter(IPlayerContext playerContext) => 
             _playerContext = playerContext;
 
-        public void Init(IGameUI ui)
-        {
+        public void Init(IGameUI ui) =>
             _subscription = _playerContext
                 .GetValue(PlayerContextAPI.Character)
                 .GetValue(GameEntityAPI.CurrentHealth)
@@ -27,7 +26,6 @@ namespace Game.UI
                     healthView.SetText(current.ToString());
                     healthView.SetProgress((float)current / max);
                 });
-        }
 
         public void Dispose(IGameUI entity) => 
             _subscription.Dispose();

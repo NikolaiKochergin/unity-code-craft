@@ -14685,6 +14685,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.4999998, y: 0.27415082, z: 2.5000048}
   m_Center: {x: -1.2499853, y: 0.13707541, z: 1.25}
+--- !u!4 &1146268628 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7272988223813815378, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+  m_PrefabInstance: {fileID: 9048405937420967252}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1146821559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28245,9 +28250,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4366909304254022560, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: _weapon
+      value: 
+      objectReference: {fileID: 9048405937420967256}
     - target: {fileID: 5635805221442455491, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635805221442455491, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: initialValueCapacity
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635805221442455491, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: initialBehaviourCapacity
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6992041410405490774, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28296,7 +28313,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7884378371530702000, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8264958231034587490}
+    - targetCorrespondingSourceObject: {fileID: 7112523048471529541, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9048405937420967256}
+    - targetCorrespondingSourceObject: {fileID: 7112523048471529541, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9048405937420967259}
   m_SourcePrefab: {fileID: 100100000, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+--- !u!1 &9048405937420967253 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7112523048471529541, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+  m_PrefabInstance: {fileID: 9048405937420967252}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &9048405937420967255 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5635805221442455491, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
@@ -28308,6 +28336,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013b186af27c578459e9bf602889f6a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.GameEntity
+--- !u!114 &9048405937420967256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048405937420967253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013b186af27c578459e9bf602889f6a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.GameEntity
+  useUnityLifecycle: 1
+  disposeValues: 1
+  installOnAwake: 1
+  uninstallOnDestroy: 1
+  scriptableInstallers: []
+  sceneInstallers:
+  - {fileID: 9048405937420967259}
+  onlySelectedGizmos: 0
+  onlyEditModeGizmos: 0
+  autoCompile: 0
+  initialTagCapacity: 0
+  initialValueCapacity: 3
+  initialBehaviourCapacity: 0
+--- !u!114 &9048405937420967259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048405937420967253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3449b060bb8845ee8f5f17f70a72222b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.ProjectileWeaponInstaller
+  _ammo:
+    active: 1
+    value:
+      value: 8
+  _cooldown:
+    active: 1
+    value:
+      _duration: 0
+      _time: 1
+  _firePoint: {fileID: 1146268628}
+  _bulletPrefab: {fileID: 4898133462883985381, guid: fc383e20fc5b342059ed5ab71e30da44, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

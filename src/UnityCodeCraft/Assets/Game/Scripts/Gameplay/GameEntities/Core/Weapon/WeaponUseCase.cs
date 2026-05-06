@@ -1,11 +1,12 @@
-﻿namespace Game.Gameplay
+﻿using Atomic.Entities;
+
+namespace Game.Gameplay
 {
     public static class WeaponUseCase
     {
-        public static void FireWithWeapon(this IGameEntity entity)
-        {
-            // TODO: Продолжить тут. Дописать механику ведения огня
-            // entity.GetValue()
-        }
+        public static void FireWithWeapon(this IGameEntity entity) =>
+            entity
+                .GetValue(GameEntityAPI.Weapon).Value
+                ?.GetValue(GameEntityAPI.FireCommand).Invoke();
     }
 }
