@@ -16,9 +16,11 @@ namespace Game.Gameplay
             
             weapon.GetValue(GameEntityAPI.FireCommand).AddAction(() =>
             {
+                IGameEntity owner = weapon.GetValue(GameEntityAPI.Owner).Value;
                 weapon.SpawnBullet(
                    _firePoint.position,
-                   _firePoint.rotation
+                   _firePoint.rotation,
+                   owner.GetValue(GameEntityAPI.Team).Value
                 );
             });
         }

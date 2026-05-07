@@ -1,4 +1,5 @@
-﻿using Atomic.Entities;
+﻿using Atomic.Elements;
+using Atomic.Entities;
 using Game.UI;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace Game.Gameplay
         {
             context.AddValue(PlayerContextAPI.Character, _playerCharacter);
             context.AddValue(PlayerContextAPI.InputMap, _inputMap);
+            context.AddValue(PlayerContextAPI.Score, new ReactiveVariable<int>());
                 
             context.AddBehaviour(new CharacterInputController(GameUI.Instance));
         }

@@ -4280,7 +4280,7 @@ MonoBehaviour:
   onlyEditModeGizmos: 0
   autoCompile: 0
   initialTagCapacity: 0
-  initialValueCapacity: 1
+  initialValueCapacity: 3
   initialBehaviourCapacity: 1
 --- !u!4 &317358820
 Transform:
@@ -25531,6 +25531,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 803416448}
     m_Modifications:
+    - target: {fileID: 700910700196832190, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+      propertyPath: m_TranslationOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 700910700196832190, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+      propertyPath: m_TranslationOffset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 700910700196832190, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+      propertyPath: m_TranslationOffset.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186118894089852813, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+      propertyPath: m_TranslationOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186118894089852813, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+      propertyPath: m_TranslationOffset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186118894089852813, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+      propertyPath: m_TranslationOffset.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4361596233082998913, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -25578,6 +25602,18 @@ PrefabInstance:
     - target: {fileID: 6355162821186015845, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
       propertyPath: m_Name
       value: Zombie (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539019232894893930, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+      propertyPath: m_TranslationOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539019232894893930, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+      propertyPath: m_TranslationOffset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539019232894893930, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+      propertyPath: m_TranslationOffset.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
