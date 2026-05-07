@@ -1628,6 +1628,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4361596233082998913}
   - component: {fileID: 8179233504444308434}
+  - component: {fileID: 8053753167985840600}
+  - component: {fileID: 8683890395289438236}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -1683,6 +1685,50 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &8053753167985840600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355162821186015845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013b186af27c578459e9bf602889f6a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.GameEntity
+  useUnityLifecycle: 1
+  disposeValues: 1
+  installOnAwake: 1
+  uninstallOnDestroy: 1
+  scriptableInstallers: []
+  sceneInstallers:
+  - {fileID: 8683890395289438236}
+  onlySelectedGizmos: 0
+  onlyEditModeGizmos: 0
+  autoCompile: 0
+  initialTagCapacity: 1
+  initialValueCapacity: 7
+  initialBehaviourCapacity: 0
+--- !u!114 &8683890395289438236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355162821186015845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e07e1a931e5435f9c8ca5ef827e5334, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.ZombieInstaller
+  _transformInstaller:
+    _transform: {fileID: 4361596233082998913}
+  _healthInstaller:
+    _maxHealth:
+      value: 3
+  _team:
+    value: 2
 --- !u!1 &6519369982854541961
 GameObject:
   m_ObjectHideFlags: 0
@@ -2189,6 +2235,7 @@ GameObject:
   - component: {fileID: 8141490258274716446}
   - component: {fileID: 1842272872912051803}
   - component: {fileID: 6539019232894893930}
+  - component: {fileID: 7874512304406448281}
   m_Layer: 10
   m_Name: <Collider>
   m_TagString: Untagged
@@ -2254,6 +2301,19 @@ PositionConstraint:
   m_Sources:
   - sourceTransform: {fileID: 1383350002564321792}
     weight: 1
+--- !u!114 &7874512304406448281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8928404799372505036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 884b1c57e12d1584a93ccc755af61f06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.GameEntityProxy
+  _source: {fileID: 8053753167985840600}
 --- !u!1 &9007448757662350964
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ namespace Game.Gameplay
 {
     public static class GameEntityAPI
     {
+        public static TagKey<IGameEntity> CharacterTag = new();
         public static TagKey<IGameEntity> DamageableTag = new();
         public static TagKey<IGameEntity> MovableTag = new();
         
@@ -41,5 +42,6 @@ namespace Game.Gameplay
         public static ValueKey<IGameEntity, TriggerEvents> Trigger = new(nameof(Trigger));
         public static ValueKey<IGameEntity, IReactiveVariable<TeamType>> Team = new(nameof(TeamType));
         public static ValueKey<IGameEntity, IVariable<IGameEntity>> Owner = new(nameof(Owner));
+        public static ValueKey<IGameEntity, Transform> Transform = new(nameof(Transform));
     }
 }

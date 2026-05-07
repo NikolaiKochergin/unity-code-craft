@@ -14,9 +14,14 @@ namespace Game.Gameplay
         [SerializeField] private TakeDamageInstaller _takeDamageInstaller;
         [SerializeField] private CharacterFireInstaller _fireInstaller;
         [SerializeField] private GameEntity _weapon;
+        [SerializeField] private ReactiveVariable<TeamType> _team;
         
         public override void Install(IGameEntity entity)
         {
+            entity.AddTag(GameEntityAPI.CharacterTag);
+            entity.AddValue(GameEntityAPI.Transform, transform);
+            entity.AddValue(GameEntityAPI.Team, _team);
+            
             _transformInstaller.Install(entity);
             _moveInstaller.Install(entity);
             _rotateInstaller.Install(entity);

@@ -6,11 +6,13 @@ namespace Game.Gameplay
 {
     public class WeaponInstaller : SceneEntityInstaller<IGameEntity>
     {
+        [SerializeField] private GameEntity _owner;
         [SerializeField] private Optional<ReactiveVariable<int>> _ammo;
         [SerializeField] private Optional<Cooldown> _cooldown;
         
         public override void Install(IGameEntity weapon)
         {
+            weapon.AddValue(GameEntityAPI.Owner, new Variable<IGameEntity>(_owner));
             weapon.AddValue(GameEntityAPI.FireCommand, new Command());
             
             if (_ammo)

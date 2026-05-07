@@ -25531,30 +25531,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 803416448}
     m_Modifications:
-    - target: {fileID: 700910700196832190, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-      propertyPath: m_TranslationOffset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 700910700196832190, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-      propertyPath: m_TranslationOffset.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 700910700196832190, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-      propertyPath: m_TranslationOffset.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2186118894089852813, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-      propertyPath: m_TranslationOffset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2186118894089852813, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-      propertyPath: m_TranslationOffset.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2186118894089852813, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-      propertyPath: m_TranslationOffset.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4361596233082998913, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -25595,25 +25571,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6213630575608684104, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-      propertyPath: _initialTarget
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6355162821186015845, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
       propertyPath: m_Name
       value: Zombie (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6539019232894893930, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-      propertyPath: m_TranslationOffset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6539019232894893930, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-      propertyPath: m_TranslationOffset.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6539019232894893930, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-      propertyPath: m_TranslationOffset.z
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28290,13 +28250,17 @@ PrefabInstance:
       propertyPath: _weapon
       value: 
       objectReference: {fileID: 9048405937420967256}
+    - target: {fileID: 4366909304254022560, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: _team.value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5635805221442455491, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5635805221442455491, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: initialValueCapacity
-      value: 21
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 5635805221442455491, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: initialBehaviourCapacity
@@ -28395,7 +28359,7 @@ MonoBehaviour:
   onlyEditModeGizmos: 0
   autoCompile: 0
   initialTagCapacity: 0
-  initialValueCapacity: 3
+  initialValueCapacity: 5
   initialBehaviourCapacity: 0
 --- !u!114 &9048405937420967259
 MonoBehaviour:
@@ -28409,6 +28373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3449b060bb8845ee8f5f17f70a72222b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.ProjectileWeaponInstaller
+  _owner: {fileID: 9048405937420967255}
   _ammo:
     active: 1
     value:
@@ -28416,8 +28381,8 @@ MonoBehaviour:
   _cooldown:
     active: 1
     value:
-      _duration: 0
-      _time: 1
+      _duration: 1
+      _time: 0
   _firePoint: {fileID: 1146268628}
   _bulletPrefab: {fileID: 4898133462883985381, guid: fc383e20fc5b342059ed5ab71e30da44, type: 3}
 --- !u!1660057539 &9223372036854775807
