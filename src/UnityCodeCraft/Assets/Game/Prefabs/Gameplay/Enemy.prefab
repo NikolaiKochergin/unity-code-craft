@@ -1704,12 +1704,13 @@ MonoBehaviour:
   scriptableInstallers: []
   sceneInstallers:
   - {fileID: 8683890395289438236}
+  - {fileID: 8139923208622980336}
   onlySelectedGizmos: 0
   onlyEditModeGizmos: 0
   autoCompile: 0
   initialTagCapacity: 1
-  initialValueCapacity: 7
-  initialBehaviourCapacity: 0
+  initialValueCapacity: 18
+  initialBehaviourCapacity: 4
 --- !u!114 &8683890395289438236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1722,11 +1723,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e07e1a931e5435f9c8ca5ef827e5334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.ZombieInstaller
+  _initialTarget: {fileID: 0}
+  _collider: {fileID: 1842272872912051803}
   _transformInstaller:
     _transform: {fileID: 4361596233082998913}
   _healthInstaller:
     _maxHealth:
       value: 3
+  _moveInstaller:
+    _moveTime:
+      _duration: 0.04
+      _time: 0
+  _rotateInstaller:
+    _rotateSpeed:
+      value: 720
+  _attackDistance:
+    value: 1
   _team:
     value: 2
 --- !u!1 &6519369982854541961
@@ -1953,6 +1965,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1383350002564321792}
   - component: {fileID: 2415962780172116089}
+  - component: {fileID: 8139923208622980336}
   m_Layer: 0
   m_Name: <Skeleton>
   m_TagString: Enemy
@@ -1998,6 +2011,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8139923208622980336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7158363685665035492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef9aa181620a478795d38282465c3d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.ZombieViewInstaller
+  _animator: {fileID: 2415962780172116089}
+  _takeDamageParticles: {fileID: 0}
+  _dieParticles: {fileID: 0}
 --- !u!1 &7369059967829061964
 GameObject:
   m_ObjectHideFlags: 0

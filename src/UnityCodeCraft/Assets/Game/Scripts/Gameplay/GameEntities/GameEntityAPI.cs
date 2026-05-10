@@ -6,9 +6,9 @@ namespace Game.Gameplay
 {
     public static class GameEntityAPI
     {
-        public static TagKey<IGameEntity> CharacterTag = new();
-        public static TagKey<IGameEntity> DamageableTag = new();
-        public static TagKey<IGameEntity> MovableTag = new();
+        public static TagKey<IGameEntity> CharacterTag = new(nameof(CharacterTag));
+        public static TagKey<IGameEntity> DamageableTag = new(nameof(DamageableTag));
+        public static TagKey<IGameEntity> MovableTag = new(nameof(MovableTag));
         
         public static ValueKey<IGameEntity, IReactiveVariable<int>> CurrentHealth = new(nameof(CurrentHealth));
         public static ValueKey<IGameEntity, IValue<int>> MaxHealth = new(nameof(MaxHealth));
@@ -43,5 +43,8 @@ namespace Game.Gameplay
         public static ValueKey<IGameEntity, IReactiveVariable<TeamType>> Team = new(nameof(TeamType));
         public static ValueKey<IGameEntity, IVariable<IGameEntity>> Owner = new(nameof(Owner));
         public static ValueKey<IGameEntity, Transform> Transform = new(nameof(Transform));
+        public static ValueKey<IGameEntity, IVariable<IGameEntity>> Target = new(nameof(Target));
+        public static ValueKey<IGameEntity, IValue<float>> AttackDistance = new(nameof(AttackDistance));
+        public static ValueKey<IGameEntity, GameEntity[]> Zombies = new(nameof(Zombies));
     }
 }

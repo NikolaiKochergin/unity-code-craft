@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 8407613841891128510}
   - component: {fileID: 5168095568867884736}
   - component: {fileID: 6473258856621968162}
+  - component: {fileID: 5138916872912250586}
   m_Layer: 9
   m_Name: <Collider>
   m_TagString: Player
@@ -203,6 +204,19 @@ PositionConstraint:
   m_Sources:
   - sourceTransform: {fileID: 765187070542819803}
     weight: 1
+--- !u!114 &5138916872912250586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397603011075967508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 884b1c57e12d1584a93ccc755af61f06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.GameEntityProxy
+  _source: {fileID: 5635805221442455491}
 --- !u!1 &482368463370242186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1432,9 +1446,9 @@ MonoBehaviour:
   onlySelectedGizmos: 0
   onlyEditModeGizmos: 0
   autoCompile: 0
-  initialTagCapacity: 1
-  initialValueCapacity: 16
-  initialBehaviourCapacity: 3
+  initialTagCapacity: 3
+  initialValueCapacity: 24
+  initialBehaviourCapacity: 4
 --- !u!114 &4366909304254022560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1455,7 +1469,7 @@ MonoBehaviour:
         _duration: 0.04
         _time: 0
   _aimInstaller:
-    _moveTime:
+    _aimTime:
       _duration: 0.04
       _time: 0
   _rotateInstaller:
@@ -1464,6 +1478,14 @@ MonoBehaviour:
   _healthInstaller:
     _maxHealth:
       value: 10
+  _fireInstaller:
+    _fireDelay:
+      active: 1
+      value:
+        duration: 0.5
+  _weapon: {fileID: 383029351826896194}
+  _team:
+    value: 1
 --- !u!1 &3818262767236408140
 GameObject:
   m_ObjectHideFlags: 0
@@ -2277,6 +2299,7 @@ GameObject:
   - component: {fileID: 765187070542819803}
   - component: {fileID: 676053041413999030}
   - component: {fileID: 7751906750042188848}
+  - component: {fileID: 2239917180144149855}
   m_Layer: 0
   m_Name: <Skeleton>
   m_TagString: Untagged
@@ -2335,6 +2358,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.CharacterViewInstaller
   _animator: {fileID: 676053041413999030}
+--- !u!114 &2239917180144149855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7884378371530702000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ecf9037ddc41c2a28e03a2cb053da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.CharacterSounds
+  _audioSource: {fileID: 1996927140430359114}
+  _death: {fileID: 8300000, guid: 234139ee661e84bc8a517d097ca63824, type: 3}
+  _moveSteps:
+  - {fileID: 8300000, guid: c2e920c5e714d4c94a3609a0f440c584, type: 3}
+  - {fileID: 8300000, guid: 4cbb8723939a742fcb51cb82e1059928, type: 3}
+  - {fileID: 8300000, guid: 3d4e74a0e14cb44f8b06b86fc2811df6, type: 3}
+  - {fileID: 8300000, guid: bbb4b8eca821e43398bd4fd4c673a7e1, type: 3}
 --- !u!1 &8089193100203344506
 GameObject:
   m_ObjectHideFlags: 0
@@ -2766,8 +2808,103 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2555051196878869353, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 383029351826896194}
+    - targetCorrespondingSourceObject: {fileID: 2555051196878869353, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5288202805277000558}
+    - targetCorrespondingSourceObject: {fileID: 2555051196878869353, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8018672637441031753}
   m_SourcePrefab: {fileID: 100100000, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}
+--- !u!198 &542312931861483368 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5064070444613506116, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}
+  m_PrefabInstance: {fileID: 4738243663061736236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7112523048471529541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2555051196878869353, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}
+  m_PrefabInstance: {fileID: 4738243663061736236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &383029351826896194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112523048471529541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013b186af27c578459e9bf602889f6a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.GameEntity
+  useUnityLifecycle: 1
+  disposeValues: 1
+  installOnAwake: 1
+  uninstallOnDestroy: 1
+  scriptableInstallers: []
+  sceneInstallers:
+  - {fileID: 5288202805277000558}
+  - {fileID: 8018672637441031753}
+  onlySelectedGizmos: 0
+  onlyEditModeGizmos: 0
+  autoCompile: 0
+  initialTagCapacity: 0
+  initialValueCapacity: 4
+  initialBehaviourCapacity: 0
+--- !u!114 &5288202805277000558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112523048471529541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3449b060bb8845ee8f5f17f70a72222b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.ProjectileWeaponInstaller
+  _owner: {fileID: 5635805221442455491}
+  _ammo:
+    active: 1
+    value:
+      value: 8
+  _cooldown:
+    active: 1
+    value:
+      _duration: 1
+      _time: 0
+  _firePoint: {fileID: 7272988223813815378}
+  _bulletPrefab: {fileID: 4898133462883985381, guid: fc383e20fc5b342059ed5ab71e30da44, type: 3}
+  _fireRate: 0.25
+--- !u!114 &8018672637441031753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112523048471529541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2a8e32140549d783d48756778f6af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.WeaponViewInstaller
+  _audioSource: {fileID: 7196453617052720464}
+  _fireSound: {fileID: 8300000, guid: ae32288ab1d5d40f099549e5b2eb634f, type: 3}
+  _fireParticles: {fileID: 542312931861483368}
+--- !u!82 &7196453617052720464 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2458806991490565756, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}
+  m_PrefabInstance: {fileID: 4738243663061736236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7272988223813815378 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2679439196154746750, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}
+  m_PrefabInstance: {fileID: 4738243663061736236}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7708566380249203598 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3115307619230652578, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}

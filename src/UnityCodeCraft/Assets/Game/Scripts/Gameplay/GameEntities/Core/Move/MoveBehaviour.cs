@@ -19,12 +19,12 @@ namespace Game.Gameplay
         {
             if (_moveRequest.Consume(out Vector3 direction) && direction != Vector3.zero)
             {
-                entity.GetValue(GameEntityAPI.MoveSpeedMultiplier).Value = direction.magnitude;
+                // entity.GetValue(GameEntityAPI.MoveSpeedMultiplier).Value = direction.magnitude;
                 _moveCommand.Invoke(new MoveArgs(direction, deltaTime));
             }
             else
             {
-                entity.GetValue(GameEntityAPI.MoveSpeedMultiplier).Value = 1f;
+                // entity.GetValue(GameEntityAPI.MoveSpeedMultiplier).Value = 1f;
             }
         }
     }
