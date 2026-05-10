@@ -7,6 +7,7 @@ namespace Game.Gameplay
     {
         [SerializeField] private Transform _firePoint;
         [SerializeField] private GameEntity _bulletPrefab;
+        [SerializeField, Min(0)] private float _fireRate;
 
         public override void Install(IGameEntity weapon)
         {
@@ -19,10 +20,15 @@ namespace Game.Gameplay
                 IGameEntity owner = weapon.GetValue(GameEntityAPI.Owner).Value;
                 weapon.SpawnBullet(
                    _firePoint.position,
-                   _firePoint.rotation,
+                   _firePoint.rotation = CalculateFireDirection(),
                    owner.GetValue(GameEntityAPI.Team).Value
                 );
             });
+        }
+
+        private Quaternion CalculateFireDirection()
+        {
+            return _firePoint.rotation * Quaternion.Euler(0f, Random.Range(-_fireRate, _fireRate) / 2f, 0f);
         }
     }
 }

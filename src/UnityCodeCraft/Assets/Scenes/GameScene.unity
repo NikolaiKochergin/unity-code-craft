@@ -28407,10 +28407,6 @@ MonoBehaviour:
     active: 1
     value:
       value: 8
-  _fireDelay:
-    active: 1
-    value:
-      duration: 0.5
   _cooldown:
     active: 1
     value:
@@ -28418,6 +28414,7 @@ MonoBehaviour:
       _time: 0
   _firePoint: {fileID: 1146268628}
   _bulletPrefab: {fileID: 4898133462883985381, guid: fc383e20fc5b342059ed5ab71e30da44, type: 3}
+  _fireRate: 0.25
 --- !u!114 &9048405937420967261
 MonoBehaviour:
   m_ObjectHideFlags: 0
