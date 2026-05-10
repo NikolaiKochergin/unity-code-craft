@@ -21,6 +21,7 @@ namespace Game.Gameplay
             entity.AddTag(GameEntityAPI.CharacterTag);
             entity.AddValue(GameEntityAPI.Transform, transform);
             entity.AddValue(GameEntityAPI.Team, _team);
+            entity.AddValue(GameEntityAPI.Weapon, new ReactiveVariable<IGameEntity>(_weapon));
             
             _transformInstaller.Install(entity);
             _moveInstaller.Install(entity);
@@ -35,7 +36,9 @@ namespace Game.Gameplay
                 .AddCondition(_ => entity.IsHealthExists())
                 .AddAction(damage => entity.ReduceHealth(damage));
             
-            entity.AddValue(GameEntityAPI.Weapon, new ReactiveVariable<IGameEntity>(_weapon));
+            entity
+                .GetValue(GameEntityAPI.AimCommand)
+                .AddAction(_ => entity.GetValue(GameEntityAPI.FireRequest).Invoke());
         }
     }
 }

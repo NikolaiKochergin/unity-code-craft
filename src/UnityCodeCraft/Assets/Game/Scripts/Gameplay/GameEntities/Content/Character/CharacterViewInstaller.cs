@@ -8,6 +8,7 @@ namespace Game.Gameplay
     {
         private static readonly int TakeDamage = Animator.StringToHash("TakeDamage");
         private static readonly int Death = Animator.StringToHash("Death");
+        private static readonly int Attack = Animator.StringToHash("Attack");
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
         private static readonly int IsAiming = Animator.StringToHash("IsAiming");
         private static readonly int AimX = Animator.StringToHash("AimX");
@@ -16,13 +17,9 @@ namespace Game.Gameplay
         [SerializeField] private Animator _animator;
 
         private readonly DisposableComposite _disposables = new();
-        
-        private IGameEntity _entity;
 
         public override void Install(IGameEntity entity)
         {
-            _entity = entity;
-            
             entity.AddValue(GameEntityAPI.Animator, _animator);
             
             entity
@@ -55,6 +52,10 @@ namespace Game.Gameplay
                 .GetValue(GameEntityAPI.MoveSpeedMultiplier)
                 .Subscribe(speed => _animator.speed = speed)
                 .AddTo(_disposables);
+
+            entity
+                .GetValue(GameEntityAPI.FireCommand)
+                .AddAction(() => _animator.SetTrigger(Attack));
         }
 
         private void OnAnimatorMove()

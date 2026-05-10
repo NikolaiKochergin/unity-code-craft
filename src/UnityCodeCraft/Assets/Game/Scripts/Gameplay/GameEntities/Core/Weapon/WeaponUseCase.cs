@@ -8,5 +8,11 @@ namespace Game.Gameplay
             entity
                 .GetValue(GameEntityAPI.Weapon).Value
                 ?.GetValue(GameEntityAPI.FireCommand).Invoke();
+
+        public static bool CanFireWithWeapon(this IGameEntity entity)
+        {
+            IGameEntity weapon = entity.GetValue(GameEntityAPI.Weapon).Value;
+            return weapon != null && weapon.GetValue(GameEntityAPI.FireCommand).CanInvoke();
+        }
     }
 }

@@ -5188,6 +5188,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.509991, y: 3.0119958, z: 1}
   m_Center: {x: -1.2500002, y: 1.5, z: 0}
+--- !u!198 &376043000 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 542312931861483368, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+  m_PrefabInstance: {fileID: 9048405937420967252}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &377622917
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18261,7 +18266,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1379042641
 Transform:
   m_ObjectHideFlags: 0
@@ -26253,6 +26258,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 15.1424885, y: 1, z: 3.6964684}
   m_Center: {x: 3.760127, y: 0, z: 16.247978}
+--- !u!82 &2119003396 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7196453617052720464, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+  m_PrefabInstance: {fileID: 9048405937420967252}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2125758030
 GameObject:
   m_ObjectHideFlags: 0
@@ -28080,7 +28090,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.CharacterSounds
   _audioSource: {fileID: 1253000347}
   _death: {fileID: 8300000, guid: 234139ee661e84bc8a517d097ca63824, type: 3}
-  _gunFire: {fileID: 8300000, guid: ae32288ab1d5d40f099549e5b2eb634f, type: 3}
   _moveSteps:
   - {fileID: 8300000, guid: c2e920c5e714d4c94a3609a0f440c584, type: 3}
   - {fileID: 8300000, guid: 4cbb8723939a742fcb51cb82e1059928, type: 3}
@@ -28254,6 +28263,22 @@ PrefabInstance:
       propertyPath: _team.value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4366909304254022560, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: _fireInstaller._cooldown.active
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4366909304254022560, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: _fireInstaller._fireDelay.active
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4366909304254022560, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: _fireInstaller._cooldown.value._duration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4366909304254022560, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: _fireInstaller._fireDelay.value.duration
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5635805221442455491, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -28319,6 +28344,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7112523048471529541, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9048405937420967259}
+    - targetCorrespondingSourceObject: {fileID: 7112523048471529541, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9048405937420967261}
   m_SourcePrefab: {fileID: 100100000, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
 --- !u!1 &9048405937420967253 stripped
 GameObject:
@@ -28355,11 +28383,12 @@ MonoBehaviour:
   scriptableInstallers: []
   sceneInstallers:
   - {fileID: 9048405937420967259}
+  - {fileID: 9048405937420967261}
   onlySelectedGizmos: 0
   onlyEditModeGizmos: 0
   autoCompile: 0
   initialTagCapacity: 0
-  initialValueCapacity: 5
+  initialValueCapacity: 4
   initialBehaviourCapacity: 0
 --- !u!114 &9048405937420967259
 MonoBehaviour:
@@ -28378,6 +28407,10 @@ MonoBehaviour:
     active: 1
     value:
       value: 8
+  _fireDelay:
+    active: 1
+    value:
+      duration: 0.5
   _cooldown:
     active: 1
     value:
@@ -28385,6 +28418,21 @@ MonoBehaviour:
       _time: 0
   _firePoint: {fileID: 1146268628}
   _bulletPrefab: {fileID: 4898133462883985381, guid: fc383e20fc5b342059ed5ab71e30da44, type: 3}
+--- !u!114 &9048405937420967261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048405937420967253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2a8e32140549d783d48756778f6af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.WeaponViewInstaller
+  _audioSource: {fileID: 2119003396}
+  _fireSound: {fileID: 8300000, guid: ae32288ab1d5d40f099549e5b2eb634f, type: 3}
+  _fireParticles: {fileID: 376043000}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

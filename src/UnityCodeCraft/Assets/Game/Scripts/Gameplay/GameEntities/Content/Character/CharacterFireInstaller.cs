@@ -17,14 +17,28 @@ namespace Game.Gameplay
 
             entity.GetValue(GameEntityAPI.FireCommand)
                 .AddCondition(entity.IsHealthExists)
-
+                .AddCondition(entity.CanFireWithWeapon)
                 .AddAction(entity.FireWithWeapon);
 
             if (_fireDelay)
             {
                 ITimer fireDelay = _fireDelay.Value;
                 entity.AddValue(GameEntityAPI.FireDelay, fireDelay);
-                // TODO: тут дописать механику задержки перед стрельбой
+                
+                entity
+                    .GetValue(GameEntityAPI.FireCommand)
+                    .AddCondition(fireDelay.IsCompleted);
+                
+                entity.WhenFixedTick(deltaTime =>
+                {
+                    if(entity.IsAiming())
+                        fireDelay.Tick(deltaTime);
+                    else
+                    {
+                        fireDelay.Start();
+                        fireDelay.ResetTime();
+                    }
+                });
             }
         }
     }

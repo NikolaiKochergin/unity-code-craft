@@ -5,9 +5,7 @@ namespace Game.Gameplay
     public class CharacterSounds : MonoBehaviour
     {
         [SerializeField] private AudioSource _audioSource;
-        
         [SerializeField] private AudioClip _death;
-        [SerializeField] private AudioClip _gunFire;
         [SerializeField] private AudioClip[] _moveSteps;
 
         public void PlayMoveStep() => 
@@ -15,8 +13,5 @@ namespace Game.Gameplay
         
         public void PlayDeathSound() =>
             _audioSource.PlayOneShot(_death);
-
-        public void PlayGunFire() => 
-            _audioSource.PlayOneShot(_gunFire);
     }
 }

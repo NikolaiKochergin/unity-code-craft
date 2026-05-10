@@ -23,7 +23,6 @@ namespace Game.Gameplay
         {
             ProcessMove();
             ProcessAim();
-            ProcessFire();
         }
 
         private void ProcessMove()
@@ -46,15 +45,6 @@ namespace Game.Gameplay
             _character
                 .GetValue(GameEntityAPI.AimRequest)
                 .Invoke(new Vector3(direction.x, 0, direction.y));
-        }
-
-        private void ProcessFire()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _character
-                    .GetValue(GameEntityAPI.FireRequest).Invoke();
-            }
         }
     }
 }
