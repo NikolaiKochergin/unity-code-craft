@@ -26,9 +26,7 @@ namespace Game.Gameplay
             });
         }
 
-        private Quaternion CalculateFireDirection()
-        {
-            return _firePoint.rotation * Quaternion.Euler(0f, Random.Range(-_fireRate, _fireRate) / 2f, 0f);
-        }
+        private Quaternion CalculateFireDirection() => 
+            _firePoint.rotation * Quaternion.Euler(0f, Random.Range(-_fireRate, _fireRate) / 2f, 0f);
     }
 }

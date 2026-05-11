@@ -23,9 +23,12 @@ namespace Game.Gameplay
         [SerializeField] private AudioClip _fallSound;
         
         private readonly DisposableComposite _disposables = new();
-        
+        private IGameEntity _entity;
+
         public override void Install(IGameEntity entity)
         {
+            _entity = entity;
+            
             entity.AddValue(GameEntityAPI.Animator, _animator);
             
             entity
@@ -52,19 +55,21 @@ namespace Game.Gameplay
             
             entity
                 .GetValue(GameEntityAPI.FireCommand)
-                .AddAction(() => _animator.SetTrigger(Attack));
+                .AddAction(() =>
+                {
+                    _animator.SetTrigger(Attack);
+                    PlayAttackSound();
+                });
         }
-        
+
         private void OnAnimatorMove()
         {
             transform.parent.position += _animator.deltaPosition;
             transform.parent.rotation *= _animator.deltaRotation;
         }
 
-        private void OnDestroy()
-        {
+        private void OnDestroy() => 
             _disposables.Dispose();
-        }
 
         private void PlayTakeDamageSound()
         {
@@ -78,10 +83,21 @@ namespace Game.Gameplay
             _audioSource.PlayOneShot(sound);
         }
 
+        private void PlayAttackSound()
+        {
+            AudioClip sound = _attackSounds[Random.Range(0, _attackSounds.Length)];
+            _audioSource.PlayOneShot(sound);
+        }
+
         private void Handle_BodyFall()
         {
             _audioSource.PlayOneShot(_fallSound);
             _fallParticles.Play();
+        }
+
+        private void Handle_PunchAttack()
+        {
+            _entity.GetValue(GameEntityAPI.Weapon).Value?.GetValue(GameEntityAPI.FireCommand).Invoke();
         }
     }
 }

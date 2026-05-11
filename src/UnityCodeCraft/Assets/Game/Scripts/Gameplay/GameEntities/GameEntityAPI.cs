@@ -49,5 +49,7 @@ namespace Game.Gameplay
         public static ValueKey<IGameEntity, GameEntity[]> Zombies = new(nameof(Zombies));
         public static ValueKey<IGameEntity, ICommand<IGameEntity>> InteractCommand = new(nameof(InteractCommand));
         public static ValueKey<IGameEntity, IEvent> CollectedEvent = new(nameof(CollectedEvent));
+        public static ValueKey<IGameEntity, IValue<float>> FistSize = new(nameof(FistSize));
+        public static ValueKey<IGameEntity, Collider[]> HitResult = new(nameof(HitResult));
     }
 }

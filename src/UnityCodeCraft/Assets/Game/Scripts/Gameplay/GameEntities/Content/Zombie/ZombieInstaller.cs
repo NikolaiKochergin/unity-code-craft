@@ -14,7 +14,8 @@ namespace Game.Gameplay
         [SerializeField] private MoveInstaller _moveInstaller;
         [SerializeField] private RotateInstaller _rotateInstaller;
         [SerializeField] private Const<float> _attackDistance;
-        [SerializeField] private FireInstaller _fireInstaller;
+        [SerializeField] private ZombieFireInstaller _fireInstaller;
+        [SerializeField] private GameEntity _weapon;
         [SerializeField] private ReactiveVariable<TeamType> _team = TeamType.ENEMY;
         
         private readonly DisposableComposite _disposables = new();
@@ -23,6 +24,8 @@ namespace Game.Gameplay
         {
             entity.AddValue(GameEntityAPI.Team, _team);
             entity.AddValue(GameEntityAPI.AttackDistance, _attackDistance);
+            entity.AddValue(GameEntityAPI.Weapon, new ReactiveVariable<IGameEntity>(_weapon));
+            
             _transformInstaller.Install(entity);
             _healthInstaller.Install(entity);
             _rotateInstaller.Install(entity);
@@ -32,6 +35,8 @@ namespace Game.Gameplay
             InstallMove(entity);
             
             entity.AddValue(GameEntityAPI.Target, new Variable<IGameEntity>(_initialTarget));
+            
+            entity.WhenFixedTick(_ => entity.GetValue(GameEntityAPI.FireRequest).Invoke());
         }
 
         private void InstallMove(IGameEntity entity)
