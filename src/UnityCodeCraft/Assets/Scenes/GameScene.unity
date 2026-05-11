@@ -8855,7 +8855,6 @@ GameObject:
   - component: {fileID: 578962331}
   - component: {fileID: 578962334}
   - component: {fileID: 578962333}
-  - component: {fileID: 578962332}
   m_Layer: 0
   m_Name: Point light (6)
   m_TagString: Untagged
@@ -8878,18 +8877,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 654301089}
   m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
---- !u!114 &578962332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 578962330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8729127ef9a3441abdbce6cecb732fac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &578962333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18493,7 +18480,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1379042641
 Transform:
   m_ObjectHideFlags: 0
@@ -22231,7 +22218,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: b4a2c68c18ef14552bcdefefca3ed5d2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.556
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -27859,9 +27846,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5456952372480117797, guid: 51e743c5740654af9aa773eb6f7af5d4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7919524849257179009}
-    - targetCorrespondingSourceObject: {fileID: 5456952372480117797, guid: 51e743c5740654af9aa773eb6f7af5d4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7919524849257179010}
   m_SourcePrefab: {fileID: 100100000, guid: 51e743c5740654af9aa773eb6f7af5d4, type: 3}
 --- !u!114 &4166353693383147386
 MonoBehaviour:
@@ -28362,18 +28346,6 @@ MonoBehaviour:
   _showAtTouch: 0
   _invertX: 0
   _invertY: 0
---- !u!114 &7919524849257179010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7919524849257179007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5087890d5bc34733a820711c7204ce15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &8264958231034587487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 765187070542819803, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
