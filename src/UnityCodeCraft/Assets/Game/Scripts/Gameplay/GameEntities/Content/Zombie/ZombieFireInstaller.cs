@@ -19,6 +19,7 @@ namespace Game.Gameplay
                 .AddCondition(entity.IsHealthExists)
                 .AddCondition(entity.CanFireWithWeapon)
                 .AddCondition(entity.IsInAttackDistance)
+                .AddCondition(entity.IsTargetAlive)
                 .AddCondition(_cooldown.IsCompleted)
                 .AddAction(() =>
                 {

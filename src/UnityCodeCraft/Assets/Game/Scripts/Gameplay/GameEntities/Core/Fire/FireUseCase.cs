@@ -17,5 +17,13 @@ namespace Game.Gameplay
             
             return attackDistance >= Vector3.Distance(selfPosition, targetPosition);
         }
+
+        public static bool IsTargetAlive(this IGameEntity entity)
+        {
+            if(!entity.TryGetValue(GameEntityAPI.Target, out IVariable<IGameEntity> target) || target.Value == null)
+                return false;
+
+            return target.Value.IsHealthExists();
+        }
     }
 }
