@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4331357746939670410}
+  - component: {fileID: 5678701844751032680}
   m_Layer: 11
   m_Name: <Visual>
   m_TagString: Untagged
@@ -32,6 +33,21 @@ Transform:
   - {fileID: 8957502909252199004}
   m_Father: {fileID: 6979400397003836636}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5678701844751032680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2349997754461001400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1ac2b240924fc48f7ea7a0562fd468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.AmmoPickUpViewInstaller
+  _pickUpParticles: {fileID: 4254272687195834861}
+  _audioSource: {fileID: 411501554367385950}
+  _pickUpSound: {fileID: 8300000, guid: 1d470785c1bc647bba845d6a62236228, type: 3}
 --- !u!1 &2868507734451175874
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,6 +187,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6979400397003836636}
   - component: {fileID: 4267398721809954443}
+  - component: {fileID: 3573404880369832309}
+  - component: {fileID: 3566827341706706041}
   m_Layer: 11
   m_Name: AmmoItem
   m_TagString: Untagged
@@ -217,6 +235,46 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.48086452, y: 0.5, z: 0.6702087}
   m_Center: {x: -0.035928726, y: 0.25, z: 0.053168178}
+--- !u!114 &3573404880369832309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3332313712654455240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013b186af27c578459e9bf602889f6a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.GameEntity
+  useUnityLifecycle: 1
+  disposeValues: 1
+  installOnAwake: 1
+  uninstallOnDestroy: 1
+  scriptableInstallers: []
+  sceneInstallers:
+  - {fileID: 3566827341706706041}
+  - {fileID: 5678701844751032680}
+  onlySelectedGizmos: 0
+  onlyEditModeGizmos: 0
+  autoCompile: 0
+  initialTagCapacity: 1
+  initialValueCapacity: 2
+  initialBehaviourCapacity: 0
+--- !u!114 &3566827341706706041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3332313712654455240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9b10605723400eae6c589549c1fdc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.AmmoPickUpInstaller
+  _ammo: 10
+  _collider: {fileID: 4267398721809954443}
 --- !u!1 &7655232285111366949
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,6 +376,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65cb20f8c841b431b82ba08ed45644e1, type: 3}
+--- !u!198 &4254272687195834861 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6591815806074881312, guid: 65cb20f8c841b431b82ba08ed45644e1, type: 3}
+  m_PrefabInstance: {fileID: 6949304866171931853}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4740266423122820531 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2429741230345695614, guid: 65cb20f8c841b431b82ba08ed45644e1, type: 3}
