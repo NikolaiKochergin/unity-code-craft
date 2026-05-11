@@ -39,6 +39,7 @@ namespace Game.Gameplay
             _moveInstaller.Install(entity);
             entity
                 .GetValue(GameEntityAPI.MoveCommand)
+                .AddCondition(_ => entity.IsHealthExists())
                 .AddAction(args => entity.RotateStep(args.Direction, args.DeltaTime));
             
             entity.AddBehaviour<MoveToTargetBehaviour>();

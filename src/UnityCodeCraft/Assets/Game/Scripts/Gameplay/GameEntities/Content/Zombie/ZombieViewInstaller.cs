@@ -14,6 +14,13 @@ namespace Game.Gameplay
         [SerializeField] private Animator _animator;
         [SerializeField] private ParticleSystem _takeDamageParticles;
         [SerializeField] private ParticleSystem _dieParticles;
+        [SerializeField] private ParticleSystem _fallParticles;
+        
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip[] _takeDamageSounds;
+        [SerializeField] private AudioClip[] _deathSounds;
+        [SerializeField] private AudioClip[] _attackSounds;
+        [SerializeField] private AudioClip _fallSound;
         
         private readonly DisposableComposite _disposables = new();
         
@@ -26,11 +33,18 @@ namespace Game.Gameplay
                 .Subscribe(() =>
                 {
                     _animator.SetTrigger(Death);
+                    _dieParticles.Play();
+                    PlayDeathSound();
                 }).AddTo(_disposables);
             
             entity
                 .GetValue(GameEntityAPI.TakeDamageCommand)
-                .Subscribe(_ => _animator.SetTrigger(TakeDamage))
+                .Subscribe(_ =>
+                {
+                    _animator.SetTrigger(TakeDamage);
+                    _takeDamageParticles.Play();
+                    PlayTakeDamageSound();
+                })
                 .AddTo(_disposables);
             
             entity
@@ -50,6 +64,24 @@ namespace Game.Gameplay
         private void OnDestroy()
         {
             _disposables.Dispose();
+        }
+
+        private void PlayTakeDamageSound()
+        {
+            AudioClip sound = _takeDamageSounds[Random.Range(0, _takeDamageSounds.Length)];
+            _audioSource.PlayOneShot(sound);
+        }
+
+        private void PlayDeathSound()
+        {
+            AudioClip sound = _deathSounds[Random.Range(0, _deathSounds.Length)];
+            _audioSource.PlayOneShot(sound);
+        }
+
+        private void Handle_BodyFall()
+        {
+            _audioSource.PlayOneShot(_fallSound);
+            _fallParticles.Play();
         }
     }
 }

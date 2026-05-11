@@ -147910,8 +147910,8 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 2.1666667
-    functionName: ReceiveEvent
-    data: body_fall_event
+    functionName: Handle_BodyFall
+    data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
