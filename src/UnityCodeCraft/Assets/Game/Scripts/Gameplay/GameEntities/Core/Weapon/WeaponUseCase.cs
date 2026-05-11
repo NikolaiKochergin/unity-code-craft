@@ -1,4 +1,5 @@
-﻿using Atomic.Entities;
+﻿using Atomic.Elements;
+using Atomic.Entities;
 
 namespace Game.Gameplay
 {
@@ -13,6 +14,19 @@ namespace Game.Gameplay
         {
             IGameEntity weapon = entity.GetValue(GameEntityAPI.Weapon).Value;
             return weapon != null && weapon.GetValue(GameEntityAPI.FireCommand).CanInvoke();
+        }
+
+        public static bool CollectAmmoWithWeapon(this IGameEntity character, int amount)
+        {
+            if(!character.TryGetValue(GameEntityAPI.Weapon, out IReactiveVariable<IGameEntity> weaponVariable))
+                return false;
+
+            IGameEntity weapon = weaponVariable.Value;
+            if(weapon == null || !weapon.TryGetValue(GameEntityAPI.Ammo, out IReactiveVariable<int> ammo))
+                return false;
+            
+            ammo.Value += amount;
+            return true;
         }
     }
 }

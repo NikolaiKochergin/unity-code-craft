@@ -13,6 +13,7 @@ namespace Game.Gameplay
         [SerializeField] private HealthInstaller _healthInstaller;
         [SerializeField] private TakeDamageInstaller _takeDamageInstaller;
         [SerializeField] private CharacterFireInstaller _fireInstaller;
+        [SerializeField] private InteractorInstaller _interactorInstaller;
         [SerializeField] private GameEntity _weapon;
         [SerializeField] private ReactiveVariable<TeamType> _team;
         
@@ -30,6 +31,7 @@ namespace Game.Gameplay
             _healthInstaller.Install(entity);
             _takeDamageInstaller.Install(entity);
             _fireInstaller.Install(entity);
+            _interactorInstaller.Install(entity);
             
             entity
                 .GetValue(GameEntityAPI.TakeDamageCommand)

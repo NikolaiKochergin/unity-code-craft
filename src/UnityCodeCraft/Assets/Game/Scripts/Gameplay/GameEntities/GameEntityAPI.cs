@@ -9,6 +9,7 @@ namespace Game.Gameplay
         public static TagKey<IGameEntity> CharacterTag = new(nameof(CharacterTag));
         public static TagKey<IGameEntity> DamageableTag = new(nameof(DamageableTag));
         public static TagKey<IGameEntity> MovableTag = new(nameof(MovableTag));
+        public static TagKey<IGameEntity> InteractableTag = new(nameof(InteractableTag));
         
         public static ValueKey<IGameEntity, IReactiveVariable<int>> CurrentHealth = new(nameof(CurrentHealth));
         public static ValueKey<IGameEntity, IValue<int>> MaxHealth = new(nameof(MaxHealth));
@@ -46,5 +47,6 @@ namespace Game.Gameplay
         public static ValueKey<IGameEntity, IVariable<IGameEntity>> Target = new(nameof(Target));
         public static ValueKey<IGameEntity, IValue<float>> AttackDistance = new(nameof(AttackDistance));
         public static ValueKey<IGameEntity, GameEntity[]> Zombies = new(nameof(Zombies));
+        public static ValueKey<IGameEntity, ICommand<IGameEntity>> InteractCommand = new(nameof(InteractCommand));
     }
 }
