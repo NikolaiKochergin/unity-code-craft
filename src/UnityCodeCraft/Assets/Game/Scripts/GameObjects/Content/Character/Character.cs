@@ -9,7 +9,7 @@ namespace Game
     [RequireComponent(typeof(MoveComponent))]
     [RequireComponent(typeof(MoveTransformComponent))]
     [RequireComponent(typeof(LookComponent))]
-    public sealed class Character : MonoBehaviour, IMoveComponent, IJumpComponent, IPushComponent, ITossComponent
+    public sealed class Character : MonoBehaviour, IPushComponent, ITossComponent
     {
         [SerializeField] private ForceComponent _pushComponent;
         [SerializeField] private ForceComponent _tossComponent;
@@ -50,12 +50,6 @@ namespace Game
 
         private void OnDestroy() => 
             _healthComponent.OnDied += OnDied;
-
-        public void Move(Vector2 direction) => 
-            _moveComponent.Move(direction);
-
-        public void Jump() => 
-            _jumpComponent.Jump();
 
         public void Push() => 
             _pushComponent.Apply();

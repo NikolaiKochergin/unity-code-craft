@@ -6,15 +6,15 @@ namespace Game
     {
         [SerializeField] private GameObject _character;
         
-        private IMoveComponent _moveComponent;
-        private IJumpComponent _jumpComponent;
+        private MoveComponent _moveComponent;
+        private JumpComponent _jumpComponent;
         private IPushComponent _pushComponent;
         private ITossComponent _tossComponent;
 
         private void Awake()
         {
-            _moveComponent = _character.GetComponent<IMoveComponent>();
-            _jumpComponent = _character.GetComponent<IJumpComponent>();
+            _moveComponent = _character.GetComponent<MoveComponent>();
+            _jumpComponent = _character.GetComponent<JumpComponent>();
             _pushComponent = _character.GetComponent<IPushComponent>();
             _tossComponent = _character.GetComponent<ITossComponent>();
         }
