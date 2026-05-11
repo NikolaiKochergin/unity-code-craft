@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Gameplay
 {
-    public class AmmoPickUpViewInstaller : GameEntityInstaller, IGameEntityDispose
+    public class PickUpViewInstaller : GameEntityInstaller, IGameEntityDispose
     {
         [SerializeField] public ParticleSystem _pickUpParticles;
         [SerializeField] public AudioSource _audioSource;
