@@ -24,16 +24,16 @@ namespace Game
             _targetComponent = GetComponent<TargetComponent>();
 
         public void SetCondition(Func<bool> condition) => _moveComponent.SetCondition(condition);
-        public void SetAction(Action<Vector2> action) => _moveComponent.SetAction(action);
+        public void SetAction(Action<Vector2, float> action) => _moveComponent.SetAction(action);
 
-        private void Update()
+        private void FixedUpdate()
         {
             if(!_targetComponent.HasTarget || 
                Vector2.Distance(_targetComponent.TargetPosition, transform.position) <= _reachDistance)
                 return;
             
             Vector2 direction = new Vector2(_targetComponent.TargetPosition.x - transform.position.x, 0).normalized;
-            _moveComponent.Move(direction);
+            _moveComponent.Move(direction, Time.fixedDeltaTime);
         }
 
 #if UNITY_EDITOR

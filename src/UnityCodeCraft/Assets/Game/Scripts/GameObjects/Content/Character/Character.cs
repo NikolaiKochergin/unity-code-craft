@@ -36,10 +36,10 @@ namespace Game
                                               _groundedComponent.IsGrounded);
             
             _moveComponent.SetCondition(() => _healthComponent.IsAlive);
-            _moveComponent.SetAction(direction =>
+            _moveComponent.SetAction((direction, deltaTime) =>
             {
                 _lookComponent.Look(direction.x);
-                _moveTransformComponent.Move(new Vector2(Mathf.Abs(direction.x), direction.y));
+                _moveTransformComponent.Move(new Vector2(Mathf.Abs(direction.x), direction.y), deltaTime);
             });
             
             _pushComponent.SetCondition(() => _healthComponent.IsAlive);

@@ -36,10 +36,10 @@ namespace Game
             _damageComponent = _tossComponent.GetComponent<DamageComponent>();
 
             _chaseMoveComponent.SetCondition(() => _healthComponent.IsAlive);
-            _chaseMoveComponent.SetAction(direction =>
+            _chaseMoveComponent.SetAction((direction, deltaTime) =>
             {
                 _lookComponent.Look(direction.x);
-                _moveTransformComponent.Move(new Vector2(Mathf.Abs(direction.x), direction.y));
+                _moveTransformComponent.Move(new Vector2(Mathf.Abs(direction.x), direction.y), deltaTime);
             });
             
             _tossComponent.SetCondition(() => _healthComponent.IsAlive);

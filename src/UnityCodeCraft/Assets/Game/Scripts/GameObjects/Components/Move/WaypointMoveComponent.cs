@@ -21,9 +21,9 @@ namespace Game
         }
 
         public void SetCondition(Func<bool> condition) => _moveComponent.SetCondition(condition);
-        public void SetAction(Action<Vector2> action) => _moveComponent.SetAction(action);
+        public void SetAction(Action<Vector2, float> action) => _moveComponent.SetAction(action);
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (_waypoints.Length <= 0) 
                 return;
@@ -32,7 +32,7 @@ namespace Game
             Vector2 current = transform.position;
             Vector2 direction = (target - current).normalized;
             
-            _moveComponent.Move(direction);
+            _moveComponent.Move(direction, Time.fixedDeltaTime);
 
             if (Vector2.Distance(target, current) <= _reachDistance)
                 _index = ++_index % _waypoints.Length;

@@ -7,10 +7,10 @@ namespace Game
         [SerializeField]
         private float _speed = 4.5f;
 
-        public void Move(Vector2 direction)
+        public void Move(Vector2 direction, float deltaTime)
         {
             if (direction != Vector2.zero) 
-                transform.Translate((Vector3) direction * _speed * Time.fixedDeltaTime);
+                transform.Translate((Vector3) direction * (_speed * deltaTime));
         }
     }
 }

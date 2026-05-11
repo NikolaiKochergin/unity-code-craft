@@ -35,7 +35,7 @@ namespace Game
                 direction.x = -1;
 
             if (direction != Vector2.zero)
-                _moveComponent.Move(direction);
+                _moveComponent.RequestMove(direction);
             
             if (Input.GetKeyDown(KeyCode.Space))
                 _jumpComponent.Jump();
