@@ -4,6 +4,9 @@ namespace SampleGame
 {
     public sealed class FollowInputHandler : InputHandler
     {
+        [SerializeField] 
+        private CommandMarkerView _commandMarkerView;
+        
         [SerializeField]
         private KeyCode _keyCode = KeyCode.F;
 
@@ -20,10 +23,13 @@ namespace SampleGame
                 if (context.point != null)
                 {
                     // TODO: Follow point
+                    
+                    _commandMarkerView.ShowFollowMarker(context.point.Value);
                 }
                 else if (context.target != null && context.target != _character)
                 {
                     // TODO: Follow target
+                    _commandMarkerView.ShowFollowMarker(context.target.transform);
                 }
             }
             else if (_next) 

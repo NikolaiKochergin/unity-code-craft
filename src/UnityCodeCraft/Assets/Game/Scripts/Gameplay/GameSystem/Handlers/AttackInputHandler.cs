@@ -4,6 +4,9 @@ namespace SampleGame
 {
     public sealed class AttackInputHandler : InputHandler
     {
+        [SerializeField] 
+        private CommandMarkerView _commandMarkerView;
+        
         [SerializeField]
         private KeyCode _keyCode = KeyCode.A;
 
@@ -20,10 +23,14 @@ namespace SampleGame
                 if (context.point != null)
                 {
                     // TODO: Attack Position
+                    
+                    _commandMarkerView.ShowAttackMarker(context.point.Value);
                 }
                 else if (context.target != null && context.target != _character)
                 {
                     // TODO: Attack Target
+                    
+                    _commandMarkerView.ShowAttackMarker(context.target.transform);
                 }
             }
             else if (_next)
