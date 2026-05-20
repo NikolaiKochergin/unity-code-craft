@@ -34,8 +34,6 @@ namespace Game
                 return BehaviourResult.Failure;
 
             AttackComponent component = character.GetComponent<AttackComponent>();
-            // if (!component.CanFire(target))
-            //     return BehaviourResult.Failure;
             
             component.Attack(target);
             return BehaviourResult.Running;

@@ -26,7 +26,7 @@ namespace SampleGame
                 {
                     
                     // TODO: Move to target
-                    _blackboard.SetReferenceValue(BlackboardAPI.MoveTarget, context.target);
+                    _blackboard.SetReferenceValue(BlackboardAPI.MovePoint, context.target);
                     
                     _commandMarkerView.ShowMoveMarker(context.target.transform);
                 }
@@ -34,7 +34,9 @@ namespace SampleGame
                 {
                     
                     // TODO: Move to point
-                    _blackboard.SetPrimitiveValue(BlackboardAPI.MoveTargetPosition, context.point.Value);
+                    GameObject movePoint = _blackboard.GetValue(BlackboardAPI.BasePoint);
+                    movePoint.transform.position = context.point.Value;
+                    _blackboard.SetReferenceValue(BlackboardAPI.MovePoint, movePoint);
                     
                     _commandMarkerView.ShowMoveMarker(context.point.Value);
                 }

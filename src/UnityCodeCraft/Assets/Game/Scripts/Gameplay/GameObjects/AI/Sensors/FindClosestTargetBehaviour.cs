@@ -39,7 +39,10 @@ namespace Game
             for (int i = 0; i < count; i++)
             {
                 Collider other = buffer[i];
-                if(!other || other.gameObject == character)
+                if(!other || 
+                   other.gameObject == character ||
+                   !other.TryGetComponent(out TeamComponent teamComponent) ||
+                   teamComponent.Team == _blackboard.GetValue(BlackboardAPI.Team))
                     continue;
                 
                 if(!other.TryGetComponent(out HealthComponent health) ||

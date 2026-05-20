@@ -32,11 +32,11 @@ namespace SampleGame
                     // TODO: Point destination
                     
                     Debug.Log("<color=orange> Enque " + context.point);
-                    if(!_blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<Vector3> waypoints) &&
-                       !context.point.HasValue)
-                        return;
-                    
-                    waypoints.Add(context.point.Value);
+                    // if(!_blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<Vector3> waypoints) &&
+                    //    !context.point.HasValue)
+                    //     return;
+                    //
+                    // waypoints.Add(context.point.Value);
                     
                     _commandMarkerView.ShowPatrolMarker(context.point.Value);
                 }

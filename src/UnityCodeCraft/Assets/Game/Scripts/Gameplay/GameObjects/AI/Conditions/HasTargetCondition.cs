@@ -9,8 +9,8 @@ namespace Game
     {
         [SerializeField]
         private Blackboard _blackboard;
-        
-        [SerializeField]
+
+        [SerializeField] 
         [BlackboardValueKey(typeof(GameObject))]
         private string _targetKey;
         

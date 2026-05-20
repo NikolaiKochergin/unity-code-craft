@@ -11,7 +11,7 @@ namespace Game
         
         protected override BehaviourResult OnUpdate(float deltaTime)
         {
-            if (!_blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<Vector3> waypoints))
+            if (!_blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<GameObject> waypoints))
                 return BehaviourResult.Failure;
 
             _blackboard.TryGetValue(BlackboardAPI.WaypointIndex, out int index);

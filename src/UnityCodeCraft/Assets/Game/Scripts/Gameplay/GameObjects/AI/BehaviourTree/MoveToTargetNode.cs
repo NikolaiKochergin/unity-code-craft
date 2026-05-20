@@ -10,13 +10,13 @@ namespace Game
         private Blackboard _blackboard;
 
         [SerializeField] 
+        [BlackboardValueKey(typeof(float))]
+        private string _stoppingDistance;
+
+        [SerializeField] 
         [BlackboardValueKey(typeof(GameObject))]
         private string _targetKey;
 
-        [SerializeField] 
-        [BlackboardValueKey(typeof(float))]
-        private string _stoppingDistance;
-        
         protected override BehaviourResult OnUpdate(float deltaTime)
         {
             if (!_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) ||

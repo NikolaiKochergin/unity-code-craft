@@ -15,12 +15,12 @@ namespace Game
         
         protected override BehaviourResult OnUpdate(float deltaTime)
         {
-            if (!_blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<Vector3> waypoints) ||
+            if (!_blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<GameObject> waypoints) ||
                 !_blackboard.TryGetValue(BlackboardAPI.WaypointIndex, out int index))
                 return BehaviourResult.Failure;
             
-            Vector3 destination = waypoints[index];
-            _blackboard.SetPrimitiveValue(_positionKey, destination);
+            Transform destination = waypoints[index].transform;
+            _blackboard.SetReferenceValue(_positionKey, destination);
             return BehaviourResult.Success;
         }
     }

@@ -166,7 +166,7 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 93395078}
-  _distanceKey: RangeAttackDistance
+  _distanceKey: AttackDistance
   _targetKey: Enemy
 --- !u!1 &44201129
 GameObject:
@@ -215,8 +215,8 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 93395078}
-  _targetKey: Enemy
-  _stoppingDistance: RangeAttackDistance
+  _stoppingDistance: AttackDistance
+  _targetKey: BasePoint
 --- !u!1 &49558431
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,12 +242,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49558431}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 575093033}
+  m_Father: {fileID: 411543847}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &49558433
 MonoBehaviour:
@@ -272,7 +272,7 @@ MonoBehaviour:
       type: {class: HasTargetCondition, ns: Game, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 93395078}
-        _targetKey: MoveTarget
+        _targetKey: MovePoint
 --- !u!1 &93395077
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,13 +305,15 @@ MonoBehaviour:
   installOnAwake: 1
   installers:
   - rid: 8653546111362400321
+  - rid: 8653546187750637833
   - rid: 8653546111362400327
-  - rid: 8653546111362400452
-  - rid: 8653546111362400363
   - rid: 8653546111362400489
+  - rid: 8653546111362400452
+  - rid: 8653546210644983888
+  - rid: 8653546111362400363
   autoCompile: 0
   initialTagCapacity: 0
-  initialValueCapacity: 7
+  initialValueCapacity: 10
   references:
     version: 2
     RefIds:
@@ -324,12 +326,10 @@ MonoBehaviour:
       type: {class: FloatBlackboardInstaller, ns: Modules.AI, asm: Modules.AI.Blackboard}
       data:
         key: StoppingDistance
-        value: 0.25
+        value: 1
     - rid: 8653546111362400363
       type: {class: WaypointsBlackboardInstaller, ns: Game, asm: Assembly-CSharp}
-      data:
-        _waypointIndex: 0
-        _waypoints: []
+      data: 
     - rid: 8653546111362400452
       type: {class: ColliderBufferBlackboardInstaller, ns: Game, asm: Assembly-CSharp}
       data:
@@ -337,8 +337,15 @@ MonoBehaviour:
     - rid: 8653546111362400489
       type: {class: FloatBlackboardInstaller, ns: Modules.AI, asm: Modules.AI.Blackboard}
       data:
-        key: RangeAttackDistance
+        key: AttackDistance
         value: 4
+    - rid: 8653546187750637833
+      type: {class: TeamBlackboardInstaller, ns: Game, asm: Assembly-CSharp}
+      data:
+        _character: {fileID: 1179872082}
+    - rid: 8653546210644983888
+      type: {class: BasePointInstaller, ns: Game, asm: Assembly-CSharp}
+      data: 
 --- !u!4 &93395079
 Transform:
   m_ObjectHideFlags: 0
@@ -371,7 +378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &191560488
 Transform:
   m_ObjectHideFlags: 0
@@ -432,7 +439,7 @@ MonoBehaviour:
       type: {class: HasTargetCondition, ns: Game, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 93395078}
-        _targetKey: Enemy
+        _targetKey: BasePoint
 --- !u!1 &206854108
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,6 +496,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 383931760}
+  - component: {fileID: 383931762}
+  - component: {fileID: 383931761}
   m_Layer: 0
   m_Name: <Follow>
   m_TagString: Untagged
@@ -508,9 +517,53 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2088926547}
+  - {fileID: 1810611447}
   m_Father: {fileID: 2003418520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &383931761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383931759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ac6a8124c64a76bd4b74ff69f1b1fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeParallel
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _nodes:
+  - {fileID: 2088926548}
+  - {fileID: 1810611448}
+--- !u!114 &383931762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383931759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef5aac40b1864451b1b5db36a1e61854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeWhile
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _condition:
+    rid: 8653546210644983905
+  _child: {fileID: 383931761}
+  references:
+    version: 2
+    RefIds:
+    - rid: 8653546210644983905
+      type: {class: HasTargetCondition, ns: Game, asm: Assembly-CSharp}
+      data:
+        _blackboard: {fileID: 93395078}
+        _targetKey: FollowPoint
 --- !u!1001 &385911206
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -610,8 +663,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 575093033}
-  - {fileID: 1044881906}
+  - {fileID: 49558432}
+  - {fileID: 701971516}
+  - {fileID: 1774633226}
   m_Father: {fileID: 2003418520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &411543848
@@ -623,14 +677,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 411543846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90b38701bdf44658b9e7cb9e1eb0a7ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f753cb2311846db8a2cd50ae5dd6cf8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeSelector
+  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeSequence
   _useUnityLifecycle: 0
   _updateMode: 0
   _nodes:
-  - {fileID: 575093034}
-  - {fileID: 1044881907}
+  - {fileID: 49558433}
+  - {fileID: 701971517}
+  - {fileID: 1774633227}
 --- !u!1 &418524740
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,7 +782,6 @@ MonoBehaviour:
   _updateMode: 0
   _blackboard: {fileID: 93395078}
   _targetKey: Enemy
-  _stoppingDistanceKey: RangeAttackDistance
 --- !u!1 &452763493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,59 +1120,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 2.220446e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &575093032
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 575093033}
-  - component: {fileID: 575093034}
-  m_Layer: 0
-  m_Name: <ToTarget>
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &575093033
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 575093032}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 49558432}
-  - {fileID: 701971516}
-  - {fileID: 1774633226}
-  m_Father: {fileID: 411543847}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &575093034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 575093032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f753cb2311846db8a2cd50ae5dd6cf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeSequence
-  _useUnityLifecycle: 0
-  _updateMode: 0
-  _nodes:
-  - {fileID: 49558433}
-  - {fileID: 701971517}
-  - {fileID: 1774633227}
 --- !u!1 &578514710
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,54 +1175,6 @@ MonoBehaviour:
       type: {class: WaypointMoveCondition, ns: Game, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 93395078}
---- !u!1 &621406602
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 621406603}
-  - component: {fileID: 621406604}
-  m_Layer: 0
-  m_Name: <CompleteMoveToPoint>
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &621406603
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 621406602}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1044881906}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &621406604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 621406602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60c3f68056cb414daadfe467d345d2c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.CompleteMoveToPoint
-  _useUnityLifecycle: 0
-  _updateMode: 0
-  _blackboard: {fileID: 93395078}
-  _targetKey: MoveTargetPosition
 --- !u!1 &694770352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1295,12 +1248,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701971515}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 575093033}
+  m_Father: {fileID: 411543847}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &701971517
 MonoBehaviour:
@@ -1317,8 +1270,8 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 93395078}
-  _targetKey: MoveTarget
   _stoppingDistance: StoppingDistance
+  _targetKey: MovePoint
 --- !u!1 &711934098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,7 +1508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &918807190
 Transform:
   m_ObjectHideFlags: 0
@@ -1626,59 +1579,6 @@ Transform:
   - {fileID: 1366347855}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1044881905
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1044881906}
-  - component: {fileID: 1044881907}
-  m_Layer: 0
-  m_Name: <ToPoint>
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1044881906
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1044881905}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1619805626}
-  - {fileID: 1468313348}
-  - {fileID: 621406603}
-  m_Father: {fileID: 411543847}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1044881907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1044881905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f753cb2311846db8a2cd50ae5dd6cf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeSequence
-  _useUnityLifecycle: 0
-  _updateMode: 0
-  _nodes:
-  - {fileID: 1619805627}
-  - {fileID: 1468313349}
-  - {fileID: 621406604}
 --- !u!1 &1146950747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,7 +1680,6 @@ MonoBehaviour:
   _origin: {fileID: 2003418521}
   _conditions:
   - rid: 8653546111362400441
-  - rid: 8653546111362400442
   _abort:
     rid: -2
   _abortEvent:
@@ -1795,12 +1694,7 @@ MonoBehaviour:
       type: {class: HasTargetCondition, ns: Game, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 93395078}
-        _targetKey: MoveTarget
-    - rid: 8653546111362400442
-      type: {class: HasTargetPointCondition, ns: Game, asm: Assembly-CSharp}
-      data:
-        _blackboard: {fileID: 93395078}
-        _targetPointKey: MoveTargetPosition
+        _targetKey: MovePoint
 --- !u!1 &1288575412 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2968069809420515332, guid: 07ccefa6ad3464845b205908b98b4a8e, type: 3}
@@ -1898,54 +1792,6 @@ Transform:
   - {fileID: 906546673}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1468313347
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1468313348}
-  - component: {fileID: 1468313349}
-  m_Layer: 0
-  m_Name: <MoveToPoint>
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1468313348
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1468313347}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1044881906}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1468313349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1468313347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17036ecba0084a58b34cad6863917136, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveToPositionNode
-  _useUnityLifecycle: 0
-  _updateMode: 0
-  _blackboard: {fileID: 93395078}
-  _positionKey: MoveTargetPosition
 --- !u!1 &1474862958
 GameObject:
   m_ObjectHideFlags: 0
@@ -1993,7 +1839,7 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 93395078}
-  _distanceKey: RangeAttackDistance
+  _distanceKey: AttackDistance
   _targetKey: Enemy
 --- !u!1001 &1515189632
 PrefabInstance:
@@ -2097,6 +1943,54 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4473757027215454236, guid: f82db08d1eee94b9791aca8b635c4482, type: 3}
   m_PrefabInstance: {fileID: 1515189632}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1539508303
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1539508304}
+  - component: {fileID: 1539508305}
+  m_Layer: 0
+  m_Name: <WaitingForEnemy>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1539508304
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539508303}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2033338411}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1539508305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539508303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2264a147b4184c1a9981c909e3b5cf7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.WaitingForTarget
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _blackboard: {fileID: 93395078}
+  _targetKey: Enemy
 --- !u!1 &1567717070
 GameObject:
   m_ObjectHideFlags: 0
@@ -2163,62 +2057,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.FindClosestTargetBehaviour
   _blackboard: {fileID: 93395078}
   _targetKey: Enemy
---- !u!1 &1619805625
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1619805626}
-  - component: {fileID: 1619805627}
-  m_Layer: 0
-  m_Name: <HasTargetPointCondition>
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1619805626
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619805625}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1044881906}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1619805627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619805625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 365f2751daa942308a17ddd12c2ee8d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeCondition
-  _useUnityLifecycle: 0
-  _updateMode: 0
-  _condition:
-    rid: 8653546111362400403
-  references:
-    version: 2
-    RefIds:
-    - rid: 8653546111362400403
-      type: {class: HasTargetPointCondition, ns: Game, asm: Assembly-CSharp}
-      data:
-        _blackboard: {fileID: 93395078}
-        _targetPointKey: MoveTargetPosition
 --- !u!1 &1774633225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2244,12 +2082,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774633225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 575093033}
+  m_Father: {fileID: 411543847}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1774633227
 MonoBehaviour:
@@ -2266,7 +2104,7 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 93395078}
-  _targetKey: MoveTarget
+  _targetKey: MovePoint
 --- !u!1 &1777495385
 GameObject:
   m_ObjectHideFlags: 0
@@ -2369,6 +2207,54 @@ MonoBehaviour:
   _updateMode: 0
   _blackboard: {fileID: 93395078}
   _positionKey: TargetPoint
+--- !u!1 &1810611446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1810611447}
+  - component: {fileID: 1810611448}
+  m_Layer: 0
+  m_Name: <LookAtTarget>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1810611447
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810611446}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 383931760}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1810611448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810611446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2867680e8fa041d99d1289c7d42ebdda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.LookAtTargetNode
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _blackboard: {fileID: 93395078}
+  _targetKey: FollowPoint
 --- !u!1 &1820899025
 GameObject:
   m_ObjectHideFlags: 0
@@ -2457,13 +2343,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1851909802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17036ecba0084a58b34cad6863917136, type: 3}
+  m_Script: {fileID: 11500000, guid: 7820bbdb5b27420f86b04a83763397cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.MoveToPositionNode
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 93395078}
-  _positionKey: TargetPoint
+  _stoppingDistance: StoppingDistance
+  _targetKey: MovePoint
 --- !u!1 &1884893189
 GameObject:
   m_ObjectHideFlags: 0
@@ -2512,7 +2399,6 @@ MonoBehaviour:
   _updateMode: 0
   _blackboard: {fileID: 93395078}
   _targetKey: Enemy
-  _stoppingDistanceKey: RangeAttackDistance
 --- !u!1 &2003418519
 GameObject:
   m_ObjectHideFlags: 0
@@ -2543,11 +2429,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 191560488}
-  - {fileID: 411543847}
-  - {fileID: 918807190}
   - {fileID: 383931760}
+  - {fileID: 411543847}
   - {fileID: 2033338411}
+  - {fileID: 191560488}
+  - {fileID: 918807190}
   m_Father: {fileID: 1214164771}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2003418521
@@ -2563,11 +2449,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeSelector
   _useUnityLifecycle: 0
-  _updateMode: 0
+  _updateMode: 1
   _nodes:
-  - {fileID: 191560490}
+  - {fileID: 383931762}
   - {fileID: 411543848}
-  - {fileID: 918807191}
   - {fileID: 2033338414}
 --- !u!1 &2024489235
 GameObject:
@@ -2648,6 +2533,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1539508304}
   - {fileID: 18778394}
   - {fileID: 437837324}
   m_Father: {fileID: 2003418520}
@@ -2667,9 +2553,26 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _nodes:
-  - {fileID: 18778395}
   - {fileID: 437837325}
+  - {fileID: 18778395}
 --- !u!114 &2033338413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033338410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f753cb2311846db8a2cd50ae5dd6cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeSequence
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _nodes:
+  - {fileID: 1539508305}
+  - {fileID: 2033338412}
+--- !u!114 &2033338414
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2684,33 +2587,16 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _condition:
-    rid: 8653546111362400520
-  _child: {fileID: 2033338412}
+    rid: 8653546210644983896
+  _child: {fileID: 2033338413}
   references:
     version: 2
     RefIds:
-    - rid: 8653546111362400520
+    - rid: 8653546210644983896
       type: {class: HasTargetCondition, ns: Game, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 93395078}
-        _targetKey: Enemy
---- !u!114 &2033338414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2033338410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7891a80c912b43fe8344afd528d8903d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeOverride
-  _useUnityLifecycle: 0
-  _updateMode: 0
-  _origin: {fileID: 2033338413}
-  _successPolicy: 0
-  _failurePolicy: 2
+        _targetKey: BasePoint
 --- !u!1001 &2044366344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2858,6 +2744,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SampleGame.MouseInputHandler
   _next: {fileID: 1146950749}
+--- !u!1 &2088926546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2088926547}
+  - component: {fileID: 2088926548}
+  m_Layer: 0
+  m_Name: <MoveToTarget>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2088926547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088926546}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 383931760}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2088926548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088926546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7820bbdb5b27420f86b04a83763397cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveToTargetNode
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _blackboard: {fileID: 93395078}
+  _stoppingDistance: StoppingDistance
+  _targetKey: FollowPoint
 --- !u!4 &1141581192752668296 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4473757027215454236, guid: f82db08d1eee94b9791aca8b635c4482, type: 3}

@@ -1,3 +1,5 @@
+using Game;
+using Modules.AI;
 using UnityEngine;
 
 namespace SampleGame
@@ -29,6 +31,9 @@ namespace SampleGame
                 else if (context.target != null && context.target != _character)
                 {
                     // TODO: Follow target
+                    
+                    _character.GetComponentInChildren<Blackboard>()?.SetReferenceValue(BlackboardAPI.FollowPoint, context.target);
+                    
                     _commandMarkerView.ShowFollowMarker(context.target.transform);
                 }
             }
