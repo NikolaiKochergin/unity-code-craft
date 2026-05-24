@@ -1,25 +1,23 @@
 ﻿using Atomic.Entities;
-using Game.UI;
+using Game.Gameplay;
 using UnityEngine;
 
-namespace Game.Gameplay
+namespace Game.UI
 {
-    public sealed class CharacterInputController : IPlayerContextInit, IPlayerContextTick
+    public sealed class CharacterInputController : IGameUIInit, IGameUITick
     {
-        private readonly GameUI _ui;
+        private IGameUI _ui;
         private IGameEntity _character;
         private InputMap _inputMap;
 
-        public CharacterInputController(GameUI ui) => 
-            _ui = ui;
-
-        public void Init(IPlayerContext context)
+        public void Init(IGameUI ui)
         {
-            _character = context.GetValue(PlayerContextAPI.Character);
-            _inputMap = context.GetValue(PlayerContextAPI.InputMap);
+            _ui = ui;
+            _character = ui.GetValue(GameUIAPI.GameContext).GetValue(GameContextAPI.Character);
+            _inputMap = ui.GetValue(GameUIAPI.InputMap);
         }
 
-        public void Tick(IPlayerContext context, float deltaTime)
+        public void Tick(IGameUI context, float deltaTime)
         {
             ProcessMove();
             ProcessAim();

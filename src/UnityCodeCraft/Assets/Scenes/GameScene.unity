@@ -4333,78 +4333,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.509991, y: 3.0119958, z: 1}
   m_Center: {x: -1.2499998, y: 1.5, z: 0}
---- !u!1 &317358817
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 317358820}
-  - component: {fileID: 317358819}
-  - component: {fileID: 317358818}
-  m_Layer: 0
-  m_Name: '[PlayerContext]'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &317358818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 317358817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c752f5b7c1d7274a8c5db97ff545c3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.PlayerContextInstaller
-  _playerCharacter: {fileID: 9048405937420967255}
-  _inputMap: {fileID: 11400000, guid: f453f92117d312c45a25f3c892ec26ae, type: 2}
---- !u!114 &317358819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 317358817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcd311c5db623d4439d2535e4cdc39b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.PlayerContext
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 317358818}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 0
-  initialValueCapacity: 3
-  initialBehaviourCapacity: 1
---- !u!4 &317358820
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 317358817}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &319358580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4725,7 +4653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d24a3a8a6845e9b4ab6af23628e259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.GameContextInstaller
-  _playerContext: {fileID: 317358819}
+  _playerCharacter: {fileID: 9048405937420967255}
 --- !u!1001 &338406016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15240,81 +15168,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6, y: 3.0119958, z: 1}
   m_Center: {x: -1.2500002, y: 1.5, z: 0}
---- !u!1 &1159873477
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1159873479}
-  - component: {fileID: 1159873478}
-  - component: {fileID: 1159873480}
-  m_Layer: 0
-  m_Name: '[AppContext]'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1159873478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159873477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30f31db04ab78614692cf0400c1ff878, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.App.AppContext
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 1159873480}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 0
-  initialValueCapacity: 2
-  initialBehaviourCapacity: 0
-  _isGlobal: 1
-  _dontDestroyOnLoad: 0
---- !u!4 &1159873479
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159873477}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.54666, y: 6.53642, z: -6.6983}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1159873480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159873477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d380f72162b42209aa100c356134f1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.App.AppContextInstaller
-  _loadGameInstaller:
-    _gameContext: {fileID: 328221074}
-    _gameUI: {fileID: 5764159610076527035}
 --- !u!1001 &1160808082
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28064,6 +27917,8 @@ MonoBehaviour:
   _healthView: {fileID: 7160444056652517396}
   _ammoView: {fileID: 7160444056652517395}
   _killsView: {fileID: 1404803378}
+  _playerInputInstaller:
+    _inputMap: {fileID: 11400000, guid: f453f92117d312c45a25f3c892ec26ae, type: 2}
 --- !u!1001 &7160444056652517393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28507,6 +28362,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Character]'
       objectReference: {fileID: 0}
+    - target: {fileID: 5288202805277000558, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: _maxAmmo.active
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5288202805277000558, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: _maxAmmo.value.value
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6992041410405490774, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.5
@@ -28573,6 +28436,4 @@ SceneRoots:
   - {fileID: 1676091983}
   - {fileID: 548618061}
   - {fileID: 5764159610076527034}
-  - {fileID: 317358820}
   - {fileID: 328221075}
-  - {fileID: 1159873479}

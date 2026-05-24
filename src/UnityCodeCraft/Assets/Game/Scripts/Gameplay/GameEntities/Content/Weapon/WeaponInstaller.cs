@@ -8,6 +8,7 @@ namespace Game.Gameplay
     {
         [SerializeField] private GameEntity _owner;
         [SerializeField] private Optional<ReactiveVariable<int>> _ammo;
+        [SerializeField] private Optional<Const<int>> _maxAmmo;
         [SerializeField] private Optional<Cooldown> _cooldown;
         
         public override void Install(IGameEntity entity)
@@ -31,6 +32,9 @@ namespace Game.Gameplay
                 entity.GetValue(GameEntityAPI.FireCommand).AddAction(cooldown.ResetTime);
                 entity.WhenFixedTick(cooldown.Tick);
             }
+            
+            if(_maxAmmo)
+                entity.AddValue(GameEntityAPI.MaxAmmo, _maxAmmo.Value);
         }
     }
 }

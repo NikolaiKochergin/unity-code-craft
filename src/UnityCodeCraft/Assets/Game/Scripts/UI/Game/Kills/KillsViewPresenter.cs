@@ -6,15 +6,12 @@ namespace Game.UI
 {
     public class KillsViewPresenter : IGameUIInit, IGameUIDispose
     {
-        private readonly IPlayerContext _playerContext;
         private Subscription<int> _subscription;
 
-        public KillsViewPresenter(IPlayerContext playerContext) => 
-            _playerContext = playerContext;
-
         public void Init(IGameUI entity) =>
-            _subscription = _playerContext
-                .GetValue(PlayerContextAPI.Score)
+            _subscription = entity
+                .GetValue(GameUIAPI.GameContext)
+                .GetValue(GameContextAPI.Score)
                 .Observe(score => entity
                     .GetValue(GameUIAPI.KillsView)
                     .SetText(score.ToString()));

@@ -6,27 +6,26 @@ namespace Game.UI
 {
     public class HealthScreenViewPresenter : IGameUIInit, IGameUIDispose
     {
-        private readonly IPlayerContext _playerContext;
         private Subscription<int> _subscription;
 
-        public HealthScreenViewPresenter(IPlayerContext playerContext) => 
-            _playerContext = playerContext;
-
         public void Init(IGameUI ui) =>
-            _subscription = _playerContext
-                .GetValue(PlayerContextAPI.Character)
+            _subscription = ui
+                .GetValue(GameUIAPI.GameContext)
+                .GetValue(GameContextAPI.Character)
                 .GetValue(GameEntityAPI.TakeDamageCommand)
                 .Subscribe(damage =>
                 {
                     HealthScreenView healthScreen = ui.GetValue(GameUIAPI.HealthScreenView);
                     healthScreen.TakeDamage(damage);
 
-                    int currentHealth = _playerContext
-                        .GetValue(PlayerContextAPI.Character)
+                    int currentHealth = ui
+                        .GetValue(GameUIAPI.GameContext)
+                        .GetValue(GameContextAPI.Character)
                         .GetValue(GameEntityAPI.CurrentHealth).Value;
                     
-                    int maxHealth = _playerContext
-                        .GetValue(PlayerContextAPI.Character)
+                    int maxHealth = ui
+                        .GetValue(GameUIAPI.GameContext)
+                        .GetValue(GameContextAPI.Character)
                         .GetValue(GameEntityAPI.MaxHealth).Value;
                     
                     healthScreen.ChangePercent((float)currentHealth / maxHealth);

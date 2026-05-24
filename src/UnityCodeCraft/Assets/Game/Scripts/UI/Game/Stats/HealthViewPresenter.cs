@@ -6,20 +6,18 @@ namespace Game.UI
 {
     public class HealthViewPresenter : IGameUIInit, IGameUIDispose
     {
-        private readonly IPlayerContext _playerContext;
         private Subscription<int> _subscription;
 
-        public HealthViewPresenter(IPlayerContext playerContext) => 
-            _playerContext = playerContext;
-
         public void Init(IGameUI ui) =>
-            _subscription = _playerContext
-                .GetValue(PlayerContextAPI.Character)
+            _subscription = ui
+                .GetValue(GameUIAPI.GameContext)
+                .GetValue(GameContextAPI.Character)
                 .GetValue(GameEntityAPI.CurrentHealth)
                 .Observe(current =>
                 {
-                    int max = _playerContext
-                        .GetValue(PlayerContextAPI.Character)
+                    int max = ui
+                        .GetValue(GameUIAPI.GameContext)
+                        .GetValue(GameContextAPI.Character)
                         .GetValue(GameEntityAPI.MaxHealth).Value;
 
                     StatView healthView = ui.GetValue(GameUIAPI.HealthView);

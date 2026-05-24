@@ -6,21 +6,22 @@ namespace Game.UI
 {
     public class AmmoViewPresenter : IGameUIInit, IGameUIDispose
     {
-        private readonly IPlayerContext _playerContext;
         private Subscription<int> _subscription;
-
-        public AmmoViewPresenter(IPlayerContext playerContext) => 
-            _playerContext = playerContext;
         
         public void Init(IGameUI ui)
         {
-            _subscription = _playerContext
-                .GetValue(PlayerContextAPI.Character)
+            _subscription = ui
+                .GetValue(GameUIAPI.GameContext)
+                .GetValue(GameContextAPI.Character)
                 .GetValue(GameEntityAPI.Weapon).Value
                 .GetValue(GameEntityAPI.Ammo)
                 .Observe(curren =>
                 {
-                    int max = 8;
+                    int max = ui
+                        .GetValue(GameUIAPI.GameContext)
+                        .GetValue(GameContextAPI.Character)
+                        .GetValue(GameEntityAPI.Weapon).Value
+                        .GetValue(GameEntityAPI.MaxAmmo).Value;
 
                     StatView ammoView = ui.GetValue(GameUIAPI.AmmoView);
                     ammoView.SetText(curren.ToString());

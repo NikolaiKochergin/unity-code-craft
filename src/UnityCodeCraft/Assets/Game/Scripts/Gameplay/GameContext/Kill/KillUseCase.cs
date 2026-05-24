@@ -21,9 +21,7 @@ namespace Game.Gameplay
             if(args.Killer == args.Victim)
                 return;
 
-            IPlayerContext player = gameContext.GetValue(GameContextAPI.PlayerContext);
-
-            player.GetValue(PlayerContextAPI.Score).Value++;
+            gameContext.GetValue(GameContextAPI.Score).Value++;
         }
     }
 }

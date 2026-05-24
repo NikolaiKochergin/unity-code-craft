@@ -14,11 +14,12 @@ namespace Game.UI
         [SerializeField] private StatView _healthView;
         [SerializeField] private StatView _ammoView;
         [SerializeField] private TMP_Text _killsView;
+        [SerializeField] private PlayerInputInstaller _playerInputInstaller;
+        
         
         public override void Install(IGameUI ui)
         {
-            IPlayerContext playerContext = GameContext.Instance.GetValue(GameContextAPI.PlayerContext);
-            
+            ui.AddValue(GameUIAPI.GameContext, GameContext.Instance);
             ui.AddValue(GameUIAPI.MoveJoystick, _moveJoystick);
             ui.AddValue(GameUIAPI.AimJoystick, _aimJoystick);
             ui.AddValue(GameUIAPI.HealthScreenView, _healthScreenView);
@@ -26,10 +27,12 @@ namespace Game.UI
             ui.AddValue(GameUIAPI.AmmoView, _ammoView);
             ui.AddValue(GameUIAPI.KillsView, _killsView);
             
-            ui.AddBehaviour(new HealthViewPresenter(playerContext));
-            ui.AddBehaviour(new AmmoViewPresenter(playerContext));
-            ui.AddBehaviour(new KillsViewPresenter(playerContext));
-            ui.AddBehaviour(new HealthScreenViewPresenter(playerContext));
+            ui.AddBehaviour<HealthViewPresenter>();
+            ui.AddBehaviour<AmmoViewPresenter>();
+            ui.AddBehaviour<KillsViewPresenter>();
+            ui.AddBehaviour<HealthScreenViewPresenter>();
+            
+            _playerInputInstaller.Install(ui);
         }
     }
 }

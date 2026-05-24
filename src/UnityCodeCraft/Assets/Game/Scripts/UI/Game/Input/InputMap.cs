@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Gameplay
+namespace Game.UI
 {
     [CreateAssetMenu(
         menuName = "Game/New InputMap",
