@@ -1282,8 +1282,6 @@ GameObject:
   m_Component:
   - component: {fileID: 76841824}
   - component: {fileID: 76841826}
-  - component: {fileID: 76841825}
-  - component: {fileID: 76841828}
   - component: {fileID: 76841827}
   m_Layer: 0
   m_Name: Trigger4
@@ -1307,18 +1305,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 279650649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &76841825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 76841823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11f7caf293d4158bfbb8855eade79be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &76841826
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1352,38 +1338,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da62fa36d4d54d4e9598e8b17f550454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.ZombieTriggerInstaller
-  _trigger: {fileID: 76841825}
   _zombies:
   - {fileID: 1293016461}
   - {fileID: 1983918304}
   - {fileID: 1615453010}
   - {fileID: 1851323716}
   - {fileID: 256725174}
---- !u!114 &76841828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 76841823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 013b186af27c578459e9bf602889f6a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.GameEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 76841827}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 0
-  initialValueCapacity: 2
-  initialBehaviourCapacity: 1
 --- !u!1 &82054749
 GameObject:
   m_ObjectHideFlags: 0
@@ -2089,8 +2049,6 @@ GameObject:
   m_Component:
   - component: {fileID: 137928204}
   - component: {fileID: 137928206}
-  - component: {fileID: 137928208}
-  - component: {fileID: 137928205}
   - component: {fileID: 137928207}
   m_Layer: 0
   m_Name: Trigger1
@@ -2114,31 +2072,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 279650649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &137928205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 137928203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 013b186af27c578459e9bf602889f6a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 137928207}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 0
-  initialValueCapacity: 2
-  initialBehaviourCapacity: 1
 --- !u!65 &137928206
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2172,22 +2105,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da62fa36d4d54d4e9598e8b17f550454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.ZombieTriggerInstaller
-  _trigger: {fileID: 137928208}
   _zombies:
   - {fileID: 2105814381}
   - {fileID: 691415260}
---- !u!114 &137928208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 137928203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11f7caf293d4158bfbb8855eade79be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.TriggerEvents
 --- !u!1001 &143138435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10057,8 +9977,6 @@ GameObject:
   m_Component:
   - component: {fileID: 680947262}
   - component: {fileID: 680947264}
-  - component: {fileID: 680947263}
-  - component: {fileID: 680947266}
   - component: {fileID: 680947265}
   m_Layer: 0
   m_Name: Trigger2
@@ -10082,18 +10000,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 279650649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &680947263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680947261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11f7caf293d4158bfbb8855eade79be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &680947264
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10127,35 +10033,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da62fa36d4d54d4e9598e8b17f550454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.ZombieTriggerInstaller
-  _trigger: {fileID: 680947263}
   _zombies:
   - {fileID: 912174563}
   - {fileID: 856499413}
---- !u!114 &680947266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680947261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 013b186af27c578459e9bf602889f6a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.GameEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 680947265}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 0
-  initialValueCapacity: 2
-  initialBehaviourCapacity: 1
 --- !u!1001 &683460838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26360,8 +26240,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2117813608}
   - component: {fileID: 2117813610}
-  - component: {fileID: 2117813609}
-  - component: {fileID: 2117813612}
   - component: {fileID: 2117813611}
   m_Layer: 0
   m_Name: Trigger3
@@ -26385,18 +26263,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 279650649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2117813609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2117813607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11f7caf293d4158bfbb8855eade79be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &2117813610
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26430,34 +26296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da62fa36d4d54d4e9598e8b17f550454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.ZombieTriggerInstaller
-  _trigger: {fileID: 2117813609}
   _zombies:
   - {fileID: 761039292}
---- !u!114 &2117813612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2117813607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 013b186af27c578459e9bf602889f6a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.GameEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 2117813611}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 0
-  initialValueCapacity: 2
-  initialBehaviourCapacity: 1
 --- !u!1 &2125758030
 GameObject:
   m_ObjectHideFlags: 0
