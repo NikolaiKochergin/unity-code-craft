@@ -62,12 +62,6 @@ namespace Game.Gameplay
                 });
         }
 
-        private void OnAnimatorMove()
-        {
-            transform.parent.position += _animator.deltaPosition;
-            transform.parent.rotation *= _animator.deltaRotation;
-        }
-
         private void OnDestroy() => 
             _disposables.Dispose();
 

@@ -17,15 +17,8 @@ namespace Game.Gameplay
 
         public void FixedTick(IGameEntity entity, float deltaTime)
         {
-            if (_moveRequest.Consume(out Vector3 direction) && direction != Vector3.zero)
-            {
-                // entity.GetValue(GameEntityAPI.MoveSpeedMultiplier).Value = direction.magnitude;
+            if (_moveRequest.Consume(out Vector3 direction) && direction != Vector3.zero) 
                 _moveCommand.Invoke(new MoveArgs(direction, deltaTime));
-            }
-            else
-            {
-                // entity.GetValue(GameEntityAPI.MoveSpeedMultiplier).Value = 1f;
-            }
         }
     }
 }

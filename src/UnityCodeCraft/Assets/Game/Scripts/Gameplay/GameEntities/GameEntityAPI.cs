@@ -32,7 +32,6 @@ namespace Game.Gameplay
         public static ValueKey<IGameEntity, IRequest> FireRequest = new(nameof(FireRequest));
         public static ValueKey<IGameEntity, IReactiveVariable<IGameEntity>> Weapon = new(nameof(Weapon));
         
-        public static ValueKey<IGameEntity, IReactiveVariable<float>> MoveSpeedMultiplier = new(nameof(MoveSpeedMultiplier));
         public static ValueKey<IGameEntity, ITimer> FireDelay = new(nameof(FireDelay));
         public static ValueKey<IGameEntity, IReactiveVariable<int>> Ammo = new(nameof(Ammo));
         public static ValueKey<IGameEntity, IValue<int>> MaxAmmo = new(nameof(MaxAmmo));

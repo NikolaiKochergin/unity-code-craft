@@ -18,7 +18,6 @@ namespace Game.Gameplay
             entity.GetValue(GameEntityAPI.FireCommand)
                 .AddCondition(entity.IsHealthExists)
                 .AddCondition(entity.CanFireWithWeapon)
-
                 .AddCondition(_cooldown.IsCompleted)
                 .AddAction(() =>
                 {

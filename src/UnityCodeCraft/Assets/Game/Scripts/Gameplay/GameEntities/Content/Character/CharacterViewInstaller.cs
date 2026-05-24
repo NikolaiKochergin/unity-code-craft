@@ -48,19 +48,8 @@ namespace Game.Gameplay
                 });
             
             entity
-                .GetValue(GameEntityAPI.MoveSpeedMultiplier)
-                .Subscribe(speed => _animator.speed = speed)
-                .AddTo(_disposables);
-
-            entity
                 .GetValue(GameEntityAPI.FireCommand)
                 .AddAction(() => _animator.SetTrigger(Attack));
-        }
-
-        private void OnAnimatorMove()
-        {
-            transform.parent.position += _animator.deltaPosition;
-            transform.parent.rotation *= _animator.deltaRotation;
         }
 
         private void OnDestroy()

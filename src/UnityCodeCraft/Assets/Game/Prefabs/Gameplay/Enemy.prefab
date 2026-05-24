@@ -1999,6 +1999,7 @@ GameObject:
   - component: {fileID: 1383350002564321792}
   - component: {fileID: 2415962780172116089}
   - component: {fileID: 8139923208622980336}
+  - component: {fileID: 8406631443758829319}
   m_Layer: 0
   m_Name: <Skeleton>
   m_TagString: Enemy
@@ -2088,6 +2089,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8ce8dafae325b4173abb2a9756d41d43, type: 3}
   - {fileID: 8300000, guid: e1da5f6fdea4749e6ba86cdad0602f73, type: 3}
   _fallSound: {fileID: 8300000, guid: 3352ade033aba4780b3044e404093b9a, type: 3}
+--- !u!114 &8406631443758829319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7158363685665035492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d79c630b3fa148eab756fcad9b4efaf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.RootMotionMoveBehaviour
+  _animator: {fileID: 2415962780172116089}
 --- !u!1 &7369059967829061964
 GameObject:
   m_ObjectHideFlags: 0
@@ -2868,6 +2882,10 @@ MonoBehaviour:
     active: 0
     value:
       value: 0
+  _maxAmmo:
+    active: 0
+    value:
+      value: 0
   _cooldown:
     active: 0
     value:
@@ -2883,6 +2901,7 @@ MonoBehaviour:
     value: 0.15
   _targetLimit:
     value: 5
+  _hitResults: []
 --- !u!1001 &4012628793975234114
 PrefabInstance:
   m_ObjectHideFlags: 0

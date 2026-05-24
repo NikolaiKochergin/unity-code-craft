@@ -2339,6 +2339,7 @@ GameObject:
   - component: {fileID: 676053041413999030}
   - component: {fileID: 7751906750042188848}
   - component: {fileID: 2239917180144149855}
+  - component: {fileID: 6121566150103953297}
   m_Layer: 0
   m_Name: <Skeleton>
   m_TagString: Untagged
@@ -2416,6 +2417,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4cbb8723939a742fcb51cb82e1059928, type: 3}
   - {fileID: 8300000, guid: 3d4e74a0e14cb44f8b06b86fc2811df6, type: 3}
   - {fileID: 8300000, guid: bbb4b8eca821e43398bd4fd4c673a7e1, type: 3}
+--- !u!114 &6121566150103953297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7884378371530702000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d79c630b3fa148eab756fcad9b4efaf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.RootMotionMoveBehaviour
+  _animator: {fileID: 676053041413999030}
 --- !u!1 &8089193100203344506
 GameObject:
   m_ObjectHideFlags: 0
@@ -2911,13 +2925,16 @@ MonoBehaviour:
     active: 1
     value:
       value: 8
+  _maxAmmo:
+    active: 1
+    value:
+      value: 8
   _cooldown:
     active: 1
     value:
       _duration: 1
       _time: 0
   _firePoint: {fileID: 7272988223813815378}
-  _bulletPrefab: {fileID: 4898133462883985381, guid: fc383e20fc5b342059ed5ab71e30da44, type: 3}
   _fireRate: 0.25
 --- !u!114 &8018672637441031753
 MonoBehaviour:
