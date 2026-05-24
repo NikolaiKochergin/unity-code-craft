@@ -6,6 +6,9 @@ namespace Game.Gameplay
 {
     public class CharacterViewInstaller : GameEntityInstaller
     {
+        private const string FootStepEvt = "step";
+        private const string DeathEvt = "death";
+        
         private static readonly int TakeDamage = Animator.StringToHash("TakeDamage");
         private static readonly int Death = Animator.StringToHash("Death");
         private static readonly int Attack = Animator.StringToHash("Attack");
@@ -15,6 +18,11 @@ namespace Game.Gameplay
         private static readonly int AimZ = Animator.StringToHash("AimZ");
         
         [SerializeField] private Animator _animator;
+        [SerializeField] private AnimationEvents _animationEvents;
+        
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip _death;
+        [SerializeField] private AudioClip[] _moveSteps;
 
         private readonly DisposableComposite _disposables = new();
 
@@ -50,11 +58,23 @@ namespace Game.Gameplay
             entity
                 .GetValue(GameEntityAPI.FireCommand)
                 .AddAction(() => _animator.SetTrigger(Attack));
+            
+            _animationEvents.Subscribe(FootStepEvt, PlayMoveStep);
+            _animationEvents.Subscribe(DeathEvt, PlayDeathSound);
         }
 
         private void OnDestroy()
         {
             _disposables.Dispose();
+            
+            _animationEvents.Unsubscribe(FootStepEvt, PlayMoveStep);
+            _animationEvents.Unsubscribe(DeathEvt, PlayDeathSound);
         }
+        
+        private void PlayMoveStep() => 
+            _audioSource.PlayOneShot(_moveSteps[Random.Range(0, _moveSteps.Length)]);
+        
+        private void PlayDeathSound() =>
+            _audioSource.PlayOneShot(_death);
     }
 }

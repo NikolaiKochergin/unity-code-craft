@@ -2338,8 +2338,8 @@ GameObject:
   - component: {fileID: 765187070542819803}
   - component: {fileID: 676053041413999030}
   - component: {fileID: 7751906750042188848}
-  - component: {fileID: 2239917180144149855}
   - component: {fileID: 6121566150103953297}
+  - component: {fileID: 586850522820922843}
   m_Layer: 0
   m_Name: <Skeleton>
   m_TagString: Untagged
@@ -2398,18 +2398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.CharacterViewInstaller
   _animator: {fileID: 676053041413999030}
---- !u!114 &2239917180144149855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7884378371530702000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08ecf9037ddc41c2a28e03a2cb053da6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.CharacterSounds
+  _animationEvents: {fileID: 586850522820922843}
   _audioSource: {fileID: 1996927140430359114}
   _death: {fileID: 8300000, guid: 234139ee661e84bc8a517d097ca63824, type: 3}
   _moveSteps:
@@ -2430,6 +2419,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.RootMotionMoveBehaviour
   _animator: {fileID: 676053041413999030}
+--- !u!114 &586850522820922843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7884378371530702000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbd08fcd85174a90b79e3f101ac134d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.AnimationEvents
 --- !u!1 &8089193100203344506
 GameObject:
   m_ObjectHideFlags: 0

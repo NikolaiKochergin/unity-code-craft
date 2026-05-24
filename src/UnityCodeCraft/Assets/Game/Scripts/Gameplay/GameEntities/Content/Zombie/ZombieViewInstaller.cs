@@ -6,12 +6,17 @@ namespace Game.Gameplay
 {
     public class ZombieViewInstaller : GameEntityInstaller
     {
+        private const string PunchEvt = "punch";
+        private const string BodyFallEvt = "body_fall";
+        
         private static readonly int TakeDamage = Animator.StringToHash("TakeDamage");
         private static readonly int Death = Animator.StringToHash("Death");
         private static readonly int Attack = Animator.StringToHash("Attack");
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
         
         [SerializeField] private Animator _animator;
+        [SerializeField] private AnimationEvents _animationEvents;
+        
         [SerializeField] private ParticleSystem _takeDamageParticles;
         [SerializeField] private ParticleSystem _dieParticles;
         [SerializeField] private ParticleSystem _fallParticles;
@@ -60,10 +65,19 @@ namespace Game.Gameplay
                     _animator.SetTrigger(Attack);
                     PlayAttackSound();
                 });
+            
+            _animationEvents.Subscribe(PunchEvt, PunchAttack);
+            
+            _animationEvents.Subscribe(BodyFallEvt, BodyFall);
         }
 
-        private void OnDestroy() => 
+        private void OnDestroy()
+        {
             _disposables.Dispose();
+            
+            _animationEvents.Unsubscribe(BodyFallEvt, BodyFall);
+            _animationEvents.Unsubscribe(PunchEvt, PunchAttack);
+        }
 
         private void PlayTakeDamageSound()
         {
@@ -83,13 +97,13 @@ namespace Game.Gameplay
             _audioSource.PlayOneShot(sound);
         }
 
-        private void Handle_BodyFall()
+        private void BodyFall()
         {
             _audioSource.PlayOneShot(_fallSound);
             _fallParticles.Play();
         }
 
-        private void Handle_PunchAttack()
+        private void PunchAttack()
         {
             _entity.GetValue(GameEntityAPI.Weapon).Value?.GetValue(GameEntityAPI.FireCommand).Invoke();
         }

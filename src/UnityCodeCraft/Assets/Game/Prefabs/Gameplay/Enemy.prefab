@@ -1998,6 +1998,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1383350002564321792}
   - component: {fileID: 2415962780172116089}
+  - component: {fileID: 8898986991669694884}
   - component: {fileID: 8139923208622980336}
   - component: {fileID: 8406631443758829319}
   m_Layer: 0
@@ -2045,6 +2046,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8898986991669694884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7158363685665035492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbd08fcd85174a90b79e3f101ac134d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.AnimationEvents
 --- !u!114 &8139923208622980336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2058,6 +2071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.ZombieViewInstaller
   _animator: {fileID: 2415962780172116089}
+  _animationEvents: {fileID: 8898986991669694884}
   _takeDamageParticles: {fileID: 7867977103327073178}
   _dieParticles: {fileID: 3066896116097995645}
   _fallParticles: {fileID: 3634830046846425720}
