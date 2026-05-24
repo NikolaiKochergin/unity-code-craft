@@ -13,7 +13,8 @@ namespace Game.UI
         {
             entity.AddValue(GameUIAPI.InputMap, _inputMap);
             
-            entity.AddBehaviour<CharacterInputController>();
+            entity.AddBehaviour<JoystickInput>();
+            entity.AddBehaviour<KeyboardInput>();
         }
     }
 }
