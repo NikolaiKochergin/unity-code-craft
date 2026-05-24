@@ -10,7 +10,7 @@ namespace Game.Gameplay
         [SerializeField] private LifetimeInstaller _lifetimeInstaller;
 
         [SerializeField] private TriggerEvents _triggerEvents;
-        [SerializeField] private Const<int> _damage;
+        [SerializeField] private Const<int> _damage = 1;
         [SerializeField] private Const<int> _moveSpeed = 45;
         [SerializeField] private ReactiveVariable<TeamType> _team;
         
@@ -22,11 +22,9 @@ namespace Game.Gameplay
             _lifetimeInstaller.Install(bullet);
             
             bullet.AddValue(GameEntityAPI.Team, _team);
-            bullet.AddValue(GameEntityAPI.Trigger, _triggerEvents);
-            bullet.AddValue(GameEntityAPI.Damage, _damage);
 
             bullet.WhenFixedTick(dt => bullet.MoveStepForward(_moveSpeed, dt));
-            bullet.AddBehaviour(new BulletCollisionBehaviour(gameContext));
+            bullet.AddBehaviour(new BulletCollisionBehaviour(gameContext, _damage, _triggerEvents));
             
             bullet.AddValue(GameEntityAPI.DestroyAction, new InlineAction(bullet.DespawnBullet));
         }

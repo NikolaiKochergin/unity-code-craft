@@ -13,12 +13,11 @@ namespace Game.Gameplay
         {
             base.Install(weapon);
             
-            weapon.AddValue(GameEntityAPI.BulletPrefab, _bulletPrefab);
-            
             weapon.GetValue(GameEntityAPI.FireCommand).AddAction(() =>
             {
                 IGameEntity owner = weapon.GetValue(GameEntityAPI.Owner).Value;
                 weapon.SpawnBullet(
+                    _bulletPrefab,
                    _firePoint.position,
                    _firePoint.rotation = CalculateFireDirection(),
                    owner.GetValue(GameEntityAPI.Team).Value

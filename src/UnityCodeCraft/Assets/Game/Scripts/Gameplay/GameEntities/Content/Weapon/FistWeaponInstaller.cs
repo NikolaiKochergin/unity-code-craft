@@ -11,19 +11,19 @@ namespace Game.Gameplay
         [SerializeField] private ReactiveVariable<TeamType> _team;
         [SerializeField, Min(0)] private Const<float> _fistRadius = 0.15f;
         [SerializeField] private Const<int> _targetLimit = 5;
+        [SerializeField] private Collider[] _hitResults;
         
         public override void Install(IGameEntity entity)
         {
             base.Install(entity);
+            _hitResults = new Collider[_targetLimit.Value];
             
             _transformInstaller.Install(entity);
             
             entity.AddValue(GameEntityAPI.Team, _team);
-            entity.AddValue(GameEntityAPI.Damage, _damage);
-            entity.AddValue(GameEntityAPI.FistSize, _fistRadius);
-            entity.AddValue(GameEntityAPI.HitResult, new Collider[_targetLimit.Value]);
 
-            entity.GetValue(GameEntityAPI.FireCommand).AddAction(entity.Punch);
+            entity.GetValue(GameEntityAPI.FireCommand)
+                .AddAction(() => entity.DealDamageOverlap(_hitResults, _fistRadius,_damage));
         }
 
 #if UNITY_EDITOR

@@ -7,32 +7,33 @@ namespace Game.Gameplay
     public class BulletCollisionBehaviour : IGameEntityInit, IGameEntityDisable
     {
         private readonly IGameContext _gameContext;
+        private readonly int _damage;
+        private readonly TriggerEvents _triggerEvents;
         
-        private IValue<int> _damage;
-        private TriggerEvents _trigger;
         private IValue<TeamType> _team;
         private IAction _destroyAction;
 
-        public BulletCollisionBehaviour(IGameContext gameContext) => 
+        public BulletCollisionBehaviour(IGameContext gameContext, int damage, TriggerEvents triggerEvents)
+        {
             _gameContext = gameContext;
+            _damage = damage;
+            _triggerEvents = triggerEvents;
+        }
 
         public void Init(IGameEntity entity)
         {
-            _damage = entity.GetValue(GameEntityAPI.Damage);
             _team = entity.GetValue(GameEntityAPI.Team);
             _destroyAction = entity.GetValue(GameEntityAPI.DestroyAction);
-
-            _trigger = entity.GetValue(GameEntityAPI.Trigger);
-            _trigger.OnEntered += OnTriggerEnter;
+            _triggerEvents.OnEntered += OnTriggerEnter;
         }
 
         public void Disable(IGameEntity entity) => 
-            _trigger.OnEntered -= OnTriggerEnter;
+            _triggerEvents.OnEntered -= OnTriggerEnter;
 
         private void OnTriggerEnter(Collider collider)
         {
             if (collider.TryGetComponent(out IGameEntity target) &&
-                _gameContext.TakeDamage(target, _damage.Value, _team.Value))
+                _gameContext.TakeDamage(target, _damage, _team.Value))
                 _destroyAction.Invoke();
         }
     }

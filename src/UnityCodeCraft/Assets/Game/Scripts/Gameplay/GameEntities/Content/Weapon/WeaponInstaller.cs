@@ -20,16 +20,18 @@ namespace Game.Gameplay
             {
                 IReactiveVariable<int> ammo = _ammo.Value;
                 entity.AddValue(GameEntityAPI.Ammo, ammo);
-                entity.GetValue(GameEntityAPI.FireCommand).AddCondition(() => ammo.Value > 0);
-                entity.GetValue(GameEntityAPI.FireCommand).AddAction(() => ammo.Value--);
+                entity.GetValue(GameEntityAPI.FireCommand)
+                    .AddCondition(() => ammo.Value > 0)
+                    .AddAction(() => ammo.Value--);
             }
             
             if (_cooldown)
             {
                 ICooldown cooldown = _cooldown.Value;
                 entity.AddValue(GameEntityAPI.FireCooldown, cooldown);
-                entity.GetValue(GameEntityAPI.FireCommand).AddCondition(cooldown.IsCompleted);
-                entity.GetValue(GameEntityAPI.FireCommand).AddAction(cooldown.ResetTime);
+                entity.GetValue(GameEntityAPI.FireCommand)
+                    .AddCondition(cooldown.IsCompleted)
+                    .AddAction(cooldown.ResetTime);
                 entity.WhenFixedTick(cooldown.Tick);
             }
             

@@ -29,20 +29,5 @@ namespace Game.Gameplay
             ammo.Value += amount;
             return true;
         }
-
-        public static void Punch(this IGameEntity entity)
-        {
-            Vector3 position = entity.GetValue(GameEntityAPI.Position).Value;
-            float radius = entity.GetValue(GameEntityAPI.FistSize).Value;
-            Collider[] results = entity.GetValue(GameEntityAPI.HitResult);
-            int damage = entity.GetValue(GameEntityAPI.Damage).Value;
-            TeamType instigator = entity.GetValue(GameEntityAPI.Team).Value;
-            
-            int size = Physics.OverlapSphereNonAlloc(position, radius, results);
-            for (int i = 0; i < size; i++)
-                if (results[i].TryGetComponent(out IGameEntity target) && target.HasTag(GameEntityAPI.CharacterTag))
-                    if(GameContext.Instance.TakeDamage(target, damage, instigator))
-                        break;
-        }
     }
 }

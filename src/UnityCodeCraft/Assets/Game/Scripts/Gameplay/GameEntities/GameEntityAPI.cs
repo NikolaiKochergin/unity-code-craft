@@ -37,10 +37,8 @@ namespace Game.Gameplay
         public static ValueKey<IGameEntity, IReactiveVariable<int>> Ammo = new(nameof(Ammo));
         public static ValueKey<IGameEntity, IValue<int>> MaxAmmo = new(nameof(MaxAmmo));
         public static ValueKey<IGameEntity, ICooldown> FireCooldown = new(nameof(FireCooldown));
-        public static ValueKey<IGameEntity, GameEntity> BulletPrefab = new(nameof(BulletPrefab));
         public static ValueKey<IGameEntity, ICooldown> Lifetime = new(nameof(Lifetime));
         public static ValueKey<IGameEntity, IAction> DestroyAction = new(nameof(DestroyAction));
-        public static ValueKey<IGameEntity, IValue<int>> Damage = new(nameof(Damage));
         public static ValueKey<IGameEntity, TriggerEvents> Trigger = new(nameof(Trigger));
         public static ValueKey<IGameEntity, IReactiveVariable<TeamType>> Team = new(nameof(TeamType));
         public static ValueKey<IGameEntity, IVariable<IGameEntity>> Owner = new(nameof(Owner));
@@ -50,7 +48,5 @@ namespace Game.Gameplay
         public static ValueKey<IGameEntity, GameEntity[]> Zombies = new(nameof(Zombies));
         public static ValueKey<IGameEntity, ICommand<IGameEntity>> InteractCommand = new(nameof(InteractCommand));
         public static ValueKey<IGameEntity, IEvent> CollectedEvent = new(nameof(CollectedEvent));
-        public static ValueKey<IGameEntity, IValue<float>> FistSize = new(nameof(FistSize));
-        public static ValueKey<IGameEntity, Collider[]> HitResult = new(nameof(HitResult));
     }
 }
