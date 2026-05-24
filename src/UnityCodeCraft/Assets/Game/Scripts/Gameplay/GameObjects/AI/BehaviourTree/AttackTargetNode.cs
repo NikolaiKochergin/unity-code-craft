@@ -24,7 +24,7 @@ namespace Game
                 !_blackboard.TryGetValue(_distanceKey, out float attackDistance))
                 return BehaviourResult.Failure;
 
-            if (!target || !target.activeInHierarchy || !target.TryGetComponent(out HealthComponent health) || health.IsDead)
+            if (!target.TryGetComponent(out HealthComponent health) || health.IsDead)
                 return BehaviourResult.Success;
 
             Vector3 delta = target.transform.position - character.transform.position;

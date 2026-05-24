@@ -1,3 +1,5 @@
+using Game;
+using Modules.AI;
 using UnityEngine;
 
 namespace SampleGame
@@ -13,6 +15,9 @@ namespace SampleGame
         [SerializeField]
         private GameObject _character;
 
+        [SerializeField] 
+        private Blackboard _blackboard;
+
         [SerializeField]
         private InputHandler _next;
 
@@ -23,12 +28,25 @@ namespace SampleGame
                 if (context.point != null)
                 {
                     // TODO: Attack Position
+
+                    GameObject basePoint = _blackboard.GetValue(BlackboardAPI.BasePoint);
+                    
+                    basePoint.transform.position = context.point.Value;
+                    
+                    _blackboard.SetReferenceValue(BlackboardAPI.Enemy, basePoint);
                     
                     _commandMarkerView.ShowAttackMarker(context.point.Value);
                 }
                 else if (context.target != null && context.target != _character)
                 {
                     // TODO: Attack Target
+                    
+                    _blackboard.SetReferenceValue(BlackboardAPI.Enemy, context.target);
+                    
+                    GameObject basePoint = _blackboard.GetValue(BlackboardAPI.BasePoint);
+                    
+                    basePoint.transform.position = context.target.transform.position;
+                    
                     
                     _commandMarkerView.ShowAttackMarker(context.target.transform);
                 }
