@@ -13,8 +13,10 @@ namespace Game.UI
         {
             entity.AddValue(GameUIAPI.InputMap, _inputMap);
             
-            entity.AddBehaviour<JoystickInput>();
-            entity.AddBehaviour<KeyboardInput>();
+            entity.AddBehaviour<JoystickMoveController>();
+            entity.AddBehaviour<JoystickAimController>();
+            entity.AddBehaviour<KeyboardMoveController>();
+            entity.AddBehaviour<KeyboardAimController>();
         }
     }
 }
