@@ -19,5 +19,8 @@ namespace Game.Gameplay
 
         public static void DespawnBullet(this IGameContext gameContext, IGameEntity bullet) => 
             gameContext.GetValue(GameContextAPI.BulletPool).Return(bullet);
+
+        public static Quaternion WithFireRate(this Transform firePoint, float rate) => 
+            firePoint.rotation * Quaternion.Euler(0f, Random.Range(-rate, rate) / 2f, 0f);
     }
 }

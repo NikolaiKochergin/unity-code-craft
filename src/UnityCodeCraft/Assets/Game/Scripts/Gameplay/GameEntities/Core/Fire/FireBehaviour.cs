@@ -7,11 +7,13 @@ namespace Game.Gameplay
     {
         private IRequest _request;
         private ICommand _command;
+        private ICooldown _delay;
 
         public void Init(IGameEntity entity)
         {
             _request = entity.GetValue(GameEntityAPI.FireRequest);
             _command = entity.GetValue(GameEntityAPI.FireCommand);
+            entity.TryGetValue(GameEntityAPI.FireDelay, out _delay);
         }
 
         public void FixedTick(IGameEntity entity, float deltaTime)

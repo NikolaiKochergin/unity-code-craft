@@ -18,13 +18,10 @@ namespace Game.Gameplay
                 IGameEntity owner = weapon.GetValue(GameEntityAPI.Owner).Value;
                 gameContext.SpawnBullet(
                    _firePoint.position,
-                   _firePoint.rotation = CalculateFireDirection(),
+                   _firePoint.WithFireRate(_fireRate),
                    owner.GetValue(GameEntityAPI.Team).Value
                 );
             });
         }
-
-        private Quaternion CalculateFireDirection() => 
-            _firePoint.rotation * Quaternion.Euler(0f, Random.Range(-_fireRate, _fireRate) / 2f, 0f);
     }
 }
