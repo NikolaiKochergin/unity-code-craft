@@ -28254,10 +28254,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Character]'
       objectReference: {fileID: 0}
-    - target: {fileID: 4366909304254022560, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
-      propertyPath: _fireInstaller._fireDelay.active
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6992041410405490774, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.5

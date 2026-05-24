@@ -1519,7 +1519,8 @@ MonoBehaviour:
     _fireDelay:
       active: 1
       value:
-        duration: 0.5
+        _duration: 1
+        _time: 1
   _interactorInstaller:
     _triggerEvents: {fileID: 8294845977011393071}
   _weapon: {fileID: 383029351826896194}
