@@ -26,7 +26,10 @@ namespace Game.Gameplay
             bullet.WhenFixedTick(dt => bullet.MoveStepForward(_moveSpeed, dt));
             bullet.AddBehaviour(new BulletCollisionBehaviour(gameContext, _damage, _triggerEvents));
             
-            bullet.AddValue(GameEntityAPI.DestroyAction, new InlineAction(bullet.DespawnBullet));
+            bullet.AddValue(GameEntityAPI.DestroyAction, new InlineAction(() => gameContext.DespawnBullet(bullet)));
+            
+            bullet.AddValue(GameEntityAPI.RespawnCommand, new Command()
+                .AddAction(bullet.GetValue(GameEntityAPI.Lifetime).ResetTime));
         }
     }
 }

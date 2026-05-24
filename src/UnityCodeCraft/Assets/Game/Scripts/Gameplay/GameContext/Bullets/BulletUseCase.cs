@@ -5,15 +5,19 @@ namespace Game.Gameplay
 {
     public static class BulletUseCase
     {
-        public static IGameEntity SpawnBullet(this IGameEntity weapon, GameEntity bulletPrefab, Vector3 position,
+        public static IGameEntity SpawnBullet(this IGameContext gameContext,Vector3 position,
             Quaternion rotation, TeamType team)
         {
-            GameEntity bullet = SceneEntity.Create(bulletPrefab, position, rotation);
+            IEntityPool<IGameEntity> bulletPool = gameContext.GetValue(GameContextAPI.BulletPool);
+            IGameEntity bullet = bulletPool.Rent();
+            bullet.GetValue(GameEntityAPI.Position).Value = position;
+            bullet.GetValue(GameEntityAPI.Rotation).Value = rotation;
             bullet.GetValue(GameEntityAPI.Team).Value = team;
+            bullet.GetValue(GameEntityAPI.RespawnCommand).Invoke();
             return bullet;
         }
 
-        public static void DespawnBullet(this IGameEntity bullet) => 
-            SceneEntity.Destroy(bullet);
+        public static void DespawnBullet(this IGameContext gameContext, IGameEntity bullet) => 
+            gameContext.GetValue(GameContextAPI.BulletPool).Return(bullet);
     }
 }

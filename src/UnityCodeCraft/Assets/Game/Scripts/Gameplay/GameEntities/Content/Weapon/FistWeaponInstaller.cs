@@ -16,6 +16,8 @@ namespace Game.Gameplay
         public override void Install(IGameEntity entity)
         {
             base.Install(entity);
+            GameContext gameContext = GameContext.Instance;
+            
             _hitResults = new Collider[_targetLimit.Value];
             
             _transformInstaller.Install(entity);
@@ -23,7 +25,7 @@ namespace Game.Gameplay
             entity.AddValue(GameEntityAPI.Team, _team);
 
             entity.GetValue(GameEntityAPI.FireCommand)
-                .AddAction(() => entity.DealDamageOverlap(_hitResults, _fistRadius,_damage));
+                .AddAction(() => entity.DealDamageOverlap(gameContext, _hitResults, _fistRadius,_damage));
         }
 
 #if UNITY_EDITOR

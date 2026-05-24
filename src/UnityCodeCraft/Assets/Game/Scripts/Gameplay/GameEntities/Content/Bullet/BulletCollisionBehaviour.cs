@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Gameplay
 {
-    public class BulletCollisionBehaviour : IGameEntityInit, IGameEntityDisable
+    public class BulletCollisionBehaviour : IGameEntityInit, IGameEntityDispose
     {
         private readonly IGameContext _gameContext;
         private readonly int _damage;
@@ -27,8 +27,10 @@ namespace Game.Gameplay
             _triggerEvents.OnEntered += OnTriggerEnter;
         }
 
-        public void Disable(IGameEntity entity) => 
+        public void Dispose(IGameEntity entity)
+        {
             _triggerEvents.OnEntered -= OnTriggerEnter;
+        }
 
         private void OnTriggerEnter(Collider collider)
         {

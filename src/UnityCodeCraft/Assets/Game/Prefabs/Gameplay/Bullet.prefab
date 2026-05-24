@@ -158,8 +158,8 @@ MonoBehaviour:
     _transform: {fileID: 6795422085097260040}
   _lifetimeInstaller:
     _cooldown:
-      _duration: 3
-      _time: 3
+      _duration: 1
+      _time: 0
   _triggerEvents: {fileID: 212722597377587427}
   _damage:
     value: 1

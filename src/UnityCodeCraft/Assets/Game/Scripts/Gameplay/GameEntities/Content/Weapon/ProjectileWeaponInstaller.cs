@@ -6,18 +6,17 @@ namespace Game.Gameplay
     public sealed class ProjectileWeaponInstaller : WeaponInstaller
     {
         [SerializeField] private Transform _firePoint;
-        [SerializeField] private GameEntity _bulletPrefab;
         [SerializeField, Min(0)] private float _fireRate;
 
         public override void Install(IGameEntity weapon)
         {
             base.Install(weapon);
             
+            GameContext gameContext = GameContext.Instance;
             weapon.GetValue(GameEntityAPI.FireCommand).AddAction(() =>
             {
                 IGameEntity owner = weapon.GetValue(GameEntityAPI.Owner).Value;
-                weapon.SpawnBullet(
-                    _bulletPrefab,
+                gameContext.SpawnBullet(
                    _firePoint.position,
                    _firePoint.rotation = CalculateFireDirection(),
                    owner.GetValue(GameEntityAPI.Team).Value
