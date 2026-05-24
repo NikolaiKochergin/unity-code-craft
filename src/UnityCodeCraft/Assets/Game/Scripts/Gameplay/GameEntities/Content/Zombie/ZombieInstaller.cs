@@ -36,7 +36,7 @@ namespace Game.Gameplay
             
             entity.AddValue(GameEntityAPI.Target, new Variable<IGameEntity>(_initialTarget));
             
-            entity.WhenFixedTick(_ => entity.GetValue(GameEntityAPI.FireRequest).Invoke());
+            entity.AddBehaviour<AttackTargetBehaviour>();
         }
 
         private void InstallMove(IGameEntity entity)

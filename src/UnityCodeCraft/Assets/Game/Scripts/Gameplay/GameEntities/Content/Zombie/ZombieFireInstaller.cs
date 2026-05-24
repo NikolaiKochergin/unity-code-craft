@@ -18,8 +18,7 @@ namespace Game.Gameplay
             entity.GetValue(GameEntityAPI.FireCommand)
                 .AddCondition(entity.IsHealthExists)
                 .AddCondition(entity.CanFireWithWeapon)
-                .AddCondition(entity.IsInAttackDistance)
-                .AddCondition(entity.IsTargetAlive)
+
                 .AddCondition(_cooldown.IsCompleted)
                 .AddAction(() =>
                 {
@@ -28,9 +27,6 @@ namespace Game.Gameplay
                 });
 
             entity.WhenFixedTick(_cooldown.Tick);
-            
-            entity
-                .WhenFixedTick(_ => entity.GetValue(GameEntityAPI.FireRequest).Invoke());
         }
     }
 }
