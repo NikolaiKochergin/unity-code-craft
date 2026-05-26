@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class ColliderBufferBlackboardInstaller : IBlackboardInstaller
+    public sealed class ColliderBufferBlackboardInstaller : IBlackboardInstaller
     {
         [SerializeField] 
         private int _bufferSize = 8;

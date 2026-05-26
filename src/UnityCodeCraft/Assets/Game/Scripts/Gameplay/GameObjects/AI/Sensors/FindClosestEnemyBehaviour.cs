@@ -4,14 +4,10 @@ using UnityEngine;
 
 namespace Game
 {
-    public sealed class FindClosestTargetBehaviour : MonoBehaviour
+    public sealed class FindClosestEnemyBehaviour : MonoBehaviour
     {
         [SerializeField]
         private Blackboard _blackboard;
-
-        [SerializeField] 
-        [BlackboardValueKey(typeof(GameObject))]
-        private string _targetKey;
 
         private void FixedUpdate()
         {
@@ -20,9 +16,9 @@ namespace Game
             GameObject character = _blackboard.GetValue(BlackboardAPI.Character);
 
             if (FindClosestTarget(character, buffer, count, out GameObject target))
-                _blackboard.SetReferenceValue(_targetKey, target);
+                _blackboard.SetReferenceValue(BlackboardAPI.Enemy, target);
             else
-                _blackboard.DelValue(_targetKey);
+                _blackboard.DelValue(BlackboardAPI.Enemy);
         }
 
         private bool FindClosestTarget(
@@ -39,8 +35,7 @@ namespace Game
             for (int i = 0; i < count; i++)
             {
                 Collider other = buffer[i];
-                if(!other || 
-                   other.gameObject == character ||
+                if(!other || other.gameObject == character ||
                    !other.TryGetComponent(out TeamComponent teamComponent) ||
                    teamComponent.Team == _blackboard.GetValue(BlackboardAPI.Team))
                     continue;

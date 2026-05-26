@@ -28,15 +28,18 @@ namespace SampleGame
                     // TODO: Move to target
                     _blackboard.SetReferenceValue(BlackboardAPI.MovePoint, context.target);
                     
+                    
                     _commandMarkerView.ShowMoveMarker(context.target.transform);
                 }
                 else if (context.point != null)
                 {
                     
                     // TODO: Move to point
-                    GameObject movePoint = _blackboard.GetValue(BlackboardAPI.BasePoint);
-                    movePoint.transform.position = context.point.Value;
-                    _blackboard.SetReferenceValue(BlackboardAPI.MovePoint, movePoint);
+                    // GameObject movePoint = _blackboard.GetValue(BlackboardAPI.BasePoint);
+                    // movePoint.transform.position = context.point.Value;
+                    // _blackboard.SetReferenceValue(BlackboardAPI.MovePoint, movePoint);
+                    
+                    _blackboard.GetValue(BlackboardAPI.CommandQueue).Enqueue(new MoveCommand(_blackboard, context.point.Value));
                     
                     _commandMarkerView.ShowMoveMarker(context.point.Value);
                 }

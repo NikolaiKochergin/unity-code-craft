@@ -13,10 +13,9 @@ namespace Game
         {
             blackboard.SetReferenceValue(BlackboardAPI.Waypoints, new List<GameObject>());
             blackboard.SetPrimitiveValue(BlackboardAPI.WaypointIndex, 0);
-            blackboard.SetReferenceValue(BlackboardAPI.WaypointPool, new ObjectPool<Transform>(OnCreate));
+            blackboard.SetReferenceValue(BlackboardAPI.PointsPool, new ObjectPool<GameObject>(OnCreate));
         }
 
-        private Transform OnCreate() => 
-            new GameObject("Waypoint").transform;
+        private GameObject OnCreate() => new("Waypoint");
     }
 }

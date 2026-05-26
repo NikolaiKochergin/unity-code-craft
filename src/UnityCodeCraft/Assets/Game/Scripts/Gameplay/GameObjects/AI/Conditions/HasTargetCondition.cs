@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class HasTargetCondition : ICondition
+    public sealed class HasTargetCondition : ICondition
     {
         [SerializeField]
         private Blackboard _blackboard;
