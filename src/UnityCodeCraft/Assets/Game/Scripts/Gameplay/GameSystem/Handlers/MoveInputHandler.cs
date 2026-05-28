@@ -9,36 +9,46 @@ namespace SampleGame
         [SerializeField] 
         private CommandMarkerView _commandMarkerView;
         
-        [SerializeField] 
-        private Blackboard _blackboard;
-        
         [SerializeField]
         private GameObject _character;
 
         [SerializeField]
         private InputHandler _next;
 
+        private UnitCommandQueue _commandQueue;
+
+        private void Start()
+        {
+            Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
+            
+            if (blackboard == null) 
+                Debug.LogError("No Blackboard component found on " + _character);
+            
+            _commandQueue = blackboard?.GetValue(BlackboardAPI.CommandQueue);
+            
+            if (_commandQueue == null)
+                Debug.LogError("CommandQueue doesn't exist on " + _character);
+        }
+
         public override void Handle(ref InputContext context)
         {
             if (context.rightClick)
             {
-                UnitCommandQueue queue = _blackboard.GetValue(BlackboardAPI.CommandQueue);
-                
                 if (context.target != null && context.target != _character)
                 {
                     if (!context.enqueueCommand)
-                        queue.Reset();
+                        _commandQueue.Reset();
                     
-                    queue.Add(new MoveCommand(context.target));
+                    _commandQueue.Add(new MoveCommand(context.target));
                     
                     _commandMarkerView.ShowMoveMarker(context.target.transform);
                 }
                 else if (context.point != null)
                 {
                     if (!context.enqueueCommand)
-                        queue.Reset();
+                        _commandQueue.Reset();
                     
-                    queue.Add(new MoveCommand(context.point.Value));
+                    _commandQueue.Add(new MoveCommand(context.point.Value));
                     
                     _commandMarkerView.ShowMoveMarker(context.point.Value);
                 }
