@@ -11,7 +11,7 @@ namespace Game
     {
         public static readonly BlackboardValueKey<GameObject> Character = new(nameof(Character));
         public static readonly BlackboardValueKey<GameObject> BasePoint = new(nameof(BasePoint));
-        public static readonly BlackboardValueKey<Queue<IUnitCommand>> CommandQueue = new(nameof(CommandQueue));
+        public static readonly BlackboardValueKey<UnitCommandQueue> CommandQueue = new(nameof(CommandQueue));
         
         // Combat
         public static readonly BlackboardValueKey<TeamType> Team = new(nameof(Team));

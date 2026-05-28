@@ -5,20 +5,38 @@ namespace Game
 {
     public sealed class MoveCommand : IUnitCommand
     {
-        private readonly Blackboard _blackboard;
         private readonly Vector3 _targetPosition;
+        private readonly GameObject _targetObject;
 
-        public MoveCommand(Blackboard blackboard, Vector3 targetPosition)
-        {
+        public MoveCommand(Vector3 targetPosition) => 
             _targetPosition = targetPosition;
-            _blackboard = blackboard;
+
+        public MoveCommand(GameObject targetObject) => 
+            _targetObject = targetObject;
+
+        public void Start(Blackboard blackboard)
+        {
+            if (_targetObject)
+            {
+                blackboard.SetReferenceValue(BlackboardAPI.MovePoint, _targetObject);
+            }
+            else
+            {
+                GameObject basePoint = blackboard.GetValue(BlackboardAPI.BasePoint);
+                basePoint.transform.position = _targetPosition;
+                blackboard.SetReferenceValue(BlackboardAPI.MovePoint, basePoint);
+            }
         }
 
-        public void Begin()
+        public void Stop(Blackboard blackboard)
         {
-            GameObject basePoint = _blackboard.GetValue(BlackboardAPI.BasePoint); 
-            basePoint.transform.position = _targetPosition;
-            _blackboard.SetReferenceValue(BlackboardAPI.MovePoint, basePoint);
+            if (_targetObject)
+            {
+                GameObject basePoint= blackboard.GetValue(BlackboardAPI.BasePoint);
+                basePoint.transform.position = _targetObject.transform.position;
+            }
+            
+            blackboard.DelValue(BlackboardAPI.MovePoint);
         }
     }
 }

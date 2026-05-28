@@ -5,12 +5,12 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public sealed class CommandQueueCondition : ICondition
+    public sealed class CommandQueueEmptyCondition : ICondition
     {
         [SerializeField] 
         private Blackboard _blackboard;
         
         public bool Invoke() => 
-            _blackboard.GetValue(BlackboardAPI.CommandQueue).Count == 0;
+            _blackboard.GetValue(BlackboardAPI.CommandQueue).IsEmpty;
     }
 }

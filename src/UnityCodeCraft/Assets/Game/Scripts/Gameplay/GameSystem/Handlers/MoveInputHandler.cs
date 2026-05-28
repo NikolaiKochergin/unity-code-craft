@@ -22,24 +22,23 @@ namespace SampleGame
         {
             if (context.rightClick)
             {
+                UnitCommandQueue queue = _blackboard.GetValue(BlackboardAPI.CommandQueue);
+                
                 if (context.target != null && context.target != _character)
                 {
+                    if (!context.enqueueCommand)
+                        queue.Reset();
                     
-                    // TODO: Move to target
-                    _blackboard.SetReferenceValue(BlackboardAPI.MovePoint, context.target);
-                    
+                    queue.Add(new MoveCommand(context.target));
                     
                     _commandMarkerView.ShowMoveMarker(context.target.transform);
                 }
                 else if (context.point != null)
                 {
+                    if (!context.enqueueCommand)
+                        queue.Reset();
                     
-                    // TODO: Move to point
-                    // GameObject movePoint = _blackboard.GetValue(BlackboardAPI.BasePoint);
-                    // movePoint.transform.position = context.point.Value;
-                    // _blackboard.SetReferenceValue(BlackboardAPI.MovePoint, movePoint);
-                    
-                    _blackboard.GetValue(BlackboardAPI.CommandQueue).Enqueue(new MoveCommand(_blackboard, context.point.Value));
+                    queue.Add(new MoveCommand(context.point.Value));
                     
                     _commandMarkerView.ShowMoveMarker(context.point.Value);
                 }
