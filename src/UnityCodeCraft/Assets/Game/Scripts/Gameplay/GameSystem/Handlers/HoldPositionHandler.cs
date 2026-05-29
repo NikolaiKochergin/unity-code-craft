@@ -34,13 +34,10 @@ namespace SampleGame
         {
             if (Input.GetKeyDown(_keyCode))
             {
-                // TODO: Hold Position
-                
                 if (!context.enqueueCommand)
                     _commandQueue.Reset();
                 
                 _commandQueue.Add(new HoldPositionCommand());
-                
             }
             else if (_next) 
                 _next.Handle(ref context);

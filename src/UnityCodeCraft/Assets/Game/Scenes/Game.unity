@@ -1144,7 +1144,7 @@ GameObject:
   - component: {fileID: 710292170}
   - component: {fileID: 710292169}
   m_Layer: 0
-  m_Name: <HoldPosition>
+  m_Name: <Hold>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1577,8 +1577,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 945414886}
+  - component: {fileID: 945414888}
+  - component: {fileID: 945414889}
   m_Layer: 0
-  m_Name: <Chase>
+  m_Name: <Follow>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1599,6 +1601,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2003418520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &945414888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945414885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef5aac40b1864451b1b5db36a1e61854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeWhile
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _condition:
+    rid: 8653546412937314383
+  _child: {fileID: 945414889}
+  references:
+    version: 2
+    RefIds:
+    - rid: 8653546412937314383
+      type: {class: HasTargetCondition, ns: Game, asm: Assembly-CSharp}
+      data:
+        _blackboard: {fileID: 93395078}
+        _targetKey: FollowPoint
+--- !u!114 &945414889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945414885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7820bbdb5b27420f86b04a83763397cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveToTargetNode
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _blackboard: {fileID: 93395078}
+  _stoppingDistance: TargetStoppingDistance
+  _targetKey: FollowPoint
 --- !u!1 &1115659573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,7 +1876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1297453834}
   m_Layer: 0
-  m_Name: <Patrole>
+  m_Name: <Patrol>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2293,7 +2337,7 @@ GameObject:
   - component: {fileID: 1759840071}
   - component: {fileID: 1759840070}
   m_Layer: 0
-  m_Name: <GuardPosition>
+  m_Name: <Guard>
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2544,6 +2588,7 @@ MonoBehaviour:
   _updateMode: 1
   _nodes:
   - {fileID: 710292170}
+  - {fileID: 945414888}
   - {fileID: 1115659575}
   - {fileID: 1759840071}
 --- !u!114 &2003418522

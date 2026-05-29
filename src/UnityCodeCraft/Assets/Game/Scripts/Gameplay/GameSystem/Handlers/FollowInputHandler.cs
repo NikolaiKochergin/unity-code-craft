@@ -17,22 +17,32 @@ namespace SampleGame
 
         [SerializeField]
         private InputHandler _next;
+        
+        private UnitCommandQueue _commandQueue;
+
+        private void Start()
+        {
+            Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
+            
+            if (blackboard == null) 
+                Debug.LogError("No Blackboard component found on " + _character);
+            
+            _commandQueue = blackboard?.GetValue(BlackboardAPI.CommandQueue);
+            
+            if (_commandQueue == null)
+                Debug.LogError("CommandQueue doesn't exist on " + _character);
+        }
 
         public override void Handle(ref InputContext context)
         {
             if (Input.GetKey(_keyCode) && context.leftClick)
             {
-                if (context.point != null)
+                if (context.target != null && context.target != _character)
                 {
-                    // TODO: Follow point
-                    
-                    _commandMarkerView.ShowFollowMarker(context.point.Value);
-                }
-                else if (context.target != null && context.target != _character)
-                {
-                    // TODO: Follow target
-                    
-                    _character.GetComponentInChildren<Blackboard>()?.SetReferenceValue(BlackboardAPI.FollowPoint, context.target);
+                    if (!context.enqueueCommand)
+                        _commandQueue.Reset();
+                
+                    _commandQueue.Add(new FollowCommand(context.target));
                     
                     _commandMarkerView.ShowFollowMarker(context.target.transform);
                 }
