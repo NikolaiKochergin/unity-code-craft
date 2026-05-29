@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public sealed class FindClosestEnemyBehaviour : MonoBehaviour
+    public sealed class FindClosestTargetBehaviour : MonoBehaviour
     {
         [SerializeField]
         private Blackboard _blackboard;
