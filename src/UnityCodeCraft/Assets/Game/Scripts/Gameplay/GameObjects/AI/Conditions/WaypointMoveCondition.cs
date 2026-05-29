@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Modules.AI;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace Game
         private Blackboard _blackboard;
         
         public bool Invoke() => 
-            _blackboard.GetValue(BlackboardAPI.Waypoints).Count > 0;
+            _blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<GameObject> waypoints) && 
+            waypoints.Count > 0;
     }
 }

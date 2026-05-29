@@ -20,6 +20,21 @@ namespace SampleGame
 
         [SerializeField]
         private InputHandler _next;
+        
+        private UnitCommandQueue _commandQueue;
+
+        private void Start()
+        {
+            Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
+            
+            if (blackboard == null) 
+                Debug.LogError("No Blackboard component found on " + _character);
+            
+            _commandQueue = blackboard?.GetValue(BlackboardAPI.CommandQueue);
+            
+            if (_commandQueue == null)
+                Debug.LogError("CommandQueue doesn't exist on " + _character);
+        }
 
         public override void Handle(ref InputContext context)
         {
@@ -27,26 +42,19 @@ namespace SampleGame
             {
                 if (context.point != null)
                 {
-                    // TODO: Attack Position
-
-                    GameObject basePoint = _blackboard.GetValue(BlackboardAPI.BasePoint);
+                    if (!context.enqueueCommand)
+                        _commandQueue.Reset();
                     
-                    basePoint.transform.position = context.point.Value;
-                    
-                    _blackboard.SetReferenceValue(BlackboardAPI.Enemy, basePoint);
+                    _commandQueue.Add(new AttackCommand(context.point.Value));
                     
                     _commandMarkerView.ShowAttackMarker(context.point.Value);
                 }
                 else if (context.target != null && context.target != _character)
                 {
-                    // TODO: Attack Target
+                    if (!context.enqueueCommand)
+                        _commandQueue.Reset();
                     
-                    _blackboard.SetReferenceValue(BlackboardAPI.Enemy, context.target);
-                    
-                    GameObject basePoint = _blackboard.GetValue(BlackboardAPI.BasePoint);
-                    
-                    basePoint.transform.position = context.target.transform.position;
-                    
+                    _commandQueue.Add(new AttackCommand(context.target));
                     
                     _commandMarkerView.ShowAttackMarker(context.target.transform);
                 }

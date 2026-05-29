@@ -730,6 +730,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4473757027215454236, guid: f82db08d1eee94b9791aca8b635c4482, type: 3}
   m_PrefabInstance: {fileID: 459566252}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &476139631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 476139632}
+  - component: {fileID: 476139633}
+  m_Layer: 0
+  m_Name: <NextWaypoint>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &476139632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476139631}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1297453834}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &476139633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476139631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48c139b853f34627a915e9a627c26abd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.NextWaypointNode
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _blackboard: {fileID: 93395078}
 --- !u!1 &496700955
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,6 +923,54 @@ MonoBehaviour:
   _character: {fileID: 1179872082}
   _blackboard: {fileID: 93395078}
   _next: {fileID: 452763495}
+--- !u!1 &534434542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 534434543}
+  - component: {fileID: 534434544}
+  m_Layer: 0
+  m_Name: <AssignWaypoint>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &534434543
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534434542}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1297453834}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &534434544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534434542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac09402648e476f9396258d539e80e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.AssignWaypointNode
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _blackboard: {fileID: 93395078}
+  _positionKey: MovePoint
 --- !u!1 &547416707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1409,6 +1504,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SampleGame.EnqueueCommandHandler
   _next: {fileID: 2024489237}
+--- !u!1 &872291996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 872291997}
+  - component: {fileID: 872291998}
+  m_Layer: 0
+  m_Name: <LookingForEnemy>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &872291997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872291996}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1934775041}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &872291998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872291996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2264a147b4184c1a9981c909e3b5cf7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.WaitingForTarget
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _blackboard: {fileID: 93395078}
+  _targetKey: Enemy
 --- !u!1 &906546670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1875,6 +2018,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1297453834}
+  - component: {fileID: 1297453836}
+  - component: {fileID: 1297453835}
   m_Layer: 0
   m_Name: <Patrol>
   m_TagString: Untagged
@@ -1894,9 +2039,54 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 534434543}
+  - {fileID: 2057597159}
+  - {fileID: 476139632}
   m_Father: {fileID: 2003418520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1297453835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297453833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f753cb2311846db8a2cd50ae5dd6cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeSequence
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _nodes:
+  - {fileID: 534434544}
+  - {fileID: 2057597160}
+  - {fileID: 476139633}
+--- !u!114 &1297453836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297453833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef5aac40b1864451b1b5db36a1e61854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeWhile
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _condition:
+    rid: 8653546412937314397
+  _child: {fileID: 1297453835}
+  references:
+    version: 2
+    RefIds:
+    - rid: 8653546412937314397
+      type: {class: WaypointMoveCondition, ns: Game, asm: Assembly-CSharp}
+      data:
+        _blackboard: {fileID: 93395078}
 --- !u!1 &1299358311
 GameObject:
   m_ObjectHideFlags: 0
@@ -2455,6 +2645,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SampleGame.InputController
   _handler: {fileID: 2049256228}
+--- !u!1 &1804592498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1804592499}
+  - component: {fileID: 1804592500}
+  m_Layer: 0
+  m_Name: <MoveToAttackTarget>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1804592499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804592498}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1934775041}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1804592500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804592498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7820bbdb5b27420f86b04a83763397cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveToTargetNode
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _blackboard: {fileID: 93395078}
+  _stoppingDistance: PointStoppingDistance
+  _targetKey: AttackTarget
 --- !u!1 &1820899025
 GameObject:
   m_ObjectHideFlags: 0
@@ -2530,7 +2769,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1804592499}
+  - {fileID: 872291997}
   m_Father: {fileID: 2003418520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2003418519
@@ -2589,6 +2830,7 @@ MonoBehaviour:
   _nodes:
   - {fileID: 710292170}
   - {fileID: 945414888}
+  - {fileID: 1297453836}
   - {fileID: 1115659575}
   - {fileID: 1759840071}
 --- !u!114 &2003418522
@@ -2801,6 +3043,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SampleGame.MouseInputHandler
   _next: {fileID: 1146950749}
+--- !u!1 &2057597158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2057597159}
+  - component: {fileID: 2057597160}
+  m_Layer: 0
+  m_Name: <MoveToWaypoint>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2057597159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057597158}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1297453834}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2057597160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057597158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7820bbdb5b27420f86b04a83763397cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveToTargetNode
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _blackboard: {fileID: 93395078}
+  _stoppingDistance: PointStoppingDistance
+  _targetKey: MovePoint
 --- !u!4 &1141581192752668296 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4473757027215454236, guid: f82db08d1eee94b9791aca8b635c4482, type: 3}

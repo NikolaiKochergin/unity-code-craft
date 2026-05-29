@@ -10,7 +10,7 @@ namespace Game
         private Blackboard _blackboard;
         
         [SerializeField]
-        [BlackboardValueKey(typeof(Vector3))]
+        [BlackboardValueKey(typeof(GameObject))]
         private string _positionKey;
         
         protected override BehaviourResult OnUpdate(float deltaTime)
@@ -19,7 +19,7 @@ namespace Game
                 !_blackboard.TryGetValue(BlackboardAPI.WaypointIndex, out int index))
                 return BehaviourResult.Failure;
             
-            Transform destination = waypoints[index].transform;
+            GameObject destination = waypoints[index];
             _blackboard.SetReferenceValue(_positionKey, destination);
             return BehaviourResult.Success;
         }

@@ -1,8 +1,7 @@
-﻿using Game;
-using Modules.AI;
+﻿using Modules.AI;
 using UnityEngine;
 
-namespace SampleGame
+namespace Game
 {
     public class FollowCommand : IUnitCommand
     {
