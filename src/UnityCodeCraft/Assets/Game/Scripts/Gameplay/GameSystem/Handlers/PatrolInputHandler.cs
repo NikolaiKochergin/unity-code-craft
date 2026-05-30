@@ -85,7 +85,8 @@ namespace SampleGame
         private void OnStop(List<GameObject> waypoints)
         {
             foreach (GameObject waypoint in waypoints)
-                _waypointsPool.Release(waypoint);
+                if(!waypoint.CompareTag(GameObjectTags.Entity))
+                    _waypointsPool.Release(waypoint);
         }
     }
 }
