@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Modules.AI;
-using UnityEngine;
 
 namespace Game
 {
@@ -10,7 +9,7 @@ namespace Game
     {
         public void Install(Blackboard blackboard)
         {
-            blackboard.SetReferenceValue(BlackboardAPI.Waypoints, new List<GameObject>());
+            blackboard.SetReferenceValue(BlackboardAPI.Waypoints, new List<IWayPoint>());
             blackboard.SetPrimitiveValue(BlackboardAPI.WaypointIndex, 0);
         }
     }

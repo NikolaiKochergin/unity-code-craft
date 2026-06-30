@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class AttackCommand : IUnitCommand
+    public class AttackCommand : IAiCommand
     {
         private readonly Vector3 _targetPosition;
         private readonly GameObject _target;
@@ -14,7 +14,7 @@ namespace Game
         public AttackCommand(GameObject target) => 
             _target = target;
 
-        public void Start(Blackboard blackboard)
+        public void Unpack(Blackboard blackboard)
         {
             if (_target)
             {
@@ -22,18 +22,18 @@ namespace Game
             }
             else
             {
-                GameObject basePoint = blackboard.GetValue(BlackboardAPI.BasePoint);
-                basePoint.transform.position = _targetPosition;
-                blackboard.SetReferenceValue(BlackboardAPI.AttackTarget, basePoint);
+                // GameObject basePoint = blackboard.GetValue(BlackboardAPI.BasePoint);
+                // basePoint.transform.position = _targetPosition;
+                // blackboard.SetReferenceValue(BlackboardAPI.AttackTarget, basePoint);
             }
         }
 
-        public void Stop(Blackboard blackboard)
+        public void Dispose(Blackboard blackboard)
         {
             if (_target)
             {
-                GameObject basePoint= blackboard.GetValue(BlackboardAPI.BasePoint);
-                basePoint.transform.position = _target.transform.position;
+                // GameObject basePoint= blackboard.GetValue(BlackboardAPI.BasePoint);
+                // basePoint.transform.position = _target.transform.position;
             }
             
             blackboard.DelValue(BlackboardAPI.AttackTarget);

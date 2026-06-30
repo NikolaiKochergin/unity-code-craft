@@ -15,7 +15,7 @@ namespace SampleGame
         [SerializeField]
         private InputHandler _next;
 
-        private UnitCommandQueue _commandQueue;
+        private AiCommandQueue _commandQueue;
 
         private void Start()
         {
@@ -39,7 +39,7 @@ namespace SampleGame
                     if (!context.enqueueCommand)
                         _commandQueue.Reset();
                     
-                    _commandQueue.Add(new MoveCommand(context.target));
+                    _commandQueue.Add(new MoveCommand(new TargetWayPoint(context.target.transform)));
                     
                     _commandMarkerView.ShowMoveMarker(context.target.transform);
                 }
@@ -48,7 +48,7 @@ namespace SampleGame
                     if (!context.enqueueCommand)
                         _commandQueue.Reset();
                     
-                    _commandQueue.Add(new MoveCommand(context.point.Value));
+                    _commandQueue.Add(new MoveCommand(new PositionWayPoint(context.point.Value)));
                     
                     _commandMarkerView.ShowMoveMarker(context.point.Value);
                 }

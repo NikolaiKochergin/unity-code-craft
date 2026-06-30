@@ -12,7 +12,7 @@ namespace Game
         private Blackboard _blackboard;
         
         public bool Invoke() => 
-            _blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<GameObject> waypoints) && 
+            _blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<IWayPoint> waypoints) && 
             waypoints.Count > 0;
     }
 }

@@ -6,48 +6,53 @@ using Sirenix.OdinInspector;
 namespace Game
 {
     [Serializable]
-    public sealed class UnitCommandQueue
+    public sealed class AiCommandQueue
     {
         [ShowInInspector, HideInEditorMode]
-        private readonly Queue<IUnitCommand> _commandQueue = new();
+        private readonly Queue<IAiCommand> _commandQueue = new();
         private readonly Blackboard _blackboard;
 
-        public UnitCommandQueue(Blackboard blackboard) => 
+        public AiCommandQueue(Blackboard blackboard) => 
             _blackboard = blackboard;
         
-        public IUnitCommand CurrentCommand { get; private set; }
+        [ShowInInspector, HideInEditorMode]
+        public IAiCommand CurrentCommand { get; private set; }
         public bool IsEmpty => _commandQueue.Count == 0;
 
-        public void Add(IUnitCommand command) => 
+        public void Add(IAiCommand command) => 
             _commandQueue.Enqueue(command);
 
         public bool TryStartNext()
         {
             StopCurrent();
 
-            if (!_commandQueue.TryDequeue(out IUnitCommand command)) 
+            if (!_commandQueue.TryDequeue(out IAiCommand command)) 
                 return false;
             
             StartCurrent(command);
             return true;
         }
 
-        public UnitCommandQueue Reset()
+        public AiCommandQueue Reset()
         {
-            StopCurrent();
+            foreach (IAiCommand command in _commandQueue) 
+                command.Dispose(_blackboard);
+            
             _commandQueue.Clear();
+            CurrentCommand?.Dispose(_blackboard);
+            CurrentCommand = null;
             return this;
         }
         
-        private void StartCurrent(IUnitCommand command)
+        private void StartCurrent(IAiCommand command)
         {
             CurrentCommand = command;
-            CurrentCommand?.Start(_blackboard);
+            CurrentCommand?.Unpack(_blackboard);
         }
 
         private void StopCurrent()
         {
-            CurrentCommand?.Stop(_blackboard);
+            CurrentCommand?.Dispose(_blackboard);
             CurrentCommand = null;
         }
     }

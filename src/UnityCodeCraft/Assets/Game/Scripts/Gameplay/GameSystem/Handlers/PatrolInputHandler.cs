@@ -23,10 +23,7 @@ namespace SampleGame
         [SerializeField]
         private InputHandler _next;
         
-        private UnitCommandQueue _commandQueue;
-
-        private readonly List<GameObject> _waypoints = new();
-        private readonly ObjectPool<GameObject> _waypointsPool = new(() => new GameObject("Waypoint"));
+        private AiCommandQueue _commandQueue;
 
         private void Start()
         {
@@ -45,48 +42,43 @@ namespace SampleGame
         {
             if (Input.GetKey(_keyCode) && context.leftClick)
             {
-                GameObject point = null;
-                
+                if(!_blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<IWayPoint> wayPoints))
+                    return;
+
+                IWayPoint wayPoint = null;
+
                 if (context.point != null)
                 {
-                    point = _waypointsPool.Get();
-                    point.transform.position = context.point.Value;
-                    
+                    wayPoint = new PositionWayPoint(context.point.Value);
                     _commandMarkerView.ShowPatrolMarker(context.point.Value);
                 }
                 else if (context.target != null && context.target != _character)
                 {
-                    point = context.target;
-                    
+                    wayPoint = new TargetWayPoint(context.target.transform);
                     _commandMarkerView.ShowPatrolMarker(context.target.transform);
                 }
-
+                
                 if (context.enqueueCommand)
                 {
+                    if (_commandQueue.CurrentCommand is WayPointCommand)
+                    {
+                        wayPoints.Add(wayPoint);
+                        return;
+                    }
                 }
                 else
                 {
                     _commandQueue.Reset();
-                    _waypoints.Clear();
-
-                    _waypoints.Add(point);
-                    
-                    point = _waypointsPool.Get();
-                    point.transform.position = _character.transform.position;
                 }
-
-                _waypoints.Add(point);
-                _commandQueue.Add(new WayPointCommand(_waypoints, OnStop));
+                
+                wayPoints.Clear();
+                wayPoints.Add(new PositionWayPoint(_character.transform.position));
+                wayPoints.Add(wayPoint);
+                
+                _commandQueue.Add(new WayPointCommand());
             }
             else if (_next)
                 _next.Handle(ref context);
-        }
-
-        private void OnStop(List<GameObject> waypoints)
-        {
-            foreach (GameObject waypoint in waypoints)
-                if(!waypoint.CompareTag(GameObjectTags.Entity))
-                    _waypointsPool.Release(waypoint);
         }
     }
 }

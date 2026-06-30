@@ -3,17 +3,15 @@ using UnityEngine;
 
 namespace Game
 {
-    public class HoldPositionCommand : IUnitCommand
+    public class HoldPositionCommand : IAiCommand
     {
-        public void Start(Blackboard blackboard)
+        public void Unpack(Blackboard blackboard)
         {
-            GameObject basePoint = blackboard.GetValue(BlackboardAPI.BasePoint);
             GameObject character = blackboard.GetValue(BlackboardAPI.Character);
-            basePoint.transform.position = character.transform.position;
-            blackboard.SetReferenceValue(BlackboardAPI.HoldPoint, basePoint);
+            blackboard.SetReferenceValue(BlackboardAPI.HoldPoint, new PositionWayPoint(character.transform.position));
         }
 
-        public void Stop(Blackboard blackboard)
+        public void Dispose(Blackboard blackboard)
         {
             blackboard.DelValue(BlackboardAPI.HoldPoint);
         }

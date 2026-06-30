@@ -15,7 +15,7 @@ namespace SampleGame
         [SerializeField]
         private InputHandler _next;
         
-        private UnitCommandQueue _commandQueue;
+        private AiCommandQueue _commandQueue;
 
         private void Start()
         {

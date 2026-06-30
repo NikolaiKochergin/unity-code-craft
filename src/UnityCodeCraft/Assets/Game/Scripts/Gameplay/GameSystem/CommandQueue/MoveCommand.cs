@@ -1,40 +1,24 @@
 ﻿using Modules.AI;
-using UnityEngine;
 
 namespace Game
 {
-    public sealed class MoveCommand : IUnitCommand
+    public sealed class MoveCommand : IAiCommand
     {
-        private readonly Vector3 _targetPosition;
-        private readonly GameObject _targetObject;
+        private readonly IWayPoint _targetPoint;
 
-        public MoveCommand(Vector3 targetPosition) => 
-            _targetPosition = targetPosition;
+        public MoveCommand(IWayPoint targetPoint) => 
+            _targetPoint = targetPoint;
 
-        public MoveCommand(GameObject targetObject) => 
-            _targetObject = targetObject;
-
-        public void Start(Blackboard blackboard)
+        public void Unpack(Blackboard blackboard)
         {
-            if (_targetObject)
-            {
-                blackboard.SetReferenceValue(BlackboardAPI.MovePoint, _targetObject);
-            }
-            else
-            {
-                GameObject basePoint = blackboard.GetValue(BlackboardAPI.BasePoint);
-                basePoint.transform.position = _targetPosition;
-                blackboard.SetReferenceValue(BlackboardAPI.MovePoint, basePoint);
-            }
+            if (_targetPoint != null) 
+                blackboard.SetReferenceValue(BlackboardAPI.MovePoint, _targetPoint);
         }
 
-        public void Stop(Blackboard blackboard)
+        public void Dispose(Blackboard blackboard)
         {
-            if (_targetObject)
-            {
-                GameObject basePoint= blackboard.GetValue(BlackboardAPI.BasePoint);
-                basePoint.transform.position = _targetObject.transform.position;
-            }
+            if (_targetPoint != null) 
+                blackboard.SetReferenceValue(BlackboardAPI.BasePoint, new PositionWayPoint(_targetPoint.Position));
             
             blackboard.DelValue(BlackboardAPI.MovePoint);
         }

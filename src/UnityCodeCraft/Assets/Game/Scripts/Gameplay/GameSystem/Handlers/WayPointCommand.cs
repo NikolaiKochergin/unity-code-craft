@@ -1,32 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using Game;
-using Modules.AI;
-using UnityEngine;
+﻿using Modules.AI;
 
-namespace SampleGame
+namespace Game
 {
-    public class WayPointCommand : IUnitCommand
+    public class WayPointCommand : IAiCommand
     {
-        private readonly List<GameObject> _waypoints;
-        private readonly Action<List<GameObject>> _onStop;
-
-        public WayPointCommand(List<GameObject> waypoints, Action<List<GameObject>> onStop)
+        public void Unpack(Blackboard blackboard)
         {
-            _onStop = onStop;
-            _waypoints = waypoints;
-        }
-
-        public void Start(Blackboard blackboard)
-        {
-            blackboard.SetReferenceValue(BlackboardAPI.Waypoints, _waypoints);
             blackboard.SetPrimitiveValue(BlackboardAPI.WaypointIndex, 0);
         }
 
-        public void Stop(Blackboard blackboard)
+        public void Dispose(Blackboard blackboard)
         {
-            _onStop?.Invoke(blackboard.GetValue(BlackboardAPI.Waypoints));
-            _waypoints.Clear();
+            blackboard.SetPrimitiveValue(BlackboardAPI.WaypointIndex, 0);
+            blackboard.GetValue(BlackboardAPI.Waypoints).Clear();
         }
     }
 }

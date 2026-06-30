@@ -11,11 +11,9 @@ namespace Game
         {
             if(!Application.isPlaying)
                 return;
-                
-            GameObject basePoint = new("BasePoint");
-            basePoint.transform.position = blackboard.GetValue(BlackboardAPI.Character).transform.position;
             
-            blackboard.SetReferenceValue(BlackboardAPI.BasePoint, basePoint);
+            Vector3 characterPosition = blackboard.GetValue(BlackboardAPI.Character).transform.position;
+            blackboard.SetReferenceValue(BlackboardAPI.BasePoint, new PositionWayPoint(characterPosition));
         }
     }
 }

@@ -10,8 +10,8 @@ namespace Game
     public static class BlackboardAPI
     {
         public static readonly BlackboardValueKey<GameObject> Character = new(nameof(Character));
-        public static readonly BlackboardValueKey<GameObject> BasePoint = new(nameof(BasePoint));
-        public static readonly BlackboardValueKey<UnitCommandQueue> CommandQueue = new(nameof(CommandQueue));
+        public static readonly BlackboardValueKey<IWayPoint> BasePoint = new(nameof(BasePoint));
+        public static readonly BlackboardValueKey<AiCommandQueue> CommandQueue = new(nameof(CommandQueue));
         
         // Combat
         public static readonly BlackboardValueKey<TeamType> Team = new(nameof(Team));
@@ -21,19 +21,19 @@ namespace Game
         
         // Patrol
         public static readonly BlackboardValueKey<ObjectPool<GameObject>> PointsPool = new(nameof(PointsPool));
-        public static readonly BlackboardValueKey<List<GameObject>> Waypoints = new(nameof(Waypoints));
+        public static readonly BlackboardValueKey<List<IWayPoint>> Waypoints = new(nameof(Waypoints));
         public static readonly BlackboardValueKey<int> WaypointIndex = new(nameof(WaypointIndex));
         
         // Move
-        public static readonly BlackboardValueKey<GameObject> MovePoint = new(nameof(MovePoint));
-        public static readonly BlackboardValueKey<float> PointStoppingDistance = new(nameof(PointStoppingDistance));
+        public static readonly BlackboardValueKey<IWayPoint> MovePoint = new(nameof(MovePoint));
+        public static readonly BlackboardValueKey<float> StoppingDistance = new(nameof(StoppingDistance));
         public static readonly BlackboardValueKey<float> TargetStoppingDistance = new(nameof(TargetStoppingDistance));
         
         // Follow
         public static readonly BlackboardValueKey<GameObject> FollowPoint = new(nameof(FollowPoint));
 
         // Holding
-        public static readonly BlackboardValueKey<GameObject> HoldPoint = new(nameof(HoldPoint));
+        public static readonly BlackboardValueKey<IWayPoint> HoldPoint = new(nameof(HoldPoint));
 
         // Sensing
         public static readonly BlackboardValueKey<Collider[]> ColliderBuffer = new(nameof(ColliderBuffer));

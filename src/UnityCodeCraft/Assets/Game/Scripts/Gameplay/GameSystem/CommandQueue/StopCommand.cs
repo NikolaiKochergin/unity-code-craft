@@ -3,16 +3,15 @@ using UnityEngine;
 
 namespace Game
 {
-    public class StopCommand : IUnitCommand
+    public class StopCommand : IAiCommand
     {
-        public void Start(Blackboard blackboard)
+        public void Unpack(Blackboard blackboard)
         {
             blackboard.GetValue(BlackboardAPI.CommandQueue).Reset();
-            GameObject basePoint = blackboard.GetValue(BlackboardAPI.BasePoint);
-            GameObject character = blackboard.GetValue(BlackboardAPI.Character);
-            basePoint.transform.position = character.transform.position;
+            Vector3 characterPosition = blackboard.GetValue(BlackboardAPI.Character).transform.position;
+            blackboard.SetReferenceValue(BlackboardAPI.BasePoint, new PositionWayPoint(characterPosition));
         }
 
-        public void Stop(Blackboard blackboard) { }
+        public void Dispose(Blackboard blackboard) { }
     }
 }
