@@ -40,21 +40,18 @@ namespace SampleGame
         {
             if (Input.GetKey(_keyCode) && context.leftClick)
             {
+                if (!context.enqueueCommand)
+                    _commandQueue.Reset();
+                
                 if (context.point != null)
                 {
-                    if (!context.enqueueCommand)
-                        _commandQueue.Reset();
-                    
-                    _commandQueue.Add(new AttackCommand(context.point.Value));
+                    _commandQueue.Add(new AttackCommand(new PositionWayPoint(context.point.Value)));
                     
                     _commandMarkerView.ShowAttackMarker(context.point.Value);
                 }
                 else if (context.target != null && context.target != _character)
                 {
-                    if (!context.enqueueCommand)
-                        _commandQueue.Reset();
-                    
-                    _commandQueue.Add(new AttackCommand(context.target));
+                    _commandQueue.Add(new AttackCommand(new TargetWayPoint(context.target.transform)));
                     
                     _commandMarkerView.ShowAttackMarker(context.target.transform);
                 }

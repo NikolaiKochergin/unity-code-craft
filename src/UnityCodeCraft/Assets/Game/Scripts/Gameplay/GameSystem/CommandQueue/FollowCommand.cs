@@ -11,9 +11,9 @@ namespace Game
             _target = target;
 
         public void Unpack(Blackboard blackboard) => 
-            blackboard.SetReferenceValue(BlackboardAPI.FollowPoint, _target);
+            blackboard.SetReferenceValue(BlackboardAPI.FollowTarget, _target);
 
         public void Dispose(Blackboard blackboard) => 
-            blackboard.DelValue(BlackboardAPI.FollowPoint);
+            blackboard.DelValue(BlackboardAPI.FollowTarget);
     }
 }
