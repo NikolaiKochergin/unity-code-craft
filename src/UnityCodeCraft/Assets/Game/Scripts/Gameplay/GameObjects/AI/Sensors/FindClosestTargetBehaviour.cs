@@ -14,15 +14,17 @@ namespace Game
             Collider[] buffer = _blackboard.GetValue(BlackboardAPI.ColliderBuffer);
             int count = _blackboard.GetValue(BlackboardAPI.ColliderCount);
             GameObject character = _blackboard.GetValue(BlackboardAPI.Character);
+            TeamType selfTeam = _blackboard.GetValue(BlackboardAPI.Team);
 
-            if (FindClosestTarget(character, buffer, count, out GameObject target))
+            if (FindClosestTarget(character, selfTeam, buffer, count, out GameObject target))
                 _blackboard.SetReferenceValue(BlackboardAPI.Enemy, target);
             else
                 _blackboard.DelValue(BlackboardAPI.Enemy);
         }
 
-        private bool FindClosestTarget(
+        private static bool FindClosestTarget(
             GameObject character,
+            TeamType selfTeam,
             Collider[] buffer,
             int count,
             out GameObject target)
@@ -37,7 +39,7 @@ namespace Game
                 Collider other = buffer[i];
                 if(!other || other.gameObject == character ||
                    !other.TryGetComponent(out TeamComponent teamComponent) ||
-                   teamComponent.Team == _blackboard.GetValue(BlackboardAPI.Team))
+                   teamComponent.Team == selfTeam)
                     continue;
                 
                 if(!other.TryGetComponent(out HealthComponent health) ||
