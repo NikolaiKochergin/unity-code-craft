@@ -1,5 +1,4 @@
 ﻿using Modules.AI;
-using SampleGame;
 using UnityEngine;
 
 namespace Game
@@ -14,19 +13,12 @@ namespace Game
             if (_blackboard.GetValue(BlackboardAPI.CommandQueue).CurrentCommand is not MoveCommand ||
                 !_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) ||
                 !_blackboard.TryGetValue(BlackboardAPI.StoppingDistance, out float stoppingDistance) ||
-                !_blackboard.TryGetValue(BlackboardAPI.MovePoint, out IWayPoint movePoint) || !movePoint.IsValid)
+                !_blackboard.TryGetValue(BlackboardAPI.MovePoint, out IPoint movePoint) || !movePoint.IsValid)
                 return BehaviourResult.Failure;
 
-            Vector3 delta = movePoint.Position - character.transform.position;
-            delta.y = 0f;
-            stoppingDistance = movePoint.Size + stoppingDistance;
-            float stoppingDistanceSqr = stoppingDistance * stoppingDistance;
-
-            if (delta.sqrMagnitude <= stoppingDistanceSqr)
-                return BehaviourResult.Success;
-            
-            character.GetComponent<MoveComponent>().MoveStep(delta.normalized, deltaTime);
-            return BehaviourResult.Running;
+            return NodeUseCases.Move(character, movePoint.Position, stoppingDistance, deltaTime) 
+                ? BehaviourResult.Running 
+                : BehaviourResult.Success;
         }
     }
 }

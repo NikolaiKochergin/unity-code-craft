@@ -2,9 +2,9 @@
 
 namespace Game
 {
-    public class PositionWayPoint : IWayPoint
+    public class PositionPoint : IPoint
     {
-        public PositionWayPoint(Vector3 position)
+        public PositionPoint(Vector3 position)
         {
             Position = position;
         }

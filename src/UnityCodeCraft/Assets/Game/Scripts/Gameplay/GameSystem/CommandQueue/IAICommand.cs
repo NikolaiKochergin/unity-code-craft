@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public interface IAiCommand
+    public interface IAICommand
     {
         void Unpack(Blackboard blackboard);
         void Dispose(Blackboard blackboard);

@@ -1,5 +1,4 @@
 ﻿using Modules.AI;
-using SampleGame;
 using UnityEngine;
 
 namespace Game
@@ -18,13 +17,7 @@ namespace Game
                 !target)
                 return BehaviourResult.Failure;
             
-            Vector3 delta = target.transform.position - character.transform.position;
-            delta.y = 0f;
-            float stoppingDistanceSqr = stoppingDistance * stoppingDistance;
-
-            if (delta.sqrMagnitude > stoppingDistanceSqr)
-                character.GetComponent<MoveComponent>().MoveStep(delta.normalized, deltaTime);
-            
+            NodeUseCases.Move(character, target.transform.position, stoppingDistance, deltaTime);
             return BehaviourResult.Running;
         }
     }

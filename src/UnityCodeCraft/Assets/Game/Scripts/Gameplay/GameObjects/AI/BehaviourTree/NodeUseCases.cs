@@ -33,14 +33,42 @@ namespace Game
                 delta.y = 0;
                 
                 float sqrDistance = delta.sqrMagnitude;
-                if (sqrDistance < minDistance)
-                {
-                    minDistance = sqrDistance;
-                    target = other.gameObject;
-                }
+                if (sqrDistance > minDistance) 
+                    continue;
+                
+                minDistance = sqrDistance;
+                target = other.gameObject;
             }
             
             return target != null;
+        }
+        
+        public static bool Attack(GameObject character, GameObject enemy, float attackDistance, float deltaTime)
+        {
+            Vector3 delta = enemy.transform.position - character.transform.position;
+            delta.y = 0;
+            
+            if(delta.sqrMagnitude > attackDistance * attackDistance)
+                return false;
+            
+            RotateTransformComponent rotateComponent = character.GetComponent<RotateTransformComponent>();
+            rotateComponent.RotateTowards(enemy, deltaTime);
+                    
+            character.GetComponent<AttackComponent>().Attack(enemy);
+
+            return true;
+        }
+
+        public static bool Move(GameObject character, Vector3 targetPosition, float stoppingDistance, float deltaTime)
+        {
+            Vector3 delta = targetPosition - character.transform.position;
+            delta.y = 0;
+            
+            if(delta.sqrMagnitude < stoppingDistance * stoppingDistance)
+                return false;
+
+            character.GetComponent<MoveComponent>().MoveStep(delta.normalized, deltaTime);
+            return true;
         }
     }
 }

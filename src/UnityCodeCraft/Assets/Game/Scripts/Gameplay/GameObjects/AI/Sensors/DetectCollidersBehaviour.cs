@@ -32,7 +32,7 @@ namespace Game
                 _triggerInteraction);
             
             _blackboard.SetPrimitiveValue(
-                BlackboardAPI.ColliderCount,
+                BlackboardAPI.ColliderBufferSize,
                 count);
         }
 

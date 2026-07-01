@@ -15,42 +15,34 @@ namespace Game
                 !_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) ||
                 !_blackboard.TryGetValue(BlackboardAPI.StoppingDistance, out float stoppingDistance) ||
                 !_blackboard.TryGetValue(BlackboardAPI.AttackDistance, out float attackDistance) ||
-                !_blackboard.TryGetValue(BlackboardAPI.AttackTarget, out IWayPoint target) ||
-                !target.IsValid)
+                !_blackboard.TryGetValue(BlackboardAPI.AttackTarget, out IPoint targetPoint) || !targetPoint.IsValid ||
+                !_blackboard.TryGetValue(BlackboardAPI.Team, out TeamType selfTeam) ||
+                !_blackboard.TryGetValue(BlackboardAPI.ColliderBuffer, out Collider[] colliderBuffer) ||
+                !_blackboard.TryGetValue(BlackboardAPI.ColliderBufferSize, out int colliderBufferSize))
                 return BehaviourResult.Failure;
             
-            Vector3 delta;
-            
             if (_blackboard.TryGetValue(BlackboardAPI.Enemy, out GameObject enemy) &&
-                enemy.TryGetComponent(out HealthComponent health) &&
-                health.IsAlive)
+                enemy.TryGetComponent(out HealthComponent health))
             {
-                delta = enemy.transform.position - character.transform.position;
-                delta.y = 0;
-                
-                if (delta.sqrMagnitude < attackDistance * attackDistance)
+                if (health.IsDead)
                 {
-                    RotateTransformComponent rotateComponent = character.GetComponent<RotateTransformComponent>();
-                    rotateComponent.RotateTowards(enemy, deltaTime);
-                    
-                    character.GetComponent<AttackComponent>().Attack(enemy);
+                    _blackboard.DelValue(BlackboardAPI.Enemy);
                     return BehaviourResult.Running;
                 }
-            }
-            else
-            {
-                delta = target.Position - character.transform.position;
-                delta.y = 0;
+                
+                if (NodeUseCases.Attack(character, enemy, attackDistance, deltaTime))
+                    return BehaviourResult.Running;
+                
+                NodeUseCases.Move(character, enemy.transform.position, stoppingDistance, deltaTime);
+                return BehaviourResult.Running;
             }
             
-            float stoppingDistanceSqr = stoppingDistance * stoppingDistance;
-
-            if (delta.sqrMagnitude <= stoppingDistanceSqr) 
-                return BehaviourResult.Success;
+            if(NodeUseCases.FindClosestTarget(character, selfTeam, colliderBuffer, colliderBufferSize, out GameObject target))
+                _blackboard.SetReferenceValue(BlackboardAPI.Enemy, target);
             
-            character.GetComponent<MoveComponent>().MoveStep(delta.normalized, deltaTime);
-            return BehaviourResult.Running;
-
+            return NodeUseCases.Move(character, targetPoint.Position, stoppingDistance, deltaTime) 
+                ? BehaviourResult.Running 
+                : BehaviourResult.Success;
         }
     }
 }

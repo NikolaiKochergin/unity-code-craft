@@ -7,6 +7,6 @@ namespace Game
     public sealed class CommandQueueInstaller : IBlackboardInstaller
     {
         public void Install(Blackboard blackboard) => 
-            blackboard.AddReferenceValue(BlackboardAPI.CommandQueue, new AiCommandQueue(blackboard));
+            blackboard.AddReferenceValue(BlackboardAPI.CommandQueue, new AICommandQueue(blackboard));
     }
 }

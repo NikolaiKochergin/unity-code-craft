@@ -6,36 +6,36 @@ using Sirenix.OdinInspector;
 namespace Game
 {
     [Serializable]
-    public sealed class AiCommandQueue
+    public sealed class AICommandQueue
     {
         [ShowInInspector, HideInEditorMode]
-        private readonly Queue<IAiCommand> _commandQueue = new();
+        private readonly Queue<IAICommand> _commandQueue = new();
         private readonly Blackboard _blackboard;
 
-        public AiCommandQueue(Blackboard blackboard) => 
+        public AICommandQueue(Blackboard blackboard) => 
             _blackboard = blackboard;
         
         [ShowInInspector, HideInEditorMode]
-        public IAiCommand CurrentCommand { get; private set; }
+        public IAICommand CurrentCommand { get; private set; }
         public bool IsEmpty => _commandQueue.Count == 0;
 
-        public void Add(IAiCommand command) => 
+        public void Add(IAICommand command) => 
             _commandQueue.Enqueue(command);
 
         public bool TryStartNext()
         {
             StopCurrent();
 
-            if (!_commandQueue.TryDequeue(out IAiCommand command)) 
+            if (!_commandQueue.TryDequeue(out IAICommand command)) 
                 return false;
             
             StartCurrent(command);
             return true;
         }
 
-        public AiCommandQueue Reset()
+        public AICommandQueue Reset()
         {
-            foreach (IAiCommand command in _commandQueue) 
+            foreach (IAICommand command in _commandQueue) 
                 command.Dispose(_blackboard);
             
             _commandQueue.Clear();
@@ -44,7 +44,7 @@ namespace Game
             return this;
         }
         
-        private void StartCurrent(IAiCommand command)
+        private void StartCurrent(IAICommand command)
         {
             CurrentCommand = command;
             CurrentCommand?.Unpack(_blackboard);

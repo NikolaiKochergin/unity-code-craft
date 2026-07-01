@@ -13,7 +13,7 @@ namespace Game
         public void Install(Blackboard blackboard)
         {
             blackboard.AddReferenceValue(BlackboardAPI.ColliderBuffer, new Collider[_bufferSize]);
-            blackboard.AddPrimitiveValue(BlackboardAPI.ColliderCount, 0);
+            blackboard.AddPrimitiveValue(BlackboardAPI.ColliderBufferSize, 0);
         }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class FollowCommand : IAiCommand
+    public class FollowCommand : IAICommand
     {
         private readonly GameObject _target;
 

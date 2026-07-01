@@ -23,7 +23,7 @@ namespace SampleGame
         [SerializeField]
         private InputHandler _next;
         
-        private AiCommandQueue _commandQueue;
+        private AICommandQueue _commandQueue;
 
         private void Start()
         {
@@ -42,19 +42,19 @@ namespace SampleGame
         {
             if (Input.GetKey(_keyCode) && context.leftClick)
             {
-                if(!_blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<IWayPoint> wayPoints))
+                if(!_blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<IPoint> wayPoints))
                     return;
 
-                IWayPoint wayPoint = null;
+                IPoint wayPoint = null;
 
                 if (context.point != null)
                 {
-                    wayPoint = new PositionWayPoint(context.point.Value);
+                    wayPoint = new PositionPoint(context.point.Value);
                     _commandMarkerView.ShowPatrolMarker(context.point.Value);
                 }
                 else if (context.target != null && context.target != _character)
                 {
-                    wayPoint = new TargetWayPoint(context.target.transform);
+                    wayPoint = new TargetPoint(context.target.transform);
                     _commandMarkerView.ShowPatrolMarker(context.target.transform);
                 }
                 
@@ -72,7 +72,7 @@ namespace SampleGame
                 }
                 
                 wayPoints.Clear();
-                wayPoints.Add(new PositionWayPoint(_character.transform.position));
+                wayPoints.Add(new PositionPoint(_character.transform.position));
                 wayPoints.Add(wayPoint);
                 
                 _commandQueue.Add(new PatrolCommand());

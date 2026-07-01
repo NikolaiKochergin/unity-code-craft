@@ -9,7 +9,7 @@ namespace Game
     {
         public void Install(Blackboard blackboard)
         {
-            blackboard.SetReferenceValue(BlackboardAPI.Waypoints, new List<IWayPoint>());
+            blackboard.SetReferenceValue(BlackboardAPI.Waypoints, new List<IPoint>());
             blackboard.SetPrimitiveValue(BlackboardAPI.WaypointIndex, 0);
         }
     }

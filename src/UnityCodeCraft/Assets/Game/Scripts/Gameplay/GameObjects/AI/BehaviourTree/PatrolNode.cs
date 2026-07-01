@@ -14,7 +14,7 @@ namespace Game
         {
             if (_blackboard.GetValue(BlackboardAPI.CommandQueue).CurrentCommand is not PatrolCommand ||
                 !_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) ||
-                !_blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<IWayPoint> waypoints) || 
+                !_blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<IPoint> waypoints) || 
                 waypoints.Count < 2 ||
                 !_blackboard.TryGetValue(BlackboardAPI.StoppingDistance, out float stoppingDistance) ||
                 !_blackboard.TryGetValue(BlackboardAPI.AttackDistance, out float attackDistance) ||
@@ -22,7 +22,7 @@ namespace Game
                 index >= waypoints.Count)
                 return BehaviourResult.Failure;
             
-            IWayPoint currentWaypoint = waypoints[index];
+            IPoint currentWaypoint = waypoints[index];
 
             if (!currentWaypoint.IsValid)
             {

@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public class PatrolCommand : IAiCommand
+    public class PatrolCommand : IAICommand
     {
         public void Unpack(Blackboard blackboard)
         {

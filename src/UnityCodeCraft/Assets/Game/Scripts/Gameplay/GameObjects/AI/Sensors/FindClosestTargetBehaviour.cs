@@ -12,7 +12,7 @@ namespace Game
         private void FixedUpdate()
         {
             Collider[] buffer = _blackboard.GetValue(BlackboardAPI.ColliderBuffer);
-            int count = _blackboard.GetValue(BlackboardAPI.ColliderCount);
+            int count = _blackboard.GetValue(BlackboardAPI.ColliderBufferSize);
             GameObject character = _blackboard.GetValue(BlackboardAPI.Character);
             TeamType selfTeam = _blackboard.GetValue(BlackboardAPI.Team);
 

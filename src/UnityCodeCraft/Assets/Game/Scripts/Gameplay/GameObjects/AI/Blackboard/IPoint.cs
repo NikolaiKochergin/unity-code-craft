@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public interface IWayPoint
+    public interface IPoint
     {
         Vector3 Position { get; }
         float Size { get; }

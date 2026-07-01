@@ -13,7 +13,7 @@ namespace Game
                 return;
             
             Vector3 characterPosition = blackboard.GetValue(BlackboardAPI.Character).transform.position;
-            blackboard.SetReferenceValue(BlackboardAPI.BasePoint, new PositionWayPoint(characterPosition));
+            blackboard.SetReferenceValue(BlackboardAPI.BasePoint, new PositionPoint(characterPosition));
         }
     }
 }
