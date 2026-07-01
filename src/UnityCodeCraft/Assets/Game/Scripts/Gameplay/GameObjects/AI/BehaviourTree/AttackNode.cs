@@ -11,7 +11,8 @@ namespace Game
         
         protected override BehaviourResult OnUpdate(float deltaTime)
         {
-            if (!_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) ||
+            if (_blackboard.GetValue(BlackboardAPI.CommandQueue).CurrentCommand is not AttackCommand ||
+                !_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) ||
                 !_blackboard.TryGetValue(BlackboardAPI.StoppingDistance, out float stoppingDistance) ||
                 !_blackboard.TryGetValue(BlackboardAPI.AttackDistance, out float attackDistance) ||
                 !_blackboard.TryGetValue(BlackboardAPI.AttackTarget, out IWayPoint target) ||

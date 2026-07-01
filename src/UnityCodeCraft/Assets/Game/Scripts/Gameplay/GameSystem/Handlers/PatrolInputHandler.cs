@@ -60,7 +60,7 @@ namespace SampleGame
                 
                 if (context.enqueueCommand)
                 {
-                    if (_commandQueue.CurrentCommand is WayPointCommand)
+                    if (_commandQueue.CurrentCommand is PatrolCommand)
                     {
                         wayPoints.Add(wayPoint);
                         return;
@@ -75,7 +75,7 @@ namespace SampleGame
                 wayPoints.Add(new PositionWayPoint(_character.transform.position));
                 wayPoints.Add(wayPoint);
                 
-                _commandQueue.Add(new WayPointCommand());
+                _commandQueue.Add(new PatrolCommand());
             }
             else if (_next)
                 _next.Handle(ref context);

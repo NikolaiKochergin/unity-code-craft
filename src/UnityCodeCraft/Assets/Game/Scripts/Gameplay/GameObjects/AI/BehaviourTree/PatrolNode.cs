@@ -12,7 +12,7 @@ namespace Game
         
         protected override BehaviourResult OnUpdate(float deltaTime)
         {
-            if (_blackboard.GetValue(BlackboardAPI.CommandQueue).CurrentCommand is not WayPointCommand ||
+            if (_blackboard.GetValue(BlackboardAPI.CommandQueue).CurrentCommand is not PatrolCommand ||
                 !_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) ||
                 !_blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<IWayPoint> waypoints) || 
                 waypoints.Count < 2 ||

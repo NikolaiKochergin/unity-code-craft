@@ -11,12 +11,12 @@ namespace Game
         
         protected override BehaviourResult OnUpdate(float deltaTime)
         {
-            if (!_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) ||
+            if (!_blackboard.GetValue(BlackboardAPI.CommandQueue).IsEmpty ||
+                !_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) ||
                 !_blackboard.TryGetValue(BlackboardAPI.BasePoint, out IWayPoint basePoint) ||
                 !_blackboard.TryGetValue(BlackboardAPI.StoppingDistance, out float pointStoppingDistance) ||
                 !_blackboard.TryGetValue(BlackboardAPI.TargetStoppingDistance, out float targetStoppingDistance) ||
-                !_blackboard.TryGetValue(BlackboardAPI.AttackDistance, out float attackDistance) ||
-                !_blackboard.GetValue(BlackboardAPI.CommandQueue).IsEmpty)
+                !_blackboard.TryGetValue(BlackboardAPI.AttackDistance, out float attackDistance))
                 return BehaviourResult.Failure;
 
             Vector3 delta;
