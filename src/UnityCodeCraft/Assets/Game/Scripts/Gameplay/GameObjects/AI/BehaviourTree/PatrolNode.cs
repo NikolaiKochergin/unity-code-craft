@@ -18,6 +18,9 @@ namespace Game
                 waypoints.Count < 2 ||
                 !_blackboard.TryGetValue(BlackboardAPI.StoppingDistance, out float stoppingDistance) ||
                 !_blackboard.TryGetValue(BlackboardAPI.AttackDistance, out float attackDistance) ||
+                !_blackboard.TryGetValue(BlackboardAPI.Team, out TeamType selfTeam) ||
+                !_blackboard.TryGetValue(BlackboardAPI.ColliderBuffer, out Collider[] colliderBuffer) ||
+                !_blackboard.TryGetValue(BlackboardAPI.ColliderBufferSize, out int colliderBufferSize) ||
                 !_blackboard.TryGetValue(BlackboardAPI.WaypointIndex, out int index) ||
                 index >= waypoints.Count)
                 return BehaviourResult.Failure;
@@ -30,39 +33,24 @@ namespace Game
                 return BehaviourResult.Running;
             }
             
-            Vector3 delta;
-            
-            if (_blackboard.TryGetValue(BlackboardAPI.Enemy, out GameObject enemy) &&
-                enemy.TryGetComponent(out HealthComponent health) &&
-                health.IsAlive)
-            {
-                delta = enemy.transform.position - character.transform.position;
-                delta.y = 0;
-                
-                if (delta.sqrMagnitude < attackDistance * attackDistance)
-                {
-                    RotateTransformComponent rotateComponent = character.GetComponent<RotateTransformComponent>();
-                    rotateComponent.RotateTowards(enemy, deltaTime);
-                    
-                    character.GetComponent<AttackComponent>().Attack(enemy);
-                    return BehaviourResult.Running;
-                }
-            }
+            if(NodeUseCases.FindClosestTarget(character, selfTeam, colliderBuffer, colliderBufferSize, out GameObject target))
+                _blackboard.SetReferenceValue(BlackboardAPI.Enemy, target);
             else
+                _blackboard.DelValue(BlackboardAPI.Enemy);
+
+            if (_blackboard.TryGetValue(BlackboardAPI.Enemy, out GameObject enemy) &&
+                enemy.TryGetComponent(out HealthComponent health) && health.IsAlive)
             {
-                delta = currentWaypoint.Position - character.transform.position;
-                delta.y = 0f;
-                stoppingDistance = currentWaypoint.Size + stoppingDistance;
-                float stoppingDistanceSqr = stoppingDistance * stoppingDistance;
-
-                if (delta.sqrMagnitude <= stoppingDistanceSqr)
-                {
-                    _blackboard.SetPrimitiveValue(BlackboardAPI.WaypointIndex, (index + 1) % waypoints.Count);
+                if (NodeUseCases.Attack(character, enemy, attackDistance, deltaTime))
                     return BehaviourResult.Running;
-                }
+                
+                NodeUseCases.Move(character, enemy.transform.position, stoppingDistance, deltaTime);
+                return BehaviourResult.Running;
             }
-
-            character.GetComponent<MoveComponent>().MoveStep(delta.normalized, deltaTime);
+            
+            if(!NodeUseCases.Move(character, currentWaypoint.Position, stoppingDistance, deltaTime))
+                _blackboard.SetPrimitiveValue(BlackboardAPI.WaypointIndex, (index + 1) % waypoints.Count);
+            
             return BehaviourResult.Running;
         }
     }
