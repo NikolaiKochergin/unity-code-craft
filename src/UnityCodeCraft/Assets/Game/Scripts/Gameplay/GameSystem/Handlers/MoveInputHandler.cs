@@ -15,43 +15,39 @@ namespace SampleGame
         [SerializeField]
         private InputHandler _next;
 
-        private AICommandQueue _commandQueue;
+        private Blackboard _blackboard;
 
         private void Start()
         {
-            Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
+            _blackboard = _character.GetComponentInChildren<Blackboard>();
             
-            if (blackboard == null) 
+            if (_blackboard == null) 
                 Debug.LogError("No Blackboard component found on " + _character);
-            
-            _commandQueue = blackboard?.GetValue(BlackboardAPI.CommandQueue);
-            
-            if (_commandQueue == null)
-                Debug.LogError("CommandQueue doesn't exist on " + _character);
         }
 
         public override void Handle(ref InputContext context)
         {
             if (context.rightClick)
             {
-                if (context.target != null && context.target != _character)
+                IPoint targetPoint = null;
+                
+                if (context.target && context.target != _character)
                 {
-                    if (!context.enqueueCommand)
-                        _commandQueue.Reset();
-                    
-                    _commandQueue.Add(new MoveCommand(new TargetPoint(context.target.transform)));
-                    
+                    targetPoint = new TargetPoint(context.target.transform);
                     _commandMarkerView.ShowMoveMarker(context.target.transform);
                 }
                 else if (context.point != null)
                 {
-                    if (!context.enqueueCommand)
-                        _commandQueue.Reset();
-                    
-                    _commandQueue.Add(new MoveCommand(new PositionPoint(context.point.Value)));
-                    
+                    targetPoint = new PositionPoint(context.point.Value);
                     _commandMarkerView.ShowMoveMarker(context.point.Value);
                 }
+                
+                if (!context.enqueueCommand)
+                    ResetUseCase.ResetQueue(_blackboard);
+                
+                _blackboard
+                    .GetValue(BlackboardAPI.CommandQueue)
+                    .Enqueue(new MoveCommand(targetPoint));
             }
             else if (_next) 
                 _next.Handle(ref context);

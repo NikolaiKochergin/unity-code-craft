@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Game;
 using Modules.AI;
 using UnityEngine;
-using UnityEngine.Pool;
 
 namespace SampleGame
 {
@@ -10,9 +9,6 @@ namespace SampleGame
     {
         [SerializeField] 
         private CommandMarkerView _commandMarkerView;
-        
-        [SerializeField] 
-        private Blackboard _blackboard;
         
         [SerializeField]
         private KeyCode _keyCode = KeyCode.P;
@@ -23,19 +19,15 @@ namespace SampleGame
         [SerializeField]
         private InputHandler _next;
         
-        private AICommandQueue _commandQueue;
+        private Blackboard _blackboard;
+        
 
         private void Start()
         {
-            Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
+            _blackboard = _character.GetComponentInChildren<Blackboard>();
             
-            if (blackboard == null) 
+            if (_blackboard == null) 
                 Debug.LogError("No Blackboard component found on " + _character);
-            
-            _commandQueue = blackboard?.GetValue(BlackboardAPI.CommandQueue);
-            
-            if (_commandQueue == null)
-                Debug.LogError("CommandQueue doesn't exist on " + _character);
         }
 
         public override void Handle(ref InputContext context)
@@ -60,7 +52,8 @@ namespace SampleGame
                 
                 if (context.enqueueCommand)
                 {
-                    if (_commandQueue.CurrentCommand is PatrolCommand)
+                    if (_blackboard.TryGetValue(BlackboardAPI.CurrentCommand, out IAICommand command) &&
+                        command is PatrolCommand)
                     {
                         wayPoints.Add(wayPoint);
                         return;
@@ -68,14 +61,16 @@ namespace SampleGame
                 }
                 else
                 {
-                    _commandQueue.Reset();
+                    ResetUseCase.ResetQueue(_blackboard);
                 }
                 
                 wayPoints.Clear();
                 wayPoints.Add(new PositionPoint(_character.transform.position));
                 wayPoints.Add(wayPoint);
                 
-                _commandQueue.Add(new PatrolCommand());
+                _blackboard
+                    .GetValue(BlackboardAPI.CommandQueue)
+                    .Enqueue(new PatrolCommand());
             }
             else if (_next)
                 _next.Handle(ref context);

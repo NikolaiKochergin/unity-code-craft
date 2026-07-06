@@ -555,7 +555,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SampleGame.PatrolInputHandler
   _commandMarkerView: {fileID: 1366347856}
-  _blackboard: {fileID: 93395078}
   _keyCode: 112
   _character: {fileID: 1179872082}
   _next: {fileID: 513256918}
@@ -606,7 +605,6 @@ MonoBehaviour:
   _commandMarkerView: {fileID: 1366347856}
   _keyCode: 97
   _character: {fileID: 1179872082}
-  _blackboard: {fileID: 93395078}
   _next: {fileID: 452763495}
 --- !u!1 &547416707
 GameObject:
@@ -766,7 +764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5078a9d4724670893d80ea9ec1d7d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeDebugger
-  _root: {fileID: 1018857030}
+  _root: {fileID: 1018857029}
 --- !u!1 &711934098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,7 +1026,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1018857028}
-  - component: {fileID: 1018857030}
   - component: {fileID: 1018857029}
   m_Layer: 0
   m_Name: <BehaviourTree>
@@ -1067,34 +1064,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1018857027}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90b38701bdf44658b9e7cb9e1eb0a7ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 6593cbcce54141e5b12f4e133d2b3db0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeSelector
-  _useUnityLifecycle: 0
-  _updateMode: 0
+  m_EditorClassIdentifier: Assembly-CSharp::Game.AICommandQueueNode
+  _useUnityLifecycle: 1
+  _updateMode: 1
+  _blackboard: {fileID: 93395078}
+  _defaultNode: {fileID: 1698135788}
   _nodes:
   - {fileID: 1378179010}
   - {fileID: 17817933}
   - {fileID: 1461658153}
   - {fileID: 1500244787}
   - {fileID: 2143947943}
-  - {fileID: 1698135788}
---- !u!114 &1018857030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1018857027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 275f4f43b16a45e48824b7226f9ee1b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.QueueNodeDecorator
-  _useUnityLifecycle: 1
-  _updateMode: 0
-  _blackboard: {fileID: 93395078}
-  _origin: {fileID: 1018857029}
 --- !u!1 &1146950747
 GameObject:
   m_ObjectHideFlags: 0

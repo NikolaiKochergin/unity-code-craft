@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Modules.AI;
 
 namespace Game
@@ -7,6 +8,6 @@ namespace Game
     public sealed class CommandQueueInstaller : IBlackboardInstaller
     {
         public void Install(Blackboard blackboard) => 
-            blackboard.AddReferenceValue(BlackboardAPI.CommandQueue, new AICommandQueue(blackboard));
+            blackboard.AddReferenceValue(BlackboardAPI.CommandQueue, new Queue<IAICommand>());
     }
 }

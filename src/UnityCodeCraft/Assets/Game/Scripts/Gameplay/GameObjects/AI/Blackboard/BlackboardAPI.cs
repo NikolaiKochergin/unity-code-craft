@@ -10,7 +10,8 @@ namespace Game
     {
         public static readonly BlackboardValueKey<GameObject> Character = new(nameof(Character));
         public static readonly BlackboardValueKey<IPoint> BasePoint = new(nameof(BasePoint));
-        public static readonly BlackboardValueKey<AICommandQueue> CommandQueue = new(nameof(CommandQueue));
+        public static readonly BlackboardValueKey<Queue<IAICommand>> CommandQueue = new(nameof(CommandQueue));
+        public static readonly BlackboardValueKey<IAICommand> CurrentCommand = new(nameof(CurrentCommand));
         
         // Combat
         public static readonly BlackboardValueKey<TeamType> Team = new(nameof(Team));

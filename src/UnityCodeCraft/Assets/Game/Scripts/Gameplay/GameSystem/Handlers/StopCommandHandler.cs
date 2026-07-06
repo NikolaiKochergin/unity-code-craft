@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game;
 using Modules.AI;
 using UnityEngine;
@@ -15,29 +16,24 @@ namespace SampleGame
         [SerializeField]
         private InputHandler _next;
 
-        private AICommandQueue _commandQueue;
+        private Blackboard _blackboard;
 
         private void Start()
         {
-            Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
+            _blackboard = _character.GetComponentInChildren<Blackboard>();
             
-            if (blackboard == null) 
+            if (!_blackboard) 
                 Debug.LogError("No Blackboard component found on " + _character);
-            
-            _commandQueue = blackboard?.GetValue(BlackboardAPI.CommandQueue);
-            
-            if (_commandQueue == null)
-                Debug.LogError("CommandQueue doesn't exist on " + _character);
         }
         
         public override void Handle(ref InputContext context)
         {
             if (Input.GetKeyDown(_keyCode))
             {
-                if (!context.enqueueCommand)
-                    _commandQueue.Reset();
-                
-                _commandQueue.Add(new StopCommand());
+                ResetUseCase.ResetQueue(_blackboard);
+
+                Vector3 characterPosition = _character.transform.position;
+                _blackboard.SetReferenceValue(BlackboardAPI.BasePoint, new PositionPoint(characterPosition));
             }
             else if (_next)
                 _next.Handle(ref context);

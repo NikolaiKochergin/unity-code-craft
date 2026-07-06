@@ -14,20 +14,16 @@ namespace SampleGame
 
         [SerializeField]
         private InputHandler _next;
-        
-        private AICommandQueue _commandQueue;
+
+        private Blackboard _blackboard;
+
 
         private void Start()
         {
-            Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
+            _blackboard = _character.GetComponentInChildren<Blackboard>();
             
-            if (blackboard == null) 
+            if (!_blackboard) 
                 Debug.LogError("No Blackboard component found on " + _character);
-            
-            _commandQueue = blackboard?.GetValue(BlackboardAPI.CommandQueue);
-            
-            if (_commandQueue == null)
-                Debug.LogError("CommandQueue doesn't exist on " + _character);
         }
 
         public override void Handle(ref InputContext context)
@@ -35,9 +31,11 @@ namespace SampleGame
             if (Input.GetKeyDown(_keyCode))
             {
                 if (!context.enqueueCommand)
-                    _commandQueue.Reset();
+                    ResetUseCase.ResetQueue(_blackboard);
                 
-                _commandQueue.Add(new HoldPositionCommand());
+                _blackboard
+                    .GetValue(BlackboardAPI.CommandQueue)
+                    .Enqueue(new HoldPositionCommand());
             }
             else if (_next) 
                 _next.Handle(ref context);

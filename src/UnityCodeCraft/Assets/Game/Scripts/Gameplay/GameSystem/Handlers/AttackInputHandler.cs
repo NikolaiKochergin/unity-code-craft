@@ -14,26 +14,18 @@ namespace SampleGame
 
         [SerializeField]
         private GameObject _character;
-
-        [SerializeField] 
-        private Blackboard _blackboard;
-
+        
         [SerializeField]
         private InputHandler _next;
         
-        private AICommandQueue _commandQueue;
+        private Blackboard _blackboard;
 
         private void Start()
         {
-            Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
+            _blackboard = _character.GetComponentInChildren<Blackboard>();
             
-            if (blackboard == null) 
+            if (!_blackboard) 
                 Debug.LogError("No Blackboard component found on " + _character);
-            
-            _commandQueue = blackboard?.GetValue(BlackboardAPI.CommandQueue);
-            
-            if (_commandQueue == null)
-                Debug.LogError("CommandQueue doesn't exist on " + _character);
         }
 
         public override void Handle(ref InputContext context)
@@ -41,20 +33,24 @@ namespace SampleGame
             if (Input.GetKey(_keyCode) && context.leftClick)
             {
                 if (!context.enqueueCommand)
-                    _commandQueue.Reset();
+                    ResetUseCase.ResetQueue(_blackboard);
+
+                IPoint targetPoint = null;
                 
                 if (context.point != null)
                 {
-                    _commandQueue.Add(new AttackCommand(new PositionPoint(context.point.Value)));
-                    
+                    targetPoint = new PositionPoint(context.point.Value);
                     _commandMarkerView.ShowAttackMarker(context.point.Value);
                 }
-                else if (context.target != null && context.target != _character)
+                else if (context.target && context.target != _character)
                 {
-                    _commandQueue.Add(new AttackCommand(new TargetPoint(context.target.transform)));
-                    
+                    targetPoint = new TargetPoint(context.target.transform);
                     _commandMarkerView.ShowAttackMarker(context.target.transform);
                 }
+                
+                _blackboard
+                    .GetValue(BlackboardAPI.CommandQueue)
+                    .Enqueue(new AttackCommand(targetPoint));
             }
             else if (_next)
                 _next.Handle(ref context);
