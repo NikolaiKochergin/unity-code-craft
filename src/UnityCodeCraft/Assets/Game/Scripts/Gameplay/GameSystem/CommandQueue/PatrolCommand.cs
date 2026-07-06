@@ -1,9 +1,12 @@
-﻿using Modules.AI;
+﻿using System;
+using Modules.AI;
 
 namespace Game
 {
     public class PatrolCommand : IAICommand
     {
+        public Type NodeType => typeof(PatrolNode);
+
         public void Unpack(Blackboard blackboard)
         {
             blackboard.SetPrimitiveValue(BlackboardAPI.WaypointIndex, 0);

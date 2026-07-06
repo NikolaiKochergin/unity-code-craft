@@ -1,4 +1,5 @@
-﻿using Modules.AI;
+﻿using System;
+using Modules.AI;
 
 namespace Game
 {
@@ -8,6 +9,8 @@ namespace Game
 
         public AttackCommand(IPoint target) => 
             _target = target;
+
+        public Type NodeType => typeof(AttackNode);
 
         public void Unpack(Blackboard blackboard)
         {
@@ -24,6 +27,7 @@ namespace Game
                 blackboard.SetReferenceValue(BlackboardAPI.BasePoint, new PositionPoint(_target.Position));
             
             blackboard.DelValue(BlackboardAPI.AttackTarget);
+            blackboard.DelValue(BlackboardAPI.Enemy);
         }
     }
 }

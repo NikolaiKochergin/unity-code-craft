@@ -1070,13 +1070,13 @@ MonoBehaviour:
   _useUnityLifecycle: 1
   _updateMode: 1
   _blackboard: {fileID: 93395078}
-  _defaultNode: {fileID: 1698135788}
   _nodes:
   - {fileID: 1378179010}
   - {fileID: 17817933}
   - {fileID: 1461658153}
   - {fileID: 1500244787}
   - {fileID: 2143947943}
+  - {fileID: 1698135788}
 --- !u!1 &1146950747
 GameObject:
   m_ObjectHideFlags: 0

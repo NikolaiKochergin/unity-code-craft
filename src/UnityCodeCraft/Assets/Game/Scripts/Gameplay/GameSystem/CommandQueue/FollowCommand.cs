@@ -1,4 +1,5 @@
-﻿using Modules.AI;
+﻿using System;
+using Modules.AI;
 using UnityEngine;
 
 namespace Game
@@ -9,6 +10,8 @@ namespace Game
 
         public FollowCommand(GameObject target) => 
             _target = target;
+
+        public Type NodeType => typeof(FollowNode);
 
         public void Unpack(Blackboard blackboard) => 
             blackboard.SetReferenceValue(BlackboardAPI.FollowTarget, _target);

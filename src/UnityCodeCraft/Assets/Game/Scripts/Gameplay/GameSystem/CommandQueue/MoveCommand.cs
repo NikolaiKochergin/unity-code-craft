@@ -1,4 +1,5 @@
-﻿using Modules.AI;
+﻿using System;
+using Modules.AI;
 
 namespace Game
 {
@@ -8,6 +9,8 @@ namespace Game
 
         public MoveCommand(IPoint targetPoint) => 
             _targetPoint = targetPoint;
+
+        public Type NodeType => typeof(MoveNode);
 
         public void Unpack(Blackboard blackboard)
         {
