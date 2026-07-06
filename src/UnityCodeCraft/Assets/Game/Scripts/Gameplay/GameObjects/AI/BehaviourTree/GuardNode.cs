@@ -11,8 +11,7 @@ namespace Game
         
         protected override BehaviourResult OnUpdate(float deltaTime)
         {
-            if (!_blackboard.GetValue(BlackboardAPI.CommandQueue).IsEmpty ||
-                !_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) ||
+            if (!_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) ||
                 !_blackboard.TryGetValue(BlackboardAPI.BasePoint, out IPoint basePoint) ||
                 !_blackboard.TryGetValue(BlackboardAPI.StoppingDistance, out float pointStoppingDistance) ||
                 !_blackboard.TryGetValue(BlackboardAPI.TargetStoppingDistance, out float targetStoppingDistance) ||
@@ -22,7 +21,7 @@ namespace Game
                 !_blackboard.TryGetValue(BlackboardAPI.ColliderBufferSize, out int colliderBufferSize))
                 return BehaviourResult.Failure;
 
-            if(NodeUseCases.FindClosestTarget(character, selfTeam, colliderBuffer, colliderBufferSize, out GameObject target))
+            if(FindUseCase.FindClosestTarget(character, selfTeam, colliderBuffer, colliderBufferSize, out GameObject target))
                 _blackboard.SetReferenceValue(BlackboardAPI.Enemy, target);
             else
                 _blackboard.DelValue(BlackboardAPI.Enemy);
@@ -30,14 +29,14 @@ namespace Game
             if (_blackboard.TryGetValue(BlackboardAPI.Enemy, out GameObject enemy) &&
                 enemy.TryGetComponent(out HealthComponent health) && health.IsAlive)
             {
-                if (NodeUseCases.Attack(character, enemy, attackDistance, deltaTime))
+                if (AttackUseCase.Attack(character, enemy, attackDistance, deltaTime))
                     return BehaviourResult.Running;
                 
-                NodeUseCases.Move(character, enemy.transform.position, targetStoppingDistance, deltaTime);
+                MoveUseCase.Move(character, enemy.transform.position, targetStoppingDistance, deltaTime);
                 return BehaviourResult.Running;
             }
             
-            NodeUseCases.Move(character, basePoint.Position, pointStoppingDistance, deltaTime);
+            MoveUseCase.Move(character, basePoint.Position, pointStoppingDistance, deltaTime);
             return BehaviourResult.Running;
         }
     }

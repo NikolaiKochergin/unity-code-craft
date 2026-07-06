@@ -12,8 +12,7 @@ namespace Game
         
         protected override BehaviourResult OnUpdate(float deltaTime)
         {
-            if (_blackboard.GetValue(BlackboardAPI.CommandQueue).CurrentCommand is not PatrolCommand ||
-                !_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) ||
+            if (!_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) ||
                 !_blackboard.TryGetValue(BlackboardAPI.Waypoints, out List<IPoint> waypoints) || 
                 waypoints.Count < 2 ||
                 !_blackboard.TryGetValue(BlackboardAPI.StoppingDistance, out float stoppingDistance) ||
@@ -33,7 +32,7 @@ namespace Game
                 return BehaviourResult.Running;
             }
             
-            if(NodeUseCases.FindClosestTarget(character, selfTeam, colliderBuffer, colliderBufferSize, out GameObject target))
+            if(FindUseCase.FindClosestTarget(character, selfTeam, colliderBuffer, colliderBufferSize, out GameObject target))
                 _blackboard.SetReferenceValue(BlackboardAPI.Enemy, target);
             else
                 _blackboard.DelValue(BlackboardAPI.Enemy);
@@ -41,14 +40,14 @@ namespace Game
             if (_blackboard.TryGetValue(BlackboardAPI.Enemy, out GameObject enemy) &&
                 enemy.TryGetComponent(out HealthComponent health) && health.IsAlive)
             {
-                if (NodeUseCases.Attack(character, enemy, attackDistance, deltaTime))
+                if (AttackUseCase.Attack(character, enemy, attackDistance, deltaTime))
                     return BehaviourResult.Running;
                 
-                NodeUseCases.Move(character, enemy.transform.position, stoppingDistance, deltaTime);
+                MoveUseCase.Move(character, enemy.transform.position, stoppingDistance, deltaTime);
                 return BehaviourResult.Running;
             }
             
-            if(!NodeUseCases.Move(character, currentWaypoint.Position, stoppingDistance, deltaTime))
+            if(!MoveUseCase.Move(character, currentWaypoint.Position, stoppingDistance, deltaTime))
                 _blackboard.SetPrimitiveValue(BlackboardAPI.WaypointIndex, (index + 1) % waypoints.Count);
             
             return BehaviourResult.Running;
