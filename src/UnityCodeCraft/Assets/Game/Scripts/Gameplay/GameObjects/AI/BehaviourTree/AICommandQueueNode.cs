@@ -40,15 +40,13 @@ namespace Game
             if (!_nodesMap.TryGetValue(currentCommand.NodeType, out BehaviourNode currentNode))
                 return BehaviourResult.Failure;
 
-            BehaviourResult result = currentNode.Run(deltaTime);
-
-            if (result == BehaviourResult.Running)
+            if (currentNode.Run(deltaTime) == BehaviourResult.Running)
                 return BehaviourResult.Running;
 
             currentCommand.Dispose(_blackboard);
+            _blackboard.DelValue(BlackboardAPI.CurrentCommand);
 
-            if (!TryStartNextCommand(commandQueue))
-                _blackboard.DelValue(BlackboardAPI.CurrentCommand);
+            TryStartNextCommand(commandQueue);
 
             return BehaviourResult.Running;
         }
