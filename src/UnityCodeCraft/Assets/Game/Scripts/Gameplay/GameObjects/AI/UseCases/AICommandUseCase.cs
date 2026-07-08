@@ -3,7 +3,7 @@ using Modules.AI;
 
 namespace Game
 {
-    public static class ResetUseCase
+    public static class AICommandUseCase
     {
         public static void ResetQueue(Blackboard blackboard)
         {

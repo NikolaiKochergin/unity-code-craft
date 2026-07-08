@@ -30,7 +30,7 @@ namespace SampleGame
         {
             if (Input.GetKeyDown(_keyCode))
             {
-                ResetUseCase.ResetQueue(_blackboard);
+                AICommandUseCase.ResetQueue(_blackboard);
 
                 Vector3 characterPosition = _character.transform.position;
                 _blackboard.SetReferenceValue(BlackboardAPI.BasePoint, new PositionPoint(characterPosition));

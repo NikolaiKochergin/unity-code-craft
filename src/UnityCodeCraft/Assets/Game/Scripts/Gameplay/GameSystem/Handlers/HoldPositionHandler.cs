@@ -31,7 +31,7 @@ namespace SampleGame
             if (Input.GetKeyDown(_keyCode))
             {
                 if (!context.enqueueCommand)
-                    ResetUseCase.ResetQueue(_blackboard);
+                    AICommandUseCase.ResetQueue(_blackboard);
                 
                 _blackboard
                     .GetValue(BlackboardAPI.CommandQueue)

@@ -13,6 +13,9 @@ namespace Game
         [SerializeField]
         private Blackboard _blackboard;
         
+        [SerializeField]
+        private BehaviourNode _defaultNode;
+        
         [Space]
         [SerializeField]
         private BehaviourNode[] _nodes;
@@ -32,7 +35,7 @@ namespace Game
             if (!_blackboard.TryGetValue(BlackboardAPI.CurrentCommand, out IAICommand currentCommand))
             {
                 if (!TryStartNextCommand(commandQueue))
-                    RunGuard(deltaTime);
+                    _defaultNode.Run(deltaTime);
 
                 return BehaviourResult.Running;
             }
@@ -60,12 +63,6 @@ namespace Game
             command.Unpack(_blackboard);
 
             return true;
-        }
-
-        private void RunGuard(float deltaTime)
-        {
-            if (_nodesMap.TryGetValue(typeof(GuardNode), out BehaviourNode guardNode))
-                guardNode.Run(deltaTime);
         }
     }
 }

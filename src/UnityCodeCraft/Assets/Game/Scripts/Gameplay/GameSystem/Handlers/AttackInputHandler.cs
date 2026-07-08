@@ -33,7 +33,7 @@ namespace SampleGame
             if (Input.GetKey(_keyCode) && context.leftClick)
             {
                 if (!context.enqueueCommand)
-                    ResetUseCase.ResetQueue(_blackboard);
+                    AICommandUseCase.ResetQueue(_blackboard);
 
                 IPoint targetPoint = null;
                 

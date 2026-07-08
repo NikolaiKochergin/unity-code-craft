@@ -61,7 +61,7 @@ namespace SampleGame
                 }
                 else
                 {
-                    ResetUseCase.ResetQueue(_blackboard);
+                    AICommandUseCase.ResetQueue(_blackboard);
                 }
                 
                 wayPoints.Clear();
