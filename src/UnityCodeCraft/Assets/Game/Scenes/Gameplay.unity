@@ -5319,10 +5319,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1405300244}
   - component: {fileID: 1405300243}
-  - component: {fileID: 1405300248}
-  - component: {fileID: 1405300247}
-  - component: {fileID: 1405300246}
-  - component: {fileID: 1405300245}
   m_Layer: 0
   m_Name: Gameplay Sub Scene
   m_TagString: Untagged
@@ -5366,57 +5362,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1405300245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1405300242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1418edc93dd4454bd13e1973df8b87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SampleGame.EntityNameAuthoring
-  _name: Swordman
---- !u!114 &1405300246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1405300242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5afe274f9db245b1b9024cc34efeabb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.SwordmanAuthoring
---- !u!114 &1405300247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1405300242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90ea7d7ec592442390ee8a87d6628416, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveSpeedAuthoring
-  _value:
-    value: 0
---- !u!114 &1405300248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1405300242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca647e06a8fd4edb94f53ee1eff67a3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveRequestAuthoring
 --- !u!1001 &1424555525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7831,11 +7776,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: '[UI]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 9022176276449797292, guid: 6beeda15e0dde43369f490f535cbd94e,
-        type: 3}
-      propertyPath: _viewPrefab
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

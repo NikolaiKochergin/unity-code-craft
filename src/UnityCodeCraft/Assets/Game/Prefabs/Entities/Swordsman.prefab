@@ -9,6 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8692576747330127514}
+  - component: {fileID: 762698119522532022}
+  - component: {fileID: 3867652708961458166}
+  - component: {fileID: 1448126290144495073}
   m_Layer: 0
   m_Name: Swordsman
   m_TagString: Untagged
@@ -24,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8692576747330127513}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -32,7 +35,46 @@ Transform:
   - {fileID: 7906830424652367556}
   - {fileID: 8194177642520444206}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &762698119522532022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c16549610bfe4458aa9389201d072bb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Entities.Hybrid::Unity.Entities.Hybrid.Baking.LinkedEntityGroupAuthoring
+--- !u!114 &3867652708961458166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1418edc93dd4454bd13e1973df8b87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityNameAuthoring
+  _name: Swordman
+--- !u!114 &1448126290144495073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afe274f9db245b1b9024cc34efeabb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.SwordmanAuthoring
+  _moveSpeed: 5
+  _rotationSpeed: 360
 --- !u!1001 &2374355558966095868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -164,7 +206,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6489447675202979944, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8421022764774505922}
   m_SourcePrefab: {fileID: 100100000, guid: 9ade5523b6f916f43a919cde252ff319, type: 3}
 --- !u!4 &8194177642520444206 stripped
 Transform:
@@ -172,6 +218,35 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2374355558966095868}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8862030228295296916 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6489447675202979944, guid: 9ade5523b6f916f43a919cde252ff319,
+    type: 3}
+  m_PrefabInstance: {fileID: 2374355558966095868}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8421022764774505922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8862030228295296916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb757bd46edfe349a52b4ea886d67e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Rukhanka.Hybrid::Rukhanka.Hybrid.RigDefinitionAuthoring
+  rigConfigSource: 0
+  avatar: {fileID: 9000000, guid: d49c65de9fce66146b5d0e164b1f9d2d, type: 3}
+  avatarOptimizationMask: {fileID: 0}
+  applyRootMotion: 0
+  animationCulling: 0
+  boneEntityStrippingMode: 0
+  rootMotionMode: 0
+  boneStrippingMask: {fileID: 0}
+  hasAnimationEvents: 0
+  hasAnimatorControllerEvents: 0
+  animationEngine: 0
 --- !u!1001 &3699895201114397584
 PrefabInstance:
   m_ObjectHideFlags: 0
