@@ -30,7 +30,8 @@ namespace Game
                 ref MoveRequest request,
                 ref LocalTransform transform,
                 in MoveSpeed moveSpeed,
-                in RotationSpeed rotationSpeed
+                in RotationSpeed rotationSpeed,
+                in CurrentHealth health
             )
             {
                 // Request
@@ -41,9 +42,8 @@ namespace Game
                 if(math.all(direction == float3.zero))
                     return;
                 
-                // TODO:
-                // if(health.IsDead())
-                //     return;
+                if(health.IsDead())
+                    return;
                 
                 // Action
                 MoveUseCase.MoveStep(

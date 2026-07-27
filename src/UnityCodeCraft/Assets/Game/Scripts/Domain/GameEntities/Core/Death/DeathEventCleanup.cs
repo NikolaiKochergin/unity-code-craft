@@ -5,13 +5,13 @@ namespace Game
 {
     [BurstCompile]
     [UpdateInGroup(typeof(CleanupSystemGroup))]
-    public partial struct MoveEventCleanup : ISystem
+    public partial struct DeathEventCleanup : ISystem
     {
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            foreach (EnabledRefRW<MoveEvent> moveEvent in SystemAPI.Query<EnabledRefRW<MoveEvent>>()) 
-                moveEvent.ValueRW = false;
+            foreach (EnabledRefRW<DeathEvent> deathEvent in SystemAPI.Query<EnabledRefRW<DeathEvent>>()) 
+                deathEvent.ValueRW = false;
         }
     }
 }

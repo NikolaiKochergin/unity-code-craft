@@ -75,6 +75,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.SwordmanAuthoring
   _moveSpeed: 5
   _rotationSpeed: 360
+  _currentHealth: 10
+  _maxHealth: 10
+  _deathDuration: 1
 --- !u!1001 &2374355558966095868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83,6 +86,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8692576747330127514}
     m_Modifications:
+    - target: {fileID: 101192113074832220, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 311922920d51f8544ba4dfb6e890d2df, type: 2}
     - target: {fileID: 2243061901237193108, guid: 9ade5523b6f916f43a919cde252ff319,
         type: 3}
       propertyPath: m_IsActive
@@ -98,11 +106,21 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4026644491872431504, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 311922920d51f8544ba4dfb6e890d2df, type: 2}
     - target: {fileID: 4741718230323717312, guid: 9ade5523b6f916f43a919cde252ff319,
         type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5472591532861699352, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 311922920d51f8544ba4dfb6e890d2df, type: 2}
     - target: {fileID: 5856076907724214994, guid: 9ade5523b6f916f43a919cde252ff319,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -188,6 +206,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6978452508453814833, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 311922920d51f8544ba4dfb6e890d2df, type: 2}
     - target: {fileID: 7914324773366655714, guid: 9ade5523b6f916f43a919cde252ff319,
         type: 3}
       propertyPath: m_IsActive
