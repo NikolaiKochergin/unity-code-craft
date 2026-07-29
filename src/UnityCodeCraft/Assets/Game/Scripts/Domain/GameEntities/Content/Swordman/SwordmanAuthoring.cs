@@ -1,3 +1,4 @@
+using Game.Scripts.Domain.GameEntities.Core.Fire;
 using Unity.Entities;
 using UnityEngine;
 
@@ -33,6 +34,9 @@ namespace Game
                     .With<MoveEvent>()
                     .With(new MoveSpeed { Value = authoring._moveSpeed })
                     .With(new RotationSpeed { Value = authoring._rotationSpeed })
+                    // Fire
+                    .WithEnabled<FireRequest>(false)
+                    .WithEnabled<FireEvent>(false)
                 
                 ;
         }

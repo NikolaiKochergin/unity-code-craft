@@ -1,18 +1,25 @@
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Game
 {
     // [DisableAutoCreation]
     public partial class MoveInputSystem : SystemBase
     {
+        private InputAction _moveAction;
+
+        protected override void OnCreate()
+        {
+            _moveAction = InputSystem.actions.FindAction("Player/Move");
+        }
+
         protected override void OnUpdate()
         {
-            float dx = Input.GetAxis("Horizontal");
-            float dz = Input.GetAxis("Vertical");
+            Vector2 direction = _moveAction.ReadValue<Vector2>();
 
-            float3 moveDirection = new float3(dx, 0, dz);
+            float3 moveDirection = new float3(direction.x, 0, direction.y);
             if (math.all(moveDirection == float3.zero) )
                 return;
             
