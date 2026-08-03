@@ -38,6 +38,13 @@ namespace Game
             return entity;
         }
 
+        public static EntityBuilder WithBuffer<T>(this EntityBuilder entity)
+            where T : unmanaged, IBufferElementData
+        {
+            entity.Baker.AddBuffer<T>(entity.Entity);
+            return entity;
+        }
+
         public static EntityBuilder WithEnabled<T>(
             this EntityBuilder entity,
             bool enabled = true)

@@ -1,4 +1,4 @@
-using Game.Scripts.Domain.GameEntities.Core.Fire;
+using SampleGame;
 using Unity.Entities;
 using UnityEngine;
 
@@ -17,12 +17,25 @@ namespace Game
         [Header("Death")] 
         [SerializeField] private float _deathDuration;
 
+        [Header("Fire")] 
+        [SerializeField] private float _fireCooldown;
+
+        [Header("Attack")] 
+        [SerializeField] private float _attackDistance;
+        [SerializeField] private int _damage;
+
+        [SerializeField] private GameObject _fakeTarget;
+        [SerializeField] private TeamType _fakeTeam;
+
         public sealed class SwordmanBaker : Baker<SwordmanAuthoring>
         {
             public override void Bake(SwordmanAuthoring authoring) =>
                 this.Entity(TransformUsageFlags.Dynamic)
                     .With<Swordman>()
                     .With<Unit>()
+                    // TODO:
+                    // .With<Team>()
+                    
                     // Health
                     .With(new CurrentHealth { Value = authoring._currentHealth })
                     .With(new MaxHealth { Value = authoring._maxHealth })
@@ -37,7 +50,21 @@ namespace Game
                     // Fire
                     .WithEnabled<FireRequest>(false)
                     .WithEnabled<FireEvent>(false)
+                    .With(new FireCooldown{ Duration = authoring._fireCooldown })
+                    // Attack
+                    .With(new AttackDistance{ Value = authoring._attackDistance })
+                    .With(new Damage{ Value = authoring._damage })
+                    // TODO:
+                    // .With<TargetEntity>()
+                    
+                    // Take Damage
+                    .WithBuffer<TakeDamageRequest>()
+                    .WithBuffer<TakeDamageEvent>()
+                    
                 
+                    .With(new TargetEntity{ Value = GetEntity(authoring._fakeTarget, TransformUsageFlags.None)})
+            
+                    .With(new Team{ Value = authoring._fakeTeam })
                 ;
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace Game
 {
-    // [DisableAutoCreation]
+    [DisableAutoCreation]
     public partial class MoveInputSystem : SystemBase
     {
         private InputAction _moveAction;
@@ -19,7 +19,7 @@ namespace Game
         {
             Vector2 direction = _moveAction.ReadValue<Vector2>();
 
-            float3 moveDirection = new float3(direction.x, 0, direction.y);
+            float3 moveDirection = new(direction.x, 0, direction.y);
             if (math.all(moveDirection == float3.zero) )
                 return;
             

@@ -1,9 +1,9 @@
-using Game.Scripts.Domain.GameEntities.Core.Fire;
 using Unity.Entities;
 using UnityEngine.InputSystem;
 
 namespace Game
 {
+    [DisableAutoCreation]
     public partial class FireInputSystem : SystemBase
     {
         private InputAction _fireAction;
@@ -20,26 +20,26 @@ namespace Game
 
             // foreach ((
             //              EnabledRefRW<FireRequest> requestEnabled, 
-            //              RefRW<FireRequest> requestValue
+            //              RefRW<FireRequest> requestValue,
+            //              RefRO<TargetEntity> target
             //         ) in SystemAPI.Query<
-            //         EnabledRefRW<FireRequest>,
-            //         RefRW<FireRequest>>()
-            //         .WithPresent<Unit, FireRequest>()
+            //                  EnabledRefRW<FireRequest>,
+            //                  RefRW<FireRequest>,
+            //                  RefRO<TargetEntity>>()
+            //              .WithPresent<Unit, FireRequest>()
             // )
             // {
             //     requestEnabled.ValueRW = true;
+            //     requestValue.ValueRW.Target = target.ValueRO.Value;
             // }
             
-            foreach ((
-                         EnabledRefRW<FireEvent> requestEnabled, 
-                         RefRW<FireEvent> requestValue
-                     ) in SystemAPI.Query<
-                             EnabledRefRW<FireEvent>,
-                             RefRW<FireEvent>>()
-                         .WithPresent<Unit, FireEvent>()
-                    )
+            foreach (
+                EnabledRefRW<FireEvent> fireEventEnabled 
+                in SystemAPI.Query<
+                        EnabledRefRW<FireEvent>>()
+                    .WithPresent<Unit, FireEvent>())
             {
-                requestEnabled.ValueRW = true;
+                fireEventEnabled.ValueRW = true;
             }
         }
     }

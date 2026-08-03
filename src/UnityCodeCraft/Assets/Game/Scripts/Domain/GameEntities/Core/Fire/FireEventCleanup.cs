@@ -1,15 +1,20 @@
 using Unity.Burst;
 using Unity.Entities;
 
-namespace Game.Scripts.Domain.GameEntities.Core.Fire
+namespace Game
 {
     [BurstCompile]
     [UpdateInGroup(typeof(CleanupSystemGroup))]
     public partial struct FireEventCleanup : ISystem
     {
-        public void OnUpdate(ref SystemState state)
+        [BurstCompile]
+        public void OnUpdate(ref SystemState state) => 
+            state.Dependency = new FireEventCleanupJob().ScheduleParallel(state.Dependency);
+
+        [BurstCompile]
+        private partial struct FireEventCleanupJob : IJobEntity
         {
-            foreach (EnabledRefRW<FireEvent> fireEvent in SystemAPI.Query<EnabledRefRW<FireEvent>>()) 
+            private static void Execute(EnabledRefRW<FireEvent> fireEvent) => 
                 fireEvent.ValueRW = false;
         }
     }
