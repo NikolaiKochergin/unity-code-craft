@@ -34,19 +34,19 @@ namespace Game
                          EnabledRefRW<FireRequest> requestEnabled, 
                          RefRO<FireRequest> requestValue, 
                          RefRW<FireCooldown> cooldown, 
+                         RefRW<FireDelay> delay, 
                          RefRO<Team> team, 
                          RefRO<AttackDistance> attackDistance, 
-                         RefRO<LocalTransform> transform, 
-                         RefRO<Damage> damage, 
+                         RefRO<LocalTransform> transform,
                          Entity entity) 
                      in SystemAPI.Query<
                          EnabledRefRW<FireRequest>,
                          RefRO<FireRequest>,
                          RefRW<FireCooldown>,
+                         RefRW<FireDelay>,
                          RefRO<Team>,
                          RefRO<AttackDistance>,
-                         RefRO<LocalTransform>,
-                         RefRO<Damage>>()
+                         RefRO<LocalTransform>>()
                          .WithPresent<Unit>()
                          .WithEntityAccess())
             {
@@ -73,20 +73,9 @@ namespace Game
                     continue;
                 
                 // Action
-                if(!_takeDamageRequests.TryGetBuffer(target, out DynamicBuffer<TakeDamageRequest> requests))
-                    continue;
-
-                requests.Add(new TakeDamageRequest
-                {
-                    Damage = damage.ValueRO.Value,
-                    Instigator = entity
-                });
-
                 _fireEventLookup.GetEnabledRefRW<FireEvent>(entity).ValueRW = true;
-                
-                // TODO:
-                // где то тут должен вызываться ивент для запуска анимации
-                
+
+                delay.ValueRW.ResetTime();
                 cooldown.ValueRW.ResetTime();
             }
         }

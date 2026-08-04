@@ -16,5 +16,14 @@ namespace Game
 
         public static float3 GetFirePoint(in LocalTransform transform, in FireOffset fireOffset) => 
             transform.Position + math.rotate(transform.Rotation, fireOffset.Value);
+        
+        public static bool IsExpired(in this FireDelay delay) => 
+            delay.Time <= 0;
+        
+        public static bool IsPlaying(in this FireDelay delay) =>
+            delay.Time > 0;
+
+        public static void ResetTime(ref this FireDelay delay) =>
+            delay.Time = delay.Duration;
     }
 }

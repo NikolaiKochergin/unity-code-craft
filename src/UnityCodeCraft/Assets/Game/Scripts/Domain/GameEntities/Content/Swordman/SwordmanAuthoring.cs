@@ -20,6 +20,7 @@ namespace Game
 
         [Header("Fire")] 
         [SerializeField] private float _fireCooldown;
+        [SerializeField] private float _fireDelay;
 
         [Header("Attack")] 
         [SerializeField] private float _attackDistance;
@@ -53,6 +54,7 @@ namespace Game
                     .WithEnabled<FireRequest>(false)
                     .WithEnabled<FireEvent>(false)
                     .With(new FireCooldown{ Duration = authoring._fireCooldown })
+                    .With(new FireDelay{ Duration = authoring._fireDelay })
                     // Attack
                     .With(new AttackDistance{ Value = authoring._attackDistance })
                     .With(new Damage{ Value = authoring._damage })

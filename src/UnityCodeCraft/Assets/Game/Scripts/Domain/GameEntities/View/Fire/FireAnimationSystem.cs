@@ -25,7 +25,7 @@ namespace Game
             
             state.Dependency = new FireAnimationJob
             {
-                FireEventLookup =  _fireEventLookup,
+                FireEventLookup = _fireEventLookup,
                 FireParam = _fireParam,
             }.ScheduleParallel(state.Dependency);
         }
