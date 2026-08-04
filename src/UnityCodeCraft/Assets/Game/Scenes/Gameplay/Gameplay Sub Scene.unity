@@ -129,6 +129,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1448126290144495073, guid: 672d95e5eaa94fe4c890e0965e4ea820,
         type: 3}
+      propertyPath: _armor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448126290144495073, guid: 672d95e5eaa94fe4c890e0965e4ea820,
+        type: 3}
       propertyPath: _damage
       value: 1
       objectReference: {fileID: 0}
@@ -371,6 +376,7 @@ MonoBehaviour:
   _rotationSpeed: 0
   _currentHealth: 10
   _maxHealth: 10
+  _armor: 0
   _deathDuration: 0
   _fireCooldown: 0
   _attackDistance: 0

@@ -11,13 +11,14 @@ namespace Game
     {
         private ComponentLookup<Team> _teamLookup;
         private ComponentLookup<LocalTransform> _transformLookup;
-        private BufferLookup<TakeDamageRequest> _takeDamageRequests;
         private ComponentLookup<FireEvent> _fireEventLookup;
+        private BufferLookup<TakeDamageRequest> _takeDamageRequests;
 
         public void OnCreate(ref SystemState state)
         {
             _teamLookup = SystemAPI.GetComponentLookup<Team>(isReadOnly: true);
             _transformLookup = SystemAPI.GetComponentLookup<LocalTransform>(isReadOnly: true);
+            _fireEventLookup = SystemAPI.GetComponentLookup<FireEvent>(isReadOnly: false);
             _takeDamageRequests = SystemAPI.GetBufferLookup<TakeDamageRequest>(isReadOnly: false);
         }
 
@@ -80,6 +81,8 @@ namespace Game
                     Damage = damage.ValueRO.Value,
                     Instigator = entity
                 });
+
+                _fireEventLookup.GetEnabledRefRW<FireEvent>(entity).ValueRW = true;
                 
                 // TODO:
                 // где то тут должен вызываться ивент для запуска анимации
