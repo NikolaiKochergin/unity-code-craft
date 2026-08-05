@@ -22,13 +22,15 @@ namespace Game
             _takeDamageRequests.Update(ref state);
 
             foreach ((
-                         RefRO<FireRequest> requestValue,
+                         EnabledRefRW<FireDelay> delayEnabled,
                          RefRW<FireDelay> delay,
+                         RefRO<FireRequest> requestValue,
                          RefRO<Damage> damage,
                          Entity entity)
                      in SystemAPI.Query<
-                         RefRO<FireRequest>,
+                         EnabledRefRW<FireDelay>,
                          RefRW<FireDelay>,
+                         RefRO<FireRequest>,
                          RefRO<Damage>>()
                          .WithPresent<Unit>()
                          .WithEntityAccess())
@@ -36,6 +38,9 @@ namespace Game
                 // Condition
                 if (delay.ValueRO.IsPlaying())
                     continue;
+
+                delayEnabled.ValueRW = false;
+                delay.ValueRW.ResetTime();
 
                 Entity target = requestValue.ValueRO.Target;
                 if (target == Entity.Null ||

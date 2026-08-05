@@ -25,9 +25,7 @@ namespace Game
         [Header("Attack")] 
         [SerializeField] private float _attackDistance;
         [SerializeField] private int _damage;
-
-        [SerializeField] private GameObject _fakeTarget;
-        [SerializeField] private TeamType _fakeTeam;
+        [SerializeField] private TeamType _team;
 
         public sealed class SwordmanBaker : Baker<SwordmanAuthoring>
         {
@@ -35,13 +33,14 @@ namespace Game
                 this.Entity(TransformUsageFlags.Dynamic)
                     .With<Swordman>()
                     .With<Unit>()
-                    // TODO:
-                    // .With<Team>()
-                    
+                    .With(new Team{ Value = authoring._team })
                     // Health
                     .With(new CurrentHealth { Value = authoring._currentHealth })
                     .With(new MaxHealth { Value = authoring._maxHealth })
                     .With(new ArmorMultiplier() { Value = authoring._armor })
+                    // Take Damage
+                    .WithBuffer<TakeDamageRequest>()
+                    .WithBuffer<TakeDamageEvent>()
                     // Death
                     .WithEnabled<DeathEvent>(false)
                     .WithEnabled(new DeathCooldown{ Duration = authoring._deathDuration }, enabled: false)
@@ -53,22 +52,12 @@ namespace Game
                     // Fire
                     .WithEnabled<FireRequest>(false)
                     .WithEnabled<FireEvent>(false)
+                    .WithEnabled(new FireDelay{ Time = authoring._fireDelay, Duration = authoring._fireDelay }, enabled: false)
                     .With(new FireCooldown{ Duration = authoring._fireCooldown })
-                    .With(new FireDelay{ Duration = authoring._fireDelay })
                     // Attack
                     .With(new AttackDistance{ Value = authoring._attackDistance })
                     .With(new Damage{ Value = authoring._damage })
-                    // TODO:
-                    // .With<TargetEntity>()
-                    
-                    // Take Damage
-                    .WithBuffer<TakeDamageRequest>()
-                    .WithBuffer<TakeDamageEvent>()
-                    
-                
-                    .With(new TargetEntity{ Value = GetEntity(authoring._fakeTarget, TransformUsageFlags.None)})
-            
-                    .With(new Team{ Value = authoring._fakeTeam })
+                    .With<TargetEntity>()
                 ;
         }
     }

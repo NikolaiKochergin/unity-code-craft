@@ -12,14 +12,14 @@ namespace Game
         private ComponentLookup<Team> _teamLookup;
         private ComponentLookup<LocalTransform> _transformLookup;
         private ComponentLookup<FireEvent> _fireEventLookup;
-        private BufferLookup<TakeDamageRequest> _takeDamageRequests;
+        private ComponentLookup<FireDelay> _fireDelayLookup;
 
         public void OnCreate(ref SystemState state)
         {
             _teamLookup = SystemAPI.GetComponentLookup<Team>(isReadOnly: true);
             _transformLookup = SystemAPI.GetComponentLookup<LocalTransform>(isReadOnly: true);
+            _fireDelayLookup = SystemAPI.GetComponentLookup<FireDelay>(isReadOnly: false);
             _fireEventLookup = SystemAPI.GetComponentLookup<FireEvent>(isReadOnly: false);
-            _takeDamageRequests = SystemAPI.GetBufferLookup<TakeDamageRequest>(isReadOnly: false);
         }
 
         [BurstCompile]
@@ -27,14 +27,13 @@ namespace Game
         {
             _teamLookup.Update(ref state);
             _transformLookup.Update(ref state);
+            _fireDelayLookup.Update(ref state);
             _fireEventLookup.Update(ref state);
-            _takeDamageRequests.Update(ref state);
 
             foreach ((
                          EnabledRefRW<FireRequest> requestEnabled, 
                          RefRO<FireRequest> requestValue, 
                          RefRW<FireCooldown> cooldown, 
-                         RefRW<FireDelay> delay, 
                          RefRO<Team> team, 
                          RefRO<AttackDistance> attackDistance, 
                          RefRO<LocalTransform> transform,
@@ -43,7 +42,6 @@ namespace Game
                          EnabledRefRW<FireRequest>,
                          RefRO<FireRequest>,
                          RefRW<FireCooldown>,
-                         RefRW<FireDelay>,
                          RefRO<Team>,
                          RefRO<AttackDistance>,
                          RefRO<LocalTransform>>()
@@ -74,8 +72,8 @@ namespace Game
                 
                 // Action
                 _fireEventLookup.GetEnabledRefRW<FireEvent>(entity).ValueRW = true;
+                _fireDelayLookup.GetEnabledRefRW<FireDelay>(entity).ValueRW = true;
 
-                delay.ValueRW.ResetTime();
                 cooldown.ValueRW.ResetTime();
             }
         }
