@@ -2,6 +2,7 @@
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace Game
 {
@@ -65,8 +66,8 @@ namespace Game
                 target.Value = SpatialHash.FindClosest(
                     transform.Position,
                     detectionRadius.Value,
-                    condition,
-                    TransformLookup
+                    in condition,
+                    in TransformLookup
                 );
             }
         }

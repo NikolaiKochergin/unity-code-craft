@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 762698119522532022}
   - component: {fileID: 3867652708961458166}
   - component: {fileID: 1448126290144495073}
+  - component: {fileID: 3862390344798470326}
   m_Layer: 0
   m_Name: Swordsman
   m_TagString: Untagged
@@ -84,7 +85,20 @@ MonoBehaviour:
   _attackDistance: 1
   _damage: 1
   _team: 0
-  _fakeTarget: {fileID: 0}
+--- !u!114 &3862390344798470326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ada487859d40d597dcabf5d30ecfb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UnitAIAuthoring
+  _detectionRadius: 12
+  _detectionInterval: 0.1
 --- !u!1001 &2374355558966095868
 PrefabInstance:
   m_ObjectHideFlags: 0

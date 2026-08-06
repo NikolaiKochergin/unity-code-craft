@@ -20,8 +20,6 @@ namespace Game
         {
             SpatialGrid.Map.Clear();
 
-            float cellSize = 3f;
-
             foreach ((
                          RefRO<LocalTransform> transform, 
                          Entity entity) 
@@ -29,7 +27,7 @@ namespace Game
                          RefRO<LocalTransform>>()
                          .WithEntityAccess())
             {
-                int2 cell = SpatialHash.GetCell(transform.ValueRO.Position, cellSize);
+                int2 cell = SpatialHash.GetCell(transform.ValueRO.Position, SpatialGrid.CellSize);
                 SpatialGrid.Map.Add(SpatialHash.Hash(cell), entity);
             }
         }
