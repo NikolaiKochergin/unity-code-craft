@@ -82,7 +82,7 @@ MonoBehaviour:
   _deathDuration: 2
   _fireCooldown: 1
   _fireDelay: 0.43
-  _attackDistance: 1
+  _attackDistance: 3
   _damage: 1
   _team: 0
 --- !u!114 &3862390344798470326
