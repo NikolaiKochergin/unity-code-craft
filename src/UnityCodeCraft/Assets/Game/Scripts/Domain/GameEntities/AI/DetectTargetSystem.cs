@@ -1,4 +1,5 @@
-﻿using Unity.Burst;
+﻿using SampleGame;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -18,6 +19,8 @@ namespace Game
 
         public void OnCreate(ref SystemState state)
         {
+            state.RequireForUpdate<CastleReferences>();
+            
             _gridMap = new NativeParallelMultiHashMap<int, Entity>(128, Allocator.Persistent);
             
             _transformLookup = state.GetComponentLookup<LocalTransform>(isReadOnly: true);
@@ -28,6 +31,8 @@ namespace Game
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
+            state.Dependency.Complete();
+            
             _gridMap.Clear();
             
             foreach ((
@@ -45,6 +50,8 @@ namespace Game
             _teamLookup.Update(ref state);
             _healthLookup.Update(ref state);
 
+            CastleReferences castles = SystemAPI.GetSingleton<CastleReferences>();
+            
             state.Dependency = new DetectJob
             {
                 GridMap = _gridMap,
@@ -52,6 +59,8 @@ namespace Game
                 TeamLookup = _teamLookup,
                 HealthLookup = _healthLookup,
                 DeltaTime = SystemAPI.Time.DeltaTime,
+                BlueTeamCastle = castles.BlueCastle,
+                RedTeamCastle = castles.RedCastle
             }.ScheduleParallel(state.Dependency);
         }
 
@@ -74,6 +83,9 @@ namespace Game
 
             [ReadOnly]
             public ComponentLookup<CurrentHealth> HealthLookup;
+            
+            public Entity BlueTeamCastle;
+            public Entity RedTeamCastle;
             
             public float DeltaTime;
 
@@ -108,6 +120,13 @@ namespace Game
                     in condition,
                     in TransformLookup
                 );
+
+                if (target.Value != Entity.Null) 
+                    return;
+                
+                target.Value = team.Value == TeamType.Blue
+                    ? RedTeamCastle
+                    : BlueTeamCastle;
             }
         }
     }
