@@ -8,8 +8,11 @@ namespace Game
     public partial struct FireEventCleanup : ISystem
     {
         [BurstCompile]
-        public void OnUpdate(ref SystemState state) => 
-            state.Dependency = new FireEventCleanupJob().ScheduleParallel(state.Dependency);
+        public void OnUpdate(ref SystemState state)
+        {
+            state.Dependency = new FireEventCleanupJob().Schedule(state.Dependency);
+            state.Dependency.Complete();
+        }
 
         [BurstCompile]
         private partial struct FireEventCleanupJob : IJobEntity

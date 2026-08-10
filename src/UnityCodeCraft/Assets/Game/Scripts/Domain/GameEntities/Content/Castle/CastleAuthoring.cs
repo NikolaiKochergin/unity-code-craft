@@ -12,8 +12,7 @@ namespace Game
 
         public class CastleBaker : Baker<CastleAuthoring>
         {
-            public override void Bake(CastleAuthoring authoring)
-            {
+            public override void Bake(CastleAuthoring authoring) =>
                 this.Entity(TransformUsageFlags.Dynamic)
                     .With<Castle>()
                     .With<Unit>()
@@ -23,9 +22,7 @@ namespace Game
                     .With(new MaxHealth { Value = authoring._maxHealth })
                     // Take Damage
                     .WithBuffer<TakeDamageRequest>()
-                    .WithBuffer<TakeDamageEvent>()
-                ;
-            }
+                    .WithBuffer<TakeDamageEvent>();
         }
     }
 }
