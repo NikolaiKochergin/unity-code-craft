@@ -21,6 +21,9 @@ namespace Game
                     // Health
                     .With(new CurrentHealth { Value = authoring._currentHealth })
                     .With(new MaxHealth { Value = authoring._maxHealth })
+                    // Take Damage
+                    .WithBuffer<TakeDamageRequest>()
+                    .WithBuffer<TakeDamageEvent>()
                 ;
             }
         }
