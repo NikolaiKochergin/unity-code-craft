@@ -1314,11 +1314,6 @@ PrefabInstance:
       propertyPath: _team
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1448126290144495073, guid: 672d95e5eaa94fe4c890e0965e4ea820,
-        type: 3}
-      propertyPath: _fakeTarget
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127513, guid: 672d95e5eaa94fe4c890e0965e4ea820,
         type: 3}
       propertyPath: m_Name
@@ -1327,7 +1322,7 @@ PrefabInstance:
     - target: {fileID: 8692576747330127513, guid: 672d95e5eaa94fe4c890e0965e4ea820,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127514, guid: 672d95e5eaa94fe4c890e0965e4ea820,
         type: 3}

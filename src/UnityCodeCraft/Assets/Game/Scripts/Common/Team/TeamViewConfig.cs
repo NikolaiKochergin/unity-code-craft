@@ -34,15 +34,9 @@ namespace SampleGame
             [SerializeField]
             private Material material;
 
-            public Material Material
-            {
-                get { return this.material; }
-            }
+            public Material Material => material;
 
-            public TeamType Type
-            {
-                get { return type; }
-            }
+            public TeamType Type => type;
         }
     }
 }

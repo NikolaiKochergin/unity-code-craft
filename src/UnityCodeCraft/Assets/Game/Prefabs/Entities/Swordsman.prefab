@@ -259,7 +259,127 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1198642443125864170}
+    - targetCorrespondingSourceObject: {fileID: 1725084501492258956, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3584992613694959782}
+    - targetCorrespondingSourceObject: {fileID: 1725084501492258956, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5624708980782970165}
+    - targetCorrespondingSourceObject: {fileID: 1456208094891242170, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3851194264088166431}
+    - targetCorrespondingSourceObject: {fileID: 1456208094891242170, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4925159721932192203}
+    - targetCorrespondingSourceObject: {fileID: 3618741537487650478, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7319245576573012422}
+    - targetCorrespondingSourceObject: {fileID: 3618741537487650478, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2214487813178479377}
   m_SourcePrefab: {fileID: 100100000, guid: 9ade5523b6f916f43a919cde252ff319, type: 3}
+--- !u!1 &1354243786292793682 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3618741537487650478, guid: 9ade5523b6f916f43a919cde252ff319,
+    type: 3}
+  m_PrefabInstance: {fileID: 2374355558966095868}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7319245576573012422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354243786292793682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d92f9660064354a0961a3c049b9ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.ModelEntityAuthoring
+  _modelEntity: {fileID: 8692576747330127513}
+--- !u!114 &2214487813178479377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354243786292793682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b6467bcd530cd4d809fae70ea0ca9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Entities.Graphics::Unity.Rendering.URPMaterialPropertyBaseColorAuthoring
+  color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &3802755801998662982 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1456208094891242170, guid: 9ade5523b6f916f43a919cde252ff319,
+    type: 3}
+  m_PrefabInstance: {fileID: 2374355558966095868}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3851194264088166431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802755801998662982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d92f9660064354a0961a3c049b9ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.ModelEntityAuthoring
+  _modelEntity: {fileID: 8692576747330127513}
+--- !u!114 &4925159721932192203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802755801998662982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b6467bcd530cd4d809fae70ea0ca9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Entities.Graphics::Unity.Rendering.URPMaterialPropertyBaseColorAuthoring
+  color: {r: 0, g: 0, b: 0, a: 0}
+--- !u!1 &3964255071241222000 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1725084501492258956, guid: 9ade5523b6f916f43a919cde252ff319,
+    type: 3}
+  m_PrefabInstance: {fileID: 2374355558966095868}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3584992613694959782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3964255071241222000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d92f9660064354a0961a3c049b9ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.ModelEntityAuthoring
+  _modelEntity: {fileID: 8692576747330127513}
+--- !u!114 &5624708980782970165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3964255071241222000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54b6467bcd530cd4d809fae70ea0ca9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Entities.Graphics::Unity.Rendering.URPMaterialPropertyBaseColorAuthoring
+  color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &8194177642520444206 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5856076907724214994, guid: 9ade5523b6f916f43a919cde252ff319,
