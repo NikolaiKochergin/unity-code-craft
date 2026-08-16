@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6638863398131917904}
   - component: {fileID: 8667156460619915840}
   - component: {fileID: 887732369143325276}
+  - component: {fileID: 1918359139884958720}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5883565171892982307}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00000009735359, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -92,3 +93,21 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1918359139884958720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5883565171892982307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a22e4bc7894bdb9a17bd0bc2065db9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.ProjectileAuthoring
+  _team: 0
+  _moveSpeed: 15
+  _rotationSpeed: 350
+  _stoppingDistance: 0.1
+  _damage: 2
+  _lifetime: 5

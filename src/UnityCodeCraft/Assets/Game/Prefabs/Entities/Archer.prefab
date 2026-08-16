@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8692576747330127514}
+  - component: {fileID: 6995075383016977509}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -33,6 +34,31 @@ Transform:
   - {fileID: 8194177642520444206}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &6995075383016977509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5d1b1556020446b9d5e887845287ce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.ArcherAuthoring
+  _team: 0
+  _currentHealth: 5
+  _maxHealth: 5
+  _deathDuration: 1
+  _moveSpeed: 1
+  _rotationSpeed: 350
+  _fireCooldown: 1
+  _fireDelay: 0.2
+  _ammo: 5
+  _projectilePrefab: {fileID: 5883565171892982307, guid: a524751f5fc054ba9b0c9ca113234ee6,
+    type: 3}
+  _attackDistance: 5
+  _damage: 2
 --- !u!1001 &2374355558966095868
 PrefabInstance:
   m_ObjectHideFlags: 0
