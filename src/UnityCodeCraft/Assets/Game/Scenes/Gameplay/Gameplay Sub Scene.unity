@@ -1843,25 +1843,40 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6995075383016977509, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+    - target: {fileID: 2769890443028325686, guid: 64170d8b6a7c5c84e9a0841f53002a09,
         type: 3}
-      propertyPath: _ammo
-      value: 50
+      propertyPath: color.b
+      value: 0.13254534
       objectReference: {fileID: 0}
-    - target: {fileID: 6995075383016977509, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+    - target: {fileID: 2769890443028325686, guid: 64170d8b6a7c5c84e9a0841f53002a09,
         type: 3}
-      propertyPath: _fireDelay
-      value: 0.7
+      propertyPath: color.g
+      value: 0.8867924
+      objectReference: {fileID: 0}
+    - target: {fileID: 2769890443028325686, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+        type: 3}
+      propertyPath: color.r
+      value: 0.0292809
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147694190990194019, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+        type: 3}
+      propertyPath: color.b
+      value: 0.13254534
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147694190990194019, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+        type: 3}
+      propertyPath: color.g
+      value: 0.8867924
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147694190990194019, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+        type: 3}
+      propertyPath: color.r
+      value: 0.0292809
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127513, guid: 64170d8b6a7c5c84e9a0841f53002a09,
         type: 3}
       propertyPath: m_Name
       value: Archer
-      objectReference: {fileID: 0}
-    - target: {fileID: 8692576747330127513, guid: 64170d8b6a7c5c84e9a0841f53002a09,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127514, guid: 64170d8b6a7c5c84e9a0841f53002a09,
         type: 3}
@@ -1912,6 +1927,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834927243931019188, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+        type: 3}
+      propertyPath: color.b
+      value: 0.13254534
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834927243931019188, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+        type: 3}
+      propertyPath: color.g
+      value: 0.8867924
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834927243931019188, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+        type: 3}
+      propertyPath: color.r
+      value: 0.0292809
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

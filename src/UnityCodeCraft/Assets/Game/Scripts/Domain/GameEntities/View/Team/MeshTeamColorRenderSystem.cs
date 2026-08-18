@@ -33,8 +33,7 @@
                     RefRO<Team> team = _teamLookup.GetRefRO(modelEntity.ValueRO.Value);
                     TeamViewConfig.TeamInfo info = _catalog.GetTeam(team.ValueRO.Value);
                     Color color = info.Material.GetColor(BaseColor);
-                    // baseColor.ValueRW.Value = new float4(color.r, color.g, color.b, color.a);
-                    baseColor.ValueRW.Value = new float4(0, 1, 0, 1);
+                    baseColor.ValueRW.Value = new float4(color.r, color.g, color.b, color.a);
                 }
             }
         }
