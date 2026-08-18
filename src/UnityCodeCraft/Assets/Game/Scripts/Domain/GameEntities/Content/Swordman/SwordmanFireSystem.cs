@@ -7,12 +7,13 @@ using Unity.Transforms;
 namespace Game
 {
     [BurstCompile]
-    public partial struct UnitFireSystem : ISystem
+    public partial struct SwordmanFireSystem : ISystem
     {
         private ComponentLookup<Team> _teamLookup;
         private ComponentLookup<LocalTransform> _transformLookup;
         private ComponentLookup<FireEvent> _fireEventLookup;
         private ComponentLookup<FireDelay> _fireDelayLookup;
+        private BufferLookup<TakeDamageRequest> _takeDamageRequests;
 
         public void OnCreate(ref SystemState state)
         {
@@ -20,6 +21,7 @@ namespace Game
             _transformLookup = SystemAPI.GetComponentLookup<LocalTransform>(isReadOnly: true);
             _fireDelayLookup = SystemAPI.GetComponentLookup<FireDelay>(isReadOnly: false);
             _fireEventLookup = SystemAPI.GetComponentLookup<FireEvent>(isReadOnly: false);
+            _takeDamageRequests = SystemAPI.GetBufferLookup<TakeDamageRequest>(isReadOnly: false);
         }
 
         [BurstCompile]
@@ -29,13 +31,15 @@ namespace Game
             _transformLookup.Update(ref state);
             _fireDelayLookup.Update(ref state);
             _fireEventLookup.Update(ref state);
+            _takeDamageRequests.Update(ref state);
 
             foreach ((
                          EnabledRefRW<FireRequest> requestEnabled, 
                          RefRO<FireRequest> requestValue, 
                          RefRW<FireCooldown> cooldown, 
                          RefRO<Team> team, 
-                         RefRO<AttackDistance> attackDistance, 
+                         RefRO<CurrentHealth> health,
+            RefRO<AttackDistance> attackDistance, 
                          RefRO<LocalTransform> transform,
                          Entity entity) 
                      in SystemAPI.Query<
@@ -43,10 +47,10 @@ namespace Game
                          RefRO<FireRequest>,
                          RefRW<FireCooldown>,
                          RefRO<Team>,
+                         RefRO<CurrentHealth>,
                          RefRO<AttackDistance>,
                          RefRO<LocalTransform>>()
-                         .WithPresent<Unit>()
-                         .WithNone<Archer>()
+                         .WithPresent<Swordman>()
                          .WithEntityAccess())
             {
                 // Request
@@ -54,6 +58,9 @@ namespace Game
                 
                 // Condition
                 if(cooldown.ValueRO.IsPlaying())
+                    continue;
+                
+                if(health.ValueRO.IsDead())
                     continue;
 
                 Entity target = requestValue.ValueRO.Target;
@@ -76,6 +83,44 @@ namespace Game
                 _fireDelayLookup.GetEnabledRefRW<FireDelay>(entity).ValueRW = true;
 
                 cooldown.ValueRW.ResetTime();
+            }
+            
+            foreach ((
+                         EnabledRefRW<FireDelay> delayEnabled,
+                         RefRW<FireDelay> delay,
+                         RefRO<FireRequest> requestValue,
+                         RefRO<Damage> damage,
+                         Entity entity)
+                     in SystemAPI.Query<
+                             EnabledRefRW<FireDelay>,
+                             RefRW<FireDelay>,
+                             RefRO<FireRequest>,
+                             RefRO<Damage>>()
+                         .WithPresent<Swordman>()
+                         .WithPresent<FireRequest>()
+                         .WithEntityAccess())
+            {
+                // Condition
+                if (delay.ValueRO.IsPlaying())
+                    continue;
+
+                delayEnabled.ValueRW = false;
+                delay.ValueRW.ResetTime();
+
+                Entity target = requestValue.ValueRO.Target;
+                if (target == Entity.Null ||
+                    !SystemAPI.Exists(target))
+                    continue;
+                
+                // Action
+                if (!_takeDamageRequests.TryGetBuffer(target, out DynamicBuffer<TakeDamageRequest> requests))
+                    continue;
+
+                requests.Add(new TakeDamageRequest
+                {
+                    Damage = damage.ValueRO.Value,
+                    Instigator = entity
+                });
             }
         }
     }
