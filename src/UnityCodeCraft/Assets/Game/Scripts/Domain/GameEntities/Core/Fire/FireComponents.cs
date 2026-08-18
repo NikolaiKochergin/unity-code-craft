@@ -1,4 +1,5 @@
 using Unity.Entities;
+using Unity.Mathematics;
 
 namespace Game
 {
@@ -6,5 +7,5 @@ namespace Game
     public struct FireEvent : IComponentData, IEnableableComponent { }
     public struct FireCooldown : IComponentData { public float Time, Duration; }
     public struct FireDelay : IComponentData, IEnableableComponent { public float Time, Duration; }
-    public struct FireOffset : IComponentData { public float Value; }
+    public struct FireOffset : IComponentData { public float3 Value; }
 }

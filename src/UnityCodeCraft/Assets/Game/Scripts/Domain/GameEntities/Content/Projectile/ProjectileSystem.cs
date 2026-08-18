@@ -1,5 +1,6 @@
 ﻿using Unity.Burst;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace Game
@@ -60,6 +61,19 @@ namespace Game
                         transform.ValueRO.Forward(), 
                         in moveSpeed.ValueRO,
                         deltaTime);
+                    continue;
+                }
+                
+                float3 targetPosition = targetTransform.Position + 
+                                        math.rotate(targetTransform.Rotation, offset.ValueRO.Value);
+                float3 delta = targetPosition - transform.ValueRO.Position;
+                float stoppingDistance = stoppingDistanceRef.ValueRO.Value;
+
+                if (math.lengthsq(delta) > stoppingDistance * stoppingDistance)
+                {
+                    float3 direction = math.normalize(delta);
+                    MoveUseCase.MoveStep(ref transform.ValueRW, direction, in moveSpeed.ValueRO, deltaTime);
+                    transform.ValueRW.Rotation = quaternion.LookRotationSafe(direction, math.up());
                     continue;
                 }
 

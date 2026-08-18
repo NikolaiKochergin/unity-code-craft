@@ -80,7 +80,7 @@ MonoBehaviour:
   _maxHealth: 10
   _armor: 0.1
   _deathDuration: 2
-  _fireCooldown: 1
+  _fireCooldown: 2
   _fireDelay: 0.43
   _attackDistance: 3
   _damage: 1

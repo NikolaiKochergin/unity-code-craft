@@ -23,6 +23,7 @@ namespace Game
         [SerializeField] private float _fireCooldown;
         [SerializeField] private float _fireDelay;
         [SerializeField] private int _ammo;
+        [SerializeField] private Transform _firePoint;
         [SerializeField] private GameObject _projectilePrefab;
         
         [Header("Attack")] 
@@ -56,6 +57,7 @@ namespace Game
                     .WithEnabled(new FireDelay{ Time = authoring._fireDelay, Duration = authoring._fireDelay }, enabled: false)
                     .With(new FireCooldown{ Duration = authoring._fireCooldown })
                     .With(new Ammo { Value = authoring._ammo })
+                    .With(new FireOffset { Value = authoring._firePoint.position - authoring.transform.position })
                     .With(new ProjectilePrefab{ Value = GetEntity(authoring._projectilePrefab, TransformUsageFlags.Dynamic) })
                     // Attack
                     .With(new AttackDistance{ Value = authoring._attackDistance })

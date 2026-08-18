@@ -12,6 +12,7 @@ namespace Game
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _rotationSpeed;
         [SerializeField] private float _stoppingDistance;
+        [SerializeField] private Vector3 _targetOffset;
         
         [Header("Attack")]
         [SerializeField] private int _damage;
@@ -31,6 +32,7 @@ namespace Game
                     .With(new MoveSpeed { Value = authoring._moveSpeed})
                     .With(new RotationSpeed { Value = authoring._rotationSpeed })
                     .With(new StoppingDistance { Value = authoring._stoppingDistance })
+                    .With(new TargetOffset { Value = authoring._targetOffset})
                 
                     .With(new Lifetime { Value = authoring._lifetime })
                 ;

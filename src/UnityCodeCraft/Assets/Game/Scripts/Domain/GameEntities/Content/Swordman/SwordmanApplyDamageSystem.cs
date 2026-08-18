@@ -4,21 +4,18 @@ using Unity.Entities;
 namespace Game
 {
     [BurstCompile]
-    public partial struct UnitMeleeFireDelaySystem : ISystem
+    public partial struct SwordmanApplyDamageSystem : ISystem
     {
-        private ComponentLookup<FireEvent> _fireEventLookup;
         private BufferLookup<TakeDamageRequest> _takeDamageRequests;
         
         public void OnCreate(ref SystemState state)
         {
-            _fireEventLookup = SystemAPI.GetComponentLookup<FireEvent>(isReadOnly: false);
             _takeDamageRequests = SystemAPI.GetBufferLookup<TakeDamageRequest>(isReadOnly: false);
         }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            _fireEventLookup.Update(ref state);
             _takeDamageRequests.Update(ref state);
 
             foreach ((
@@ -32,7 +29,8 @@ namespace Game
                          RefRW<FireDelay>,
                          RefRO<FireRequest>,
                          RefRO<Damage>>()
-                         .WithPresent<Unit>()
+                         .WithPresent<Swordman>()
+                         .WithPresent<FireRequest>()
                          .WithEntityAccess())
             {
                 // Condition

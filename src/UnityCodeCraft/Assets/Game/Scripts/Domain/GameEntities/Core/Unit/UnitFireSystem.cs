@@ -7,7 +7,7 @@ using Unity.Transforms;
 namespace Game
 {
     [BurstCompile]
-    public partial struct UnitMeleeFireSystem : ISystem
+    public partial struct UnitFireSystem : ISystem
     {
         private ComponentLookup<Team> _teamLookup;
         private ComponentLookup<LocalTransform> _transformLookup;
@@ -46,6 +46,7 @@ namespace Game
                          RefRO<AttackDistance>,
                          RefRO<LocalTransform>>()
                          .WithPresent<Unit>()
+                         .WithNone<Archer>()
                          .WithEntityAccess())
             {
                 // Request

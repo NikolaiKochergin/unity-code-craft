@@ -1,5 +1,4 @@
 ﻿using SampleGame;
-using TMPro;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -14,6 +13,7 @@ namespace Game
         private ComponentLookup<Team> _teamLookup;
         private ComponentLookup<ProjectilePrefab> _projectilePrefabs;
         private ComponentLookup<FireOffset> _fireOffsetLookup;
+        private ComponentLookup<FireDelay> _fireDelayLookup;
         private ComponentLookup<FireEvent> _fireEventLookup;
 
         public void OnCreate(ref SystemState state)
@@ -24,6 +24,7 @@ namespace Game
             _teamLookup = SystemAPI.GetComponentLookup<Team>(isReadOnly: true);
             _projectilePrefabs = SystemAPI.GetComponentLookup<ProjectilePrefab>(isReadOnly: true);
             _fireOffsetLookup = SystemAPI.GetComponentLookup<FireOffset>(isReadOnly: true);
+            _fireDelayLookup = SystemAPI.GetComponentLookup<FireDelay>(isReadOnly: false);
             _fireEventLookup = SystemAPI.GetComponentLookup<FireEvent>(isReadOnly: false);
         }
 
@@ -34,6 +35,7 @@ namespace Game
             _projectilePrefabs.Update(ref state);
             _teamLookup.Update(ref state);
             _transformLookup.Update(ref state);
+            _fireDelayLookup.Update(ref state);
             _fireEventLookup.Update(ref state);
 
             EntityCommandBuffer ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>()
@@ -89,25 +91,57 @@ namespace Game
                 if(math.lengthsq(delta) > distance * distance)
                     continue;
                 
+                transform.ValueRW.Rotation = quaternion.LookRotation(math.normalize(delta), math.up());
+                
                 // Action
+                _fireDelayLookup.SetComponentEnabled(entity, true);
+                cooldown.ValueRW.ResetTime();
+                ammo.ValueRW.Value--;
+                
+                // Event 
+                _fireEventLookup.SetComponentEnabled(entity, true);
+            }
+
+            foreach ((
+                         EnabledRefRW<FireDelay> delayEnabled, 
+                         RefRW<FireDelay> delay, 
+                         RefRO<FireRequest> requestValue, 
+                         RefRO<Team>  team,
+                         RefRO<Damage> damage, 
+                         Entity entity)
+                     in SystemAPI.Query<
+                         EnabledRefRW<FireDelay>,
+                         RefRW<FireDelay>,
+                         RefRO<FireRequest>,
+                         RefRO<Team>,
+                         RefRO<Damage>>()
+                         .WithPresent<Archer>()
+                         .WithPresent<FireRequest>()
+                         .WithEntityAccess())
+            {
+                if(delay.ValueRO.IsPlaying())
+                    continue;
+
+                delayEnabled.ValueRW = false;
+                delay.ValueRW.ResetTime();
+                
+                Entity target = requestValue.ValueRO.Target;
+                if (target == Entity.Null ||
+                    !SystemAPI.Exists(target))
+                    continue;
+                
+                RefRW<LocalTransform> transform = _transformLookup.GetRefRW(entity);
                 RefRO<ProjectilePrefab> projectilePrefab = _projectilePrefabs.GetRefRO(entity);
                 RefRO<FireOffset> fireOffset = _fireOffsetLookup.GetRefRO(entity);
-                
-                transform.ValueRW.Rotation = quaternion.LookRotation(math.normalize(delta), math.up());
 
                 ProjectileUseCase.SpawnProjectile(
                     ref ecb,
                     projectilePrefab.ValueRO,
                     transform.ValueRO,
                     fireOffset.ValueRO,
+                    damage.ValueRO.Value,
                     team,
                     target);
-
-                cooldown.ValueRW.ResetTime();
-                ammo.ValueRW.Value--;
-                
-                // Event 
-                _fireEventLookup.SetComponentEnabled(entity, true);
             }
         }
     }
