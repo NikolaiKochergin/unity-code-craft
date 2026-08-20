@@ -1737,6 +1737,16 @@ PrefabInstance:
       propertyPath: _team
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2950644733472697251, guid: 09a84d2719aac2546a75f1c2d3fd70ee,
+        type: 3}
+      propertyPath: _maxHealth
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2950644733472697251, guid: 09a84d2719aac2546a75f1c2d3fd70ee,
+        type: 3}
+      propertyPath: _currentHealth
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 4471176170290514848, guid: 09a84d2719aac2546a75f1c2d3fd70ee,
         type: 3}
       propertyPath: m_Layer

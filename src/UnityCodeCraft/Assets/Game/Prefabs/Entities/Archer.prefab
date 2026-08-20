@@ -114,7 +114,8 @@ MonoBehaviour:
   _rotationSpeed: 360
   _fireCooldown: 2.5
   _fireDelay: 0.7
-  _ammo: 50
+  _ammo: 5
+  _restoreAmmoCooldown: 5
   _firePoint: {fileID: 771083539675214868}
   _projectilePrefab: {fileID: 7594068351041934544, guid: b8c6a6d9db06e7b4cae95322444f3905,
     type: 3}
