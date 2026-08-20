@@ -10,15 +10,13 @@ namespace Game
         
         public class CastleReferencesBaker : Baker<CastleReferencesAuthoring>
         {
-            public override void Bake(CastleReferencesAuthoring authoring)
-            {
+            public override void Bake(CastleReferencesAuthoring authoring) =>
                 this.Entity()
                     .With(new CastleReferences
                     {
                         BlueCastle = GetEntity(authoring._blueCastle, TransformUsageFlags.Dynamic),
                         RedCastle = GetEntity(authoring._redCastle, TransformUsageFlags.Dynamic),
                     });
-            }
         }
     }
 }
