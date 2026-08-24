@@ -1,9 +1,11 @@
-﻿using Unity.Entities;
+﻿using Unity.Burst;
+using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace Game
 {
+    [BurstCompile]
     public partial struct UnitSpawnSystem : ISystem
     {
         private Random _random;
@@ -14,6 +16,7 @@ namespace Game
             _random = Random.CreateFromIndex(135735);
         }
 
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             EntityCommandBuffer ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>()

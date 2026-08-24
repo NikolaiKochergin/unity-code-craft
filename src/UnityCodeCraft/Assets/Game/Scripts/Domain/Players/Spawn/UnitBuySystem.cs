@@ -1,9 +1,12 @@
+using Unity.Burst;
 using Unity.Entities;
 
 namespace Game
 {
+    [BurstCompile]
     public partial struct UnitBuySystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             foreach ((
