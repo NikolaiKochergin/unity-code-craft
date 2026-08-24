@@ -13,16 +13,14 @@ namespace Game
         {
             public override void Bake(UnitSpawnPointsAuthoring authoring)
             {
-                GameObject[] points = authoring._unitSpawnPoints;
-                
-                for (int i = 0; i < points.Length; i++)
+                foreach (var point in authoring._unitSpawnPoints)
                 {
-                    Entity pointEntity = GetEntity(points[i], TransformUsageFlags.None);
-                    AddComponent(pointEntity, 
-                        new EntityName { value = $"{authoring._team.ToString()} {points[i].name}" });
+                    Entity pointEntity = CreateAdditionalEntity(TransformUsageFlags.None);
+                    AddComponent(pointEntity, new EntityName { value = $"{authoring._team.ToString()} {point.name}" });
                     AddComponent(pointEntity, new UnitSpawnPoint());
                     AddComponent(pointEntity, new Team { Value = authoring._team });
-                    AddComponent(pointEntity, new UnitSpawnPointCount { Value = points.Length });
+                    AddComponent(pointEntity, new UnitSpawnPointCount { Value = authoring._unitSpawnPoints.Length });
+                    AddComponent(pointEntity, new UnitSpawnPointPosition { Value = point.transform.position });
                 }
             }
         }

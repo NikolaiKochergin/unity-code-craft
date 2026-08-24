@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 168809603}
   m_Layer: 0
-  m_Name: Point 2
+  m_Name: Spawn Point 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -261,7 +261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 327402696}
   m_Layer: 0
-  m_Name: Point 3
+  m_Name: Spawn Point 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1114,7 +1114,7 @@ GameObject:
   m_Component:
   - component: {fileID: 945504109}
   m_Layer: 0
-  m_Name: Point 3
+  m_Name: Spawn Point 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1145,7 +1145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1021957154}
   m_Layer: 0
-  m_Name: Point 1
+  m_Name: Spawn Point 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1165,6 +1165,68 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1953945049}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1092256876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1092256879}
+  - component: {fileID: 1092256878}
+  - component: {fileID: 1092256877}
+  m_Layer: 0
+  m_Name: <RedPlayer>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1092256877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092256876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83793eb3981949dcaaaab23253c721bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.PlayerAuthoring
+  _team: 1
+  _money: 5
+  _income: 1
+  _tickCooldown: 1
+--- !u!114 &1092256878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092256876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1418edc93dd4454bd13e1973df8b87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityNameAuthoring
+  _name: Red Player
+--- !u!4 &1092256879
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092256876}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1192664214
 PrefabInstance:
@@ -1256,7 +1318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1589448941}
   m_Layer: 0
-  m_Name: Point 1
+  m_Name: Spawn Point 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1471,7 +1533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1660021328}
   m_Layer: 0
-  m_Name: Point 2
+  m_Name: Spawn Point 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1614,8 +1676,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1953945049}
-  - component: {fileID: 1953945051}
-  - component: {fileID: 1953945050}
   - component: {fileID: 1953945052}
   m_Layer: 0
   m_Name: <BlueSpawnPoints>
@@ -1642,35 +1702,6 @@ Transform:
   - {fileID: 327402696}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1953945050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1953945048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83793eb3981949dcaaaab23253c721bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.PlayerAuthoring
-  _team: 0
-  _money: 5
-  _income: 1
-  _tickCooldown: 1
---- !u!114 &1953945051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1953945048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1418edc93dd4454bd13e1973df8b87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityNameAuthoring
-  _name: Blue Player
 --- !u!114 &1953945052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1697,8 +1728,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1960890905}
-  - component: {fileID: 1960890908}
-  - component: {fileID: 1960890907}
   - component: {fileID: 1960890906}
   m_Layer: 0
   m_Name: <RedSpawnPoints>
@@ -1742,35 +1771,6 @@ MonoBehaviour:
   - {fileID: 168809602}
   - {fileID: 945504108}
   _team: 1
---- !u!114 &1960890907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1960890904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83793eb3981949dcaaaab23253c721bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.PlayerAuthoring
-  _team: 1
-  _money: 5
-  _income: 1
-  _tickCooldown: 1
---- !u!114 &1960890908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1960890904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1418edc93dd4454bd13e1973df8b87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityNameAuthoring
-  _name: Red Player
 --- !u!1001 &2018375056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1860,6 +1860,68 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2018375056}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2129668633
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2129668636}
+  - component: {fileID: 2129668635}
+  - component: {fileID: 2129668634}
+  m_Layer: 0
+  m_Name: <BluePlayer>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2129668634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129668633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83793eb3981949dcaaaab23253c721bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.PlayerAuthoring
+  _team: 0
+  _money: 5
+  _income: 1
+  _tickCooldown: 1
+--- !u!114 &2129668635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129668633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1418edc93dd4454bd13e1973df8b87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityNameAuthoring
+  _name: Blue Player
+--- !u!4 &2129668636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129668633}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &423135267784322734
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2320,6 +2382,8 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 2129668636}
+  - {fileID: 1092256879}
   - {fileID: 1953945049}
   - {fileID: 1960890905}
   - {fileID: 463166444}
