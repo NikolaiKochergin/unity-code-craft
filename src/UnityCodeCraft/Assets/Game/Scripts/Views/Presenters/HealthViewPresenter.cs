@@ -15,6 +15,9 @@ namespace Game
         private EntityQuery _castleQuery;
         private Entity _castleEntity;
 
+        private int _lastCurrentHealth = -1;
+        private int _lastMaxHealth = -1;
+
         private IEnumerator Start()
         {
             while (World.DefaultGameObjectInjectionWorld == null)
@@ -51,6 +54,10 @@ namespace Game
 
             MaxHealth maxHealth =
                 _entityManager.GetComponentData<MaxHealth>(_castleEntity);
+            
+            if (currentHealth.Value == _lastCurrentHealth &&
+                maxHealth.Value == _lastMaxHealth)
+                return;
             
             _healthView.HealthText = $"{currentHealth.Value}/{maxHealth.Value}";
 

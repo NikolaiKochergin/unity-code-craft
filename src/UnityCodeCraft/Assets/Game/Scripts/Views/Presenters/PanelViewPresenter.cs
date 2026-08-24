@@ -45,9 +45,6 @@ namespace Game
 
         private void Update()
         {
-            foreach (UnitCardVewPresenter presenter in _presenters) 
-                presenter.Update();
-            
             if(_playerEntity == Entity.Null)
                 return;
 
@@ -56,9 +53,12 @@ namespace Game
                 _playerEntity = Entity.Null;
                 return;
             }
+
+            var moneyAmount = _entityManager.GetComponentData<Money>(_playerEntity).Value;
+            _panelView.EnergyAmountText = moneyAmount.ToString();
             
-            _panelView.EnergyAmountText = _entityManager
-                .GetComponentData<Money>(_playerEntity).Value.ToString();
+            foreach (UnitCardVewPresenter presenter in _presenters) 
+                presenter.Update(moneyAmount);
         }
 
         private Entity FindPlayer()

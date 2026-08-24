@@ -128,8 +128,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 168809603}
-  - component: {fileID: 168809605}
-  - component: {fileID: 168809604}
   m_Layer: 0
   m_Name: Point 2
   m_TagString: Untagged
@@ -152,32 +150,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1960890905}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &168809604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168809602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73dcc9d3921d4ff7be471864488c9879, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.UnitSpawnPointAuthoring
-  _team: 1
---- !u!114 &168809605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168809602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1418edc93dd4454bd13e1973df8b87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityNameAuthoring
-  _name: Red Team Spawn Point 2
 --- !u!4 &254118205 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 815369288960148935, guid: 09a84d2719aac2546a75f1c2d3fd70ee,
@@ -288,8 +260,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 327402696}
-  - component: {fileID: 327402698}
-  - component: {fileID: 327402697}
   m_Layer: 0
   m_Name: Point 3
   m_TagString: Untagged
@@ -312,32 +282,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1953945049}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &327402697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 327402695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73dcc9d3921d4ff7be471864488c9879, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.UnitSpawnPointsAuthoring
-  _team: 0
---- !u!114 &327402698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 327402695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1418edc93dd4454bd13e1973df8b87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityNameAuthoring
-  _name: Blue Team Spawn Point 3
 --- !u!1001 &330151749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1169,8 +1113,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 945504109}
-  - component: {fileID: 945504111}
-  - component: {fileID: 945504110}
   m_Layer: 0
   m_Name: Point 3
   m_TagString: Untagged
@@ -1193,32 +1135,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1960890905}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &945504110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 945504108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73dcc9d3921d4ff7be471864488c9879, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.UnitSpawnPointAuthoring
-  _team: 1
---- !u!114 &945504111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 945504108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1418edc93dd4454bd13e1973df8b87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityNameAuthoring
-  _name: Red Team Spawn Point 3
 --- !u!1 &1021957153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1228,8 +1144,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1021957154}
-  - component: {fileID: 1021957156}
-  - component: {fileID: 1021957155}
   m_Layer: 0
   m_Name: Point 1
   m_TagString: Untagged
@@ -1252,32 +1166,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1953945049}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1021957155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1021957153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73dcc9d3921d4ff7be471864488c9879, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.UnitSpawnPointsAuthoring
-  _team: 0
---- !u!114 &1021957156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1021957153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1418edc93dd4454bd13e1973df8b87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityNameAuthoring
-  _name: Blue Team Spawn Point 1
 --- !u!1001 &1192664214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1367,8 +1255,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1589448941}
-  - component: {fileID: 1589448943}
-  - component: {fileID: 1589448942}
   m_Layer: 0
   m_Name: Point 1
   m_TagString: Untagged
@@ -1391,32 +1277,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1960890905}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1589448942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589448940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73dcc9d3921d4ff7be471864488c9879, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.UnitSpawnPointAuthoring
-  _team: 1
---- !u!114 &1589448943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1589448940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1418edc93dd4454bd13e1973df8b87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityNameAuthoring
-  _name: Red Team Spawn Point 1
 --- !u!1001 &1622863030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1610,8 +1470,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1660021328}
-  - component: {fileID: 1660021330}
-  - component: {fileID: 1660021329}
   m_Layer: 0
   m_Name: Point 2
   m_TagString: Untagged
@@ -1634,32 +1492,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1953945049}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1660021329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1660021327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73dcc9d3921d4ff7be471864488c9879, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.UnitSpawnPointsAuthoring
-  _team: 0
---- !u!114 &1660021330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1660021327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1418edc93dd4454bd13e1973df8b87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityNameAuthoring
-  _name: Blue Team Spawn Point 2
 --- !u!1 &1673067380
 GameObject:
   m_ObjectHideFlags: 0
@@ -1784,6 +1616,7 @@ GameObject:
   - component: {fileID: 1953945049}
   - component: {fileID: 1953945051}
   - component: {fileID: 1953945050}
+  - component: {fileID: 1953945052}
   m_Layer: 0
   m_Name: <BlueSpawnPoints>
   m_TagString: Untagged
@@ -1838,6 +1671,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.EntityNameAuthoring
   _name: Blue Player
+--- !u!114 &1953945052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953945048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73dcc9d3921d4ff7be471864488c9879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UnitSpawnPointsAuthoring
+  _unitSpawnPoints:
+  - {fileID: 1021957153}
+  - {fileID: 1660021327}
+  - {fileID: 327402695}
+  _team: 0
 --- !u!1 &1960890904
 GameObject:
   m_ObjectHideFlags: 0
@@ -1847,6 +1697,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1960890905}
+  - component: {fileID: 1960890908}
+  - component: {fileID: 1960890907}
+  - component: {fileID: 1960890906}
   m_Layer: 0
   m_Name: <RedSpawnPoints>
   m_TagString: Untagged
@@ -1872,6 +1725,52 @@ Transform:
   - {fileID: 945504109}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1960890906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960890904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73dcc9d3921d4ff7be471864488c9879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UnitSpawnPointsAuthoring
+  _unitSpawnPoints:
+  - {fileID: 1589448940}
+  - {fileID: 168809602}
+  - {fileID: 945504108}
+  _team: 1
+--- !u!114 &1960890907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960890904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83793eb3981949dcaaaab23253c721bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.PlayerAuthoring
+  _team: 1
+  _money: 5
+  _income: 1
+  _tickCooldown: 1
+--- !u!114 &1960890908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960890904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1418edc93dd4454bd13e1973df8b87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityNameAuthoring
+  _name: Red Player
 --- !u!1001 &2018375056
 PrefabInstance:
   m_ObjectHideFlags: 0
