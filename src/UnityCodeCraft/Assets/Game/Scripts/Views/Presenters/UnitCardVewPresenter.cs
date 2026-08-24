@@ -1,5 +1,6 @@
 ﻿using System;
 using SampleGame;
+using Unity.Entities;
 using UnityEngine;
 
 namespace Game
@@ -8,11 +9,19 @@ namespace Game
     {
         private readonly UnitCardView _card;
         private readonly UnitCardConfig _config;
+        private readonly Entity _playerEntity;
         
         private int _lastMoneyAmount = -1;
+        private EntityManager _entityManager;
 
-        public UnitCardVewPresenter(UnitCardView card, UnitCardConfig config)
+        public UnitCardVewPresenter(
+            UnitCardView card, 
+            UnitCardConfig config, 
+            Entity playerEntity,
+            EntityManager entityManager)
         {
+            _entityManager = entityManager;
+            _playerEntity = playerEntity;
             _card = card;
             _config = config;
             Setup();
@@ -43,7 +52,8 @@ namespace Game
 
         private void OnCardClicked()
         {
-            Debug.Log("OnCardClicked");
+            _entityManager.SetComponentData(_playerEntity, new UnitBuyRequest { PrefabName = _config.Name });
+            _entityManager.SetComponentEnabled<UnitBuyRequest>(_playerEntity, true);
         }
     }
 }

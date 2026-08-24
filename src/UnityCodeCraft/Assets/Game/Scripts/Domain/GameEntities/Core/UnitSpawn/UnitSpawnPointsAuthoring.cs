@@ -17,10 +17,9 @@ namespace Game
                 {
                     Entity pointEntity = CreateAdditionalEntity(TransformUsageFlags.None);
                     AddComponent(pointEntity, new EntityName { value = $"{authoring._team.ToString()} {point.name}" });
-                    AddComponent(pointEntity, new UnitSpawnPoint());
                     AddComponent(pointEntity, new Team { Value = authoring._team });
                     AddComponent(pointEntity, new UnitSpawnPointCount { Value = authoring._unitSpawnPoints.Length });
-                    AddComponent(pointEntity, new UnitSpawnPointPosition { Value = point.transform.position });
+                    AddComponent(pointEntity, new UnitSpawnPosition { Value = point.transform.position });
                 }
             }
         }

@@ -20,12 +20,6 @@ namespace Game
 
         private IEnumerator Start()
         {
-            foreach (UnitCardConfig config in _unitCardsCatalog.Cards)
-            {
-                UnitCardView card = _panelView.GetCard();
-                _presenters.Add(new UnitCardVewPresenter(card, config));
-            }
-            
             while (World.DefaultGameObjectInjectionWorld == null)
                 yield return null;
             
@@ -40,6 +34,12 @@ namespace Game
             {
                 _playerEntity = FindPlayer();
                 yield return null;
+            }
+            
+            foreach (UnitCardConfig config in _unitCardsCatalog.Cards)
+            {
+                UnitCardView card = _panelView.GetCard();
+                _presenters.Add(new UnitCardVewPresenter(card, config, _playerEntity, _entityManager));
             }
         }
 
