@@ -17,7 +17,8 @@ namespace Game
         {
             public override void Bake(PlayerAuthoring authoring) =>
                 this.Entity()
-                    .With(new Player { Team = authoring._team })
+                    .With<Player>()
+                    .With(new Team { Value = authoring._team })
                     // Money
                     .With(new Money { Value = authoring._money})
                     .With(new MoneyIncome { Value = authoring._income})
