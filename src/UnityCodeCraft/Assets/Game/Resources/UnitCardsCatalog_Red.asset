@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 545af28401254c0c96c1b8d7506d5cff, type: 3}
+  m_Name: UnitCardsCatalog_Red
+  m_EditorClassIdentifier: 
+  _cards:
+  - <Name>k__BackingField: Swordman
+    <Icon>k__BackingField: {fileID: 21300000, guid: 560c46b53b7160f4486f3a311dac0a6a,
+      type: 3}
+    <Prefab>k__BackingField: {fileID: 4521646451008000794, guid: 51f4fe3bcd98929429cb089dc0a8a865,
+      type: 3}
+    <Price>k__BackingField: 5
+  - <Name>k__BackingField: Archer
+    <Icon>k__BackingField: {fileID: 21300000, guid: fb2a35ff6389e9a4c9a481866412d46c,
+      type: 3}
+    <Prefab>k__BackingField: {fileID: 529563401528677051, guid: aa191e3001e28a74499c8707263068e7,
+      type: 3}
+    <Price>k__BackingField: 10
+  - <Name>k__BackingField: Mage
+    <Icon>k__BackingField: {fileID: 21300000, guid: d06048e0fbbba4350b03ae3c97a7f4d2,
+      type: 3}
+    <Prefab>k__BackingField: {fileID: 8451853515735079644, guid: d2a4425f61b11e34caffc5e94d90e7ce,
+      type: 3}
+    <Price>k__BackingField: 15
+  - <Name>k__BackingField: Warlock
+    <Icon>k__BackingField: {fileID: 21300000, guid: 84d6188a729b94346a3500b754d5d7a8,
+      type: 3}
+    <Prefab>k__BackingField: {fileID: 4591287596056758583, guid: a50dfc49635e73b48b138d3a9d13a64d,
+      type: 3}
+    <Price>k__BackingField: 20

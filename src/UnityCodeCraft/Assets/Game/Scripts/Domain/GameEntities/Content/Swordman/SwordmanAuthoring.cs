@@ -37,7 +37,7 @@ namespace Game
                     // Health
                     .With(new CurrentHealth { Value = authoring._currentHealth })
                     .With(new MaxHealth { Value = authoring._maxHealth })
-                    .With(new ArmorMultiplier() { Value = authoring._armor })
+                    .With(new ArmorMultiplier { Value = authoring._armor })
                     // Take Damage
                     .WithBuffer<TakeDamageRequest>()
                     .WithBuffer<TakeDamageEvent>()

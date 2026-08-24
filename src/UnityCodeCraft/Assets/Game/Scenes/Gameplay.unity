@@ -3779,6 +3779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de978a600b014d29a1c8ad1f76a0d29a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.PanelViewPresenter
+  _team: 0
   _panelView: {fileID: 1192194161}
   _unitCardsCatalog: {fileID: 11400000, guid: e7061a0801beab04db9870077ec9a250, type: 2}
 --- !u!114 &1192194161

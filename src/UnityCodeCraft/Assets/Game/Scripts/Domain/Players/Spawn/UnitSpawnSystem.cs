@@ -32,27 +32,25 @@ namespace Game
                 spawnRequestEnabled.ValueRW = false;
                 
                 float3 unitSpawnPosition = default;
-
-                int index = 0;
                 
                 foreach ((
                              RefRO<Team> pointTeam,
-                             RefRO<UnitSpawnPosition> spawnPosition, 
-                             RefRO<UnitSpawnPointCount> spawnPointCount)
+                             DynamicBuffer<UnitSpawnPoint> spawnPoints)
                          in SystemAPI.Query<
                              RefRO<Team>,
-                             RefRO<UnitSpawnPosition>,
-                             RefRO<UnitSpawnPointCount>>())
+                             DynamicBuffer<UnitSpawnPoint>>())
                 {
                     if(pointTeam.ValueRO.Value != team.ValueRO.Value)
                         continue;
-                    // int i = _random.NextInt(index, spawnPointCount.ValueRO.Value);
-                    // if(i > index)
-                        unitSpawnPosition = spawnPosition.ValueRO.Value;
-                    index++;
+                    
+                    if(spawnPoints.Length == 0)
+                        continue;
+
+                    int randomIndex = _random.NextInt(spawnPoints.Length);
+                    unitSpawnPosition = spawnPoints[randomIndex].Position;
                 }
                 
-                var unit = ecb.Instantiate(spawnRequestValue.ValueRO.Prefab);
+                Entity unit = ecb.Instantiate(spawnRequestValue.ValueRO.Prefab);
                 ecb.SetComponent(unit, LocalTransform.FromPositionRotation(unitSpawnPosition, quaternion.identity));
                 ecb.SetComponent(unit, new Team { Value = team.ValueRO.Value });
             }

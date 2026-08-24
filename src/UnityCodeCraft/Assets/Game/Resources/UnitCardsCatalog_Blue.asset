@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 545af28401254c0c96c1b8d7506d5cff, type: 3}
-  m_Name: UnitCardsCatalog
+  m_Name: UnitCardsCatalog_Blue
   m_EditorClassIdentifier: 
   _cards:
   - <Name>k__BackingField: Swordman

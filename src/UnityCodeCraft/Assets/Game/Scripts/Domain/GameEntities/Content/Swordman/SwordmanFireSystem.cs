@@ -39,7 +39,7 @@ namespace Game
                          RefRW<FireCooldown> cooldown, 
                          RefRO<Team> team, 
                          RefRO<CurrentHealth> health,
-            RefRO<AttackDistance> attackDistance, 
+                         RefRO<AttackDistance> attackDistance, 
                          RefRO<LocalTransform> transform,
                          Entity entity) 
                      in SystemAPI.Query<

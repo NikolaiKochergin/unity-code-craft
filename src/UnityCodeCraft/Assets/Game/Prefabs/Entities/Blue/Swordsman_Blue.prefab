@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1448126290144495073}
   - component: {fileID: 3862390344798470326}
   m_Layer: 0
-  m_Name: Swordsman
+  m_Name: Swordsman_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8692576747330127513}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36,7 +36,7 @@ Transform:
   - {fileID: 7906830424652367556}
   - {fileID: 8194177642520444206}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &762698119522532022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 311922920d51f8544ba4dfb6e890d2df, type: 2}
+      objectReference: {fileID: 2100000, guid: a4be7c893d16f354dbe9d2aa2cef149f, type: 2}
     - target: {fileID: 4741718230323717312, guid: 9ade5523b6f916f43a919cde252ff319,
         type: 3}
       propertyPath: m_IsActive
@@ -231,7 +231,12 @@ PrefabInstance:
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 311922920d51f8544ba4dfb6e890d2df, type: 2}
+      objectReference: {fileID: 2100000, guid: a4be7c893d16f354dbe9d2aa2cef149f, type: 2}
+    - target: {fileID: 6978452508453814833, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a4be7c893d16f354dbe9d2aa2cef149f, type: 2}
     - target: {fileID: 7914324773366655714, guid: 9ade5523b6f916f43a919cde252ff319,
         type: 3}
       propertyPath: m_IsActive

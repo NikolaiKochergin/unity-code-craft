@@ -1,7 +1,6 @@
 ﻿using System;
 using SampleGame;
 using Unity.Entities;
-using UnityEngine;
 
 namespace Game
 {
