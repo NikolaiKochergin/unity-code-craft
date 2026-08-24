@@ -1,4 +1,5 @@
-﻿using SampleGame;
+﻿using System.Collections;
+using SampleGame;
 using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
@@ -11,27 +12,33 @@ namespace Game
         [SerializeField] private TeamType _team;
 
         private EntityManager _entityManager;
+        private EntityQuery _castleQuery;
         private Entity _castleEntity;
+
+        private IEnumerator Start()
+        {
+            while (World.DefaultGameObjectInjectionWorld == null)
+                yield return null;
+            
+            _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+            
+            _castleQuery = _entityManager.CreateEntityQuery(
+                ComponentType.ReadOnly<Castle>(),
+                ComponentType.ReadOnly<Team>(),
+                ComponentType.ReadOnly<CurrentHealth>(),
+                ComponentType.ReadOnly<MaxHealth>());
+
+            while (_castleEntity == Entity.Null)
+            {
+                _castleEntity = FindCastle();
+                yield return null;
+            }
+        }
 
         private void Update()
         {
-            if (_entityManager == default)
-            {
-                World world = World.DefaultGameObjectInjectionWorld;
-
-                if (world == null)
-                    return;
-
-                _entityManager = world.EntityManager;
-            }
-
-            if (_castleEntity == Entity.Null)
-            {
-                FindCastle();
-
-                if (_castleEntity == Entity.Null)
-                    return;
-            }
+            if(_castleEntity == Entity.Null)
+                return;
 
             if (!_entityManager.Exists(_castleEntity))
             {
@@ -53,27 +60,18 @@ namespace Game
                     : 0f;
         }
 
-        private void FindCastle()
+        private Entity FindCastle()
         {
-            EntityQuery query = _entityManager.CreateEntityQuery(
-                ComponentType.ReadOnly<Castle>(),
-                ComponentType.ReadOnly<Team>(),
-                ComponentType.ReadOnly<CurrentHealth>(),
-                ComponentType.ReadOnly<MaxHealth>());
-
             using NativeArray<Entity> entities =
-                query.ToEntityArray(Allocator.Temp);
+                _castleQuery.ToEntityArray(Allocator.Temp);
 
             foreach (Entity entity in entities)
             {
                 Team team = _entityManager.GetComponentData<Team>(entity);
-
                 if (team.Value == _team)
-                {
-                    _castleEntity = entity;
-                    return;
-                }
+                    return entity;
             }
+            return Entity.Null;
         }
     }
 }

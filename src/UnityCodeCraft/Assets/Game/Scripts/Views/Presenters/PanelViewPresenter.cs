@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using SampleGame;
 using Unity.Collections;
 using Unity.Entities;
@@ -13,16 +14,32 @@ namespace Game
         [SerializeField] private UnitCardsCatalog _unitCardsCatalog;
 
         private readonly List<UnitCardVewPresenter> _presenters = new();
-        private World _world;
-        private Entity _playerEntity;
         private EntityManager _entityManager;
+        private EntityQuery _playerQuery;
+        private Entity _playerEntity;
 
-        private void Start()
+        private IEnumerator Start()
         {
             foreach (UnitCardConfig config in _unitCardsCatalog.Cards)
             {
                 UnitCardView card = _panelView.GetCard();
                 _presenters.Add(new UnitCardVewPresenter(card, config));
+            }
+            
+            while (World.DefaultGameObjectInjectionWorld == null)
+                yield return null;
+            
+            _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+            
+            _playerQuery = _entityManager.CreateEntityQuery(
+                ComponentType.ReadOnly<Player>(),
+                ComponentType.ReadOnly<Money>(),
+                ComponentType.ReadOnly<Team>());
+
+            while (_playerEntity == Entity.Null)
+            {
+                _playerEntity = FindPlayer();
+                yield return null;
             }
         }
 
@@ -31,23 +48,8 @@ namespace Game
             foreach (UnitCardVewPresenter presenter in _presenters) 
                 presenter.Update();
             
-            if (_entityManager == default)
-            {
-                World world = World.DefaultGameObjectInjectionWorld;
-
-                if (world == null)
-                    return;
-
-                _entityManager = world.EntityManager;
-            }
-
-            if (_playerEntity == Entity.Null)
-            {
-                FindPlayerEntity();
-
-                if (_playerEntity == Entity.Null)
-                    return;
-            }
+            if(_playerEntity == Entity.Null)
+                return;
 
             if (!_entityManager.Exists(_playerEntity))
             {
@@ -55,28 +57,21 @@ namespace Game
                 return;
             }
             
-            _panelView.EnergyAmountText = _entityManager.GetComponentData<Money>(_playerEntity).Value.ToString();
+            _panelView.EnergyAmountText = _entityManager
+                .GetComponentData<Money>(_playerEntity).Value.ToString();
         }
 
-        private void FindPlayerEntity()
+        private Entity FindPlayer()
         {
-            EntityQuery query = _entityManager.CreateEntityQuery(
-                ComponentType.ReadOnly<Player>(),
-                ComponentType.ReadOnly<Money>(),
-                ComponentType.ReadOnly<Team>()
-            );
-
-            using NativeArray<Entity> entities = query.ToEntityArray(Allocator.Temp);
+            using NativeArray<Entity> entities = _playerQuery.ToEntityArray(Allocator.Temp);
 
             foreach (Entity entity in entities)
             {
                 Team team = _entityManager.GetComponentData<Team>(entity);
                 if (team.Value == _team)
-                {
-                    _playerEntity = entity;
-                    return;
-                }
+                    return entity;
             }
+            return Entity.Null;
         }
     }
 }
