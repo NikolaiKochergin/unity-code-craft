@@ -25,7 +25,6 @@ namespace Game
         [Header("Attack")] 
         [SerializeField] private float _attackDistance;
         [SerializeField] private int _damage;
-        [SerializeField] private TeamType _team;
 
         public sealed class SwordmanBaker : Baker<SwordmanAuthoring>
         {
@@ -33,7 +32,7 @@ namespace Game
                 this.Entity(TransformUsageFlags.Dynamic)
                     .With<Swordman>()
                     .With<Unit>()
-                    .With(new Team{ Value = authoring._team })
+                    .With<Team>()
                     // Health
                     .With(new CurrentHealth { Value = authoring._currentHealth })
                     .With(new MaxHealth { Value = authoring._maxHealth })

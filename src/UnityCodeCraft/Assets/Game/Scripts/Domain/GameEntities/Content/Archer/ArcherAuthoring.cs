@@ -1,4 +1,3 @@
-using SampleGame;
 using Unity.Entities;
 using UnityEngine;
 
@@ -6,8 +5,6 @@ namespace Game
 {
     public class ArcherAuthoring : MonoBehaviour
     {
-        [SerializeField] private TeamType _team;
-        
         [Header("Health")]
         [SerializeField] private int _currentHealth;
         [SerializeField] private int _maxHealth;
@@ -37,7 +34,7 @@ namespace Game
                 this.Entity(TransformUsageFlags.Dynamic)
                     .With<Archer>()
                     .With<Unit>()
-                    .With(new Team{ Value = authoring._team })
+                    .With<Team>()
                     // Health
                     .With(new CurrentHealth { Value = authoring._currentHealth })
                     .With(new MaxHealth { Value = authoring._maxHealth })

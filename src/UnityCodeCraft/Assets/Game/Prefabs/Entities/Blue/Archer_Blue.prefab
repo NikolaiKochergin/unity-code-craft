@@ -106,7 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5d1b1556020446b9d5e887845287ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.ArcherAuthoring
-  _team: 0
   _currentHealth: 5
   _maxHealth: 5
   _deathDuration: 1
@@ -135,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.UnitAIAuthoring
   _detectionRadius: 12
   _detectionInterval: 0.1
+  _detectionTeam: 1
 --- !u!1001 &2374355558966095868
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -84,7 +84,6 @@ MonoBehaviour:
   _fireDelay: 0.43
   _attackDistance: 3
   _damage: 1
-  _team: 0
 --- !u!114 &3862390344798470326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.UnitAIAuthoring
   _detectionRadius: 12
   _detectionInterval: 0.1
+  _detectionTeam: 1
 --- !u!1001 &2374355558966095868
 PrefabInstance:
   m_ObjectHideFlags: 0

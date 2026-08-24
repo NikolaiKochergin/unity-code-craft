@@ -18,6 +18,11 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 311922920d51f8544ba4dfb6e890d2df, type: 2}
+    - target: {fileID: 5409329614771395543, guid: e509c663fa25e2749bbb17707ca86b90,
+        type: 3}
+      propertyPath: _detectionTeam
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7106188156725872294, guid: e509c663fa25e2749bbb17707ca86b90,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -36,7 +41,7 @@ PrefabInstance:
     - target: {fileID: 8692576747330127513, guid: e509c663fa25e2749bbb17707ca86b90,
         type: 3}
       propertyPath: m_Name
-      value: Mage_Blue Variant
+      value: Mage_Red
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127514, guid: e509c663fa25e2749bbb17707ca86b90,
         type: 3}

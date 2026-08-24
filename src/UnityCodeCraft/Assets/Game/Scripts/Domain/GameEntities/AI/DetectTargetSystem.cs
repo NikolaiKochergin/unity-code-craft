@@ -16,6 +16,7 @@ namespace Game
         private ComponentLookup<LocalTransform> _transformLookup;
         private ComponentLookup<Team> _teamLookup;
         private ComponentLookup<CurrentHealth> _healthLookup;
+        private ComponentLookup<MaxHealth> _maxHealthLookup;
 
         public void OnCreate(ref SystemState state)
         {
@@ -26,6 +27,7 @@ namespace Game
             _transformLookup = state.GetComponentLookup<LocalTransform>(isReadOnly: true);
             _teamLookup = state.GetComponentLookup<Team>(isReadOnly: true);
             _healthLookup = state.GetComponentLookup<CurrentHealth>(isReadOnly: true);
+            _maxHealthLookup = state.GetComponentLookup<MaxHealth>(isReadOnly: true);
         }
 
         [BurstCompile]
@@ -49,6 +51,7 @@ namespace Game
             _transformLookup.Update(ref state);
             _teamLookup.Update(ref state);
             _healthLookup.Update(ref state);
+            _maxHealthLookup.Update(ref state);
 
             CastleReferences castles = SystemAPI.GetSingleton<CastleReferences>();
             
@@ -58,6 +61,7 @@ namespace Game
                 TransformLookup = _transformLookup,
                 TeamLookup = _teamLookup,
                 HealthLookup = _healthLookup,
+                MaxHealthLookup = _maxHealthLookup,
                 DeltaTime = SystemAPI.Time.DeltaTime,
                 BlueTeamCastle = castles.BlueCastle,
                 RedTeamCastle = castles.RedCastle
@@ -84,6 +88,9 @@ namespace Game
             [ReadOnly]
             public ComponentLookup<CurrentHealth> HealthLookup;
             
+            [ReadOnly]
+            public ComponentLookup<MaxHealth> MaxHealthLookup;
+            
             public Entity BlueTeamCastle;
             public Entity RedTeamCastle;
             
@@ -93,6 +100,7 @@ namespace Game
                 Entity entity,
                 in LocalTransform transform,
                 in Team team,
+                in DetectionTeam detectionTeam,
                 in DetectionRadius detectionRadius,
                 ref TargetEntity target,
                 ref DetectionCooldown cooldown
@@ -105,28 +113,47 @@ namespace Game
 
                 cooldown.Time = cooldown.Duration;
                 
-                IsEnemyPredicate condition = new(
+                IsEnemyPredicate enemyCondition = new(
                     entity,
                     team.Value,
                     TeamLookup,
                     HealthLookup
                 );
-
-                target.Value = SpatialHashUtility.FindClosest(
-                    GridMap,
-                    transform.Position,
-                    detectionRadius.Value,
-                    CellSize,
-                    in condition,
-                    in TransformLookup
+                
+                IsFriendPredicate friendCondition = new(
+                    entity,
+                    team.Value,
+                    TeamLookup,
+                    HealthLookup,
+                    MaxHealthLookup
                 );
+
+                target.Value = team.Value == detectionTeam.TargetTeam
+                    ? SpatialHashUtility.FindClosest(
+                        GridMap,
+                        transform.Position,
+                        detectionRadius.Value,
+                        CellSize,
+                        in friendCondition,
+                        in TransformLookup)
+                    : SpatialHashUtility.FindClosest(
+                        GridMap,
+                        transform.Position,
+                        detectionRadius.Value,
+                        CellSize,
+                        in enemyCondition,
+                        in TransformLookup);
 
                 if (target.Value != Entity.Null) 
                     return;
                 
-                target.Value = team.Value == TeamType.Blue
-                    ? RedTeamCastle
-                    : BlueTeamCastle;
+                target.Value = team.Value == detectionTeam.TargetTeam
+                    ? team.Value == TeamType.Blue
+                        ? BlueTeamCastle
+                        : RedTeamCastle
+                    : team.Value == TeamType.Blue
+                        ? RedTeamCastle
+                        : BlueTeamCastle;
             }
         }
     }
