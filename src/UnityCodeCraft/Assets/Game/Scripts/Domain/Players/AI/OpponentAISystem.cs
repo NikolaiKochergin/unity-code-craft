@@ -1,4 +1,5 @@
 ﻿using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 
@@ -18,52 +19,60 @@ namespace Game
         public void OnUpdate(ref SystemState state)
         {
             foreach ((
-                         EnabledRefRW<SelectedUnit> selectedUnitEnabled, 
-                         EnabledRefRW<UnitBuyRequest> unitToBuyRequestEnabled, 
-                         RefRW<SelectedUnit> selectedUnitValue,
-                         RefRW<UnitBuyRequest> unitToBuyRequestValue,
-                         RefRW<Money> money)
+                         RefRW<SelectedUnit> selectedUnit,
+                         RefRW<Money> money,
+                         Entity entity)
                      in SystemAPI.Query<
-                         EnabledRefRW<SelectedUnit>,
-                         EnabledRefRW<UnitBuyRequest>,
                          RefRW<SelectedUnit>,
-                         RefRW<UnitBuyRequest>,
                          RefRW<Money>>()
-                         .WithPresent<SelectedUnit>())
+                         .WithPresent<SelectedUnit>()
+                         .WithEntityAccess())
             {
-                if (selectedUnitEnabled.ValueRO)
+                if (!SystemAPI.IsComponentEnabled<SelectedUnit>(entity))
                 {
-                    foreach ((
-                                 RefRO<UnitConfig> config,
-                                 RefRO<UnitPrice> price) 
-                             in SystemAPI.Query<
-                                 RefRO<UnitConfig>,
-                                 RefRO<UnitPrice>>())
-                    {
-                        if(selectedUnitValue.ValueRO.Name != config.ValueRO.Name)
-                            continue;
-                        
-                        if (money.ValueRO.Value < price.ValueRO.Value)
-                            continue;
-
-                        selectedUnitEnabled.ValueRW = false;
-                        unitToBuyRequestEnabled.ValueRW = true;
-                        unitToBuyRequestValue.ValueRW.PrefabName = config.ValueRO.Name;
-                    }
+                    ChooseRandomUnit(ref state, entity, ref selectedUnit.ValueRW);
+                    continue;
                 }
-                else
-                {
-                    foreach (RefRO<UnitConfig> config in SystemAPI.Query<RefRO<UnitConfig>>())
-                    {
-                        if (_random.NextBool())
-                            continue;
 
-                        selectedUnitEnabled.ValueRW = true;
-                        selectedUnitValue.ValueRW.Name = config.ValueRO.Name;
+                foreach ((
+                             RefRO<UnitConfig> config, 
+                             RefRO<UnitPrice> price) 
+                         in SystemAPI.Query<
+                             RefRO<UnitConfig>,
+                             RefRO<UnitPrice>>())
+                {
+                    if(config.ValueRO.Name != selectedUnit.ValueRO.Name)
+                        continue;
+                    
+                    if(money.ValueRO.Value < price.ValueRO.Value)
                         break;
-                    }
+                    
+                    SystemAPI.SetComponentEnabled<UnitBuyRequest>(entity, true);
+                    SystemAPI.SetComponent(entity, new UnitBuyRequest { PrefabName = config.ValueRO.Name });
+                    SystemAPI.SetComponentEnabled<SelectedUnit>(entity, false);
+                    
+                    break;
                 }
             }
+        }
+
+        private void ChooseRandomUnit(
+            ref SystemState state, 
+            Entity entity, 
+            ref SelectedUnit selectedUnit)
+        {
+            NativeList<UnitConfig> units = new NativeList<UnitConfig>(Allocator.Temp);
+
+            foreach (RefRO<UnitConfig> config in SystemAPI.Query<RefRO<UnitConfig>>()) 
+                units.Add(config.ValueRO);
+            
+            if(units.Length == 0)
+                return;
+            
+            var index = _random.NextInt(units.Length);
+            selectedUnit.Name = units[index].Name;
+            
+            SystemAPI.SetComponentEnabled<SelectedUnit>(entity, true);
         }
     }
 }
