@@ -33,6 +33,7 @@ namespace Game
                 {
                     Entity config = CreateAdditionalEntity(TransformUsageFlags.None);
                     AddComponent(config, new UnitConfig { Name = card.Name });
+                    AddComponent(config, new Team { Value = authoring._team });
                     AddComponent(config, new UnitPrice { Value = card.Price });
                     AddComponent(config, new UnitPrefab { Value = GetEntity(card.Prefab, TransformUsageFlags.Dynamic)});
                 }

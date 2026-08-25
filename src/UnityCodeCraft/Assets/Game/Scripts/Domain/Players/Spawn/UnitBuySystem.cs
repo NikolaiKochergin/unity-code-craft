@@ -13,13 +13,15 @@ namespace Game
                          EnabledRefRW<UnitBuyRequest> unitBuyRequestEnabled, 
                          EnabledRefRW<UnitSpawnRequest> unitSpawnRequestEnabled, 
                          RefRO<UnitBuyRequest> unitBuyRequestValue, 
-                         RefRW<UnitSpawnRequest> unitSpawnRequestValue, 
+                         RefRW<UnitSpawnRequest> unitSpawnRequestValue,
+                         RefRO<Team> playerTeam,
                          RefRW<Money> money)
                      in SystemAPI.Query<
                          EnabledRefRW<UnitBuyRequest>,
                          EnabledRefRW<UnitSpawnRequest>,
                          RefRO<UnitBuyRequest>,
                          RefRW<UnitSpawnRequest>,
+                         RefRO<Team>,
                          RefRW<Money>>()
                          .WithPresent<UnitSpawnRequest>()
                          .WithPresent<Player>())
@@ -28,13 +30,18 @@ namespace Game
                 
                 foreach ((
                              RefRO<UnitConfig> unitConfig, 
+                             RefRO<Team> configTeam, 
                              RefRO<UnitPrice> price, 
                              RefRO<UnitPrefab> prefab) 
                          in SystemAPI.Query<
                              RefRO<UnitConfig>,
+                             RefRO<Team>,
                              RefRO<UnitPrice>,
                              RefRO<UnitPrefab>>())
                 {
+                    if(playerTeam.ValueRO.Value != configTeam.ValueRO.Value)
+                        continue;
+                    
                     if(unitBuyRequestValue.ValueRO.PrefabName != unitConfig.ValueRO.Name)
                         continue;
                         
