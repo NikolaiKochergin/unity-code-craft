@@ -14,6 +14,10 @@ namespace Game
                     .With<Unit>()
                     .With<Team>()
                     
+                    
+                    // Heal
+                    .WithBuffer<TakeHealRequest>()
+                    .WithBuffer<TakeHealEvent>()
                 ;
             }
         }

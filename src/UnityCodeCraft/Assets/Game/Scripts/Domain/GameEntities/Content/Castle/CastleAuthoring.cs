@@ -22,7 +22,11 @@ namespace Game
                     .With(new MaxHealth { Value = authoring._maxHealth })
                     // Take Damage
                     .WithBuffer<TakeDamageRequest>()
-                    .WithBuffer<TakeDamageEvent>();
+                    .WithBuffer<TakeDamageEvent>()
+                    // Heal
+                    .WithBuffer<TakeHealRequest>()
+                    .WithBuffer<TakeHealEvent>()
+                ;
         }
     }
 }

@@ -63,6 +63,9 @@ namespace Game
                     .With(new AttackDistance{ Value = authoring._attackDistance })
                     .With(new Damage{ Value = authoring._damage })
                     .With<TargetEntity>()
+                    // Heal
+                    .WithBuffer<TakeHealRequest>()
+                    .WithBuffer<TakeHealEvent>()
                 ;
         }
     }

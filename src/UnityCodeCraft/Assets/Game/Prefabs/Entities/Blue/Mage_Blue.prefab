@@ -79,8 +79,13 @@ MonoBehaviour:
   _deathDuration: 1
   _moveSpeed: 4
   _rotationSpeed: 360
-  _healDistance: 0
-  _heal: 0
+  _maxMana: 8
+  _restoreManaDuration: 3
+  _fireCooldown: 2
+  _fireDelay: 0.4667
+  _healManaCost: 2
+  _healDistance: 16
+  _healValue: 5
 --- !u!114 &5409329614771395543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3ada487859d40d597dcabf5d30ecfb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.UnitAIAuthoring
-  _detectionRadius: 12
+  _detectionRadius: 30
   _detectionInterval: 0.1
   _detectionTeam: 0
 --- !u!1001 &2374355558966095868

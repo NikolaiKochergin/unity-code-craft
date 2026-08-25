@@ -15,11 +15,19 @@ namespace Game
         [Header("Movement")]
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _rotationSpeed;
+
+        [Header("Mana")] 
+        [SerializeField] private int _maxMana;
+        [SerializeField] private float _restoreManaDuration;
         
+        [Header("Fire")] 
+        [SerializeField] private float _fireCooldown;
+        [SerializeField] private float _fireDelay;
         
         [Header("Heal")] 
+        [SerializeField] private int _healManaCost;
         [SerializeField] private float _healDistance;
-        [SerializeField] private int _heal;
+        [SerializeField] private int _healValue;
         
         public class MageBaker : Baker<MageAuthoring>
         {
@@ -42,11 +50,24 @@ namespace Game
                     .With<MoveEvent>()
                     .With(new MoveSpeed { Value = authoring._moveSpeed })
                     .With(new RotationSpeed { Value = authoring._rotationSpeed })
-                
-                    // Attack
-                    // .With(new AttackDistance{ Value = authoring._attackDistance })
-                    // .With(new Damage{ Value = authoring._damage })
+                    // Mana
+                    .With(new Mana { Value = authoring._maxMana })
+                    .With(new MaxMana { Value = authoring._maxMana })
+                    .WithEnabled(new ManaRestoreCooldown { Time = authoring._restoreManaDuration, Duration = authoring._restoreManaDuration })
+                    // Fire
+                    .WithEnabled<FireRequest>(false)
+                    .WithEnabled<FireEvent>(false)
+                    .WithEnabled(new FireDelay{ Time = authoring._fireDelay, Duration = authoring._fireDelay }, enabled: false)
+                    .With(new FireCooldown{ Duration = authoring._fireCooldown })
+                    // Heal
+                    .With(new AttackDistance{ Value = authoring._healDistance })
+                    .With(new Heal{ Value = authoring._healValue })
+                    .With(new HealCost{ Value = authoring._healManaCost })
                     .With<TargetEntity>()
+                
+                    // Heal
+                    .WithBuffer<TakeHealRequest>()
+                    .WithBuffer<TakeHealEvent>()
                 ;
         }
     }

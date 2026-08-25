@@ -92,10 +92,10 @@ namespace Game
                          RefRO<Damage> damage,
                          Entity entity)
                      in SystemAPI.Query<
-                             EnabledRefRW<FireDelay>,
-                             RefRW<FireDelay>,
-                             RefRO<FireRequest>,
-                             RefRO<Damage>>()
+                         EnabledRefRW<FireDelay>,
+                         RefRW<FireDelay>,
+                         RefRO<FireRequest>,
+                         RefRO<Damage>>()
                          .WithPresent<Swordman>()
                          .WithPresent<FireRequest>()
                          .WithEntityAccess())

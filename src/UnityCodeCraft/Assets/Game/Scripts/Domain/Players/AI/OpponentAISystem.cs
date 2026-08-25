@@ -61,7 +61,7 @@ namespace Game
             Entity entity, 
             ref SelectedUnit selectedUnit)
         {
-            NativeList<UnitConfig> units = new NativeList<UnitConfig>(Allocator.Temp);
+            NativeList<UnitConfig> units = new(Allocator.Temp);
 
             foreach (RefRO<UnitConfig> config in SystemAPI.Query<RefRO<UnitConfig>>()) 
                 units.Add(config.ValueRO);
