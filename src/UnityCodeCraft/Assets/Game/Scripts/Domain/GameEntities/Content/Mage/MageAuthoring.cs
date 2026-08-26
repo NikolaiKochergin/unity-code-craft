@@ -62,7 +62,7 @@ namespace Game
                     // Heal
                     .With(new AttackDistance{ Value = authoring._healDistance })
                     .With(new Heal{ Value = authoring._healValue })
-                    .With(new HealCost{ Value = authoring._healManaCost })
+                    .With(new SpellCost{ Value = authoring._healManaCost })
                     .With<TargetEntity>()
                 
                     // Heal

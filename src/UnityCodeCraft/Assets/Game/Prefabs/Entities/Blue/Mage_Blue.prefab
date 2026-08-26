@@ -81,7 +81,7 @@ MonoBehaviour:
   _rotationSpeed: 360
   _maxMana: 8
   _restoreManaDuration: 3
-  _fireCooldown: 2
+  _fireCooldown: 5
   _fireDelay: 0.4667
   _healManaCost: 2
   _healDistance: 16

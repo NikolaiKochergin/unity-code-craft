@@ -1,4 +1,4 @@
-﻿using SampleGame;
+using SampleGame;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -7,37 +7,36 @@ using Unity.Transforms;
 namespace Game
 {
     [BurstCompile]
-    public partial struct MageFireSystem : ISystem
+    public partial struct WarlockFireSystem : ISystem
     {
         private ComponentLookup<LocalTransform> _transformLookup;
+        private ComponentLookup<Mana> _manaLookup;
+        private ComponentLookup<SpellCost> _spellCostLookup;
         private ComponentLookup<Team> _teamLookup;
         private ComponentLookup<FireDelay> _fireDelayLookup;
         private ComponentLookup<FireEvent> _fireEventLookup;
-        private ComponentLookup<Mana> _manaLookup;
-        private ComponentLookup<SpellCost> _healCostLookup;
-        private BufferLookup<TakeHealRequest> _takeHealRequests;
+        private BufferLookup<TakeDamageRequest> _takeDamageRequests;
 
         public void OnCreate(ref SystemState state)
         {
             _transformLookup = SystemAPI.GetComponentLookup<LocalTransform>(isReadOnly: true);
+            _manaLookup = SystemAPI.GetComponentLookup<Mana>(isReadOnly: false);
+            _spellCostLookup = SystemAPI.GetComponentLookup<SpellCost>(isReadOnly: true);
             _teamLookup = SystemAPI.GetComponentLookup<Team>(isReadOnly: true);
             _fireDelayLookup = SystemAPI.GetComponentLookup<FireDelay>(isReadOnly: false);
             _fireEventLookup = SystemAPI.GetComponentLookup<FireEvent>(isReadOnly: false);
-            _manaLookup = SystemAPI.GetComponentLookup<Mana>(isReadOnly: false);
-            _healCostLookup = SystemAPI.GetComponentLookup<SpellCost>(isReadOnly: true);
-            _takeHealRequests = SystemAPI.GetBufferLookup<TakeHealRequest>(isReadOnly: false);
+            _takeDamageRequests = SystemAPI.GetBufferLookup<TakeDamageRequest>(isReadOnly: false);
         }
 
-        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             _transformLookup.Update(ref state);
+            _manaLookup.Update(ref state);
+            _spellCostLookup.Update(ref state);
             _teamLookup.Update(ref state);
             _fireDelayLookup.Update(ref state);
             _fireEventLookup.Update(ref state);
-            _manaLookup.Update(ref state);
-            _healCostLookup.Update(ref state);
-            _takeHealRequests.Update(ref state);
+            _takeDamageRequests.Update(ref state);
             
             foreach ((
                          EnabledRefRW<FireRequest> requestEnabled,
@@ -56,7 +55,7 @@ namespace Game
                          RefRO<CurrentHealth>,
                          RefRO<AttackDistance>,
                          RefRW<LocalTransform>>()
-                         .WithPresent<Mage>()
+                         .WithPresent<Warlock>()
                          .WithEntityAccess())
             {
                 // Request
@@ -70,7 +69,7 @@ namespace Game
                     continue;
 
                 RefRW<Mana> mana = _manaLookup.GetRefRW(entity);
-                RefRO<SpellCost> healCost = _healCostLookup.GetRefRO(entity);
+                RefRO<SpellCost> healCost = _spellCostLookup.GetRefRO(entity);
                 
                 if(mana.ValueRO.Value < healCost.ValueRO.Value)
                     continue;
@@ -82,7 +81,7 @@ namespace Game
                     continue;
                 
                 TeamType myTeam = team.ValueRO.Value;
-                if(!_teamLookup.TryGetComponent(target, out Team targetTeam) || targetTeam.Value != myTeam)
+                if(!_teamLookup.TryGetComponent(target, out Team targetTeam) || targetTeam.Value == myTeam)
                     continue;
                 
                 float distance = attackDistance.ValueRO.Value;
@@ -99,19 +98,21 @@ namespace Game
                 cooldown.ValueRW.ResetTime();
                 mana.ValueRW.Value -= healCost.ValueRO.Value;
             }
-
+            
             foreach ((
                          EnabledRefRW<FireDelay> delayEnabled,
                          RefRW<FireDelay> delay,
                          RefRO<FireRequest> requestValue,
-                         RefRO<Heal> heal)
+                         RefRO<Damage> damage,
+                         Entity entity)
                      in SystemAPI.Query<
                          EnabledRefRW<FireDelay>,
                          RefRW<FireDelay>,
                          RefRO<FireRequest>,
-                         RefRO<Heal>>()
-                         .WithPresent<Mage>()
-                         .WithPresent<FireRequest>())
+                         RefRO<Damage>>()
+                         .WithPresent<Warlock>()
+                         .WithPresent<FireRequest>()
+                         .WithEntityAccess())
             {
                 if(delay.ValueRO.IsPlaying())
                     continue;
@@ -119,17 +120,20 @@ namespace Game
                 delayEnabled.ValueRW = false;
                 delay.ValueRW.ResetTime();
                 
+                
+                // TODO: тут нужно прописать логику поиска целей по области
                 Entity target = requestValue.ValueRO.Target;
                 if (target == Entity.Null ||
                     !SystemAPI.Exists(target))
                     continue;
                 
-                if (!_takeHealRequests.TryGetBuffer(target, out DynamicBuffer<TakeHealRequest> requests))
+                if (!_takeDamageRequests.TryGetBuffer(target, out DynamicBuffer<TakeDamageRequest> requests))
                     continue;
 
-                requests.Add(new TakeHealRequest
+                requests.Add(new TakeDamageRequest
                 {
-                    Value = heal.ValueRO.Value,
+                    Damage = damage.ValueRO.Value,
+                    Instigator = entity
                 });
             }
         }
