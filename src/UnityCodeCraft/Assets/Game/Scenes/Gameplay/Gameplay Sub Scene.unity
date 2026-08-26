@@ -1062,6 +1062,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1960890905}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &969227461 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6480648308455456160, guid: 09a84d2719aac2546a75f1c2d3fd70ee,
+    type: 3}
+  m_PrefabInstance: {fileID: 6075334459726365621}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1021957153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,6 +1135,7 @@ MonoBehaviour:
   _money: 5
   _income: 1
   _tickCooldown: 1
+  _castle: {fileID: 969227461}
 --- !u!114 &1092256878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1248,6 +1255,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2619070213038625120, guid: 15826ef750efc4a44920c6f7c2648e78,
     type: 3}
   m_PrefabInstance: {fileID: 1192664214}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1238123632 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7078650420259860604, guid: a82794b5cab41ef46a2ba26c65e32fc1,
+    type: 3}
+  m_PrefabInstance: {fileID: 423135267784322734}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1589448940
 GameObject:
@@ -1836,6 +1849,7 @@ MonoBehaviour:
   _money: 5
   _income: 1
   _tickCooldown: 1
+  _castle: {fileID: 1238123632}
 --- !u!114 &2129668635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1901,6 +1915,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1378457182323828351, guid: a82794b5cab41ef46a2ba26c65e32fc1,
+        type: 3}
+      propertyPath: _deathDuration
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3495723828963739675, guid: a82794b5cab41ef46a2ba26c65e32fc1,
         type: 3}
@@ -2014,7 +2033,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 423135267784322734}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1238123632}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ef644f9f48d4b5e9719da7d48d38368, type: 3}
@@ -2096,12 +2115,17 @@ PrefabInstance:
     - target: {fileID: 2950644733472697251, guid: 09a84d2719aac2546a75f1c2d3fd70ee,
         type: 3}
       propertyPath: _maxHealth
-      value: 500
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2950644733472697251, guid: 09a84d2719aac2546a75f1c2d3fd70ee,
         type: 3}
       propertyPath: _currentHealth
-      value: 500
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2950644733472697251, guid: 09a84d2719aac2546a75f1c2d3fd70ee,
+        type: 3}
+      propertyPath: _deathDuration
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4471176170290514848, guid: 09a84d2719aac2546a75f1c2d3fd70ee,
         type: 3}
@@ -2195,7 +2219,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 6075334459726365621}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 969227461}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ef644f9f48d4b5e9719da7d48d38368, type: 3}

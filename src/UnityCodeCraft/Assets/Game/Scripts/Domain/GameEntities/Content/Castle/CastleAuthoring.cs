@@ -6,9 +6,13 @@ namespace Game
 {
     public class CastleAuthoring : MonoBehaviour
     {
+        [Header("Health")]
         [SerializeField] private TeamType _team;
         [SerializeField] private int _currentHealth;
         [SerializeField] private int _maxHealth;
+        
+        [Header("Death")] 
+        [SerializeField] private float _deathDuration;
 
         public class CastleBaker : Baker<CastleAuthoring>
         {
@@ -23,6 +27,9 @@ namespace Game
                     // Take Damage
                     .WithBuffer<TakeDamageRequest>()
                     .WithBuffer<TakeDamageEvent>()
+                    // Death
+                    .WithEnabled<DeathEvent>(false)
+                    .WithEnabled(new DeathCooldown{ Duration = authoring._deathDuration }, enabled: false)
                     // Heal
                     .WithBuffer<TakeHealRequest>()
                     .WithBuffer<TakeHealEvent>()
