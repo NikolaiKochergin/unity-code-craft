@@ -37,6 +37,7 @@ Transform:
   - {fileID: 2262541237631166645}
   - {fileID: 1463180516903595179}
   - {fileID: 5306908465344004425}
+  - {fileID: 2066232065273086482}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6037911438376519723
@@ -79,6 +80,69 @@ MonoBehaviour:
   _team: 0
   _currentHealth: 50
   _maxHealth: 50
+  _deathDuration: 0
+--- !u!1 &6485067426653714725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2066232065273086482}
+  - component: {fileID: 560893715964819594}
+  - component: {fileID: 1848397665873157600}
+  m_Layer: 0
+  m_Name: FX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2066232065273086482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6485067426653714725}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6854243942854037326}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &560893715964819594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6485067426653714725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f767837c9ab9473c893a6f9267ae7911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.TakeDamageSfxAuthoring
+  _takeDamageSfx:
+    _bank: {fileID: 11400000, guid: 90f934a2858aee148851fee0c2cd67c6, type: 2}
+    _event: TakeDamageBuilding
+    _key: Unit.TakeDamageBuilding
+--- !u!114 &1848397665873157600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6485067426653714725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08d92f9660064354a0961a3c049b9ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.ModelEntityAuthoring
+  _modelEntity: {fileID: 981802089077454633}
 --- !u!1001 &2441520716458160203
 PrefabInstance:
   m_ObjectHideFlags: 0

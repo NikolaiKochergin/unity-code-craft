@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c59311ed514f81aa536eb0ff91b011, type: 3}
+  m_Name: Unit
+  m_EditorClassIdentifier: AudioEngine::Modules.AudioEvents.AudioBank
+  _identifier: Unit
+  _events:
+  - name: Death
+    value: {fileID: 11400000, guid: 14c83b93a857fd946a020fded85d612e, type: 2}
+  - name: TakeDamageUnit
+    value: {fileID: 11400000, guid: 832861e9fe3013245adbfce4ee702d48, type: 2}
+  - name: TakeDamageBuilding
+    value: {fileID: 11400000, guid: 50ab1f159f8c65641b8267fcd24d8f58, type: 2}
+  - name: AttackBow
+    value: {fileID: 11400000, guid: e8fbc926c432b194a86eafcecafc7444, type: 2}
+  - name: AttackSword
+    value: {fileID: 11400000, guid: 75b340954a7e15f459f7dffda884e0b1, type: 2}
+  _boolParameters: []
+  _intParameters: []
+  _floatParameters: []
+  _callbacks: []
+  _namespace: Modules.AudioEvents
+  _directoryPath: Assets/Audio

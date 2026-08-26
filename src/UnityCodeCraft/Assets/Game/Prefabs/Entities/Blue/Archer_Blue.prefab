@@ -514,6 +514,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6309055570608520943}
+    - targetCorrespondingSourceObject: {fileID: 6837061768053742933, guid: c041548ad5f52014d8ae27de23cf2764,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4365332845414063269}
   m_SourcePrefab: {fileID: 100100000, guid: c041548ad5f52014d8ae27de23cf2764, type: 3}
 --- !u!4 &7906830424652367556 stripped
 Transform:
@@ -552,3 +556,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.ModelEntityAuthoring
   _modelEntity: {fileID: 8692576747330127513}
+--- !u!114 &4365332845414063269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7906830424652367557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f767837c9ab9473c893a6f9267ae7911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.TakeDamageSfxAuthoring
+  _takeDamageSfx:
+    _bank: {fileID: 11400000, guid: 90f934a2858aee148851fee0c2cd67c6, type: 2}
+    _event: TakeDamageUnit
+    _key: Unit.TakeDamageUnit

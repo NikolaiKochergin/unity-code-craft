@@ -2863,7 +2863,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: dcc17b202dc284487a282178aaf9098d, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2961,7 +2961,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: AudioEngine::Modules.AudioEvents.AudioSystem
   initOnAwake: 1
-  initialBanks: []
+  initialBanks:
+  - {fileID: 11400000, guid: 90f934a2858aee148851fee0c2cd67c6, type: 2}
 --- !u!81 &895386440
 AudioListener:
   m_ObjectHideFlags: 0

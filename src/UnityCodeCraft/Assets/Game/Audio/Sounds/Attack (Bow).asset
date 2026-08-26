@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 966df4d6c0dc4ec0b855f32895a79c89, type: 3}
+  m_Name: Attack (Bow)
+  m_EditorClassIdentifier: AudioEngine::Modules.AudioEvents.AudioEvent
+  _poolable: 1
+  output: {fileID: 0}
+  loop: 0
+  startTime:
+    rid: 976653905203298395
+  duration: 0.408
+  overrideDuration: 0
+  spatialBlend: 0
+  clip:
+    rid: 976653905203298396
+  pitch:
+    rid: 976653905203298397
+  volume:
+    rid: 976653905203298398
+  reverbZoneMix:
+    rid: 976653905203298399
+  rolloffMode: 0
+  rolloffCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  minDistance:
+    rid: 976653905203298400
+  maxDistance:
+    rid: 976653905203298401
+  dopplerLevel:
+    rid: 976653905203298402
+  spread:
+    rid: 976653905203298403
+  behaviours: []
+  actions: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 976653905203298395
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 0
+    - rid: 976653905203298396
+      type: {class: ClipConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        clip: {fileID: 8300000, guid: 240baeffce55e5943bffbca94f5ad07a, type: 3}
+    - rid: 976653905203298397
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 1
+    - rid: 976653905203298398
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 1
+    - rid: 976653905203298399
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 1
+    - rid: 976653905203298400
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 1
+    - rid: 976653905203298401
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 500
+    - rid: 976653905203298402
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 0.8
+    - rid: 976653905203298403
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 0
