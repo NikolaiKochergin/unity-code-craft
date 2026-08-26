@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using SampleGame;
-using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
 
@@ -9,12 +6,13 @@ namespace Game
 {
     public class GameOverScreenPresenter : MonoBehaviour
     {
-        
+        [SerializeField] private GameObject _winScreen;
+        [SerializeField] private GameObject _loseScreen;
         
         private EntityManager _entityManager;
-        private EntityQuery _playerQuery;
-        private Entity _playerEntity;
-        private Entity _opponentEntity;
+        private EntityQuery _gameResultQuery;
+
+        private bool _isInitialized;
 
         private IEnumerator Start()
         {
@@ -23,50 +21,31 @@ namespace Game
             
             _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
             
-            _playerQuery = _entityManager.CreateEntityQuery(
-                ComponentType.ReadOnly<Player>(),
-                ComponentType.ReadOnly<Team>());
-
-            while (_playerEntity == Entity.Null)
-            {
-                _playerEntity = FindPlayer(TeamType.Blue);
-                yield return null;
-            }
+            _gameResultQuery = _entityManager.CreateEntityQuery(
+                ComponentType.ReadOnly<GameResult>());
             
-            while (_opponentEntity == Entity.Null)
-            {
-                _opponentEntity = FindPlayer(TeamType.Red);
-                yield return null;
-            }
+            _isInitialized = true;
         }
 
         private void Update()
         {
-            if (!_entityManager.Exists(_opponentEntity))
-            {
-                Debug.LogWarning("<color=green> Win");
-                enabled = false;
-                return;
-            }
-
-            if (_entityManager.Exists(_playerEntity)) 
+            if(!_isInitialized)
                 return;
             
-            Debug.LogWarning("<color=green> Lose");
-            enabled = false;
-        }
+            if(_gameResultQuery.IsEmpty)
+                return;
+            
+            GameResult result = _gameResultQuery.GetSingleton<GameResult>();
 
-        private Entity FindPlayer(TeamType team)
-        {
-            using NativeArray<Entity> entities = _playerQuery.ToEntityArray(Allocator.Temp);
-
-            foreach (Entity entity in entities)
+            switch (result.Value)
             {
-                Team playerTeam = _entityManager.GetComponentData<Team>(entity);
-                if (playerTeam.Value == team)
-                    return entity;
+                case GameResultType.Win:
+                    _winScreen.SetActive(true);
+                    break;
+                case GameResultType.Lose:
+                    _loseScreen.SetActive(true);
+                    break;
             }
-            return Entity.Null;
         }
     }
 }

@@ -1,3 +1,4 @@
+using SampleGame;
 using Unity.Burst;
 using Unity.Entities;
 
@@ -18,6 +19,9 @@ namespace Game
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
+            if(SystemAPI.HasSingleton<GameResult>())
+                return;
+            
             _healthLookup.Update(ref state);
             
             EntityCommandBuffer ecb = SystemAPI
@@ -35,12 +39,16 @@ namespace Game
             {
                 Entity castleEntity = player.ValueRO.Castle;
 
-                if (castleEntity != Entity.Null &&
+                bool isCastleAlive =
+                    castleEntity != Entity.Null &&
                     SystemAPI.Exists(castleEntity) &&
-                    (!_healthLookup.TryGetComponent(castleEntity, out var health) || health.Value > 0)) 
+                    _healthLookup.TryGetComponent(
+                        castleEntity,
+                        out CurrentHealth health) &&
+                    health.Value > 0;
+
+                if(isCastleAlive)
                     continue;
-                
-                ecb.DestroyEntity(entity);
 
                 foreach ((
                              RefRO<Team> unitTeam, 
@@ -58,6 +66,18 @@ namespace Game
                     EnabledRefRW<IncomeTickCooldown> income 
                     in SystemAPI.Query<EnabledRefRW<IncomeTickCooldown>>()) 
                     income.ValueRW = false;
+
+                Entity gameResultEntity = ecb.CreateEntity();
+                ecb.AddComponent(gameResultEntity, new GameResult
+                {
+                    Value = team.ValueRO.Value == TeamType.Red 
+                        ? GameResultType.Win 
+                        : GameResultType.Lose
+                });
+                
+                ecb.DestroyEntity(entity);
+                
+                break;
             }
         }
     }
