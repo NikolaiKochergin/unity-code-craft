@@ -26,7 +26,7 @@ namespace Game
 
         [Header("Attack")] [SerializeField] private int _spellCost;
         [SerializeField] private float _attackDistance;
-        [SerializeField] private float _attackRadius;
+        [SerializeField] private float _damageRadius = 8;
         [SerializeField] private int _damage;
         
         public class WarlockBaker : Baker<WarlockAuthoring>
@@ -65,9 +65,10 @@ namespace Game
                     .WithBuffer<TakeHealEvent>()
                     // Attack
                     .With(new AttackDistance{ Value = authoring._attackDistance })
-                    .With(new AttackRadius{ Value = authoring._attackRadius })
+                    .With(new DamageRadius{ Value = authoring._damageRadius })
                     .With(new Damage{ Value = authoring._damage })
                     .With(new SpellCost{ Value = authoring._spellCost })
+                    .WithEnabled<AreaDamageRequest>(false)
                     .With<TargetEntity>()
                 ;
             }

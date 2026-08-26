@@ -101,15 +101,17 @@ namespace Game
             
             foreach ((
                          EnabledRefRW<FireDelay> delayEnabled,
+                         EnabledRefRW<AreaDamageRequest> areaDamageRequestEnabled,
+                         RefRW<AreaDamageRequest> areaDamageRequestValue,
                          RefRW<FireDelay> delay,
                          RefRO<FireRequest> requestValue,
-                         RefRO<Damage> damage,
                          Entity entity)
                      in SystemAPI.Query<
                          EnabledRefRW<FireDelay>,
+                         EnabledRefRW<AreaDamageRequest>,
+                         RefRW<AreaDamageRequest>,
                          RefRW<FireDelay>,
-                         RefRO<FireRequest>,
-                         RefRO<Damage>>()
+                         RefRO<FireRequest>>()
                          .WithPresent<Warlock>()
                          .WithPresent<FireRequest>()
                          .WithEntityAccess())
@@ -120,21 +122,16 @@ namespace Game
                 delayEnabled.ValueRW = false;
                 delay.ValueRW.ResetTime();
                 
-                
-                // TODO: тут нужно прописать логику поиска целей по области
                 Entity target = requestValue.ValueRO.Target;
                 if (target == Entity.Null ||
                     !SystemAPI.Exists(target))
                     continue;
-                
-                if (!_takeDamageRequests.TryGetBuffer(target, out DynamicBuffer<TakeDamageRequest> requests))
-                    continue;
 
-                requests.Add(new TakeDamageRequest
-                {
-                    Damage = damage.ValueRO.Value,
-                    Instigator = entity
-                });
+                RefRO<LocalTransform> targetTransform = _transformLookup.GetRefRO(target);
+
+                areaDamageRequestEnabled.ValueRW = true;
+                areaDamageRequestValue.ValueRW.Position = targetTransform.ValueRO.Position; 
+                areaDamageRequestValue.ValueRW.Instigator = entity;
             }
         }
     }
