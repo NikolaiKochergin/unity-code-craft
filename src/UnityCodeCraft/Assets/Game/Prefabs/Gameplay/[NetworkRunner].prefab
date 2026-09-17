@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5271770978341589591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8582770677466696111}
+  - component: {fileID: 4844803651724689512}
+  m_Layer: 0
+  m_Name: <Player>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8582770677466696111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5271770978341589591}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8234186983930691228}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4844803651724689512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5271770978341589591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5dc7d9001d412193f28fa8be0cd411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.InputPolling
+  _networkEvents: {fileID: 8915506999737654804}
+  _inputMap: {fileID: 11400000, guid: a8a59987d8ac0034988988860a958d2f, type: 2}
 --- !u!1 &5843785152257727222
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,6 +59,7 @@ GameObject:
   - component: {fileID: 8915506999737654804}
   - component: {fileID: 1771853592453163069}
   - component: {fileID: 5641000355134194572}
+  - component: {fileID: -5862672535341435404}
   m_Layer: 0
   m_Name: '[NetworkRunner]'
   m_TagString: Untagged
@@ -32,7 +79,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8582770677466696111}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8397643819374020930
@@ -141,6 +189,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Fusion.Extensions::Fusion.NetworkRunnerContext
   _parentInstallerPrefabsUnderContext: 0
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: -5862672535341435404}
   _installerPrefabs: []
   _autoRun: 1
+--- !u!114 &-5862672535341435404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5843785152257727222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34657653401743f28ce57b12d8d394c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.NetworkRunnerInstaller
