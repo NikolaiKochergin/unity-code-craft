@@ -19,6 +19,7 @@ namespace Game
         
         [Networked, OnChangedRender(nameof(MoveDirectionChanged))]
         public Vector3 MoveDirection { get; private set; }
+        public bool IsMoving => MoveDirection != Vector3.zero;
 
         public event Action OnStateChanged;
 

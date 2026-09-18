@@ -10,21 +10,15 @@ namespace Game
         private NetworkButtons _previousButtons { get; set; }
 
         private PlayerCharacterProvider _characterProvider;
-
-
+        
         [Inject]
         public void Construct(PlayerCharacterProvider characterProvider)
         {
             _characterProvider = characterProvider;
         }
-
-        // TODO: дописать передвижение и разобраться что не так со стейт ауторити
         
         public override void FixedUpdateNetwork()
         {
-            
-            
-            
             NetworkObject character = _characterProvider.Character;
             if(character == null)
                 return;

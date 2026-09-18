@@ -28,9 +28,7 @@ namespace Game
             }
             else
             {
-                
-                // TODO: дописать тут корректное назначение индекса точки спауна
-                Transform spawnPoint = _spawnPointService.GetSpawnPoint(Runner.LocalPlayer.AsIndex);
+                Transform spawnPoint = _spawnPointService.GetSpawnPoint(player.AsIndex % _spawnPointService.Count);
                 characterProvider.Character = Runner.Spawn(
                     _characterPrefab,
                     spawnPoint.position,
