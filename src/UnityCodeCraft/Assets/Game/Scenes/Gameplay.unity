@@ -36277,6 +36277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1428945950}
+  - component: {fileID: 1428945951}
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
@@ -36300,6 +36301,19 @@ Transform:
   - {fileID: 963194228}
   m_Father: {fileID: 1433310354}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1428945951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428945949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa019f81db6d46d6b18bb0116cd5186a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.PlayerCameraView
+  _pivot: {fileID: 1428945950}
 --- !u!1 &1433310353
 GameObject:
   m_ObjectHideFlags: 0
@@ -36309,6 +36323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1433310354}
+  - component: {fileID: 1433310355}
   m_Layer: 0
   m_Name: '[Camera]'
   m_TagString: Untagged
@@ -36332,6 +36347,19 @@ Transform:
   - {fileID: 1428945950}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1433310355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433310353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d31fde81df83483787c84e8a52d53f59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.PlayerCameraInstaller
+  _playerCameraView: {fileID: 1428945951}
 --- !u!4 &1435209555 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 677367341945422435, guid: a4cd458af09655443839cde63bed5f7b, type: 3}
@@ -53443,6 +53471,22 @@ PrefabInstance:
       propertyPath: SortKey
       value: 2888086373
       objectReference: {fileID: 0}
+    - target: {fileID: 8010611471188291670, guid: 07a387b535fb559408e23e93414c291c, type: 3}
+      propertyPath: _monoInstallers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010611471188291670, guid: 07a387b535fb559408e23e93414c291c, type: 3}
+      propertyPath: _installerPrefabs.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010611471188291670, guid: 07a387b535fb559408e23e93414c291c, type: 3}
+      propertyPath: '_monoInstallers.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1433310355}
+    - target: {fileID: 8010611471188291670, guid: 07a387b535fb559408e23e93414c291c, type: 3}
+      propertyPath: '_installerPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1433310355}
     - target: {fileID: 8041420041717226016, guid: 07a387b535fb559408e23e93414c291c, type: 3}
       propertyPath: _spawnPointService
       value: 

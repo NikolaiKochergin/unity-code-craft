@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5493230855599609299}
   - component: {fileID: 4649181715525637570}
   - component: {fileID: -5958471739179058958}
-  - component: {fileID: 6075119104129346105}
+  - component: {fileID: 6005815703996897757}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -79,7 +79,7 @@ MonoBehaviour:
   Flags: 262402
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 6075119104129346105}
+  - {fileID: 6005815703996897757}
   - {fileID: -5958471739179058958}
   - {fileID: 252651021526692577}
   ForceRemoteRenderTimeframe: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   _angularSpeed: 720
   _lookRotation: 1
   _MoveDirection: {x: 0, y: 0, z: 0}
---- !u!114 &6075119104129346105
+--- !u!114 &6005815703996897757
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
