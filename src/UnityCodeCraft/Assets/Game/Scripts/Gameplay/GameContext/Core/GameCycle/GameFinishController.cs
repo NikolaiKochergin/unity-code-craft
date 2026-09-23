@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Fusion;
+using UnityEngine;
 using Zenject;
 
 namespace Game
@@ -20,11 +21,17 @@ namespace Game
         {
             if (_gameCycle.State != GameState.Run) 
                 return;
-            
-            if(IsGameWon()) 
+
+            if (IsGameWon())
+            {
                 _gameCycle.WinGame();
-            else if(IsGameLost())
+                Debug.Log("<color=green>GAME WON</color>");
+            }
+            else if (IsGameLost())
+            {
                 _gameCycle.LoseGame();
+                Debug.Log("<color=red>GAME LOSE</color>");
+            }
         }
 
         public void AddPlayerTeamUnit(NetworkObject unit) => 
@@ -35,15 +42,17 @@ namespace Game
 
         private bool IsGameWon()
         {
-            foreach (HealthComponent unit in _playerTeamUnits.Values)
-                if(unit.IsDead)
-                    return true;
+
             
             return false;
         }
 
         private bool IsGameLost()
         {
+            foreach (HealthComponent unit in _playerTeamUnits.Values)
+                if(unit.IsDead)
+                    return true;
+            
             return false;
         }
     }
