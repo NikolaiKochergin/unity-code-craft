@@ -86,6 +86,7 @@ MonoBehaviour:
   - {fileID: -5958471739179058958}
   - {fileID: 2472966714248999351}
   - {fileID: 252651021526692577}
+  - {fileID: 669605990153200944}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &5937413705753683388
 MonoBehaviour:
@@ -242,6 +243,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7731064993723319110}
   - component: {fileID: 252651021526692577}
+  - component: {fileID: 669605990153200944}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -278,6 +280,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.MoveAnimComponent
   _moveComponent: {fileID: -5958471739179058958}
+  _animator: {fileID: 7705296155306509989}
+--- !u!114 &669605990153200944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8624199316096552311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd6188a3a9aa4343b51eda6f13cbc45c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.HealthAnimComponent
+  _healthComponent: {fileID: 2472966714248999351}
   _animator: {fileID: 7705296155306509989}
 --- !u!1001 &7763271436874195781
 PrefabInstance:
