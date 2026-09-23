@@ -32343,6 +32343,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7135167256177450538, guid: c4c58b8d98fa4874c8902ced03964d3c, type: 3}
+      propertyPath: SortKey
+      value: 3024374862
+      objectReference: {fileID: 0}
     - target: {fileID: 7687135409742009684, guid: c4c58b8d98fa4874c8902ced03964d3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -32388,6 +32392,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4c58b8d98fa4874c8902ced03964d3c, type: 3}
+--- !u!114 &1317087207 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3878471630001786717, guid: c4c58b8d98fa4874c8902ced03964d3c, type: 3}
+  m_PrefabInstance: {fileID: 1317087206}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d498e548e6f41d1910101d382ec8d44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.Portal
 --- !u!4 &1317087209 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7687135409742009684, guid: c4c58b8d98fa4874c8902ced03964d3c, type: 3}
@@ -53487,6 +53502,10 @@ PrefabInstance:
       propertyPath: '_installerPrefabs.Array.data[0]'
       value: 
       objectReference: {fileID: 1433310355}
+    - target: {fileID: 8041420041717226016, guid: 07a387b535fb559408e23e93414c291c, type: 3}
+      propertyPath: _portal
+      value: 
+      objectReference: {fileID: 1317087207}
     - target: {fileID: 8041420041717226016, guid: 07a387b535fb559408e23e93414c291c, type: 3}
       propertyPath: _spawnPointService
       value: 

@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 5480370286973988358}
   - component: {fileID: 6118742937381778627}
   - component: {fileID: 1228733599245893492}
+  - component: {fileID: 7389861348768199682}
+  - component: {fileID: 7972283525839827437}
+  - component: {fileID: -6026398505720978025}
   m_Layer: 0
   m_Name: '[GameContext]'
   m_TagString: Untagged
@@ -69,6 +72,9 @@ MonoBehaviour:
   _playerManager: {fileID: 6118742937381778627}
   _characterSpawner: {fileID: 1228733599245893492}
   _spawnPointService: {fileID: 0}
+  _gameCycle: {fileID: 7389861348768199682}
+  _gameStartController: {fileID: 7972283525839827437}
+  _gameFinishController: {fileID: -6026398505720978025}
 --- !u!114 &5480370286973988358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,6 +95,9 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 6118742937381778627}
   - {fileID: 1228733599245893492}
+  - {fileID: 7389861348768199682}
+  - {fileID: 7972283525839827437}
+  - {fileID: -6026398505720978025}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &6118742937381778627
 MonoBehaviour:
@@ -118,6 +127,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game::Game.PlayerCharacterSpawner
   _characterPrefab:
     RawGuidValue: 343607b7b8f81424d97be5e61fc664d6
+--- !u!114 &7389861348768199682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004472131309267828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8587986a3b2c4daba6d492b94d3ea664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.GameCycle
+  _State: 0
+--- !u!114 &7972283525839827437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004472131309267828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09296269af6b4200b45d7869bad5b540, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.GameStartController
+  _startPlayerCount: 2
+--- !u!114 &-6026398505720978025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004472131309267828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b61e95ff8294714baa98260d8154f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.GameFinishController
 --- !u!1 &5466400640869194120
 GameObject:
   m_ObjectHideFlags: 0
