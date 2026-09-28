@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 1771853592453163069}
   - component: {fileID: 5641000355134194572}
   - component: {fileID: -5862672535341435404}
+  - component: {fileID: 8011477573441669469}
   m_Layer: 0
   m_Name: '[NetworkRunner]'
   m_TagString: Untagged
@@ -81,6 +82,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8582770677466696111}
+  - {fileID: 4675743785303438224}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8397643819374020930
@@ -205,3 +207,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34657653401743f28ce57b12d8d394c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.NetworkRunnerInstaller
+  _hitboxManager: {fileID: 8011477573441669469}
+  _killNotificator: {fileID: 7241898541411967378}
+--- !u!114 &8011477573441669469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5843785152257727222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -49887739, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.HitboxManager
+  BVHDepth: 0
+  BVHNodes: 0
+  TotalHitboxes: 0
+--- !u!1 &8610544347347472269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4675743785303438224}
+  - component: {fileID: 7241898541411967378}
+  m_Layer: 0
+  m_Name: <Kill>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4675743785303438224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8610544347347472269}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8234186983930691228}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7241898541411967378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8610544347347472269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06760293274c4606b68122126d523f03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.KillNotificator

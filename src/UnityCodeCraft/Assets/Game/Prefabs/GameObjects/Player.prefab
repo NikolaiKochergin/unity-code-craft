@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6005815703996897757}
   - component: {fileID: -5958471739179058958}
   - component: {fileID: 2472966714248999351}
+  - component: {fileID: 5688253915934294589}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -85,6 +86,7 @@ MonoBehaviour:
   - {fileID: 5937413705753683388}
   - {fileID: -5958471739179058958}
   - {fileID: 2472966714248999351}
+  - {fileID: 5688253915934294589}
   - {fileID: 252651021526692577}
   - {fileID: 669605990153200944}
   ForceRemoteRenderTimeframe: 0
@@ -171,6 +173,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.HealthComponent
   _Current: 5
+--- !u!114 &5688253915934294589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404067246571692652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5b238323a24b398d29a3e7b602adf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.TakeDamageComponent
+  _healthComponent: {fileID: 2472966714248999351}
 --- !u!1 &2051941622203599037
 GameObject:
   m_ObjectHideFlags: 0
