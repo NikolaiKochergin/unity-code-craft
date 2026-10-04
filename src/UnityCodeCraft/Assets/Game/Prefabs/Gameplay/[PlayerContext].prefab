@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 430458342445266251}
   - component: {fileID: 4288733932621820525}
   - component: {fileID: 5019362402712630632}
+  - component: {fileID: 530302644746821036}
   m_Layer: 0
   m_Name: '[PlayerContext]'
   m_TagString: Untagged
@@ -34,6 +35,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2653437315011227080}
   - {fileID: 3007438604379362252}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -57,6 +59,8 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 4288733932621820525}
   - {fileID: 5019362402712630632}
+  - {fileID: 530302644746821036}
+  - {fileID: 7010081100746563552}
   - {fileID: 6272365344779356117}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &2059588314404148243
@@ -116,6 +120,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.PlayerCharacterProvider
   _Character: {fileID: 0}
+--- !u!114 &530302644746821036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832376533194790517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 905be377208b4b79a4e17c91fb003826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.ProjectileWorld
+  _projectileConfig: {fileID: 11400000, guid: d208e11f980cfba4396010650bc2be28, type: 2}
+  Length: 32
 --- !u!1 &3513090104129982309
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,3 +178,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896f4119599c4b60bcbeca86ded8b2bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.PlayerCameraPresenter
+--- !u!1 &8187360200086158438
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2653437315011227080}
+  - component: {fileID: 7010081100746563552}
+  m_Layer: 0
+  m_Name: <Projectiles>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2653437315011227080
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8187360200086158438}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2855499511401890746}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7010081100746563552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8187360200086158438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d044f22957bf4526b0ecd08a494e6ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.ProjectileWorldView
+  _world: {fileID: 530302644746821036}
+  _container: {fileID: 2653437315011227080}

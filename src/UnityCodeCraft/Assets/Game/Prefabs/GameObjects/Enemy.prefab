@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3484277882467739485}
   - component: {fileID: 6567034695613458246}
   - component: {fileID: 5433745593524548685}
+  - component: {fileID: 5069819724016695651}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -83,6 +84,7 @@ MonoBehaviour:
   - {fileID: 3484277882467739485}
   - {fileID: 6567034695613458246}
   - {fileID: 5433745593524548685}
+  - {fileID: 5069819724016695651}
   - {fileID: 228863256306245043}
   - {fileID: 1305880883284020337}
   - {fileID: 77751801295249112}
@@ -143,6 +145,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.TakeDamageComponent
   _healthComponent: {fileID: 3484277882467739485}
+--- !u!114 &5069819724016695651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011030080782938114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 092bb948334040a8879e4474f11eaba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.WeaponComponent
+  _Current: {fileID: 77751801295249112}
+  _meleeFireDelay: 0.25
+  _rangeFireDelay: 0.2
 --- !u!1 &5653502658082345064
 GameObject:
   m_ObjectHideFlags: 0

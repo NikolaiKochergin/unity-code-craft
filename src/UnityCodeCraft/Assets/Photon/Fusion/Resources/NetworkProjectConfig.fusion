@@ -4,7 +4,7 @@
     "HubMode": 2,
     "PeerMode": 0,
     "LagCompensation": {
-        "Enabled": false,
+        "Enabled": true,
         "HitboxBufferLengthInMs": 200,
         "HitboxDefaultCapacity": 512,
         "CachedStaticCollidersSize": 64
@@ -12,7 +12,7 @@
     "PhysicsForecast": false,
     "EnqueueIncompleteSynchronousSpawns": false,
     "InvokeRenderMode": 1,
-    "NetworkIdIsObjectName": false,
+    "NetworkIdIsObjectName": true,
     "HideNetworkObjectInactivityGuard": false,
     "AllowClientServerModesInWebGL": false,
     "AllowMasterClientReassignRequest": false,
@@ -67,7 +67,7 @@
         "GameReliableChannelSendCount": 1
     },
     "HostMigration": {
-        "EnableAutoUpdate": false,
+        "EnableAutoUpdate": true,
         "UpdateDelay": 10
     },
     "EncryptionConfig": {
@@ -101,6 +101,6 @@
     ],
     "UseSerializableDictionary": true,
     "NullChecksForNetworkedProperties": true,
-    "CheckRpcAttributeUsage": false,
-    "CheckNetworkedPropertiesBeingEmpty": false
+    "CheckRpcAttributeUsage": true,
+    "CheckNetworkedPropertiesBeingEmpty": true
 }

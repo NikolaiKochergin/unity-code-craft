@@ -41,6 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6395485873527495649}
+  - component: {fileID: 3056856768759282562}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -64,6 +65,21 @@ Transform:
   - {fileID: 6577828191405725432}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3056856768759282562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5134814337769119832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 101dbe4292494d7ca6dbadfcb7ec66e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.DirectProjectileView
+  _renderers:
+  - {fileID: 2165320043705481988}
+  _config: {fileID: 11400000, guid: d208e11f980cfba4396010650bc2be28, type: 2}
 --- !u!1001 &5613671800019741609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -148,5 +164,10 @@ PrefabInstance:
 --- !u!4 &1029054681378635883 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4872942100104817602, guid: c072151c13fbbd44abdd9c52ec652636, type: 3}
+  m_PrefabInstance: {fileID: 5613671800019741609}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2165320043705481988 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6046935553462816941, guid: c072151c13fbbd44abdd9c52ec652636, type: 3}
   m_PrefabInstance: {fileID: 5613671800019741609}
   m_PrefabAsset: {fileID: 0}
