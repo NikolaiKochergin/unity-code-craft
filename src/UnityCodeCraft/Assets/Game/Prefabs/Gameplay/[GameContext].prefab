@@ -18,6 +18,8 @@ GameObject:
   - component: {fileID: 7972283525839827437}
   - component: {fileID: -6026398505720978025}
   - component: {fileID: 158112266395086447}
+  - component: {fileID: 373389064510807868}
+  - component: {fileID: 6752316674120537528}
   m_Layer: 0
   m_Name: '[GameContext]'
   m_TagString: Untagged
@@ -71,11 +73,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.GameContextInstaller
   _playerManager: {fileID: 6118742937381778627}
-  _characterSpawner: {fileID: 1228733599245893492}
+  _playerCharacterSpawner: {fileID: 1228733599245893492}
   _gameCycle: {fileID: 7389861348768199682}
   _gameStartController: {fileID: 7972283525839827437}
   _gameFinishController: {fileID: -6026398505720978025}
   _moneyStorage: {fileID: 158112266395086447}
+  _enemyManager: {fileID: 373389064510807868}
+  _enemyCharacterSpawner: {fileID: 6752316674120537528}
 --- !u!114 &5480370286973988358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +104,8 @@ MonoBehaviour:
   - {fileID: 7972283525839827437}
   - {fileID: -6026398505720978025}
   - {fileID: 158112266395086447}
+  - {fileID: 373389064510807868}
+  - {fileID: 6752316674120537528}
   - {fileID: 6173664031731602383}
   - {fileID: 5327483139632078258}
   ForceRemoteRenderTimeframe: 0
@@ -182,6 +188,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.MoneyStorage
   _Money: 0
+--- !u!114 &373389064510807868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004472131309267828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f295377843648bdb534d002c9a6f042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.EnemyManager
+--- !u!114 &6752316674120537528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004472131309267828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48c290d6003348f4b3b2fdc6110b5ba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.EnemyCharacterSpawner
+  _enemyConfig: {fileID: 11400000, guid: 59764f096cccf124b8b56eeeb5dc6bf7, type: 2}
 --- !u!1 &5466400640869194120
 GameObject:
   m_ObjectHideFlags: 0

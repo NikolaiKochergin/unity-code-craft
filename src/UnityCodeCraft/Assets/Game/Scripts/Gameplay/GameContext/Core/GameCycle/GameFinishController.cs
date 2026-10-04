@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Fusion;
+﻿using Fusion;
 using UnityEngine;
 using Zenject;
 
@@ -7,53 +6,41 @@ namespace Game
 {
     public sealed class GameFinishController : NetworkBehaviour
     {
-        private readonly Dictionary<NetworkObject, HealthComponent> _playerTeamUnits = new();
-        
         private GameCycle _gameCycle;
+        private KillNotificator _killNotificator;
 
         [Inject]
-        public void Construct(GameCycle gameCycle)
+        public void Construct(
+            GameCycle gameCycle,
+            KillNotificator killNotificator)
         {
+            _killNotificator = killNotificator;
             _gameCycle = gameCycle;
         }
 
-        public override void FixedUpdateNetwork()
+        public override void Spawned() => 
+            _killNotificator.OnKilled += OnKilled;
+
+        public override void Despawned(NetworkRunner _, bool __)
         {
-            if (_gameCycle.State != GameState.Run) 
+            _killNotificator.OnKilled -= OnKilled;
+        }
+
+        private void OnKilled(KillArgs args)
+        {
+            NetworkObject victim = Runner.GetPlayerObject(args.Victim);
+            if(victim == null)
                 return;
 
-            if (IsGameWon())
+            if (victim.GetBehaviour<Character>() || victim.GetBehaviour<Portal>())
             {
-                _gameCycle.WinGame();
-                Debug.Log("<color=green>GAME WON</color>");
-            }
-            else if (IsGameLost())
-            {
-                _gameCycle.LoseGame();
                 Debug.Log("<color=red>GAME LOSE</color>");
+                _gameCycle.LoseGame();
+                return;
             }
-        }
-
-        public void AddPlayerTeamUnit(NetworkObject unit) => 
-            _playerTeamUnits.Add(unit, unit.GetBehaviour<HealthComponent>());
-
-        public void RemovePlayerTeamUnit(NetworkObject unit) => 
-            _playerTeamUnits.Remove(unit);
-
-        private bool IsGameWon()
-        {
-
             
-            return false;
-        }
-
-        private bool IsGameLost()
-        {
-            foreach (HealthComponent unit in _playerTeamUnits.Values)
-                if(unit.IsDead)
-                    return true;
-            
-            return false;
+            // _gameCycle.WinGame();
+            // Debug.Log("<color=green>GAME WON</color>");
         }
     }
 }

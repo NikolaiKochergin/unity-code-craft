@@ -4,19 +4,16 @@ using Zenject;
 
 namespace Game
 {
-    public class PlayerCharacterSpawner : NetworkBehaviour
+    public sealed class PlayerCharacterSpawner : NetworkBehaviour
     {
         [SerializeField] private NetworkPrefabRef _characterPrefab;
         
         private SpawnPointService _spawnPointService;
-        private GameFinishController _gameFinishController;
 
         [Inject]
         public void Construct(
-            [Inject(Id = Tags.Player)] SpawnPointService spawnPointService,
-            GameFinishController gameFinishController)
+            [Inject(Id = Tags.Player)] SpawnPointService spawnPointService)
         {
-            _gameFinishController = gameFinishController;
             _spawnPointService = spawnPointService;
         }
         
@@ -40,8 +37,6 @@ namespace Game
                     player
                 );
             }
-            
-            _gameFinishController.AddPlayerTeamUnit(characterProvider.Character);
         }
 
         public void DespawnCharacter(NetworkObject playerObject)
@@ -50,8 +45,6 @@ namespace Game
             NetworkObject character = characterProvider.Character;
             if(!character)
                 return;
-            
-            _gameFinishController.RemovePlayerTeamUnit(character);
             
             characterProvider.Character = null;
             Runner.Despawn(character);

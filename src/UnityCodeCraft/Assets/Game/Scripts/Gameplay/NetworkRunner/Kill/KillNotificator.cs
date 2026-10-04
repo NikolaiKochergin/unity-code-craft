@@ -9,7 +9,7 @@ namespace Game
         
         public void NotifyAboutKill(PlayerRef killer, PlayerRef victim)
         {
-            KillArgs args = new KillArgs(killer, victim);
+            KillArgs args = new(killer, victim);
             NotifyAboutKill(args);
         }
 
