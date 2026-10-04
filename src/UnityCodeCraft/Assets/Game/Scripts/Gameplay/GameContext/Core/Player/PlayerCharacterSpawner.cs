@@ -13,7 +13,7 @@ namespace Game
 
         [Inject]
         public void Construct(
-            SpawnPointService spawnPointService,
+            [Inject(Id = Tags.Player)] SpawnPointService spawnPointService,
             GameFinishController gameFinishController)
         {
             _gameFinishController = gameFinishController;

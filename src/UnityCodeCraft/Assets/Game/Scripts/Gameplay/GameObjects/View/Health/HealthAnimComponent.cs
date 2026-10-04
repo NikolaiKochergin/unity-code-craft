@@ -13,7 +13,7 @@ namespace Game
         public override void Spawned()
         {
             _healthComponent.OnHealthChanged += OnHealthChanged;
-            OnHealthChanged();
+            OnHealthChanged(_healthComponent.Current, _healthComponent.Current);
         }
 
         public override void Despawned(NetworkRunner runner, bool hasState)
@@ -21,7 +21,7 @@ namespace Game
             _healthComponent.OnHealthChanged -= OnHealthChanged;
         }
 
-        private void OnHealthChanged()
+        private void OnHealthChanged(int _, int __)
         {
             if(_healthComponent.IsDead)
                 _animator.SetTrigger(IsDead);
