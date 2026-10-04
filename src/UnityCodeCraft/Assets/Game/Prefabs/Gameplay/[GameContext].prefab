@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7389861348768199682}
   - component: {fileID: 7972283525839827437}
   - component: {fileID: -6026398505720978025}
+  - component: {fileID: 158112266395086447}
   m_Layer: 0
   m_Name: '[GameContext]'
   m_TagString: Untagged
@@ -74,6 +75,7 @@ MonoBehaviour:
   _gameCycle: {fileID: 7389861348768199682}
   _gameStartController: {fileID: 7972283525839827437}
   _gameFinishController: {fileID: -6026398505720978025}
+  _moneyStorage: {fileID: 158112266395086447}
 --- !u!114 &5480370286973988358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,7 +99,9 @@ MonoBehaviour:
   - {fileID: 7389861348768199682}
   - {fileID: 7972283525839827437}
   - {fileID: -6026398505720978025}
+  - {fileID: 158112266395086447}
   - {fileID: 6173664031731602383}
+  - {fileID: 5327483139632078258}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &6118742937381778627
 MonoBehaviour:
@@ -165,6 +169,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b61e95ff8294714baa98260d8154f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.GameFinishController
+--- !u!114 &158112266395086447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004472131309267828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 793cbf314d5b483b91c62636c5346812, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.MoneyStorage
+  _Money: 0
 --- !u!1 &5466400640869194120
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,6 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3113219325107334642}
   - component: {fileID: 6173664031731602383}
+  - component: {fileID: 5327483139632078258}
   m_Layer: 0
   m_Name: <UI>
   m_TagString: Untagged
@@ -209,3 +227,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a8aea1f312249eeb30d9ef436c5723b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.PortalHealthPresenter
+--- !u!114 &5327483139632078258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5466400640869194120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c0454bdc0f421d90ecc8969bef43f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.MoneyStoragePresenter
