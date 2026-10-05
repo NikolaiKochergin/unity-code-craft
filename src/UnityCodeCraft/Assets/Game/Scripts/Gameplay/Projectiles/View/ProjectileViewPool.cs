@@ -31,6 +31,7 @@ namespace Game
         {
             internal IInstantiator _instantiator;
 
+            [SerializeField]
             private ProjectileView _prefab;
 
             private readonly Stack<ProjectileView> _available = new();

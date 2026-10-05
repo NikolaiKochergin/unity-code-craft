@@ -1,5 +1,6 @@
 ﻿using Fusion;
 using UnityEngine;
+using Zenject;
 
 namespace Game
 {
@@ -11,10 +12,16 @@ namespace Game
         private ProjectileViewPool _projectileViewPool;
         private ProjectileView[] _projectileViews;
 
+        [Inject]
+        public void Construct(ProjectileViewPool projectileViewPool)
+        {
+            _projectileViewPool = projectileViewPool;
+        }
+
         public override void Spawned()
         {
             _projectileViews = new ProjectileView[_world.Length];
-            _projectileViewPool = Runner.GetBehaviour<ProjectileViewPool>();
+            // _projectileViewPool = Runner.GetBehaviour<ProjectileViewPool>();
         }
 
         public override void Render()

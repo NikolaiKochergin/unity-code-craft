@@ -15,6 +15,8 @@ namespace Game
         [SerializeField] private MoneyStorage _moneyStorage;
         [SerializeField] private EnemyManager _enemyManager;
         [SerializeField] private EnemyCharacterSpawner _enemyCharacterSpawner;
+        
+        [SerializeField] private ProjectileViewPool _projectilePool;
 
         public override void InstallBindings()
         {
@@ -28,6 +30,8 @@ namespace Game
             Container.Bind<MoneyStorage>().FromInstance(_moneyStorage).AsSingle();
             Container.Bind<EnemyManager>().FromInstance(_enemyManager).AsSingle();
             Container.Bind<EnemyCharacterSpawner>().FromInstance(_enemyCharacterSpawner).AsSingle();
+            
+            Container.Bind<ProjectileViewPool>().FromInstance(_projectilePool).AsSingle();
         }
     }
 }

@@ -41,6 +41,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3113219325107334642}
+  - {fileID: 6550084015405027453}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8010611471188291670
@@ -80,6 +81,7 @@ MonoBehaviour:
   _moneyStorage: {fileID: 158112266395086447}
   _enemyManager: {fileID: 373389064510807868}
   _enemyCharacterSpawner: {fileID: 6752316674120537528}
+  _projectilePool: {fileID: 3699336498353149613}
 --- !u!114 &5480370286973988358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f295377843648bdb534d002c9a6f042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.EnemyManager
+  _spawnInterval: 2
 --- !u!114 &6752316674120537528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +216,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.EnemyCharacterSpawner
   _enemyConfig: {fileID: 11400000, guid: 59764f096cccf124b8b56eeeb5dc6bf7, type: 2}
+--- !u!1 &3155405327252336325
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6550084015405027453}
+  - component: {fileID: 3699336498353149613}
+  m_Layer: 0
+  m_Name: <Projectiles>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6550084015405027453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3155405327252336325}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1642053956024571119}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3699336498353149613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3155405327252336325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5367640c3fe844d0af456d382f7d7a8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.ProjectileViewPool
+  _container: {fileID: 6550084015405027453}
+  _pool:
+    _prefab: {fileID: 3056856768759282562, guid: e144f4fff9860bb4c836bc81264974ff, type: 3}
 --- !u!1 &5466400640869194120
 GameObject:
   m_ObjectHideFlags: 0

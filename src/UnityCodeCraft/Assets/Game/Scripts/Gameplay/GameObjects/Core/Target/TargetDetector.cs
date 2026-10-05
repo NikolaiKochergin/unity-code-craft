@@ -4,27 +4,30 @@ using UnityEngine;
 
 namespace Game
 {
-    public sealed class MeleeWeapon : Weapon
+    public sealed class TargetDetector : NetworkBehaviour
     {
         private static readonly List<LagCompensatedHit> HitsBuffer = new();
         
-        [SerializeField] private Transform _firePoint;
-        [SerializeField] private float _fireRadius = 0.5f;
-        [SerializeField] private int _damage = 1;
-        [SerializeField] private float _cooldown = 1;
+        [SerializeField] private Transform _detectionPoint;
+        [SerializeField] private float _detectionRadius = 0.5f;
         [SerializeField] private LayerMask _layerMask;
-        
-        [Networked]
-        private TickTimer CooldownTimestamp { get; set; }
-        
-        public override bool CanFire() => 
-            CooldownTimestamp.ExpiredOrNotRunning(Runner);
 
-        public override void Fire()
+        private readonly List<NetworkObject> _targets = new();
+        
+        public IReadOnlyList<NetworkObject> Targets => _targets;
+        
+        public bool HasTarget()
         {
+            Scan();
+            return _targets.Count > 0;
+        }
+
+        public void Scan()
+        {
+            _targets.Clear();
             int count = Runner.LagCompensation.OverlapSphere(
-                _firePoint.position,
-                _fireRadius,
+                _detectionPoint.position,
+                _detectionRadius,
                 Object.InputAuthority,
                 HitsBuffer,
                 _layerMask,
@@ -32,7 +35,7 @@ namespace Game
                 clearHits: true,
                 QueryTriggerInteraction.Ignore
             );
-
+            
             for (int i = 0; i < count; i++)
             {
                 LagCompensatedHit hit = HitsBuffer[i];
@@ -41,23 +44,21 @@ namespace Game
                     continue;
                 
                 NetworkObject other = hitbox.GetComponentInParent<NetworkObject>();
-                if (other != null && other.TryGetBehaviour(out HealthComponent health) && health.IsAlive
-                    && other.TryGetBehaviour(out TakeDamageComponent takeDamageComponent))
+                if (other != null && other.TryGetBehaviour(out HealthComponent health) && health.IsAlive)
                 {
-                    takeDamageComponent.TakeDamage(new TakeDamageArgs(Object.InputAuthority, _damage));
+                    _targets.Add(other);
                     break;
                 }
-                
-                CooldownTimestamp = TickTimer.CreateFromSeconds(Runner, _cooldown);
             }
         }
-        
+
+
         private void OnDrawGizmosSelected()
         {
-            if (_firePoint != null)
+            if (_detectionPoint != null)
             {
-                Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(_firePoint.position, _fireRadius);
+                Gizmos.color = Color.darkOrange;
+                Gizmos.DrawWireSphere(_detectionPoint.position, _detectionRadius);
             }
         }
     }

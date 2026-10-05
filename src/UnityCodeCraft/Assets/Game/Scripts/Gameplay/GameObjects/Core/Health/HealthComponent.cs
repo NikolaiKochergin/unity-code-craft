@@ -7,7 +7,6 @@ namespace Game
     public sealed class HealthComponent : NetworkBehaviour
     {
         public delegate void HealthChangeHandler(int previous, int current);
-
         
         [Networked, OnChangedRender(nameof(InvokeHealthChanged))]
         public int Current { get; private set; } = 5;

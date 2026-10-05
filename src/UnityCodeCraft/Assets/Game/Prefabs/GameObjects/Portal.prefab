@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4685958131008381072}
   - component: {fileID: 6680971215970858813}
   - component: {fileID: 974440108189074973}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: floor_decoration_A (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1442122064758237538}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 6871746847897447783}
   - component: {fileID: 8241597712408691799}
   - component: {fileID: 2947818327297866761}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: obj_milestone_C (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 7135167256177450538}
   - component: {fileID: 3878471630001786717}
   - component: {fileID: 8408327441919251142}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Portal
   m_TagString: Portal
   m_Icon: {fileID: 0}
@@ -319,3 +319,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.HealthComponent
   _Current: 10
+  _max: 10
