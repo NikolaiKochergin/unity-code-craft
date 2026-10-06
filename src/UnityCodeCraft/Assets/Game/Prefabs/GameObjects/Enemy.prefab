@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.MoveToTargetComponent
   _moveComponent: {fileID: 6567034695613458246}
-  _reachDistance: 0.05
+  _reachDistance: 0.5
   _target: {fileID: 0}
 --- !u!114 &7689485807204655865
 MonoBehaviour:
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.TargetDetector
   _detectionPoint: {fileID: 2214871453147694112}
-  _detectionRadius: 0.5
+  _detectionRadius: 1.4
   _layerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.MeleeWeapon
   _firePoint: {fileID: 2214871453147694112}
-  _fireRadius: 0.5
+  _fireRadius: 1.5
   _damage: 1
   _cooldown: 1
   _layerMask:

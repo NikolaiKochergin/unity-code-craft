@@ -31,6 +31,11 @@ namespace Game
             if(_healthComponent.IsDead)
                 Runner.Despawn(Object);
         }
+        
+        private void FixedUpdate()
+        {
+            _weaponComponent.StartFire();
+        }
 
         bool MoveComponent.ICondition.IsMet() => 
             _healthComponent.IsAlive;

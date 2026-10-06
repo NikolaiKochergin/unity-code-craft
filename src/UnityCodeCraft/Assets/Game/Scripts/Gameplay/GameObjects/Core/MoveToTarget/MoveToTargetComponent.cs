@@ -11,7 +11,7 @@ namespace Game
         }
         
         [SerializeField] private MoveComponent _moveComponent;
-        [SerializeField] private float _reachDistance = 0.05f;
+        [SerializeField] private float _reachDistance = 0.5f;
         [SerializeField] private Transform _target;
         
         private ICondition _condition;
@@ -35,6 +35,8 @@ namespace Game
             
             if(delta.sqrMagnitude > _reachDistance * _reachDistance)
                 _moveComponent.Move(delta.normalized);
+            else
+                _moveComponent.Stop();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Fusion;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game
@@ -14,6 +15,7 @@ namespace Game
 
         private readonly List<NetworkObject> _targets = new();
         
+        [ShowInInspector]
         public IReadOnlyList<NetworkObject> Targets => _targets;
         
         public bool HasTarget()
