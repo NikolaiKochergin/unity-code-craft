@@ -19,6 +19,17 @@ namespace Game
             _moveComponent.SetCondition(this);
             _moveToTargetComponent.SetCondition(this);
             _weaponComponent.SetCondition(this);
+
+            _healthComponent.OnHealthChanged += OnHealthChanged;
+        }
+
+        public override void Despawned(NetworkRunner _, bool __) => 
+            _healthComponent.OnHealthChanged -= OnHealthChanged;
+
+        private void OnHealthChanged(int _, int __)
+        {
+            if(_healthComponent.IsDead)
+                Runner.Despawn(Object);
         }
 
         bool MoveComponent.ICondition.IsMet() => 
