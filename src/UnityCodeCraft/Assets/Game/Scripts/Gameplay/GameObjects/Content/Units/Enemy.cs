@@ -43,7 +43,10 @@ namespace Game
         bool MoveToTargetComponent.ICondition.IsMet() => 
             _healthComponent.IsAlive;
 
-        bool WeaponComponent.ICondition.IsMet() => 
-            _healthComponent.IsAlive && _targetDetector.HasTarget();
+        bool WeaponComponent.ICondition.IsMet()
+        {
+            _targetDetector.Scan();
+            return _healthComponent.IsAlive && _targetDetector.HasTarget;
+        }
     }
 }

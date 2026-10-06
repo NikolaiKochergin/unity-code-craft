@@ -18,10 +18,23 @@ namespace Game
         [ShowInInspector]
         public IReadOnlyList<NetworkObject> Targets => _targets;
         
-        public bool HasTarget()
+        public bool HasTarget => _targets.Count > 0;
+
+        public bool TryGetNearestTarget(out NetworkObject nearestTarget)
         {
-            Scan();
-            return _targets.Count > 0;
+            nearestTarget = null;
+            float nearestDistanceSqr = float.MaxValue;
+            foreach (NetworkObject target in _targets)
+            {
+                float distanceSqr = (target.transform.position - _detectionPoint.position).sqrMagnitude;
+                if (distanceSqr > nearestDistanceSqr)
+                    continue;
+                
+                nearestDistanceSqr = distanceSqr;
+                nearestTarget = target;
+            }
+
+            return nearestTarget;
         }
 
         public void Scan()

@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 5688253915934294589}
   - component: {fileID: 3481657433815911385}
   - component: {fileID: 5266978744128517321}
+  - component: {fileID: 7723403333774314875}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -124,6 +125,7 @@ MonoBehaviour:
   - {fileID: 5688253915934294589}
   - {fileID: 3481657433815911385}
   - {fileID: 5266978744128517321}
+  - {fileID: 7723403333774314875}
   - {fileID: 252651021526692577}
   - {fileID: 669605990153200944}
   - {fileID: 4235317132188483059}
@@ -144,6 +146,7 @@ MonoBehaviour:
   _healthComponent: {fileID: 2472966714248999351}
   _moveComponent: {fileID: -5958471739179058958}
   _weaponComponent: {fileID: 3481657433815911385}
+  _targetDetector: {fileID: 7723403333774314875}
 --- !u!114 &6005815703996897757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +263,23 @@ MonoBehaviour:
   GizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   Hitboxes:
   - {fileID: 5581456149701520188}
+--- !u!114 &7723403333774314875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404067246571692652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 856c6ac2d61e43eba1cae25cd1128250, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.TargetDetector
+  _detectionPoint: {fileID: 1231370781976454233}
+  _detectionRadius: 6
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &2051941622203599037
 GameObject:
   m_ObjectHideFlags: 0
