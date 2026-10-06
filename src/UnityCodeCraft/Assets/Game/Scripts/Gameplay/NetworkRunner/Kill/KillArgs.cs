@@ -4,10 +4,10 @@ namespace Game
 {
     public readonly struct KillArgs : INetworkStruct
     {
-        public readonly PlayerRef Killer;
-        public readonly PlayerRef Victim;
+        public readonly NetworkId Killer;
+        public readonly NetworkId Victim;
 
-        public KillArgs(PlayerRef killer, PlayerRef victim)
+        public KillArgs(NetworkId killer, NetworkId victim)
         {
             Killer = killer;
             Victim = victim;

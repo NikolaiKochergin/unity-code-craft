@@ -7,7 +7,7 @@ namespace Game
     {
         public event Action<KillArgs> OnKilled;
         
-        public void NotifyAboutKill(PlayerRef killer, PlayerRef victim)
+        public void NotifyAboutKill(NetworkId killer, NetworkId victim)
         {
             KillArgs args = new(killer, victim);
             NotifyAboutKill(args);
@@ -18,7 +18,7 @@ namespace Game
             if(!Runner.IsServer)
                 return;
 
-            if (args.Killer.IsRealPlayer && args.Victim.IsRealPlayer)
+            // if (args.Killer.IsRealPlayer && args.Victim.IsRealPlayer)
                 RpcKill(Runner, args);
         }
 

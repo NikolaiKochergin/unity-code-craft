@@ -44,7 +44,7 @@ namespace Game
                 if (other != null && other.TryGetBehaviour(out HealthComponent health) && health.IsAlive
                     && other.TryGetBehaviour(out TakeDamageComponent takeDamageComponent))
                 {
-                    takeDamageComponent.TakeDamage(new TakeDamageArgs(Object.InputAuthority, _damage));
+                    takeDamageComponent.TakeDamage(new TakeDamageArgs(Object.Id, _damage));
                     break;
                 }
                 

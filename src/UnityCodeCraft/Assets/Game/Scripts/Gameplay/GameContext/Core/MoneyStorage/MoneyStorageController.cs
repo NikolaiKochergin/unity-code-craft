@@ -1,5 +1,4 @@
 ﻿using Fusion;
-using UnityEngine;
 using Zenject;
 
 namespace Game
@@ -26,9 +25,7 @@ namespace Game
 
         private void OnKilled(KillArgs args)
         {
-            Debug.Log(">>>>>>>>>>>>>>>>>> " + args);
-            
-            if (Runner.GetPlayerObject(args.Killer)?.GetBehaviour<Character>())
+            if (Runner.FindObject(args.Killer)?.GetBehaviour<PlayerCharacterProvider>())
                 _moneyStorage.EarnMoney(1);
         }
     }

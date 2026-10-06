@@ -28,7 +28,7 @@ namespace Game
 
         private void OnKilled(KillArgs args)
         {
-            NetworkObject victim = Runner.GetPlayerObject(args.Victim);
+            NetworkObject victim = Runner.FindObject(args.Victim);
             if(victim == null)
                 return;
 

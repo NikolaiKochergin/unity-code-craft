@@ -31,10 +31,10 @@ namespace Game
                 NotifyAboutKill(args.Instigator);
         }
 
-        private void NotifyAboutKill(PlayerRef killer) =>
+        private void NotifyAboutKill(NetworkId killer) =>
             Runner
                 .GetBehaviour<KillNotificator>()
-                .NotifyAboutKill(killer, Object.InputAuthority);
+                .NotifyAboutKill(killer, Object.Id);
 
         public override void Spawned() => 
             _localDamageCount = DamageCount;
