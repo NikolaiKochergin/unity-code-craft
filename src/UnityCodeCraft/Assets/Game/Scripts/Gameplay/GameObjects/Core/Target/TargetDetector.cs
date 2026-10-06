@@ -52,7 +52,6 @@ namespace Game
             }
         }
 
-
         private void OnDrawGizmosSelected()
         {
             if (_detectionPoint != null)

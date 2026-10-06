@@ -61,7 +61,6 @@ GameObject:
   - component: {fileID: 5641000355134194572}
   - component: {fileID: -5862672535341435404}
   - component: {fileID: 8011477573441669469}
-  - component: {fileID: 5448215544272115660}
   m_Layer: 0
   m_Name: '[NetworkRunner]'
   m_TagString: Untagged
@@ -82,7 +81,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3519926962348305639}
   - {fileID: 8582770677466696111}
   - {fileID: 4675743785303438224}
   m_Father: {fileID: 0}
@@ -226,53 +224,6 @@ MonoBehaviour:
   BVHDepth: 0
   BVHNodes: 0
   TotalHitboxes: 0
---- !u!114 &5448215544272115660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5843785152257727222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4c80435f77b4757b717099fdc2353c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Fusion.Extensions::Fusion.NetworkObjectProviderPool
-  DelayIfSceneManagerIsBusy: 1
-  _container: {fileID: 3519926962348305639}
-  _maxPoolCount: 32
-  _initialStackSize: 4
---- !u!1 &6942798264001674809
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3519926962348305639}
-  m_Layer: 0
-  m_Name: <ObjectPool>
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3519926962348305639
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6942798264001674809}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8234186983930691228}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8610544347347472269
 GameObject:
   m_ObjectHideFlags: 0

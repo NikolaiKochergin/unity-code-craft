@@ -26,6 +26,6 @@ namespace Game
             _healthComponent.IsAlive;
 
         bool WeaponComponent.ICondition.IsMet() => 
-            _healthComponent.IsAlive;
+            _healthComponent.IsAlive && !_moveComponent.IsMoving;
     }
 }

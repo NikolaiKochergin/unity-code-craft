@@ -10,21 +10,13 @@ namespace Game
         [SerializeField] private HealthComponent _healthComponent;
         [SerializeField] private Animator _animator;
 
-        public override void Spawned()
-        {
+        public override void Spawned() => 
             _healthComponent.OnHealthChanged += OnHealthChanged;
-            OnHealthChanged(_healthComponent.Current, _healthComponent.Current);
-        }
 
-        public override void Despawned(NetworkRunner runner, bool hasState)
-        {
+        public override void Despawned(NetworkRunner _, bool __) => 
             _healthComponent.OnHealthChanged -= OnHealthChanged;
-        }
 
-        private void OnHealthChanged(int _, int __)
-        {
-            if(_healthComponent.IsDead)
-                _animator.SetTrigger(IsDead);
-        }
+        private void OnHealthChanged(int _, int __) => 
+            _animator.SetBool(IsDead, _healthComponent.IsDead);
     }
 }
