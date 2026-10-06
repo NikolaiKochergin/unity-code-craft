@@ -8,15 +8,9 @@ namespace Game
         [SerializeField] private HealthComponent _healthComponent;
         [SerializeField] private ParticleSpawner _particleSpawner;
 
-        public override void Spawned() => 
-            _healthComponent.OnHealthChanged += OnHealthChanged;
-
-        public override void Despawned(NetworkRunner _, bool __) => 
-            _healthComponent.OnHealthChanged -= OnHealthChanged;
-
-        private void OnHealthChanged(int previous, int current)
+        public override void Despawned(NetworkRunner _, bool __)
         {
-            if(/*previous > 0 && */current <= 0)
+            if(_healthComponent.Current <= 0)
                 _particleSpawner.Play();
         }
     }
