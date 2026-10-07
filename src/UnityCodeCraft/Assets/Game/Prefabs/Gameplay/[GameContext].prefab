@@ -113,6 +113,7 @@ MonoBehaviour:
   - {fileID: 6173664031731602383}
   - {fileID: 5327483139632078258}
   - {fileID: 5861297208122333273}
+  - {fileID: 767924432393697294}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &6118742937381778627
 MonoBehaviour:
@@ -205,7 +206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f295377843648bdb534d002c9a6f042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.EnemyManager
-  _spawnInterval: 2
+  _waveCapacity: 2
+  _spawnInterval: {x: 1, y: 2}
 --- !u!114 &6752316674120537528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,6 +292,7 @@ GameObject:
   - component: {fileID: 6173664031731602383}
   - component: {fileID: 5327483139632078258}
   - component: {fileID: 5861297208122333273}
+  - component: {fileID: 767924432393697294}
   m_Layer: 0
   m_Name: <UI>
   m_TagString: Untagged
@@ -348,5 +351,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3683d522c97648268a37a8204b3dab81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.LosePopupPresenter
-  _losePopup: {fileID: 0}
-  _menuButton: {fileID: 0}
+--- !u!114 &767924432393697294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5466400640869194120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec8dfc69a7304b9a8a3b9ef2229d5c94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.WonPopupPresenter

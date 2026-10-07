@@ -6,13 +6,18 @@ namespace Game
 {
     public class EnemyManager : NetworkBehaviour
     {
-        [SerializeField] private float _spawnInterval = 2f;
+        [SerializeField] private int _waveCapacity = 50;
+        [SerializeField] private Vector2 _spawnInterval;
         
         private NetworkObject _portal;
         private GameCycle _gameCycle;
 
         private float _timer;
         private EnemyCharacterSpawner _spawner;
+
+        private int _enemySpawned;
+        
+        public int WaveCapacity => _waveCapacity;
 
         [Inject]
         public void Construct(
@@ -29,14 +34,17 @@ namespace Game
         {
             if(_gameCycle.State != GameState.Run)
                 return;
+            
+            if(_enemySpawned == _waveCapacity)
+                return;
 
             _timer -= Runner.DeltaTime;
             if (_timer <= 0)
             {
-                _timer = _spawnInterval;
+                _timer = Random.Range(_spawnInterval.x, _spawnInterval.y);
                 NetworkObject enemy = _spawner.SpawnCharacter();
-                
                 enemy.GetBehaviour<MoveToTargetComponent>().SetTarget(_portal.transform);
+                _enemySpawned++;
             }
         }
     }

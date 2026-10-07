@@ -8,12 +8,17 @@ namespace Game
     {
         private GameCycle _gameCycle;
         private KillNotificator _killNotificator;
+        private EnemyManager _enemyManager;
+
+        private int _enemyKilled;
 
         [Inject]
         public void Construct(
             GameCycle gameCycle,
-            KillNotificator killNotificator)
+            KillNotificator killNotificator,
+            EnemyManager enemyManager)
         {
+            _enemyManager = enemyManager;
             _killNotificator = killNotificator;
             _gameCycle = gameCycle;
         }
@@ -38,9 +43,16 @@ namespace Game
                 _gameCycle.LoseGame();
                 return;
             }
-            
-            // _gameCycle.WinGame();
-            // Debug.Log("<color=green>GAME WON</color>");
+
+            if (victim.GetBehaviour<Enemy>())
+            {
+                _enemyKilled++;
+                if(_enemyKilled != _enemyManager.WaveCapacity)
+                    return;
+                
+                _gameCycle.WinGame();
+                Debug.Log("<color=green>GAME WON</color>");
+            }
         }
     }
 }
