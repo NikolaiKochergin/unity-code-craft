@@ -11,7 +11,8 @@ namespace Game
         [SerializeField] private GameCycle _gameCycle;
         [SerializeField] private GameStartController _gameStartController;
         [SerializeField] private GameFinishController _gameFinishController;
-        
+
+        [SerializeField] private Store _store;
         [SerializeField] private MoneyStorage _moneyStorage;
         [SerializeField] private EnemyManager _enemyManager;
         [SerializeField] private EnemyCharacterSpawner _enemyCharacterSpawner;
@@ -27,6 +28,7 @@ namespace Game
             Container.Bind<GameStartController>().FromInstance(_gameStartController).AsSingle();
             Container.Bind<GameFinishController>().FromInstance(_gameFinishController).AsSingle();
 
+            Container.Bind<Store>().FromInstance(_store).AsSingle();
             Container.Bind<MoneyStorage>().FromInstance(_moneyStorage).AsSingle();
             Container.Bind<EnemyManager>().FromInstance(_enemyManager).AsSingle();
             Container.Bind<EnemyCharacterSpawner>().FromInstance(_enemyCharacterSpawner).AsSingle();

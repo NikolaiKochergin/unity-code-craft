@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 373389064510807868}
   - component: {fileID: 6752316674120537528}
   - component: {fileID: 4477675757535674335}
+  - component: {fileID: 657373660686243214}
   m_Layer: 0
   m_Name: '[GameContext]'
   m_TagString: Untagged
@@ -79,6 +80,7 @@ MonoBehaviour:
   _gameCycle: {fileID: 7389861348768199682}
   _gameStartController: {fileID: 7972283525839827437}
   _gameFinishController: {fileID: -6026398505720978025}
+  _store: {fileID: 657373660686243214}
   _moneyStorage: {fileID: 158112266395086447}
   _enemyManager: {fileID: 373389064510807868}
   _enemyCharacterSpawner: {fileID: 6752316674120537528}
@@ -110,6 +112,7 @@ MonoBehaviour:
   - {fileID: 373389064510807868}
   - {fileID: 6752316674120537528}
   - {fileID: 4477675757535674335}
+  - {fileID: 657373660686243214}
   - {fileID: 6173664031731602383}
   - {fileID: 5327483139632078258}
   - {fileID: 5861297208122333273}
@@ -233,6 +236,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d895968ac5b74376a94efc31397aa2b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.MoneyStorageController
+--- !u!114 &657373660686243214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004472131309267828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25c61b3fc8464662a17bb0841ddab879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.Store
+  _minePrice: 100
+  _minePrefab: {fileID: 2383642033501367656, guid: adda297a5e7b0c74890e871f1b9d4171, type: 3}
+  _turretPrice: 200
+  _turretPrefab: {fileID: 4874596960492398582, guid: cd9a4372cefbf3747b263b423d5a0a17, type: 3}
 --- !u!1 &3155405327252336325
 GameObject:
   m_ObjectHideFlags: 0
