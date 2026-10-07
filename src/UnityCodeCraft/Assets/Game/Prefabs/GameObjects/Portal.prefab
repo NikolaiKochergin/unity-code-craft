@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 8408327441919251142}
   - component: {fileID: 4671957464227949631}
   - component: {fileID: 4259883547196766890}
+  - component: {fileID: 2398779654123938847}
   m_Layer: 6
   m_Name: Portal
   m_TagString: Portal
@@ -329,6 +330,7 @@ MonoBehaviour:
   - {fileID: 8408327441919251142}
   - {fileID: 4671957464227949631}
   - {fileID: 4259883547196766890}
+  - {fileID: 2398779654123938847}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &3878471630001786717
 MonoBehaviour:
@@ -387,6 +389,19 @@ MonoBehaviour:
   Offset: {x: 0, y: 0, z: 0}
   GizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   Hitboxes: []
+--- !u!114 &2398779654123938847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2755872164277444644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8cc11e6007456b86980b143fae8260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.Retaliation
+  _takeDamageComponent: {fileID: 4671957464227949631}
 --- !u!1 &6691485729626764412
 GameObject:
   m_ObjectHideFlags: 0

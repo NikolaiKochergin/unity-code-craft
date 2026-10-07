@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f295377843648bdb534d002c9a6f042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.EnemyManager
-  _waveCapacity: 2
+  _waveCapacity: 30
   _spawnInterval: {x: 1, y: 2}
 --- !u!114 &6752316674120537528
 MonoBehaviour:
