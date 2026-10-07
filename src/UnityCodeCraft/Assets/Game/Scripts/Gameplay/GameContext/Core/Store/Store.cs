@@ -28,13 +28,23 @@ namespace Game
 
         public void TryBuyTurretFor(NetworkObject character)
         {
-            Debug.Log("<color=orange>TryBuyTurretFor()</color>");
+            if(_moneyStorage.Money < _turretPrice)
+                return;
+            
+            _moneyStorage.SpendMoney(_turretPrice);
+            SpawnTurretFor(character);
         }
 
         private void SpawnMineFor(NetworkObject character)
         {
             Mine mine = Runner.Spawn(_minePrefab, character.transform.position, Quaternion.identity);
             mine.SetupInstigator(character.Id);
+        }
+
+        private void SpawnTurretFor(NetworkObject character)
+        {
+            Turret turret = Runner.Spawn(_turretPrefab, character.transform.position, Quaternion.identity);
+            turret.SetupInstigator(character.Id);
         }
     }
 }
