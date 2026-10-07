@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 5165767976520336239}
   - component: {fileID: 7689485807204655865}
   - component: {fileID: 4826304445865732866}
+  - component: {fileID: 6953057720404598886}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -94,6 +95,7 @@ MonoBehaviour:
   - {fileID: 5165767976520336239}
   - {fileID: 7689485807204655865}
   - {fileID: 4826304445865732866}
+  - {fileID: 6953057720404598886}
   - {fileID: 228863256306245043}
   - {fileID: 706139730102056099}
   - {fileID: 77751801295249112}
@@ -262,6 +264,19 @@ MonoBehaviour:
   Offset: {x: 0, y: 0, z: 0}
   GizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   Hitboxes: []
+--- !u!114 &6953057720404598886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011030080782938114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c06f339930664f99ab262c0daeb32ebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.MoneyBag
+  _RewardAmount: 0
 --- !u!1 &4189368609806693992
 GameObject:
   m_ObjectHideFlags: 0

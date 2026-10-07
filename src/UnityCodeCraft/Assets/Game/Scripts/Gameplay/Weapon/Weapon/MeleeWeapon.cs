@@ -16,7 +16,10 @@ namespace Game
         
         [Networked]
         private TickTimer CooldownTimestamp { get; set; }
-        
+
+        public override void SetDamage(int value) => _damage = value;
+        public override void SetCooldown(float value) => _cooldown = value;
+
         public override bool CanFire() => 
             CooldownTimestamp.ExpiredOrNotRunning(Runner);
 

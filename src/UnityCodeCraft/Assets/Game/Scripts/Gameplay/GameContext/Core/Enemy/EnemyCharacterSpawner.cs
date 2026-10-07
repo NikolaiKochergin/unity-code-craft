@@ -26,6 +26,16 @@ namespace Game
                 spawnPoint.position,
                 spawnPoint.rotation);
 
+            if(character.TryGetBehaviour(out MoneyBag bag))
+                bag.RewardAmount = Random.Range(_enemyConfig.Reward.x, _enemyConfig.Reward.y + 1);
+
+            Weapon weapon = character.GetComponentInChildren<Weapon>();
+            if (weapon)
+            {
+                weapon.SetDamage(_enemyConfig.Damage);
+                weapon.SetCooldown(_enemyConfig.PlayerDamageCooldown);
+            }
+
             return character;
         }
     }

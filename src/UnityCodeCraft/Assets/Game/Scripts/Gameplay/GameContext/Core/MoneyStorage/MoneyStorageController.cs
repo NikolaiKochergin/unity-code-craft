@@ -25,8 +25,13 @@ namespace Game
 
         private void OnKilled(KillArgs args)
         {
-            if (Runner.FindObject(args.Killer)?.GetBehaviour<PlayerCharacterProvider>())
-                _moneyStorage.EarnMoney(1);
+            if (!Runner.FindObject(args.Killer)?.GetBehaviour<PlayerCharacterProvider>())
+                return;
+
+            int? reward = Runner.FindObject(args.Victim)?.GetBehaviour<MoneyBag>()?.RewardAmount;
+            
+            if(reward.HasValue)
+                _moneyStorage.EarnMoney(reward.Value);
         }
     }
 }
