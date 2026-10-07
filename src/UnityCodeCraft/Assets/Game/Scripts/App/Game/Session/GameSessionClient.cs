@@ -22,7 +22,7 @@ namespace Game
         {
             await Shutdown(ShutdownReason.Ok);
             _runner = CreateRunner();
-
+            
             StartGameResult result = await _runner.StartGame(new StartGameArgs
             {
                 GameMode = gameMode,

@@ -8,11 +8,13 @@ namespace Game
     {
         [SerializeField] private SmoothHealthBar _portalHealthBar;
         [SerializeField] private TMP_Text _moneyAmountText;
+        [SerializeField] private LosePopup _losePopup;
 
         public override void InstallBindings()
         {
             Container.Bind<SmoothHealthBar>().WithId(Tags.Portal).FromInstance(_portalHealthBar).AsSingle();
             Container.Bind<TMP_Text>().WithId(Tags.Player).FromInstance(_moneyAmountText).AsSingle();
+            Container.Bind<LosePopup>().FromInstance(_losePopup).AsSingle();
         }
     }
 }
