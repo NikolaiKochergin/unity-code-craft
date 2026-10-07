@@ -12,6 +12,8 @@ namespace Game
         
         public void SetupInstigator(NetworkId characterId)
         {
+            PlayerRef player = Runner.FindObject(characterId).InputAuthority;
+            Object.AssignInputAuthority(player);
         }
 
         public override void Spawned() => 
