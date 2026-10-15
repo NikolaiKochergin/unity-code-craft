@@ -8,19 +8,19 @@ namespace Game
 {
     public sealed class WonPopupPresenter : NetworkBehaviour
     {
-        private GameSessionClient _sessionClient;
+        private SceneNavigator _sceneNavigator;
         private GameCycle _gameCycle;
         private WonPopup _wonPopup;
 
         [Inject]
         public void Construct(
             WonPopup wonPopup,
-            GameSessionClient sessionClient, 
+            SceneNavigator sceneNavigator,
             GameCycle gameCycle)
         {
             _wonPopup = wonPopup;
             _gameCycle = gameCycle;
-            _sessionClient = sessionClient;
+            _sceneNavigator = sceneNavigator;
         }
 
         public override void Spawned()
@@ -43,12 +43,6 @@ namespace Game
                 _wonPopup.Show();
         }
 
-        private void OnMenuButtonClick() => StopGameAsync().Forget(Debug.LogError);
-
-        private async UniTask StopGameAsync()
-        {
-            await _sessionClient.Shutdown(ShutdownReason.Ok);
-            await SceneManager.LoadSceneAsync(0).ToUniTask();
-        }
+        private void OnMenuButtonClick() => _sceneNavigator.GoToMenu();
     }
 }

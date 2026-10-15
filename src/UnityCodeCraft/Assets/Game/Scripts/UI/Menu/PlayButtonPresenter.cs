@@ -1,5 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
@@ -9,11 +8,11 @@ namespace Game.Scripts.UI.Menu
     {
         [SerializeField] private Button _playButton;
         
-        private GameSessionClient _sessionClient;
+        private SceneNavigator _sceneNavigator;
 
         [Inject]
-        public void Construct(GameSessionClient sessionClient) => 
-            _sessionClient = sessionClient;
+        public void Construct(SceneNavigator sceneNavigator) =>
+            _sceneNavigator = sceneNavigator;
 
         private void OnEnable() => 
             _playButton.onClick.AddListener(OnPlayButtonClicked);
@@ -21,9 +20,6 @@ namespace Game.Scripts.UI.Menu
         private void OnDisable() => 
             _playButton.onClick.RemoveListener(OnPlayButtonClicked);
 
-        private void OnPlayButtonClicked() =>
-            _sessionClient
-                .StartGame()
-                .Forget(Debug.LogError);
+        private void OnPlayButtonClicked() => _sceneNavigator.GoToGameplay();
     }
 }

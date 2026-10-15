@@ -10,6 +10,7 @@ namespace Game
         public override void InstallBindings()
         {
             Container.Bind<GameSessionClient>().FromInstance(_sessionClient).AsSingle();
+            Container.Bind<SceneNavigator>().AsSingle();
         }
     }
 }
