@@ -71,7 +71,6 @@ namespace Game
         private float GetDelay() =>
             Current switch
             {
-                MeleeWeapon => _meleeFireDelay,
                 ProjectileWeapon => _rangeFireDelay,
                 _ => throw new ArgumentOutOfRangeException(nameof(Current))
             };

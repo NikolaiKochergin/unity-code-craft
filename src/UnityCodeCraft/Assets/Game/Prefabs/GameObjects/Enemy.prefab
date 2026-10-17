@@ -16,9 +16,7 @@ GameObject:
   - component: {fileID: 3484277882467739485}
   - component: {fileID: 6567034695613458246}
   - component: {fileID: 5433745593524548685}
-  - component: {fileID: 5069819724016695651}
   - component: {fileID: 5165767976520336239}
-  - component: {fileID: 7689485807204655865}
   - component: {fileID: 6953057720404598886}
   m_Layer: 7
   m_Name: Enemy
@@ -42,7 +40,6 @@ Transform:
   m_Children:
   - {fileID: 4110996159869562643}
   - {fileID: 1051175001654507704}
-  - {fileID: 3237199945670588764}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &216082409229877555
@@ -89,13 +86,10 @@ MonoBehaviour:
   - {fileID: 3484277882467739485}
   - {fileID: 6567034695613458246}
   - {fileID: 5433745593524548685}
-  - {fileID: 5069819724016695651}
   - {fileID: 5165767976520336239}
-  - {fileID: 7689485807204655865}
   - {fileID: 6953057720404598886}
   - {fileID: 228863256306245043}
   - {fileID: 706139730102056099}
-  - {fileID: 77751801295249112}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &3275237870928010891
 MonoBehaviour:
@@ -149,11 +143,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce72b32e4d7946bb90cbcb5f0aaacf25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.Enemy
+  _collider: {fileID: 216082409229877555}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _cooldown: 0.1
+  _damage: 1
   _healthComponent: {fileID: 3484277882467739485}
   _moveComponent: {fileID: 6567034695613458246}
   _moveToTargetComponent: {fileID: 5165767976520336239}
-  _weaponComponent: {fileID: 5069819724016695651}
-  _targetDetector: {fileID: 7689485807204655865}
 --- !u!114 &3484277882467739485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,21 +195,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.TakeDamageComponent
   _healthComponent: {fileID: 3484277882467739485}
---- !u!114 &5069819724016695651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1011030080782938114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 092bb948334040a8879e4474f11eaba7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Game.WeaponComponent
-  _Current: {fileID: 77751801295249112}
-  _meleeFireDelay: 0.25
-  _rangeFireDelay: 0.2
 --- !u!114 &5165767976520336239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,23 +210,6 @@ MonoBehaviour:
   _moveComponent: {fileID: 6567034695613458246}
   _reachDistance: 0.5
   _target: {fileID: 0}
---- !u!114 &7689485807204655865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1011030080782938114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 856c6ac2d61e43eba1cae25cd1128250, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Game.TargetDetector
-  _detectionPoint: {fileID: 2214871453147694112}
-  _detectionRadius: 1.4
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &6953057720404598886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,121 +223,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.MoneyBag
   _RewardAmount: 0
---- !u!1 &4189368609806693992
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2214871453147694112}
-  m_Layer: 7
-  m_Name: FirePoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2214871453147694112
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4189368609806693992}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0.465}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2556830149685976496}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5653502658082345064
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3237199945670588764}
-  m_Layer: 7
-  m_Name: <Weapons>
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3237199945670588764
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5653502658082345064}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2556830149685976496}
-  m_Father: {fileID: 4010362202926120242}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6572637497837493270
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2556830149685976496}
-  - component: {fileID: 77751801295249112}
-  m_Layer: 7
-  m_Name: MeleeWeapon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2556830149685976496
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6572637497837493270}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2214871453147694112}
-  m_Father: {fileID: 3237199945670588764}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &77751801295249112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6572637497837493270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b99b23bf42c1401eaf426d404183ace6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Game.MeleeWeapon
-  _firePoint: {fileID: 2214871453147694112}
-  _fireRadius: 1.5
-  _damage: 1
-  _cooldown: 1
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &6681128362121645732
 GameObject:
   m_ObjectHideFlags: 0

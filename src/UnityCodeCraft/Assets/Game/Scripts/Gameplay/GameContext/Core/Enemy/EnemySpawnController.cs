@@ -13,8 +13,8 @@ namespace Game
         private GameCycle _gameCycle;
         private EnemyCharacterSpawner _spawner;
 
-        [Networked]
-        public TickTimer Timer { get; set; }
+        [Networked] 
+        private TickTimer Timer { get; set; }
 
         private int _enemySpawned;
         
