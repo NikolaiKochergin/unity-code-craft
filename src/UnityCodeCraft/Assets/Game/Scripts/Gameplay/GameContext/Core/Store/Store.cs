@@ -34,7 +34,7 @@ namespace Game
             _moneyStorage.SpendMoney(_turretPrice);
             SpawnTurretFor(character);
         }
-
+        
         private void SpawnMineFor(NetworkObject character)
         {
             Mine mine = Runner.Spawn(_minePrefab, character.transform.position, Quaternion.identity);

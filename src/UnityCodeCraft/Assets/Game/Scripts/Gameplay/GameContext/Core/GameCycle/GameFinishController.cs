@@ -4,34 +4,23 @@ using Zenject;
 
 namespace Game
 {
-    public sealed class GameFinishController : NetworkBehaviour
+    public sealed class GameFinishController : NetworkBehaviour, IKillHandler
     {
         private GameCycle _gameCycle;
-        private KillNotificator _killNotificator;
-        private EnemyManager _enemyManager;
+        private EnemySpawnController _enemySpawnController;
 
         private int _enemyKilled;
 
         [Inject]
         public void Construct(
             GameCycle gameCycle,
-            KillNotificator killNotificator,
-            EnemyManager enemyManager)
+            EnemySpawnController enemySpawnController)
         {
-            _enemyManager = enemyManager;
-            _killNotificator = killNotificator;
+            _enemySpawnController = enemySpawnController;
             _gameCycle = gameCycle;
         }
 
-        public override void Spawned() => 
-            _killNotificator.OnKilled += OnKilled;
-
-        public override void Despawned(NetworkRunner _, bool __)
-        {
-            _killNotificator.OnKilled -= OnKilled;
-        }
-
-        private void OnKilled(KillArgs args)
+        public void Handle(KillArgs args)
         {
             NetworkObject victim = Runner.FindObject(args.Victim);
             if(victim == null)
@@ -47,7 +36,7 @@ namespace Game
             if (victim.GetBehaviour<Enemy>())
             {
                 _enemyKilled++;
-                if(_enemyKilled != _enemyManager.WaveCapacity)
+                if(_enemyKilled != _enemySpawnController.WaveCapacity)
                     return;
                 
                 _gameCycle.WinGame();

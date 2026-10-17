@@ -7,13 +7,12 @@ namespace Game
 {
     public sealed class TargetDetector : NetworkBehaviour
     {
-        private static readonly List<LagCompensatedHit> HitsBuffer = new();
-        
         [SerializeField] private Transform _detectionPoint;
         [SerializeField] private float _detectionRadius = 0.5f;
         [SerializeField] private LayerMask _layerMask;
 
         private readonly List<NetworkObject> _targets = new();
+        private readonly Collider[] _results = new Collider[10];
         
         [ShowInInspector]
         public IReadOnlyList<NetworkObject> Targets => _targets;
@@ -40,26 +39,22 @@ namespace Game
         public void Scan()
         {
             _targets.Clear();
-            int count = Runner.LagCompensation.OverlapSphere(
+            int count = Runner.GetPhysicsScene().OverlapSphere(
                 _detectionPoint.position,
                 _detectionRadius,
-                Object.InputAuthority,
-                HitsBuffer,
+                _results,
                 _layerMask,
-                HitOptions.IncludePhysX | HitOptions.SubtickAccuracy | HitOptions.IgnoreInputAuthority,
-                clearHits: true,
                 QueryTriggerInteraction.Ignore
             );
             
             for (int i = 0; i < count; i++)
             {
-                LagCompensatedHit hit = HitsBuffer[i];
-                Hitbox hitbox = hit.Hitbox;
-                if(hitbox == null)
+                Collider hit = _results[i];
+                if(!hit)
                     continue;
                 
-                NetworkObject other = hitbox.GetComponentInParent<NetworkObject>();
-                if (other != null && other.TryGetBehaviour(out HealthComponent health) && health.IsAlive)
+                NetworkObject other = hit.GetComponentInParent<NetworkObject>();
+                if (other && other.TryGetBehaviour(out HealthComponent health) && health.IsAlive)
                 {
                     _targets.Add(other);
                     break;

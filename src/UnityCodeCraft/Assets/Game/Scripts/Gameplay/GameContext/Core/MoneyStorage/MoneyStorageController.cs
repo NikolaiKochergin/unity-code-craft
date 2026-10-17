@@ -3,27 +3,15 @@ using Zenject;
 
 namespace Game
 {
-    public sealed class MoneyStorageController : NetworkBehaviour
+    public sealed class MoneyStorageController : NetworkBehaviour, IKillHandler
     {
         private MoneyStorage _moneyStorage;
-        private KillNotificator _killNotificator;
 
         [Inject]
-        public void Construct(MoneyStorage moneyStorage, KillNotificator killNotificator)
-        {
-            _killNotificator = killNotificator;
+        public void Construct(MoneyStorage moneyStorage) => 
             _moneyStorage = moneyStorage;
-        }
 
-        public override void Spawned()
-        {
-            _killNotificator.OnKilled += OnKilled;
-        }
-
-        public override void Despawned(NetworkRunner _, bool __) => 
-            _killNotificator.OnKilled -= OnKilled;
-
-        private void OnKilled(KillArgs args)
+        public void Handle(KillArgs args)
         {
             if (!Runner.FindObject(args.Killer)?.GetBehaviour<PlayerCharacterProvider>())
                 return;

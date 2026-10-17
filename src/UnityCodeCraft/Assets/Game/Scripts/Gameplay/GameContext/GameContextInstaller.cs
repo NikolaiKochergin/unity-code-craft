@@ -14,7 +14,7 @@ namespace Game
 
         [SerializeField] private Store _store;
         [SerializeField] private MoneyStorage _moneyStorage;
-        [SerializeField] private EnemyManager _enemyManager;
+        [SerializeField] private EnemySpawnController _enemySpawnController;
         [SerializeField] private EnemyCharacterSpawner _enemyCharacterSpawner;
         
         [SerializeField] private ProjectileViewPool _projectilePool;
@@ -30,7 +30,7 @@ namespace Game
 
             Container.Bind<Store>().FromInstance(_store).AsSingle();
             Container.Bind<MoneyStorage>().FromInstance(_moneyStorage).AsSingle();
-            Container.Bind<EnemyManager>().FromInstance(_enemyManager).AsSingle();
+            Container.Bind<EnemySpawnController>().FromInstance(_enemySpawnController).AsSingle();
             Container.Bind<EnemyCharacterSpawner>().FromInstance(_enemyCharacterSpawner).AsSingle();
             
             Container.Bind<ProjectileViewPool>().FromInstance(_projectilePool).AsSingle();

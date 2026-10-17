@@ -33,8 +33,8 @@ namespace Game
 
         private void NotifyAboutKill(NetworkId killer) =>
             Runner
-                .GetBehaviour<KillNotificator>()
-                .NotifyAboutKill(killer, Object.Id);
+                .GetBehaviour<KillProcessor>()
+                .ProcessKill(killer, Object.Id);
 
         public override void Spawned() => 
             _localDamageCount = DamageCount;

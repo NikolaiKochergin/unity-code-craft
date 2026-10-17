@@ -60,7 +60,6 @@ GameObject:
   - component: {fileID: 1771853592453163069}
   - component: {fileID: 5641000355134194572}
   - component: {fileID: -5862672535341435404}
-  - component: {fileID: 8011477573441669469}
   m_Layer: 0
   m_Name: '[NetworkRunner]'
   m_TagString: Untagged
@@ -207,23 +206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34657653401743f28ce57b12d8d394c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.NetworkRunnerInstaller
-  _hitboxManager: {fileID: 8011477573441669469}
+  _hitboxManager: {fileID: 0}
   _killNotificator: {fileID: 7241898541411967378}
---- !u!114 &8011477573441669469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5843785152257727222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -49887739, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.HitboxManager
-  BVHDepth: 0
-  BVHNodes: 0
-  TotalHitboxes: 0
 --- !u!1 &8610544347347472269
 GameObject:
   m_ObjectHideFlags: 0
