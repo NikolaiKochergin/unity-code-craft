@@ -18,7 +18,10 @@ namespace Game
         
         public void SetTarget(Transform target) => _target = target;
         
-        public void SetCondition(ICondition condition) => _condition = condition;
+        public void SetCondition(ICondition condition)
+        {
+            _condition = condition;
+        }
 
         public override void FixedUpdateNetwork()
         {

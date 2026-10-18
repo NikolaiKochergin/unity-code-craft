@@ -13,9 +13,12 @@ namespace Game
         [SerializeField] private GameFinishController _gameFinishController;
 
         [SerializeField] private Store _store;
+        [SerializeField] private MoneyStorageController _moneyStorageController;
         [SerializeField] private MoneyStorage _moneyStorage;
         [SerializeField] private EnemySpawnController _enemySpawnController;
         [SerializeField] private EnemyCharacterSpawner _enemyCharacterSpawner;
+        
+        [SerializeField] private KillProcessor _killProcessor;
         
         [SerializeField] private ProjectileViewPool _projectilePool;
 
@@ -26,12 +29,19 @@ namespace Game
             
             Container.Bind<GameCycle>().FromInstance(_gameCycle).AsSingle();
             Container.Bind<GameStartController>().FromInstance(_gameStartController).AsSingle();
-            Container.Bind<GameFinishController>().FromInstance(_gameFinishController).AsSingle();
+            Container.BindInterfacesAndSelfTo<GameFinishController>().FromInstance(_gameFinishController).AsSingle();
 
             Container.Bind<Store>().FromInstance(_store).AsSingle();
+            Container
+                .Bind<IKillHandler>()
+                .To<MoneyStorageController>()
+                .FromInstance(_moneyStorageController)
+                .AsSingle();
             Container.Bind<MoneyStorage>().FromInstance(_moneyStorage).AsSingle();
             Container.Bind<EnemySpawnController>().FromInstance(_enemySpawnController).AsSingle();
             Container.Bind<EnemyCharacterSpawner>().FromInstance(_enemyCharacterSpawner).AsSingle();
+            
+            Container.Bind<KillProcessor>().FromInstance(_killProcessor).AsSingle();
             
             Container.Bind<ProjectileViewPool>().FromInstance(_projectilePool).AsSingle();
         }

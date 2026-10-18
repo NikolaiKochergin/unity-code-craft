@@ -147,7 +147,7 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 64
-  _cooldown: 0.1
+  _cooldown: 0.5
   _damage: 1
   _healthComponent: {fileID: 3484277882467739485}
   _moveComponent: {fileID: 6567034695613458246}

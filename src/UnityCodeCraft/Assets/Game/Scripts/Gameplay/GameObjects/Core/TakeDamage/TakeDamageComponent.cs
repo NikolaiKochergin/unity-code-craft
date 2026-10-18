@@ -1,12 +1,15 @@
 ﻿using System;
 using Fusion;
 using UnityEngine;
+using Zenject;
 
 namespace Game
 {
     public sealed class TakeDamageComponent : NetworkBehaviour
     {
         [SerializeField] private HealthComponent _healthComponent;
+
+        [Inject] private KillProcessor _killProcessor;
 
         [Networked]
         private TakeDamageArgs LastDamage { get; set; }
@@ -32,9 +35,7 @@ namespace Game
         }
 
         private void NotifyAboutKill(NetworkId killer) =>
-            Runner
-                .GetBehaviour<KillProcessor>()
-                .ProcessKill(killer, Object.Id);
+            _killProcessor.ProcessKill(killer, Object.Id);
 
         public override void Spawned() => 
             _localDamageCount = DamageCount;

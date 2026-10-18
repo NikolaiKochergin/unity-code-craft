@@ -1,4 +1,5 @@
-﻿using Fusion;
+﻿using System.Collections.Generic;
+using Fusion;
 using Zenject;
 
 namespace Game
@@ -10,7 +11,7 @@ namespace Game
     
     public sealed class KillProcessor : SimulationBehaviour
     {
-        [Inject] private IKillHandler[] _handlers;
+        [Inject] private IEnumerable<IKillHandler> _handlers;
         
         public void ProcessKill(NetworkId killer, NetworkId victim)
         {
@@ -22,7 +23,7 @@ namespace Game
         {
             if(!Runner.IsServer)
                 return;
-
+            
             foreach (IKillHandler handler in _handlers) 
                 handler.Handle(args);
         }
