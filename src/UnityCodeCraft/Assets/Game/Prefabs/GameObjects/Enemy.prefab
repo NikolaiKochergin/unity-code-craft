@@ -89,7 +89,6 @@ MonoBehaviour:
   - {fileID: 5165767976520336239}
   - {fileID: 6953057720404598886}
   - {fileID: 228863256306245043}
-  - {fileID: 706139730102056099}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &3275237870928010891
 MonoBehaviour:
@@ -150,7 +149,6 @@ MonoBehaviour:
   _cooldown: 0.5
   _damage: 1
   _healthComponent: {fileID: 3484277882467739485}
-  _moveComponent: {fileID: 6567034695613458246}
   _moveToTargetComponent: {fileID: 5165767976520336239}
 --- !u!114 &3484277882467739485
 MonoBehaviour:
@@ -280,7 +278,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1051175001654507704}
   - component: {fileID: 5511031309674076297}
-  - component: {fileID: 706139730102056099}
   m_Layer: 7
   m_Name: DeathVFXPivot
   m_TagString: Untagged
@@ -317,20 +314,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _effectPrefab: {fileID: 4011700550874226019, guid: d41045928ffb47049910a6d4e3fdb02d, type: 3}
   _playPoint: {fileID: 1051175001654507704}
---- !u!114 &706139730102056099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7136196916883076713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92cb819b53ac450c89d85f6741643733, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Game.DeathVfxComponent
-  _healthComponent: {fileID: 3484277882467739485}
-  _particleSpawner: {fileID: 5511031309674076297}
 --- !u!1001 &1612625129254522361
 PrefabInstance:
   m_ObjectHideFlags: 0

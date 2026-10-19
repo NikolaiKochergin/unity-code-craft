@@ -19,6 +19,7 @@ namespace Game
         [SerializeField] private EnemyCharacterSpawner _enemyCharacterSpawner;
         
         [SerializeField] private KillProcessor _killProcessor;
+        [SerializeField] private VfxBus _vfxBus;
         
         [SerializeField] private ProjectileViewPool _projectilePool;
 
@@ -42,6 +43,7 @@ namespace Game
             Container.Bind<EnemyCharacterSpawner>().FromInstance(_enemyCharacterSpawner).AsSingle();
             
             Container.Bind<KillProcessor>().FromInstance(_killProcessor).AsSingle();
+            Container.Bind<VfxBus>().FromInstance(_vfxBus).AsSingle();
             
             Container.Bind<ProjectileViewPool>().FromInstance(_projectilePool).AsSingle();
         }

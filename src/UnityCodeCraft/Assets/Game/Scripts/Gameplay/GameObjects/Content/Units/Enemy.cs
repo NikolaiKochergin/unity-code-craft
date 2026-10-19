@@ -1,5 +1,6 @@
 ﻿using Fusion;
 using UnityEngine;
+using Zenject;
 
 namespace Game
 {
@@ -14,9 +15,16 @@ namespace Game
         [SerializeField] private MoveToTargetComponent _moveToTargetComponent;
         
         private readonly Collider[] _results = new Collider[10];
+        private VfxBus _vfxBus;
 
         [Networked]
         private TickTimer Timer { get; set; }
+
+        [Inject]
+        public void Construct(VfxBus vfxBus)
+        {
+            _vfxBus = vfxBus;
+        }
 
         public override void Spawned()
         {
@@ -30,8 +38,11 @@ namespace Game
 
         private void OnHealthChanged(int _, int __)
         {
-            if(_healthComponent.IsDead)
+            if (_healthComponent.IsDead)
+            {
                 Runner.Despawn(Object);
+                _vfxBus.PlayVfx(VfxType.EnemyDie, transform);
+            }
         }
         
         public override void FixedUpdateNetwork()

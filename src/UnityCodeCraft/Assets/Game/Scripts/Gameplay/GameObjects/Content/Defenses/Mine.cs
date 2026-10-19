@@ -1,14 +1,20 @@
 ﻿using Fusion;
 using UnityEngine;
+using Zenject;
 
 namespace Game
 {
     public sealed class Mine : NetworkBehaviour
     {
-        [SerializeField] private ParticleSpawner _particleSpawner;
         [SerializeField] private TargetDetector _targetDetector;
         [SerializeField] private int _damage;
         
+        private VfxBus _vfxBus;
+
+        [Inject]
+        public void Construct(VfxBus vfxBus) => 
+            _vfxBus = vfxBus;
+
         public override void FixedUpdateNetwork()
         {
             _targetDetector.Scan();
@@ -25,7 +31,7 @@ namespace Game
             }
             
             Runner.Despawn(Object);
-            _particleSpawner.Play();
+            _vfxBus.PlayVfx(VfxType.Explode, transform);
         }
     }
 }

@@ -9,12 +9,15 @@ namespace Game
         [SerializeField] private EnemyConfig _enemyConfig;
         
         private SpawnPointService _spawnPointService;
+        private DiContainer _container;
 
         [Inject]
         public void Construct(
-            [Inject(Id = Tags.Enemy)] SpawnPointService spawnPointService
+            [Inject(Id = Tags.Enemy)] SpawnPointService spawnPointService,
+            DiContainer container
         )
         {
+            _container = container;
             _spawnPointService = spawnPointService;
         }
 
@@ -25,16 +28,12 @@ namespace Game
                 _enemyConfig.Prefab,
                 spawnPoint.position,
                 spawnPoint.rotation);
+            
+            _container.Inject(character);
 
             if(character.TryGetBehaviour(out MoneyBag bag))
                 bag.RewardAmount = Random.Range(_enemyConfig.Reward.x, _enemyConfig.Reward.y + 1);
 
-            Weapon weapon = character.GetComponentInChildren<Weapon>();
-            if (weapon)
-            {
-                weapon.SetDamage(_enemyConfig.Damage);
-                weapon.SetCooldown(_enemyConfig.PlayerDamageCooldown);
-            }
 
             return character;
         }

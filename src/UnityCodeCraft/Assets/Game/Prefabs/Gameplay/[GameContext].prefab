@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 2137999940152897428}
   - component: {fileID: -8950394680459208322}
   - component: {fileID: 2750838824847684910}
+  - component: {fileID: 7289848484046271525}
   m_Layer: 0
   m_Name: '[GameContext]'
   m_TagString: Untagged
@@ -89,6 +90,7 @@ MonoBehaviour:
   _enemySpawnController: {fileID: 373389064510807868}
   _enemyCharacterSpawner: {fileID: 6752316674120537528}
   _killProcessor: {fileID: 2137999940152897428}
+  _vfxBus: {fileID: 7289848484046271525}
   _projectilePool: {fileID: 3699336498353149613}
 --- !u!114 &5480370286973988358
 MonoBehaviour:
@@ -120,6 +122,7 @@ MonoBehaviour:
   - {fileID: 657373660686243214}
   - {fileID: -8950394680459208322}
   - {fileID: 2750838824847684910}
+  - {fileID: 7289848484046271525}
   - {fileID: 6173664031731602383}
   - {fileID: 5327483139632078258}
   - {fileID: 5861297208122333273}
@@ -255,10 +258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c61b3fc8464662a17bb0841ddab879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.Store
-  _minePrice: 100
-  _minePrefab: {fileID: 2383642033501367656, guid: adda297a5e7b0c74890e871f1b9d4171, type: 3}
-  _turretPrice: 200
-  _turretPrefab: {fileID: 4874596960492398582, guid: cd9a4372cefbf3747b263b423d5a0a17, type: 3}
   _purchases:
   - Id: 0
     Price: 100
@@ -293,7 +292,6 @@ MonoBehaviour:
   _prefab: {fileID: 3028975819223396361, guid: adda297a5e7b0c74890e871f1b9d4171, type: 3}
   _container: {fileID: 1642053956024571119}
   _outPosition: {x: 0, y: -1000, z: 0}
-  _price: 100
 --- !u!114 &2750838824847684910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +307,23 @@ MonoBehaviour:
   _prefab: {fileID: 7889029648868976899, guid: cd9a4372cefbf3747b263b423d5a0a17, type: 3}
   _container: {fileID: 1642053956024571119}
   _outPosition: {x: 0, y: -1000, z: 0}
-  _price: 200
+--- !u!114 &7289848484046271525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004472131309267828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68c6f0353004457c96cd2e40313848c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.VfxBus
+  _vfxCatalog:
+  - Type: 0
+    Prefab: {fileID: 198779945009258616, guid: 9aa670fab9a0c664e85bcf9d96b4c506, type: 3}
+  - Type: 1
+    Prefab: {fileID: 4011700550874226019, guid: d41045928ffb47049910a6d4e3fdb02d, type: 3}
 --- !u!1 &3155405327252336325
 GameObject:
   m_ObjectHideFlags: 0
