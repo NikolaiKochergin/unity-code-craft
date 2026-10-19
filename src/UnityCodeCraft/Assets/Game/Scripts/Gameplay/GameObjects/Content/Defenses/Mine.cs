@@ -9,11 +9,6 @@ namespace Game
         [SerializeField] private TargetDetector _targetDetector;
         [SerializeField] private int _damage;
         
-        private NetworkId _instigatorId;
-
-        public void SetupInstigator(NetworkId instigator) => 
-            _instigatorId = instigator;
-
         public override void FixedUpdateNetwork()
         {
             _targetDetector.Scan();
@@ -26,7 +21,7 @@ namespace Game
             foreach (NetworkObject target in _targetDetector.Targets)
             {
                 if(target.TryGetBehaviour(out TakeDamageComponent takeDamage))
-                    takeDamage.TakeDamage(new TakeDamageArgs(_instigatorId, _damage));
+                    takeDamage.TakeDamage(new TakeDamageArgs(Object.InputAuthority, _damage));
             }
             
             Runner.Despawn(Object);

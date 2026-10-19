@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 4477675757535674335}
   - component: {fileID: 657373660686243214}
   - component: {fileID: 2137999940152897428}
+  - component: {fileID: -8950394680459208322}
+  - component: {fileID: 2750838824847684910}
   m_Layer: 0
   m_Name: '[GameContext]'
   m_TagString: Untagged
@@ -116,6 +118,8 @@ MonoBehaviour:
   - {fileID: 6752316674120537528}
   - {fileID: 4477675757535674335}
   - {fileID: 657373660686243214}
+  - {fileID: -8950394680459208322}
+  - {fileID: 2750838824847684910}
   - {fileID: 6173664031731602383}
   - {fileID: 5327483139632078258}
   - {fileID: 5861297208122333273}
@@ -255,6 +259,13 @@ MonoBehaviour:
   _minePrefab: {fileID: 2383642033501367656, guid: adda297a5e7b0c74890e871f1b9d4171, type: 3}
   _turretPrice: 200
   _turretPrefab: {fileID: 4874596960492398582, guid: cd9a4372cefbf3747b263b423d5a0a17, type: 3}
+  _purchases:
+  - Id: 0
+    Price: 100
+    Supplier: {fileID: -8950394680459208322}
+  - Id: 1
+    Price: 200
+    Supplier: {fileID: 2750838824847684910}
 --- !u!114 &2137999940152897428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +278,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06760293274c4606b68122126d523f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.KillProcessor
+--- !u!114 &-8950394680459208322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004472131309267828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d98a3a50454790a18d707da6c5279b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.MineSupplier
+  _prefab: {fileID: 3028975819223396361, guid: adda297a5e7b0c74890e871f1b9d4171, type: 3}
+  _container: {fileID: 1642053956024571119}
+  _outPosition: {x: 0, y: -1000, z: 0}
+  _price: 100
+--- !u!114 &2750838824847684910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2004472131309267828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b644e005fc804760bc725c29144f5714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.TurretSupplier
+  _prefab: {fileID: 7889029648868976899, guid: cd9a4372cefbf3747b263b423d5a0a17, type: 3}
+  _container: {fileID: 1642053956024571119}
+  _outPosition: {x: 0, y: -1000, z: 0}
+  _price: 200
 --- !u!1 &3155405327252336325
 GameObject:
   m_ObjectHideFlags: 0

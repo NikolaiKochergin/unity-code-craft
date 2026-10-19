@@ -42,8 +42,7 @@ namespace Game
 
             if (wasHit)
             {
-                NetworkId playerId = runner.GetPlayerObject(player).Id;
-                DealDamage(hit.collider, playerId);
+                DealDamage(hit.collider, player);
                 finished = true;
             }
         }
@@ -62,11 +61,11 @@ namespace Game
             return projectile.Position + projectile.Direction * t * _speed;
         }
 
-        private bool DealDamage(Collider collider, NetworkId player)
+        private bool DealDamage(Collider collider, PlayerRef player)
         {
             NetworkObject target = collider.GetComponentInParent<NetworkObject>();
             if (target == null ||
-                target.Id == player ||
+                target.InputAuthority == player ||
                 !target.TryGetBehaviour(out TakeDamageComponent takeDamageComponent))
                 return false;
             

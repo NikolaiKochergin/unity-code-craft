@@ -34,7 +34,7 @@ namespace Game
                 NotifyAboutKill(args.Instigator);
         }
 
-        private void NotifyAboutKill(NetworkId killer) =>
+        private void NotifyAboutKill(PlayerRef killer) =>
             _killProcessor.ProcessKill(killer, Object.Id);
 
         public override void Spawned() => 

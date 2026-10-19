@@ -13,7 +13,7 @@ namespace Game
     {
         [Inject] private IEnumerable<IKillHandler> _handlers;
         
-        public void ProcessKill(NetworkId killer, NetworkId victim)
+        public void ProcessKill(PlayerRef killer, NetworkId victim)
         {
             KillArgs args = new(killer, victim);
             ProcessKill(args);

@@ -10,12 +10,6 @@ namespace Game
         [SerializeField] private WeaponComponent _weaponComponent;
         [SerializeField] private TargetDetector _targetDetector;
         
-        public void SetupInstigator(NetworkId characterId)
-        {
-            PlayerRef player = Runner.FindObject(characterId).InputAuthority;
-            Object.AssignInputAuthority(player);
-        }
-
         public override void Spawned() => 
             _weaponComponent.SetCondition(this);
         

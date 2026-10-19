@@ -65,11 +65,12 @@ namespace Game
                     other.TryGetBehaviour(out HealthComponent health) && health.IsAlive &&
                     other.TryGetBehaviour(out TakeDamageComponent takeDamage))
                 {
-                    takeDamage.TakeDamage(new TakeDamageArgs(Object.Id, _damage));
+                    takeDamage.TakeDamage(new TakeDamageArgs(Object.InputAuthority, _damage));
 
                     if (other.TryGetBehaviour(out Portal _))
                     {
-                        _healthComponent.Decrement(_healthComponent.Current);
+                        GetBehaviour<TakeDamageComponent>()
+                            .TakeDamage(new TakeDamageArgs(Object.InputAuthority, _healthComponent.Current));
                         return;
                     }
                     

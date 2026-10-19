@@ -13,7 +13,7 @@ namespace Game
 
         public void Handle(KillArgs args)
         {
-            if (!Runner.FindObject(args.Killer)?.GetBehaviour<PlayerCharacterProvider>())
+            if(!args.Killer.IsRealPlayer)
                 return;
 
             int? reward = Runner.FindObject(args.Victim)?.GetBehaviour<MoneyBag>()?.RewardAmount;

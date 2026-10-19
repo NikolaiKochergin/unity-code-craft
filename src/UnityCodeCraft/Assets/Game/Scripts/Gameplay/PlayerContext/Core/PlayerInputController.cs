@@ -50,13 +50,13 @@ namespace Game
         private void ProcessSetMine(NetworkObject character, NetworkButtons inputButtons)
         {
             if (inputButtons.WasPressed(_previousButtons, InputButtons.Mine))
-                _store.TryBuyMineFor(character);
+                _store.TryBuy(PurchaseId.Mine, character);
         }
 
         private void ProcessSetArcher(NetworkObject character, NetworkButtons inputButtons)
         {
             if(inputButtons.WasPressed(_previousButtons, InputButtons.Turret))
-                _store.TryBuyTurretFor(character);
+                _store.TryBuy(PurchaseId.Turret, character);
         }
 
         private void ProcessMove(NetworkObject character, Vector2 inputDirection)

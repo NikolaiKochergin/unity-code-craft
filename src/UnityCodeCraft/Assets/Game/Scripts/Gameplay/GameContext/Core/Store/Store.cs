@@ -1,50 +1,50 @@
-﻿using Fusion;
+﻿using System;
+using Fusion;
 using UnityEngine;
 using Zenject;
 
 namespace Game
 {
+    public enum PurchaseId
+    {
+        Mine = 0,
+        Turret = 1
+    }
+
+    [Serializable]
+    public sealed class Purchase
+    {
+        public PurchaseId Id;
+        public int Price;
+        public NetworkObjectSupplier Supplier;
+    }
+    
     public sealed class Store : NetworkBehaviour
     {
-        [SerializeField] private int _minePrice = 100;
-        [SerializeField] private Mine _minePrefab;
-        [SerializeField] private int _turretPrice = 200;
-        [SerializeField] private Turret _turretPrefab;
+        [SerializeField] private Purchase[] _purchases;
         
         private MoneyStorage _moneyStorage;
-
-        [Inject]
-        public void Construct(MoneyStorage moneyStorage) => 
-            _moneyStorage = moneyStorage;
-
-        public void TryBuyMineFor(NetworkObject character)
-        {
-            if(_moneyStorage.Money < _minePrice)
-                return;
-            
-            _moneyStorage.SpendMoney(_minePrice);
-            SpawnMineFor(character);
-        }
-
-        public void TryBuyTurretFor(NetworkObject character)
-        {
-            if(_moneyStorage.Money < _turretPrice)
-                return;
-            
-            _moneyStorage.SpendMoney(_turretPrice);
-            SpawnTurretFor(character);
-        }
         
-        private void SpawnMineFor(NetworkObject character)
+        [Inject]
+        public void Construct(MoneyStorage moneyStorage)
         {
-            Mine mine = Runner.Spawn(_minePrefab, character.transform.position, Quaternion.identity);
-            mine.SetupInstigator(character.Id);
+            _moneyStorage = moneyStorage;
         }
 
-        private void SpawnTurretFor(NetworkObject character)
+        public void TryBuy(PurchaseId purchaseId, NetworkObject character)
         {
-            Turret turret = Runner.Spawn(_turretPrefab, character.transform.position, Quaternion.identity);
-            turret.SetupInstigator(character.Id);
+            foreach (Purchase purchase in _purchases)
+            {
+                if(purchase.Id != purchaseId)
+                    continue;
+                
+                if(_moneyStorage.Money < purchase.Price)
+                    return;
+                
+                _moneyStorage.SpendMoney(purchase.Price);
+                purchase.Supplier.Supply(character.InputAuthority, out NetworkObject instance);
+                instance.GetBehaviour<NetworkTransform>().Teleport(character.transform.position, character.transform.rotation);
+            }
         }
     }
 }
