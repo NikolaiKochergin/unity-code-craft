@@ -13,21 +13,20 @@ namespace Game
         public override void Spawned() => 
             _weaponComponent.SetCondition(this);
         
-        private void FixedUpdate() => 
-            _weaponComponent.StartFire();
-
-        bool WeaponComponent.ICondition.IsMet()
+        public override void FixedUpdateNetwork()
         {
             if(_healthComponent.IsDead)
-                return false;
+                return;
             
             _targetDetector.Scan();
             if(!_targetDetector.TryGetNearestTarget(out NetworkObject target))
-                return false;
+                return;
             
             transform.LookAt(target.transform);
-            
-            return true;
+            _weaponComponent.StartFire();
         }
+
+        bool WeaponComponent.ICondition.IsMet() => 
+            !_healthComponent.IsDead;
     }
 }

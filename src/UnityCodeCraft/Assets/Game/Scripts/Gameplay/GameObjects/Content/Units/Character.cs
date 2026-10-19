@@ -18,24 +18,23 @@ namespace Game
             _weaponComponent.SetCondition(this);
         }
 
-        private void FixedUpdate() => 
+        public override void FixedUpdateNetwork()
+        {
+            if(_healthComponent.IsDead || _moveComponent.IsMoving)
+                return;
+            
+            _targetDetector.Scan();
+            if(!_targetDetector.TryGetNearestTarget(out NetworkObject target))
+                return;
+            
+            transform.LookAt(target.transform);
             _weaponComponent.StartFire();
+        }
 
         bool MoveComponent.ICondition.IsMet() => 
             _healthComponent.IsAlive;
 
-        bool WeaponComponent.ICondition.IsMet()
-        {
-            if(_healthComponent.IsDead || _moveComponent.IsMoving)
-                return false;
-            
-            _targetDetector.Scan();
-            if(!_targetDetector.TryGetNearestTarget(out NetworkObject target))
-                return false;
-            
-            transform.LookAt(target.transform);
-            
-            return true;
-        }
+        bool WeaponComponent.ICondition.IsMet() => 
+            !_healthComponent.IsDead && !_moveComponent.IsMoving;
     }
 }
