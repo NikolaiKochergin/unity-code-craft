@@ -61,9 +61,11 @@ namespace Game
                 NetworkObject other = coll.GetComponent<NetworkObject>() ?? 
                                       coll.GetComponentInParent<NetworkObject>();
 
-                if (other && other.TryGetBehaviour(out HealthComponent health) && health.IsAlive)
+                if (other && 
+                    other.TryGetBehaviour(out HealthComponent health) && health.IsAlive &&
+                    other.TryGetBehaviour(out TakeDamageComponent takeDamage))
                 {
-                    health.Decrement(_damage);
+                    takeDamage.TakeDamage(new TakeDamageArgs(Object.Id, _damage));
 
                     if (other.TryGetBehaviour(out Portal _))
                     {
