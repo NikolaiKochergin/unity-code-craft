@@ -14,7 +14,7 @@ namespace SampleGame
         private MouseInput mouseInput;
 
         [SerializeField]
-        private new Camera camera;
+        private Camera camera;
 
         [SerializeField]
         private UnitSelectionManager _selectionManager;

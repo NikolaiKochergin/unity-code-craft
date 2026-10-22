@@ -117,7 +117,7 @@ namespace SampleGame
             float maxZ = Mathf.Max(startWorldPoint.z, endWorldPoint.z);
             
             HashSet<Unit> units = new HashSet<Unit>();
-            Unit[] allUnits = FindObjectsOfType<Unit>();
+            Unit[] allUnits = FindObjectsByType<Unit>();
             for (int i = 0, count = allUnits.Length; i < count; i++)
             {
                 Unit unit = allUnits[i];

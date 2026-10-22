@@ -54,6 +54,14 @@
             </summary>
             <param name="color">The color.</param>
         </member>
+        <member name="M:Sirenix.Utilities.ColorExtensions.PerceivedLuminosity(UnityEngine.Color,System.Boolean)">
+            <summary>
+            Gets the perceived luminosity of a given <see cref="T:UnityEngine.Color"/>.
+            </summary>
+            <param name="color">The current <see cref="T:UnityEngine.Color"/>.</param>
+            <param name="includeAlpha">Determines if the <see cref="F:UnityEngine.Color.a">Color.a</see> value should impact the result.</param>
+            <returns>The <see cref="T:System.Single">float</see> value representing the luminosity.</returns>
+        </member>
         <member name="T:Sirenix.Utilities.DelegateExtensions">
             <summary>
             Delegate method extensions.
@@ -1328,6 +1336,13 @@
             <param name="rect">The original Rect.</param>
             <param name="pos">The position to expand the rect towards.</param>
         </member>
+        <member name="M:Sirenix.Utilities.RectExtensions.IsPlaceholder(UnityEngine.Rect)">
+            <summary>
+            Determines if an <see cref="T:UnityEngine.Rect"/> is a placeholder; usually (0, 0, 1, 1) in Layout.
+            </summary>
+            <param name="rect">The original <see cref="T:UnityEngine.Rect"/>.</param>
+            <returns><c>true</c> if the <see cref="T:UnityEngine.Rect"/> is equal to (0, 0, 0, 0) or (0, 0, 1, 1); otherwise <c>false</c>.</returns>
+        </member>
         <member name="T:Sirenix.Utilities.StringExtensions">
             <summary>
             String method extensions.
@@ -1656,6 +1671,7 @@
             <summary>
             <para>Checks whether an array of types satisfy the constraints of a given generic type definition.</para>
             <para>If this method returns true, the given parameters can be safely used with <see cref="M:System.Type.MakeGenericType(System.Type[])"/> with the given generic type definition.</para>
+            <para>The rules are the ones the CoreCLR runtime enforces, which are stricter than Mono's, and the result is the same on every runtime.</para>
             </summary>
             <param name="genericType">The generic type definition to check.</param>
             <param name="parameters">The parameters to check validity for.</param>
@@ -1670,6 +1686,7 @@
             <summary>
             <para>Checks whether an array of types satisfy the constraints of a given generic method definition.</para>
             <para>If this method returns true, the given parameters can be safely used with <see cref="M:System.Reflection.MethodInfo.MakeGenericMethod(System.Type[])"/> with the given generic method definition.</para>
+            <para>The rules are the ones the CoreCLR runtime enforces, which are stricter than Mono's, and the result is the same on every runtime.</para>
             </summary>
             <param name="genericMethod">The generic method definition to check.</param>
             <param name="parameters">The parameters to check validity for.</param>
@@ -1680,9 +1697,44 @@
             </exception>
             <exception cref="T:System.ArgumentException">The genericMethod parameter must be a generic method definition.</exception>
         </member>
-        <member name="M:Sirenix.Utilities.TypeExtensions.GenericParameterIsFulfilledBy(System.Type,System.Type,System.Collections.Generic.Dictionary{System.Type,System.Type},System.Collections.Generic.HashSet{System.Type})">
+        <member name="M:Sirenix.Utilities.TypeExtensions.AreGenericConstraintsSatisfiedBy(System.Type[],System.Type[])">
             <summary>
-            Before calling this method we must ALWAYS hold a lock on the GenericConstraintsSatisfaction_LOCK object, as that is an implicit assumption it works with.
+            <para>Checks whether an array of types can be used as the arguments for the given generic parameters, which must be all the generic parameters of one generic type or method definition, in order.</para>
+            <para>Entries of <paramref name="definitions"/> that are not generic parameters must be matched exactly by the corresponding entry of <paramref name="parameters"/>.</para>
+            <para>The rules are the ones the CoreCLR runtime enforces, which are stricter than Mono's, and the result is the same on every runtime.</para>
+            </summary>
+        </member>
+        <member name="M:Sirenix.Utilities.TypeExtensions.GenericParameterIsFulfilledBy(System.Type,System.Type)">
+            <summary>
+            <para>Checks whether a type can be used as the argument for a single generic parameter, when the arguments for the other generic parameters of its declaring type or method are not known.</para>
+            <para>Constraints that refer to other generic parameters are considered satisfied if those parameters can be inferred from the given type in a valid way;
+            for example, given <c>where T : IList&lt;U&gt;</c>, <c>List&lt;int&gt;</c> fulfills T by inferring that U is <c>int</c>.</para>
+            </summary>
+        </member>
+        <member name="M:Sirenix.Utilities.TypeExtensions.IsGenericArgumentValidFor(System.Type,System.Type,System.Type[],System.Type[],System.Boolean,System.Int32)">
+            <summary>
+            Whether <paramref name="argument"/> may be used for the generic parameter <paramref name="parameter"/>, which is one of <paramref name="definitions"/>,
+            when <paramref name="arguments"/> are the arguments for all of <paramref name="definitions"/>. If <paramref name="inferUnknown"/> is true, null entries
+            of <paramref name="arguments"/> are unknown and may be inferred (and filled in) while checking.
+            </summary>
+        </member>
+        <member name="M:Sirenix.Utilities.TypeExtensions.CanCastTo(System.Type,System.Type,System.Int32)">
+            <summary>
+            Whether a value of type <paramref name="from"/> can be cast to <paramref name="to"/>, for the purposes of satisfying a generic constraint.
+            Value types count as boxed, variance applies, and an open generic parameter can be cast to whatever its own constraints can be cast to.
+            </summary>
+        </member>
+        <member name="M:Sirenix.Utilities.TypeExtensions.SubstituteGenericParameters(System.Type,System.Type[],System.Type[])">
+            <summary>
+            Replaces the generic parameters in <paramref name="definitions"/> with the corresponding <paramref name="arguments"/>, anywhere within <paramref name="type"/>.
+            For example, substituting T with int in <c>IList&lt;T[]&gt;</c> gives <c>IList&lt;int[]&gt;</c>. Null arguments, and arguments that are the parameter itself,
+            leave that parameter in place. Returns null if the resulting type can't be constructed.
+            </summary>
+        </member>
+        <member name="M:Sirenix.Utilities.TypeExtensions.TryInferUnknownGenericParameters(System.Type,System.Type,System.Type[],System.Type[],System.Int32)">
+            <summary>
+            Infers unknown generic parameters within <paramref name="target"/> from the type in <paramref name="argument"/>'s hierarchy (itself, its base types or its
+            interfaces) with the same generic type definition, and validates each inferred argument for its parameter.
             </summary>
         </member>
         <member name="M:Sirenix.Utilities.TypeExtensions.GetGenericConstraintsString(System.Type,System.Boolean)">
@@ -1724,6 +1776,51 @@
             </summary>
             <param name="identifier">The identifier to check.</param>
             <returns><c>true</c> if the string is a C# keyword. Otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Sirenix.Utilities.TypeExtensions.HasDefaultConstructor(System.Type)">
+            <summary>
+            <para>Determines if a given <see cref="T:System.Type"/> has a default constructor.</para>
+            <para>A type is considered to have a default constructor if: It is a string, if it is an array, if it is a value type or if it has a public parameterless constructor.</para>
+            </summary>
+            <param name="self">The <see cref="T:System.Type"/> to investigate.</param>
+            <returns><c>true</c> if a default constructor has been found; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Sirenix.Utilities.TypeExtensions.InstantiateDefault(System.Type,System.Boolean)">
+            <summary>
+            Attempts to instantiate an object of a given <see cref="T:System.Type"/> with it's default constructor. If no default constructor is found then it attempts to find the most suitable alternative constructor and instantiate the <see cref="T:System.Type"/> with default parameters.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to instantiate.</param>
+            <param name="preferUninitializedOverNonDefault">Determines if the use of <see cref="M:System.Runtime.Serialization.FormatterServices.GetUninitializedObject(System.Type)"/> is preferred over a non-default constructor call.</param>
+            <returns>The instantiated object or <c>null</c> if no suitable alternative constructor is found.</returns>
+        </member>
+        <member name="M:Sirenix.Utilities.TypeExtensions.FindIdealConstructor(System.Type,System.Reflection.BindingFlags)">
+            <summary>
+            Finds the constructor of a type that is closest to a default constructor while favoring safer options.
+            Unmanaged constructors are ignored.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> whose constructors are evaluated.</param>
+            <param name="flags">
+            The <see cref="T:System.Reflection.BindingFlags"/> to use when retrieving constructors. 
+            <see cref="F:System.Reflection.BindingFlags.Default"/> restricts the search to public constructors.
+            </param>
+            <returns>
+            The <see cref="T:System.Reflection.ConstructorInfo"/> considered closest to a default constructor based on the ranking heuristics.
+            </returns>
+            <remarks>
+            <p>Constructors are ranked using these heuristics:</p>
+            <p>1. Empty constructors are preferred first.</p>
+            <p>2. Constructors where all parameters have default values are preferred next.</p>
+            <p>3. Shorter constructors are preferred over longer ones.</p>
+            <p>4. Constructors with more parameters that have default values are preferred.</p>
+            <p>5. Constructors with more value-type parameters are preferred.</p>
+            </remarks>
+        </member>
+        <member name="M:Sirenix.Utilities.TypeExtensions.IsUnmanagedCtor(System.Reflection.ConstructorInfo)">
+            <summary>
+            Checks if a given <see cref="T:System.Reflection.ConstructorInfo"/> is unmanaged, by checking if it contains any <see cref="P:System.Type.IsPointer"/>, <see cref="P:System.Type.IsByRef"/> or <see cref="P:System.Type.IsMarshalByRef"/> parameters.
+            </summary>
+            <param name="ctor">The <see cref="T:System.Reflection.ConstructorInfo"/> to validate.</param>
+            <returns><c>true</c> if the <see cref="T:System.Reflection.ConstructorInfo"/> is unmanaged; otherwise <c>false</c>.</returns>
         </member>
         <member name="T:Sirenix.Utilities.UnityExtensions">
             <summary>
