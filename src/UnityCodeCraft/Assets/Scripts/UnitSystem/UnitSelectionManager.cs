@@ -93,7 +93,7 @@ namespace SampleGame
         {
             _selectedUnits.Clear();
 
-            Unit[] units = FindObjectsOfType<Unit>();
+            Unit[] units = FindObjectsByType<Unit>();
             for (int i = 0, count = units.Length; i < count; i++)
                 this.AddUnit(units[i]);
         }
