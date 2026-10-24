@@ -6,7 +6,7 @@
         _Thickness ("Thickness", Float) = 0.2
         _Dash ("Dash", Float) = 8
         _Speed ("Speed", Float) = 2.0
-        _Radius ("Radius", Float) = 2
+        _Size ("Size", Float) = 1
     }
     SubShader
     {
@@ -35,7 +35,7 @@
                 half _Thickness;
                 half _Dash;
                 half _Speed;
-                half _Radius;
+                half _Size;
             CBUFFER_END
 
             struct Attributes
@@ -54,7 +54,9 @@
             {
                 Varyings output;
                 
-                output.positionWS = TransformObjectToWorld(input.positionOS.xyz);
+                float3 scaledPositionOS = input.positionOS.xyz * _Size;
+                
+                output.positionWS = TransformObjectToWorld(scaledPositionOS);
                 output.positionCS = TransformWorldToHClip(output.positionWS);
                 output.centerWS = TransformObjectToWorld(float3(0,0,0));
                 
@@ -66,7 +68,7 @@
                 return  DrawHoverCircle(
                     input.positionWS,
                     input.centerWS,
-                    _Radius,
+                    _Size * 0.5,
                     _Thickness,
                     _BaseColor,
                     _Dash,

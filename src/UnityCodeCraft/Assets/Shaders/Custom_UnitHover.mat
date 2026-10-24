@@ -25,9 +25,16 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
+    - _Dash: 8
+    - _DashCount: 24
+    - _QuadSize: 2
+    - _Radius: 1.22
+    - _Size: 4.27
+    - _Speed: 0.2
+    - _Thickness: 0.2
     - _TintStrength: 0.418
     m_Colors:
-    - _BaseColor: {r: 0.26699895, g: 0.754717, b: 0.657582, a: 1}
+    - _BaseColor: {r: 0.27058822, g: 0.78431374, b: 0.77455276, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _TintColor: {r: 0.378471, g: 0.74166304, b: 0.764151, a: 1}
   m_BuildTextureStacks: []
