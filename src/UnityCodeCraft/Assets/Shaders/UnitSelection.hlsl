@@ -1,4 +1,4 @@
-#define PI 3.14159265359
+// #define PI 3.14159265359
 
 half4 DrawSelectionCircle(
     float3 position,
