@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5433745593524548685}
   - component: {fileID: 5165767976520336239}
   - component: {fileID: 6953057720404598886}
+  - component: {fileID: 6331073307056437722}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -88,6 +89,7 @@ MonoBehaviour:
   - {fileID: 5433745593524548685}
   - {fileID: 5165767976520336239}
   - {fileID: 6953057720404598886}
+  - {fileID: 6331073307056437722}
   - {fileID: 228863256306245043}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &3275237870928010891
@@ -142,14 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce72b32e4d7946bb90cbcb5f0aaacf25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.Enemy
-  _collider: {fileID: 216082409229877555}
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  _cooldown: 0.5
-  _damage: 1
   _healthComponent: {fileID: 3484277882467739485}
   _moveToTargetComponent: {fileID: 5165767976520336239}
+  _enemyCollisionComponent: {fileID: 6331073307056437722}
 --- !u!114 &3484277882467739485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +217,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c06f339930664f99ab262c0daeb32ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.MoneyBag
-  _RewardAmount: 0
+--- !u!114 &6331073307056437722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011030080782938114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7809f8964c1643bcad486d3721dd917e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.EnemyCollisionComponent
+  _healthComponent: {fileID: 3484277882467739485}
+  _collider: {fileID: 216082409229877555}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _cooldown: 0.5
+  _damage: 1
 --- !u!1 &6681128362121645732
 GameObject:
   m_ObjectHideFlags: 0
