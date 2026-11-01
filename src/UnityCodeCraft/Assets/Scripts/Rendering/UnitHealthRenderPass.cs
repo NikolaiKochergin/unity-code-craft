@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.Rendering.Universal;
+using Unit = SampleGame.Unit;
 
 namespace Rendering
 {
@@ -15,7 +16,7 @@ namespace Rendering
         private struct UnitSnapshot
         {
             public Vector3 Position;
-            public float Scale;
+            public Vector4 HealthRect;
             public float Health;
         }
         
@@ -33,12 +34,14 @@ namespace Rendering
         private UnitSelectionManager _selectionManager;
         private Material _material;
         private Mesh _quadMesh;
-        
-        public void Setup(
-            UnitSelectionManager selectionManager,
-            Material material, 
-            Mesh quadMesh)
+        private HealthBarRect _healthBarRect;
+
+        public void Setup(UnitSelectionManager selectionManager,
+            Material material,
+            Mesh quadMesh, 
+            HealthBarRect healthBarRect)
         {
+            _healthBarRect = healthBarRect;
             _quadMesh = quadMesh;
             _material = material;
             _selectionManager = selectionManager;
@@ -76,7 +79,7 @@ namespace Rendering
                 Matrix4x4 matrix = Matrix4x4.TRS(unit.Position, Quaternion.identity, Vector3.one);
                 passData.MaterialPropertyBlock.Clear();
                 passData.MaterialPropertyBlock.SetFloat(FillID, unit.Health);
-                passData.MaterialPropertyBlock.SetVector(RectID, new Vector4(100 * unit.Scale, 8, 0, -50 * unit.Scale));
+                passData.MaterialPropertyBlock.SetVector(RectID, unit.HealthRect);
 
                 RasterCommandBuffer commandBuffer = context.cmd;
                 commandBuffer.DrawMesh(
@@ -102,7 +105,11 @@ namespace Rendering
                 passData.Units.Add(new UnitSnapshot
                 {
                     Position = unit.Position,
-                    Scale = unit.Scale,
+                    HealthRect = new Vector4(
+                        _healthBarRect.Width * unit.Scale, 
+                        _healthBarRect.Height, 
+                        _healthBarRect.OffsetX,
+                        _healthBarRect.OffsetY * -unit.Scale),
                     Health = (float)unit.CurrentHealth / unit.MaxHealth,
                 });
             }

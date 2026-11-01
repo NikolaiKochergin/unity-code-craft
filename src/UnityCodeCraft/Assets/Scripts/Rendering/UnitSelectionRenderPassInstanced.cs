@@ -42,6 +42,8 @@ namespace Rendering
             _quadMesh = quadMesh;
             _material = material;
             _selectionManager = selectionManager;
+            
+            _material.enableInstancing = true;
         }
 
         public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using SampleGame;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -9,6 +10,7 @@ namespace Rendering
     {
         [SerializeField] private Material _selectionMaterial;
         [SerializeField] private Material _healthMaterial;
+        [SerializeField] private HealthBarRect _healthBarRect;
         [SerializeField] private TeamsConfig _teamsConfig;
         
         private Mesh _quadMesh;
@@ -47,8 +49,18 @@ namespace Rendering
             if(_healthMaterial == null)
                 return;
             
-            _healthRenderPass.Setup(selectionManager, _healthMaterial, _quadMesh);
+            _healthRenderPass.Setup(selectionManager, _healthMaterial, _quadMesh, _healthBarRect);
             renderer.EnqueuePass(_healthRenderPass);
         }
+    }
+    
+    
+    [Serializable]
+    public class HealthBarRect
+    {
+        public float Width;
+        public float Height;
+        public float OffsetX;
+        public float OffsetY;
     }
 }
