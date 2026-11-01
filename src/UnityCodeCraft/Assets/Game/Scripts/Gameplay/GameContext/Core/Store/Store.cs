@@ -24,14 +24,10 @@ namespace Game
         [SerializeField] private Purchase[] _purchases;
         
         private MoneyStorage _moneyStorage;
-        private DiContainer _container;
 
         [Inject]
-        public void Construct(MoneyStorage moneyStorage, DiContainer container)
-        {
-            _container = container;
+        public void Construct(MoneyStorage moneyStorage) => 
             _moneyStorage = moneyStorage;
-        }
 
         public void TryBuy(PurchaseId purchaseId, NetworkObject character)
         {
@@ -44,9 +40,8 @@ namespace Game
                     return;
                 
                 _moneyStorage.SpendMoney(purchase.Price);
-                purchase.Supplier.Supply(character.InputAuthority, out NetworkObject instance);
-                instance.GetBehaviour<NetworkTransform>().Teleport(character.transform.position, character.transform.rotation);
-                _container.Inject(instance);
+                if (purchase.Supplier.Supply(character.InputAuthority, out NetworkObject instance)) 
+                    instance.GetBehaviour<NetworkTransform>().Teleport(character.transform.position, character.transform.rotation);
             }
         }
     }
