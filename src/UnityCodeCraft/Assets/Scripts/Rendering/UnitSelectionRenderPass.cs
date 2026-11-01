@@ -10,11 +10,13 @@ namespace Rendering
     public sealed class UnitSelectionRenderPass : ScriptableRenderPass
     {
         private static readonly int SizeID = Shader.PropertyToID("_Size");
+        private static readonly int ColorID = Shader.PropertyToID("_BaseColor");
 
         private struct UnitSnapshot
         {
             public Vector3 Position;
             public Quaternion Rotation;
+            public Color Color;
             public float Scale;
         }
         
@@ -26,18 +28,20 @@ namespace Rendering
             public List<UnitSnapshot> Units;
         }
         
+        private readonly MaterialPropertyBlock _materialPropertyBlock = new();
+        private readonly List<Unit> _culledUnits = new();
+        
         private UnitSelectionManager _selectionManager;
         private Material _material;
         private Mesh _quadMesh;
-        
-        private readonly MaterialPropertyBlock _materialPropertyBlock = new();
-        private readonly List<Unit> _culledUnits = new();
+        private TeamsConfig _teamsConfig;
 
-        public void Setup(
-            UnitSelectionManager selectionManager,
-            Material material, 
-            Mesh quadMesh)
+        public void Setup(UnitSelectionManager selectionManager,
+            Material material,
+            Mesh quadMesh, 
+            TeamsConfig teamsConfig)
         {
+            _teamsConfig = teamsConfig;
             _quadMesh = quadMesh;
             _material = material;
             _selectionManager = selectionManager;
@@ -75,6 +79,7 @@ namespace Rendering
                 Matrix4x4 matrix = Matrix4x4.TRS(unit.Position, unit.Rotation, Vector3.one);
                 passData.MaterialPropertyBlock.Clear();
                 passData.MaterialPropertyBlock.SetFloat(SizeID, unit.Scale * 2);
+                passData.MaterialPropertyBlock.SetColor(ColorID, unit.Color);
 
                 RasterCommandBuffer commandBuffer = context.cmd;
                 commandBuffer.DrawMesh(
@@ -101,6 +106,7 @@ namespace Rendering
                 {
                     Position = unit.Position,
                     Rotation = unit.Rotation,
+                    Color = _teamsConfig.GetColor(unit.TeamType),
                     Scale = unit.Scale
                 });
             }

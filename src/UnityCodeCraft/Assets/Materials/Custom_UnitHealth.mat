@@ -25,7 +25,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Fill: 0.393
+    - _Fill: 0.223
     - _Offset: 1
     - _Size: 1
     - _Thickness: 0.2

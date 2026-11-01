@@ -7,20 +7,19 @@ namespace Rendering
 {
     public sealed class UnitRenderFeature : ScriptableRendererFeature
     {
-        [SerializeField] private Material _material;
-        
+        [SerializeField] private Material _selectionMaterial;
         [SerializeField] private Material _healthMaterial;
+        [SerializeField] private TeamsConfig _teamsConfig;
         
         private Mesh _quadMesh;
-        private UnitSelectionRenderPass _renderPass;
+        private UnitSelectionRenderPass _selectionRenderPass;
         
         private UnitHealthRenderPass _healthRenderPass;
 
         public override void Create()
         {
             _quadMesh = GraphicsUtils.CreateQuadMesh();
-            _renderPass = new UnitSelectionRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingOpaques };
-            
+            _selectionRenderPass = new UnitSelectionRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingOpaques };
             _healthRenderPass = new UnitHealthRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing };
         }
 
@@ -35,15 +34,15 @@ namespace Rendering
 
         public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
         {
-            if(_material == null || _quadMesh == null)
+            if(_selectionMaterial == null || _quadMesh == null)
                 return;
             
             UnitSelectionManager selectionManager = FindAnyObjectByType<UnitSelectionManager>();
             if (selectionManager == null)
                 return;
             
-            _renderPass.Setup(selectionManager, _material, _quadMesh);
-            renderer.EnqueuePass(_renderPass);
+            _selectionRenderPass.Setup(selectionManager, _selectionMaterial, _quadMesh, _teamsConfig);
+            renderer.EnqueuePass(_selectionRenderPass);
             
             if(_healthMaterial == null)
                 return;
