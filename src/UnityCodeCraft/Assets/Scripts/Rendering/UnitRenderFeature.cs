@@ -9,13 +9,19 @@ namespace Rendering
     {
         [SerializeField] private Material _material;
         
+        [SerializeField] private Material _healthMaterial;
+        
         private Mesh _quadMesh;
         private UnitSelectionRenderPass _renderPass;
         
+        private UnitHealthRenderPass _healthRenderPass;
+
         public override void Create()
         {
             _quadMesh = GraphicsUtils.CreateQuadMesh();
             _renderPass = new UnitSelectionRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingOpaques };
+            
+            _healthRenderPass = new UnitHealthRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing };
         }
 
         protected override void Dispose(bool disposing)
@@ -33,11 +39,17 @@ namespace Rendering
                 return;
             
             UnitSelectionManager selectionManager = FindAnyObjectByType<UnitSelectionManager>();
-            if (selectionManager == null || selectionManager.UnitCount <= 0)
+            if (selectionManager == null)
                 return;
             
             _renderPass.Setup(selectionManager, _material, _quadMesh);
             renderer.EnqueuePass(_renderPass);
+            
+            if(_healthMaterial == null)
+                return;
+            
+            _healthRenderPass.Setup(selectionManager, _healthMaterial, _quadMesh);
+            renderer.EnqueuePass(_healthRenderPass);
         }
     }
 }

@@ -43,6 +43,11 @@ namespace Rendering
             passData.Mesh = _quadMesh;
             passData.Material = _material;
             passData.MaterialPropertyBlock = _materialPropertyBlock;
+            
+            UniversalCameraData cameraData = frameData.Get<UniversalCameraData>();
+
+            int width = cameraData.cameraTargetDescriptor.width;
+            int height = cameraData.cameraTargetDescriptor.height;
           
             Vector2 min = Vector2.Min(
                 _rectInput.StartPoint,
@@ -55,10 +60,10 @@ namespace Rendering
             );
 
             passData.Rect = new Vector4(
-                min.x / Screen.width,
-                1f - max.y / Screen.height,
-                max.x / Screen.width,
-                1f - min.y / Screen.height
+                min.x / width,
+                1f - max.y / height,
+                max.x / width,
+                1f - min.y / height
             );
             
             UniversalResourceData resourceData = frameData.Get<UniversalResourceData>();
