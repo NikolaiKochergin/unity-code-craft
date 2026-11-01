@@ -15,17 +15,16 @@ namespace Rendering
         public override void Create()
         {
             _quadMesh = GraphicsUtils.CreateQuadMesh();
-            _renderPass = 
-                new UnitSelectionRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing + 10 };
+            _renderPass = new UnitSelectionRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing + 10 };
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (_quadMesh)
-            {
-                CoreUtils.Destroy(_quadMesh);
-                _quadMesh = null;
-            }
+            if (!_quadMesh) 
+                return;
+            
+            CoreUtils.Destroy(_quadMesh);
+            _quadMesh = null;
         }
 
         public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
@@ -37,7 +36,7 @@ namespace Rendering
             if (selectionManager == null || selectionManager.UnitCount <= 0)
                 return;
             
-            _renderPass.Setup(renderer, _quadMesh);
+            _renderPass.Setup(selectionManager, _material, _quadMesh);
             renderer.EnqueuePass(_renderPass);
         }
     }
