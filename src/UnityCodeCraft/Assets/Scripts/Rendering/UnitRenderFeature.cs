@@ -15,14 +15,13 @@ namespace Rendering
         
         private Mesh _quadMesh;
         private UnitSelectionRenderPassInstanced _selectionRenderPass;
-        
-        private UnitHealthRenderPass _healthRenderPass;
+        private UnitHealthRenderPassInstanced _healthRenderPass;
 
         public override void Create()
         {
             _quadMesh = GraphicsUtils.CreateQuadMesh();
             _selectionRenderPass = new UnitSelectionRenderPassInstanced { renderPassEvent = RenderPassEvent.AfterRenderingOpaques };
-            _healthRenderPass = new UnitHealthRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing };
+            _healthRenderPass = new UnitHealthRenderPassInstanced { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing };
         }
 
         protected override void Dispose(bool disposing)
@@ -53,7 +52,6 @@ namespace Rendering
             renderer.EnqueuePass(_healthRenderPass);
         }
     }
-    
     
     [Serializable]
     public class HealthBarRect

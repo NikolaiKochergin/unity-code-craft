@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Rendering.UnitRenderFeature
   m_Active: 1
   _selectionMaterial: {fileID: 2100000, guid: a82c4f751870781498fdb1c57b09ac39, type: 2}
-  _healthMaterial: {fileID: 2100000, guid: 1c85c8605b9ae9b4b83c77d62a9ce6be, type: 2}
+  _healthMaterial: {fileID: 2100000, guid: 68c75cc6c7a41044cbc0b0ce5883b2f9, type: 2}
   _healthBarRect:
     Width: 100
     Height: 8
