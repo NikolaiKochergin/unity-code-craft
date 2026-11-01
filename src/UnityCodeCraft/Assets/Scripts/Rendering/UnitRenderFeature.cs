@@ -12,14 +12,14 @@ namespace Rendering
         [SerializeField] private TeamsConfig _teamsConfig;
         
         private Mesh _quadMesh;
-        private UnitSelectionRenderPass _selectionRenderPass;
+        private UnitSelectionRenderPassInstanced _selectionRenderPass;
         
         private UnitHealthRenderPass _healthRenderPass;
 
         public override void Create()
         {
             _quadMesh = GraphicsUtils.CreateQuadMesh();
-            _selectionRenderPass = new UnitSelectionRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingOpaques };
+            _selectionRenderPass = new UnitSelectionRenderPassInstanced { renderPassEvent = RenderPassEvent.AfterRenderingOpaques };
             _healthRenderPass = new UnitHealthRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing };
         }
 

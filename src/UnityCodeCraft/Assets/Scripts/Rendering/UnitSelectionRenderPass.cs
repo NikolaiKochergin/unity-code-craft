@@ -17,7 +17,7 @@ namespace Rendering
             public Vector3 Position;
             public Quaternion Rotation;
             public Color Color;
-            public float Scale;
+            public float Size;
         }
         
         private sealed class PassData
@@ -36,7 +36,8 @@ namespace Rendering
         private Mesh _quadMesh;
         private TeamsConfig _teamsConfig;
 
-        public void Setup(UnitSelectionManager selectionManager,
+        public void Setup(
+            UnitSelectionManager selectionManager,
             Material material,
             Mesh quadMesh, 
             TeamsConfig teamsConfig)
@@ -78,7 +79,7 @@ namespace Rendering
             {
                 Matrix4x4 matrix = Matrix4x4.TRS(unit.Position, unit.Rotation, Vector3.one);
                 passData.MaterialPropertyBlock.Clear();
-                passData.MaterialPropertyBlock.SetFloat(SizeID, unit.Scale * 2);
+                passData.MaterialPropertyBlock.SetFloat(SizeID, unit.Size);
                 passData.MaterialPropertyBlock.SetColor(ColorID, unit.Color);
 
                 RasterCommandBuffer commandBuffer = context.cmd;
@@ -107,7 +108,7 @@ namespace Rendering
                     Position = unit.Position,
                     Rotation = unit.Rotation,
                     Color = _teamsConfig.GetColor(unit.TeamType),
-                    Scale = unit.Scale
+                    Size = unit.Scale * 2
                 });
             }
         }

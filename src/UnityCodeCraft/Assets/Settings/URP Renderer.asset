@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: UnitRenderFeature
   m_EditorClassIdentifier: Assembly-CSharp::Rendering.UnitRenderFeature
   m_Active: 1
-  _material: {fileID: 2100000, guid: e93381529d52bc24ba317ffbaefd7926, type: 2}
+  _selectionMaterial: {fileID: 2100000, guid: a82c4f751870781498fdb1c57b09ac39, type: 2}
   _healthMaterial: {fileID: 2100000, guid: 1c85c8605b9ae9b4b83c77d62a9ce6be, type: 2}
+  _teamsConfig: {fileID: 11400000, guid: 39406c4b6dbfd4909a8dcbd397a33f74, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
