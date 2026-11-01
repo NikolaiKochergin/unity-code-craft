@@ -9,7 +9,7 @@ namespace Rendering
 {
     public sealed class UnitSelectionRenderPass : ScriptableRenderPass
     {
-        private static readonly int Size = Shader.PropertyToID("_Size");
+        private static readonly int SizeID = Shader.PropertyToID("_Size");
 
         private struct UnitSnapshot
         {
@@ -74,7 +74,7 @@ namespace Rendering
             {
                 Matrix4x4 matrix = Matrix4x4.TRS(unit.Position, unit.Rotation, Vector3.one);
                 passData.MaterialPropertyBlock.Clear();
-                passData.MaterialPropertyBlock.SetFloat(Size, unit.Scale * 2);
+                passData.MaterialPropertyBlock.SetFloat(SizeID, unit.Scale * 2);
 
                 RasterCommandBuffer commandBuffer = context.cmd;
                 commandBuffer.DrawMesh(

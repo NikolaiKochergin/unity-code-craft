@@ -32,7 +32,7 @@ Material:
     - _BarRect: {r: 100, g: 12, b: 0, a: 0}
     - _BorderColor: {r: 0.19999993, g: 0.7, b: 1, a: 0.70980394}
     - _FillColor: {r: 0.19999996, g: 0.69803923, b: 1, a: 0.2}
-    - _Rect: {r: 0.2, g: 0.2, b: 0.78, a: 0.72}
+    - _Rect: {r: 0.5, g: 0.2, b: 0.78, a: 0.72}
     - _RectMax: {r: 0.82, g: 0.8, b: 0, a: 0}
     - _RectMin: {r: 0.46, g: 0.24, b: 0, a: 0}
   m_BuildTextureStacks: []

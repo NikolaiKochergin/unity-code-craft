@@ -15,7 +15,7 @@ namespace Rendering
         public override void Create()
         {
             _quadMesh = GraphicsUtils.CreateQuadMesh();
-            _renderPass = new UnitSelectionRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing + 10 };
+            _renderPass = new UnitSelectionRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingOpaques };
         }
 
         protected override void Dispose(bool disposing)
