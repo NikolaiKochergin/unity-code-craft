@@ -54,7 +54,7 @@ namespace Game
                     continue;
                 
                 NetworkObject other = hit.GetComponentInParent<NetworkObject>();
-                if (other && other.TryGetBehaviour(out HealthComponent health) && health.IsAlive)
+                if (other.IsValid && other.TryGetBehaviour(out HealthComponent health) && health.IsAlive)
                 {
                     _targets.Add(other);
                     break;

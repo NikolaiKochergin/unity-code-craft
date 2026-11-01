@@ -66,6 +66,7 @@ namespace Game
             NetworkObject target = collider.GetComponentInParent<NetworkObject>();
             if (target == null ||
                 target.InputAuthority == player ||
+                !target.IsValid ||
                 !target.TryGetBehaviour(out TakeDamageComponent takeDamageComponent))
                 return false;
             

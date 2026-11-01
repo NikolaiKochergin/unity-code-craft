@@ -16,6 +16,7 @@ namespace Game
         
         private readonly Collider[] _results = new Collider[10];
         private VfxBus _vfxBus;
+        private bool _isDestroyed;
 
         [Networked]
         private TickTimer Timer { get; set; }
@@ -29,33 +30,29 @@ namespace Game
         public override void Spawned()
         {
             _moveToTargetComponent.SetCondition(this);
-
-            _healthComponent.OnHealthChanged += OnHealthChanged;
-        }
-
-        public override void Despawned(NetworkRunner _, bool __) => 
-            _healthComponent.OnHealthChanged -= OnHealthChanged;
-
-        private void OnHealthChanged(int _, int __)
-        {
-            if (_healthComponent.IsDead)
-            {
-                Runner.Despawn(Object);
-                _vfxBus.PlayVfx(VfxType.EnemyDie, transform);
-            }
         }
         
         public override void FixedUpdateNetwork()
         {
-            if(!Runner.IsServer)
-                return;
-            
             if(Timer.IsRunning(Runner))
                 return;
             
-            if(_healthComponent.IsDead)
+            if(_isDestroyed)
                 return;
+
+            if (_healthComponent.IsDead)
+            {
+                Runner.Despawn(Object);
+                _vfxBus.PlayVfx(VfxType.EnemyDie, transform);
+                _isDestroyed = true;
+                return;
+            }
             
+            HandleCollision();
+        }
+        
+        private void HandleCollision()
+        {
             PhysicsScene physicsScene = Runner.GetPhysicsScene();
             int count = physicsScene
                 .OverlapBox(
