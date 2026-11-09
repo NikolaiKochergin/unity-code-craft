@@ -18,14 +18,16 @@ namespace Rendering
         private UnitSelectionRenderPassInstanced _selectionRenderPass;
         private UnitHealthRenderPassInstanced _healthRenderPass;
         private UnitHoverRenderPass _hoverRenderPass;
+        private UnitSelectionManager _selectionManager;
+        private UnitHover _unitHover;
 
         public override void Create()
         {
             _quadMesh = GraphicsUtils.CreateQuadMesh();
             
-            _hoverRenderPass = new UnitHoverRenderPass();
-            _selectionRenderPass = new UnitSelectionRenderPassInstanced { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing };
-            _healthRenderPass = new UnitHealthRenderPassInstanced { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing };
+            _hoverRenderPass = new UnitHoverRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing + 10};
+            _selectionRenderPass = new UnitSelectionRenderPassInstanced { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing + 20 };
+            _healthRenderPass = new UnitHealthRenderPassInstanced { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing + 30 };
         }
 
         protected override void Dispose(bool disposing)
@@ -39,28 +41,32 @@ namespace Rendering
 
         public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
         {
-            if(_selectionMaterial == null || _quadMesh == null)
+            if(_quadMesh == null)
                 return;
             
-            UnitSelectionManager selectionManager = FindAnyObjectByType<UnitSelectionManager>();
-            if (selectionManager == null)
-                return;
+            if(!_selectionManager)
+                _selectionManager = FindAnyObjectByType<UnitSelectionManager>();
             
-            _selectionRenderPass.Setup(selectionManager, _selectionMaterial, _quadMesh, _teamsConfig);
-            renderer.EnqueuePass(_selectionRenderPass);
+            if(!_unitHover)
+                _unitHover = FindAnyObjectByType<UnitHover>();
             
-            if(_healthMaterial == null)
-                return;
-            
-            _healthRenderPass.Setup(selectionManager, _healthMaterial, _quadMesh, _healthBarRect);
-            renderer.EnqueuePass(_healthRenderPass);
-            
-            UnitHover unitHover = FindAnyObjectByType<UnitHover>();
-            if (unitHover == null)
-                return;
-            
-            _hoverRenderPass.Setup(unitHover, _hoverMaterial, _quadMesh, _teamsConfig);
-            renderer.EnqueuePass(_hoverRenderPass);
+            if (_selectionManager && _selectionMaterial && _teamsConfig)
+            {
+                _selectionRenderPass.Setup(_selectionManager, _selectionMaterial, _quadMesh, _teamsConfig);
+                renderer.EnqueuePass(_selectionRenderPass);
+            }
+
+            if (_selectionManager && _healthMaterial)
+            {
+                _healthRenderPass.Setup(_selectionManager, _healthMaterial, _quadMesh, _healthBarRect);
+                renderer.EnqueuePass(_healthRenderPass);
+            }
+
+            if (_unitHover && _hoverMaterial&& _teamsConfig)
+            {
+                _hoverRenderPass.Setup(_unitHover, _hoverMaterial, _quadMesh, _teamsConfig);
+                renderer.EnqueuePass(_hoverRenderPass);
+            }
         }
     }
     
