@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3778225963959159850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f75dbac22d44711833349226012bf33, type: 3}
+  m_Name: SelectionBoxRenderFeature
+  m_EditorClassIdentifier: Assembly-CSharp::Rendering.SelectionBoxRenderFeature
+  m_Active: 1
+  _material: {fileID: 2100000, guid: 0672c5b7f441c714191724a1cd4910d5, type: 2}
 --- !u!114 &-3461595590135804738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15,6 +29,7 @@ MonoBehaviour:
   m_Active: 1
   _selectionMaterial: {fileID: 2100000, guid: a82c4f751870781498fdb1c57b09ac39, type: 2}
   _healthMaterial: {fileID: 2100000, guid: 68c75cc6c7a41044cbc0b0ce5883b2f9, type: 2}
+  _hoverMaterial: {fileID: 2100000, guid: 94351f9c90493f244999efecf50d4162, type: 2}
   _healthBarRect:
     Width: 100
     Height: 8
@@ -49,8 +64,8 @@ MonoBehaviour:
     probeVolumeBlendStatesCS: {fileID: 0}
   m_RendererFeatures:
   - {fileID: -3461595590135804738}
-  - {fileID: 1940581918085817576}
-  m_RendererFeatureMap: be8ce5ad26f1f5cfe8240d0df954ee1a
+  - {fileID: -3778225963959159850}
+  m_RendererFeatureMap: be8ce5ad26f1f5cfd6730ef1800b91cb
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   m_AssetVersion: 3
@@ -79,17 +94,3 @@ MonoBehaviour:
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
   m_TileOnlyMode: 0
---- !u!114 &1940581918085817576
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f75dbac22d44711833349226012bf33, type: 3}
-  m_Name: SelectionBoxRenderFeature
-  m_EditorClassIdentifier: Assembly-CSharp::Rendering.SelectionBoxRenderFeature
-  m_Active: 1
-  _material: {fileID: 2100000, guid: 0672c5b7f441c714191724a1cd4910d5, type: 2}
