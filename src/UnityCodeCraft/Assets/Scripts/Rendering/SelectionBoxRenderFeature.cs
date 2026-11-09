@@ -14,8 +14,8 @@ namespace Rendering
         
         public override void Create()
         {
-            _quadMesh = GraphicsUtils.CreateQuadMesh();
-            _renderPass = new SelectionBoxRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingOpaques };
+            _quadMesh = GraphicsUtils.CreateQuadMesh01();
+            _renderPass = new SelectionBoxRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing + 200 };
         }
 
         protected override void Dispose(bool disposing)
@@ -34,6 +34,9 @@ namespace Rendering
             
             RectInput rectInput = FindAnyObjectByType<RectInput>();
             if (rectInput == null)
+                return;
+            
+            if(!rectInput.IsSelecting)
                 return;
             
             _renderPass.Setup(rectInput, _material, _quadMesh);

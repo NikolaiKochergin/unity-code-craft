@@ -3,7 +3,6 @@
     Properties
     {
         _Rect ("Selection Rect", Vector) = (0.2, 0.2, 0.8, 0.8)
-
         _FillColor ("Fill Color", Color) = (0.2, 0.7, 1.0, 0.15)
         _BorderColor ("Border Color", Color) = (0.2, 0.7, 1.0, 1.0)
         _BorderWidth ("Border Width (Pixels)", Float) = 2.0
@@ -26,6 +25,7 @@
         Pass
         {
             HLSLPROGRAM
+            
             #pragma vertex vert
             #pragma fragment frag
 
@@ -40,7 +40,7 @@
 
             struct Attributes
             {
-                float2 uv : TEXCOORD0;
+                float2 uv : POSITION;
             };
 
             struct Varyings
@@ -52,10 +52,19 @@
             Varyings vert(Attributes input)
             {
                 Varyings output;
+                                
+                float2 positionCS = lerp(
+                    _Rect.xy, 
+                    _Rect.zw, 
+                    input.uv
+                );
                 
-                float2 positionCS = input.uv * 2.0 - 1.0;
+                output.positionHCS = float4(
+                    positionCS * 2.0 - 1.0,
+                    0.0,
+                    1.0
+                );
                 
-                output.positionHCS = float4(positionCS, 0.0, 1.0);
                 output.uv = input.uv;
 
                 return output;
@@ -63,28 +72,17 @@
 
             half4 frag(Varyings input) : SV_Target
             {
-                float2 uv = input.uv;
+                float2 rectSizePixels = 
+                    (_Rect.zw - _Rect.xy) * _ScreenParams.xy;
                 
-                float2 rectMin = _Rect.xy;
-                float2 rectMax = _Rect.zw;
-                
-                float2 insideMin = step(rectMin, uv);
-                float2 insideMax = step(uv, rectMax);
-                
-                float inside = 
-                    insideMin.x * insideMin.y *
-                    insideMax.x * insideMax.y;
-                
-                clip(inside - 0.5);
-                
-                float2 distanceToEdge = min(
-                    (uv - rectMin) * _ScreenParams.xy,
-                    (rectMax - uv) * _ScreenParams.xy
-                );
+                float2 edgeDistance = min(
+                    input.uv,
+                    1.0 - input.uv
+                ) * rectSizePixels;
                 
                 float distanceToBorder = min(
-                    distanceToEdge.x,
-                    distanceToEdge.y
+                    edgeDistance.x,
+                    edgeDistance.y
                 );
                 
                 float border = 1.0 - step(
@@ -92,14 +90,13 @@
                     distanceToBorder
                 );
                 
-                half4 color = lerp(
+                return  lerp(
                     _FillColor,
                     _BorderColor,
                     border
                 );
-                
-                return color;
             }
+            
             ENDHLSL
         }
     }

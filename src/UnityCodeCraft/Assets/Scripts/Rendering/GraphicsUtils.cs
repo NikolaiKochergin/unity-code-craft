@@ -16,15 +16,42 @@ namespace SampleGame
                 name = "Unit Quad",
                 vertices = new[]
                 {
-                    // new Vector3(-0.5f, 0f, -0.5f),
-                    // new Vector3( 0.5f, 0f, -0.5f),
-                    // new Vector3( 0.5f, 0f,  0.5f),
-                    // new Vector3(-0.5f, 0f,  0.5f)
-                    
                     new Vector3(-1.0f, 0f, -1.0f),
                     new Vector3( 1.0f, 0f, -1.0f),
                     new Vector3( 1.0f, 0f,  1.0f),
                     new Vector3(-1.0f, 0f,  1.0f)
+                },
+                uv = new[]
+                {
+                    new Vector2(0f, 0f),
+                    new Vector2(1f, 0f),
+                    new Vector2(1f, 1f),
+                    new Vector2(0f, 1f)
+                },
+                triangles = new[]
+                {
+                    0, 1, 2,
+                    0, 2, 3
+                }
+            };
+
+            mesh.RecalculateNormals();
+            mesh.RecalculateBounds();
+
+            return mesh;
+        }
+        
+        public static Mesh CreateQuadMesh01()
+        {
+            Mesh mesh = new()
+            {
+                name = "Unit Quad",
+                vertices = new[]
+                {
+                    new Vector3(0f, 0f, 0f),
+                    new Vector3(1f, 0f, 0f),
+                    new Vector3(1f, 1f, 0f),
+                    new Vector3(0f, 1f, 0f)
                 },
                 uv = new[]
                 {

@@ -33,7 +33,7 @@ namespace Rendering
 
         public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
         {
-            if(!_rectInput.IsDragging)
+            if(!_rectInput.IsSelecting)
                 return;
 
             using IRasterRenderGraphBuilder builder = renderGraph.AddRasterRenderPass(
