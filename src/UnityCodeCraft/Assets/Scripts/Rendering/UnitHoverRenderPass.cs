@@ -10,6 +10,7 @@ namespace Rendering
     {
         private static readonly int SizeID = Shader.PropertyToID("_Size");
         private static readonly int ColorID = Shader.PropertyToID("_BaseColor");
+        private static readonly int PositionID = Shader.PropertyToID("_Position");
         
         private sealed class PassData
         {
@@ -19,6 +20,7 @@ namespace Rendering
             public float Size;
             public Color Color;
             public Matrix4x4 Matrix;
+            public Vector4 Position;
         }
         
         private readonly MaterialPropertyBlock _materialPropertyBlock = new();
@@ -52,6 +54,7 @@ namespace Rendering
             passData.MaterialPropertyBlock = _materialPropertyBlock;
             
             passData.Matrix = Matrix4x4.TRS(unit.Position, unit.Rotation, Vector3.one);
+            passData.Position = unit.Position;
             passData.Size = unit.Scale * 2;
             passData.Color = _teamsConfig.GetColor(unit.TeamType);
             
@@ -67,6 +70,7 @@ namespace Rendering
             passData.MaterialPropertyBlock.Clear();
             passData.MaterialPropertyBlock.SetFloat(SizeID, passData.Size);
             passData.MaterialPropertyBlock.SetColor(ColorID, passData.Color);
+            passData.MaterialPropertyBlock.SetVector(PositionID, passData.Position);
             
             RasterCommandBuffer commandBuffer = context.cmd;
             commandBuffer.DrawMesh(

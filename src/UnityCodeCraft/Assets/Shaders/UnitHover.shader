@@ -7,6 +7,7 @@
         _Dash ("Dash", Float) = 8
         _Speed ("Speed", Float) = 2.0
         _Size ("Size", Float) = 1
+        _Position ("Position", Vector) = (1,1,1,1)
     }
     SubShader
     {
@@ -32,6 +33,7 @@
             
             CBUFFER_START(UnityPerMaterial)
                 half4 _BaseColor;
+                half4 _Position;
                 half _Thickness;
                 half _Dash;
                 half _Speed;
@@ -47,7 +49,6 @@
             {
                 float4 positionCS : SV_POSITION;
                 float3 positionWS : TEXCOORD0;
-                float3 centerWS : TEXCOORD1;
             };
             
             Varyings vert(Attributes input)
@@ -58,7 +59,6 @@
                 
                 output.positionWS = TransformObjectToWorld(scaledPositionOS);
                 output.positionCS = TransformWorldToHClip(output.positionWS);
-                output.centerWS = TransformObjectToWorld(float3(0,0,0));
                 
                 return output;
             }
@@ -67,7 +67,7 @@
             {                
                 return  DrawHoverCircle(
                     input.positionWS,
-                    input.centerWS,
+                    _Position,
                     _Size * 0.5,
                     _Thickness,
                     _BaseColor,
