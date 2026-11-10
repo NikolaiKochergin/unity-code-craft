@@ -15,8 +15,7 @@ namespace Rendering
         [SerializeField] private TeamsConfig _teamsConfig;
         
         private Mesh _quadMesh;
-        private UnitSelectionRenderPassInstanced _selectionRenderPass;
-        private UnitHealthRenderPassInstanced _healthRenderPass;
+        private UnitRenderPassInstanced _unitRenderPass;
         private UnitHoverRenderPass _hoverRenderPass;
         private UnitSelectionManager _selectionManager;
         private UnitHover _unitHover;
@@ -26,8 +25,7 @@ namespace Rendering
             _quadMesh = GraphicsUtils.CreateQuadMesh();
             
             _hoverRenderPass = new UnitHoverRenderPass { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing + 10};
-            _selectionRenderPass = new UnitSelectionRenderPassInstanced { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing + 20 };
-            _healthRenderPass = new UnitHealthRenderPassInstanced { renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing + 30 };
+            _unitRenderPass = new UnitRenderPassInstanced() {  renderPassEvent = RenderPassEvent.AfterRenderingPostProcessing + 20 };
         }
 
         protected override void Dispose(bool disposing)
@@ -49,17 +47,11 @@ namespace Rendering
             
             if(!_unitHover)
                 _unitHover = FindAnyObjectByType<UnitHover>();
-            
-            if (_selectionManager && _selectionMaterial && _teamsConfig)
-            {
-                _selectionRenderPass.Setup(_selectionManager, _selectionMaterial, _quadMesh, _teamsConfig);
-                renderer.EnqueuePass(_selectionRenderPass);
-            }
 
-            if (_selectionManager && _healthMaterial)
+            if (_selectionManager && _selectionMaterial && _healthMaterial && _teamsConfig)
             {
-                _healthRenderPass.Setup(_selectionManager, _healthMaterial, _quadMesh, _healthBarRect);
-                renderer.EnqueuePass(_healthRenderPass);
+                _unitRenderPass.Setup(_selectionManager, _selectionMaterial, _healthMaterial, _quadMesh, _teamsConfig, _healthBarRect);
+                renderer.EnqueuePass(_unitRenderPass);
             }
 
             if (_unitHover && _hoverMaterial&& _teamsConfig)
