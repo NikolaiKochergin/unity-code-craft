@@ -94,9 +94,6 @@ namespace Rendering
 
         public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
         {
-            if (!_selectionManager || !_quadMesh)
-                return;
-
             UniversalCameraData cameraData = frameData.Get<UniversalCameraData>();
 
             Camera camera = cameraData.camera;
@@ -259,7 +256,7 @@ namespace Rendering
         {
             _culledUnits.Clear();
             foreach (Unit unit in _selectionManager)
-                if (camera.IsPositionInFrustum(unit.Position))
+                if (camera.IsPositionInFrustum(unit.Position) && unit.Scale > 0)
                     _culledUnits.Add(unit);
         }
     }
