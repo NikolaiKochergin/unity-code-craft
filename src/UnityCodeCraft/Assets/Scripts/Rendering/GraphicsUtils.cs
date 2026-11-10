@@ -45,7 +45,7 @@ namespace SampleGame
         {
             Mesh mesh = new()
             {
-                name = "Unit Quad",
+                name = "Selection Quad",
                 vertices = new[]
                 {
                     new Vector3(0f, 0f, 0f),
