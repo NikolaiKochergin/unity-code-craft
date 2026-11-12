@@ -3,6 +3,7 @@
     Properties
     {
         _Rect ("Selection Rect", Vector) = (0.2, 0.2, 0.8, 0.8)
+        _RectSizePixels ("Rect Size Pixels", Vector) = (0, 0, 0, 0)
         _FillColor ("Fill Color", Color) = (0.2, 0.7, 1.0, 0.15)
         _BorderColor ("Border Color", Color) = (0.2, 0.7, 1.0, 1.0)
         _BorderWidth ("Border Width (Pixels)", Float) = 2.0
@@ -33,6 +34,7 @@
 
             CBUFFER_START(UnityPerMaterial)
                 float4 _Rect;
+                float2 _RectSizePixels;
                 float4 _FillColor;
                 float4 _BorderColor;
                 float _BorderWidth;
@@ -72,13 +74,10 @@
 
             half4 frag(Varyings input) : SV_Target
             {
-                float2 rectSizePixels = 
-                    (_Rect.zw - _Rect.xy) * _ScreenParams.xy;
-                
                 float2 edgeDistance = min(
                     input.uv,
                     1.0 - input.uv
-                ) * rectSizePixels;
+                ) * _RectSizePixels;
                 
                 float distanceToBorder = min(
                     edgeDistance.x,

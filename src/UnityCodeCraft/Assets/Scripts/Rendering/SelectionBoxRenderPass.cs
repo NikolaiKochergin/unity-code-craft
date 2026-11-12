@@ -9,6 +9,7 @@ namespace Rendering
     public sealed class SelectionBoxRenderPass : ScriptableRenderPass
     {
         private static readonly int RectID = Shader.PropertyToID("_Rect");
+        private static readonly int RectSizePixelsID = Shader.PropertyToID("_RectSizePixels");
         
         private sealed class PassData
         {
@@ -16,6 +17,7 @@ namespace Rendering
             public Material Material;
             public MaterialPropertyBlock MaterialPropertyBlock;
             public Vector4 Rect;
+            public Vector2 RectSizePixels;
         }
         
         private readonly MaterialPropertyBlock _materialPropertyBlock = new();
@@ -59,12 +61,19 @@ namespace Rendering
                 _rectInput.EndPoint
             );
 
-            passData.Rect = new Vector4(
+            Vector4 rect = new Vector4(
                 min.x / width,
                 1f - max.y / height,
                 max.x / width,
                 1f - min.y / height
             );
+            
+            passData.RectSizePixels = new Vector2(
+                (rect.z - rect.x) * Screen.width,
+                (rect.w - rect.y) * Screen.height
+            );
+            
+            passData.Rect = rect;    
             
             UniversalResourceData resourceData = frameData.Get<UniversalResourceData>();
             TextureHandle colorTexture = resourceData.activeColorTexture;
@@ -77,6 +86,7 @@ namespace Rendering
         {
             passData.MaterialPropertyBlock.Clear();
             passData.MaterialPropertyBlock.SetVector(RectID, passData.Rect);
+            passData.MaterialPropertyBlock.SetVector(RectSizePixelsID, passData.RectSizePixels);
 
             RasterCommandBuffer commandBuffer = context.cmd;
             commandBuffer.DrawMesh(
